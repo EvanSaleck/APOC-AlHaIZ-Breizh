@@ -144,15 +144,15 @@ CREATE TABLE logement (
 
 CREATE TABLE amenagement (
    id_amenagement serial,
-   nom_amenagement varchar(40),
+   nom_amenagement varchar(40) NOT NULL,
 
    CONSTRAINT amenagement_pk 
    PRIMARY KEY (id_amenagement)
 );
 
 CREATE TABLE amenagements_logement (
-   AL_id_logement integer,
-   AL_id_amenagement integer,
+   AL_id_logement integer NOT NULL,
+   AL_id_amenagement integer NOT NULL,
    
    CONSTRAINT amenagements_logement_pk
    PRIMARY KEY (AL_id_logement,AL_id_amenagement),
@@ -164,18 +164,14 @@ CREATE TABLE amenagements_logement (
 
 CREATE TABLE reservation (
    id_reservation serial,
-   nb_nuit integer,
-   date_arrivee date,
-   date_depart date,
-   nb_occupant integer,
-   total_tarif_ttc decimal(10, 2),
-   frais_service decimal(10, 2),
-   taxe_sejour decimal (10, 2) GENERATED ALWAYS AS (nb_occupant * nb_nuit) STORED,
-   tarif_total decimal(10, 2),
-   date_reservation date,
-   en_annulation boolean,
-   R_id_logement integer,
-   R_id_client integer,
+   nb_nuit integer NOT NULL,
+   date_arrivee date NOT NULL,
+   date_depart date NOT NULL,
+   nb_occupant integer NOT NULL,
+   date_reservation date NOT NULL,
+   en_annulation boolean NOT NULL,
+   R_id_logement integer NOT NULL,
+   R_id_client integer NOT NULL,
 
    CONSTRAINT reservation_pk 
    PRIMARY KEY (id_reservation),
@@ -187,16 +183,16 @@ CREATE TABLE reservation (
 
 CREATE TABLE activite (
    id_activite serial,
-   nom_activite varchar(70),
+   nom_activite varchar(70) NOT NULL,
 
    CONSTRAINT activite_pk 
    PRIMARY KEY (id_activite)
-   );
+);
 
-   CREATE TABLE activite_dispo (
-   AD_id_logement integer,
-   AD_id_activite integer,
-   eloignement varchar(50),
+CREATE TABLE activite_dispo (
+   AD_id_logement integer NOT NULL,
+   AD_id_activite integer NOT NULL,
+   eloignement varchar(50) NOT NULL,
 
    CONSTRAINT activite_dispo_pk 
    PRIMARY KEY (AD_id_logement, AD_id_activite),
@@ -208,9 +204,9 @@ CREATE TABLE activite (
 
 CREATE TABLE avis (
    id_avis serial,
-   note_avis integer,
+   note_avis integer NOT NULL,
    commentaire varchar(150),
-   AV_id_reservation integer,
+   AV_id_reservation integer NOT NULL,
 
    CONSTRAINT avis_pk 
    PRIMARY KEY (id_avis),
