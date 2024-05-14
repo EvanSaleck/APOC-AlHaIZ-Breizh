@@ -22,7 +22,7 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 
-./html/assets/SCSS/*.css
-!./general.css
+/html/assets/SCSS/*.css
+html/assets/general.css
 
-./html/assets/SCSS/*.css.map
+/html/assets/SCSS/*.css.map
