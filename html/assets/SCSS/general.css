@@ -6,5 +6,11 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
 /* Import de la police dyslexique Lexend */
 @import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+}
+
 /* Définition tailles de police desktop */
 /* Définition tailles de police mobile *//*# sourceMappingURL=general.css.map */
