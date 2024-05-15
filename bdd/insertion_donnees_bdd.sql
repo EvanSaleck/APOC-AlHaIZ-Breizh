@@ -88,16 +88,16 @@ VALUES
  (11, 'rue des bleuets', 29600, 'Morlaix', 'France');
 
 
-INSERT INTO avis (note_avis, commentaire)
-VALUES ('4', 'Très bel appartement');
-INSERT INTO avis (note_avis, commentaire)
-VALUES ('2', 'Matelas inconfortable, à revoir...');
-INSERT INTO avis (note_avis, commentaire)
-VALUES ('5', 'Un palace digne des plus grands ! Le roi Louis XIV aurait rêvé de ce logement !');
-INSERT INTO avis (note_avis, commentaire)
-VALUES ('3', 'Peut mieux faire.');
-INSERT INTO avis (note_avis, commentaire)
-VALUES ('1', 'Des cafards partout ! Cet appartement est misérable !');
+INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
+VALUES ('4', 'Très bel appartement', 1);
+INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
+VALUES ('2', 'Matelas inconfortable, à revoir...', 5);
+INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
+VALUES ('5', 'Un palace digne des plus grands ! Le roi Louis XIV aurait rêvé de ce logement !', 3);
+INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
+VALUES ('3', 'Peut mieux faire.', 4);
+INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
+VALUES ('1', 'Des cafards partout ! Cet appartement est misérable !', 2);
 
 INSERT INTO langue(nom_langue)
 VALUES ('Français');
@@ -123,17 +123,21 @@ INSERT INTO compte(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn
 VALUES ('Mr', 'Toman', 'Ks', 'toman.ks@apple.us', 'totom11111', 'TomanWar','./images/Toman_ks.png', '09/07/1956','5');
 INSERT INTO compte(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse)
 VALUES ('Non spécifié', 'Magi', 'Renou', 'magi.renou@gmail.eu', 'magi1234', 'MagiRenou','./images/renou_magi.png', '23/02/2000','6');
+INSERT INTO compte(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse)
+VALUES ('Mr', 'Renault', 'Guillaume', 'guillaume.renault@gmail.com', 'magi1234', 'MagiRenou','./images/guillaume_renou.png', '23/02/2000','6');
+INSERT INTO compte(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse)
+VALUES ('Non spécifié', 'Magi', 'Renou', 'magi.renou@gmail.eu', 'magi1234', 'MagiRenou','./images/renou_magi.png', '23/02/2000','6');
+INSERT INTO compte(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse)
+VALUES ('Non spécifié', 'Magi', 'Renou', 'magi.renou@gmail.eu', 'magi1234', 'MagiRenou','./images/renou_magi.png', '23/02/2000','6');
 
-
-INSERT INTO compte_client(code_client)
-VALUES ('NEYJEAN01');
-INSERT INTO compte_client(code_client)
-VALUES ('WAXEMMI02');
-INSERT INTO compte_client(code_client)
-VALUES ('DAIJAUNI03');
-
-INSERT INTO compte_client(code_client)
-VALUES ('MAGRENOU06');
+INSERT INTO compte_client(code_client, cc_id_adresse)
+VALUES ('NEYJEAN01', 1);
+INSERT INTO compte_client(code_client, cc_id_adresse)
+VALUES ('WAXEMMI02', 2);
+INSERT INTO compte_client(code_client, cc_id_adresse)
+VALUES ('DAIJAUNI03', 3);
+INSERT INTO compte_client(code_client, cc_id_adresse)
+VALUES ('MAGRENOU06', 6);
 
 INSERT INTO compte_proprietaire(identite, date_cni_fin_valid, est_valide)
 VALUES ('./images/cni/identite_01','21/12/2025', true );
@@ -235,9 +239,7 @@ INSERT INTO logement(titre, accroche, personnes_max, image_principale, latitude,
 VALUES ('Gîte familial', 'Gîte familial, spacieux et bien équipé, idéal pour un séjour en famille.', 8, './image/logements/image_13', 48.9123, -3.3333, 70, 4, 2, 2, 150, 1, 6, 8, 7, 10, 10, 10, 10);
 
 
-
-
-/* Insertion logement sans accroche */
+/* Insertion sans les descriptions et accroches */
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_proprietaire, L_id_type, L_id_categorie)
 VALUES ('Cabanon rustique', 2, './image/logements/image_1', 48.0275, -2.2163, 15, 1, 0, 1, 80, false, 2, 7, 7, 1, 1, 4, 4);
 
@@ -261,4 +263,23 @@ INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude
 VALUES ('Maison de vacances', 8, './image/logements/image_8', 48.5678, -2.7890, 130, 4, 2, 2, 150, true, 5, 7, 7, 5, 5, 5, 5);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_proprietaire, L_id_type, L_id_categorie)
-VALUES ('Appartement', 3, './image/logements/image_9', 48.6789, -2.8901, 50, 1, 0, 1, 80, true, 3, 5, 7, 6, 6, 6, 6);
+VALUES ('Appartement', 3, './image/logements/image_9', 48.6789, -2.8901, 50, 1, 0, 1, 80, true, 3, 5, 7, 6, 5, 6, 6);
+
+
+INSERT INTO langue_parlee(LP_id_proprietaire, LP_id_langue)
+VALUES (1,2);
+INSERT INTO langue_parlee(LP_id_proprietaire, LP_id_langue)
+VALUES (2,3);
+INSERT INTO langue_parlee(LP_id_proprietaire, LP_id_langue)
+VALUES (2,4);
+INSERT INTO langue_parlee(LP_id_proprietaire, LP_id_langue)
+VALUES (3,5);
+INSERT INTO langue_parlee(LP_id_proprietaire, LP_id_langue)
+VALUES (3,1);
+INSERT INTO langue_parlee(LP_id_proprietaire, LP_id_langue)
+VALUES (4,1);
+INSERT INTO langue_parlee(LP_id_proprietaire, LP_id_langue)
+VALUES (5,3);
+
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (5,3);
