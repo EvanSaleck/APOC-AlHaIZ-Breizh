@@ -14,17 +14,8 @@ switch($requestUrl) {
     case '/':
     case '':
         include './Controllers/Front/LogementController.php';
-
-        // Appel de la fonction indexAction si elle existe
-        if (function_exists('indexAction')) {
-            indexAction();
-            exit;
-        } else {
-            // Gérer le cas où la fonction indexAction n'est pas définie
-            http_response_code(500); // Erreur interne du serveur
-            echo "Erreur 500 - Fonction indexAction non trouvée";
-            exit;
-        }
+        appelFunction('indexAction');
+        
         break;
     case '/logement/edit':
         
@@ -49,3 +40,13 @@ switch($requestUrl) {
 //         require 'Views/Front/404.php';
 //         break;
 // }
+
+function appelFunction($fonction) {
+    if (function_exists($fonction)) {
+        $fonction();
+        exit;
+    } else {
+        http_response_code(500);
+        echo "Erreur 500 - Fonction $fonction non trouvée";
+    }
+}
