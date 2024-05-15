@@ -1,0 +1,80 @@
+@use 'general'
+
+$mobile: screen and (max-width: 680px)
+$tablette: screen and (max-width: 960px)
+
+@mixin flexRow
+    display: flex
+    flex-flow: row nowrap
+    justify-content: center
+    align-items: center
+
+@mixin flexCol
+    display: flex
+    flex-flow: column nowrap
+    justify-content: center
+    align-items: center
+
+#mainLogement
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    @include flexCol
+    font-family: 'DM Sans'
+
+    #sectionDesc
+        grid-column: 1 / 2
+        grid-row: 1
+
+    article
+        @include flexCol
+        margin: 10px 0
+        
+    #imageLogement
+        width: 100%
+
+    #divTitre
+        display: flex
+        flex-flow: row wrap
+        justify-content: center
+        margin: 20px 10px 10px 10px
+
+        h1
+            font-size: 18pt
+            margin: 0 5px
+
+    #note img
+        width: 25px
+
+    #divPrix
+        @include flexRow
+
+        #prix
+            font-size: 20pt
+
+    h2
+        font-size: 15pt
+
+    #divNbPersonnesMax
+        @include flexCol
+        margin: 10px 0
+
+        p
+            margin: 10px
+            font-weight: 600
+
+    #literie
+        @include flexRow
+
+        div
+            @include flexCol
+            margin: 10px 0
+
+            p
+                margin: 10px
+                width: 100px
+                text-align: center
+                font-weight: 600
+        
+
+    #descDet
+        margin: 10px 20px
