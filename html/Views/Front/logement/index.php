@@ -1,18 +1,21 @@
+<?php require 'Views/Front/navbar.php' ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des logements</title>
-    <link rel="stylesheet" href="../../../assets/SCSS/logement.css">
+    <link rel="stylesheet" href="assets/SCSS/logement.css">
 </head>
+
 <body>
     <div id="headerAccueilMobile">
-        <img src="../../../assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
+        <img src="assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
         <button id="buttonfiltresMobile">
-            <img src="../../../assets/imgs/mobile/Menu.svg" alt="Logo menu">
+            <img src="assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
     </div>
+    <p>Bonjour <?php echo $user ?></p>
     <div id="ongletFiltres">
         <h1>Filtres</h1>
         <span id="barreFiltresMobiles"></span>
@@ -21,11 +24,11 @@
             <input type="text" name="parCommune" id="parCommune">
         </div>
         <div>
-           <label for="parDepartement">Département</label>
+            <label for="parDepartement">Département</label>
             <input type="text" name="parDepartement" id="parDepartement">
         </div>
         <div>
-           <label for="parProprietaire">Propriétaire</label>
+            <label for="parProprietaire">Propriétaire</label>
             <input type="text" name="parProprietaire" id="parProprietaire">
         </div>
         <div>
@@ -55,4 +58,5 @@
         </div>
     </div>
 </body>
+
 </html>
