@@ -2,50 +2,29 @@
 
 namespace Controllers\Front;
 
-include 'Service/Database.php';
+include_once 'Service/Database.php';
 
 use Service\Database;
 
 class LogementController {
         
-        public function getAllLogements()
-        {
+    public function getAllLogements() {
             
-            $db = new Database();
-            $logements = $db->executeQuery('SELECT * FROM logement');
+        $db = new Database();
+        $logements = $db->executeQuery('SELECT * FROM logement');
+            
+        header('Content-Type: application/json');
+            
+        echo json_encode($logements);
+    }
         
-            // echo json_encode($logements);
+    public function getLogementById($id) {
             
-            header('Content-Type: application/json');
+        $db = new Database();
+        $logement = $db->executeQuery('SELECT * FROM logement WHERE id_logement = ' . $id);
             
-            echo json_encode($logements);
-        }
-        
-        public function getLogementById($id)
-        {
+        header('Content-Type: application/json');
             
-            $db = new Database();
-            $logement = $db->executeQuery('SELECT * FROM logement WHERE id_logement = ' . $id);
-        
-            // echo json_encode($logements);
-            
-            header('Content-Type: application/json');
-            
-            echo json_encode($logement);
-        }
-
-        
-}
-
-function indextAction()
-{
-    
-    $db = new Database();
-    $logements = $db->executeQuery('SELECT * FROM logement');
-
-    // echo json_encode($logements);
-    
-    header('Content-Type: application/json');
-    
-    echo json_encode($logements);
+        echo json_encode($logement);
+    }    
 }
