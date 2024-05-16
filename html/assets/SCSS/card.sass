@@ -2,7 +2,8 @@
 
 .card
     width: 76vw
-    height: 37vh
+    min-width: 30vh
+    min-height: 37vh
     margin: auto
     border: 1px solid black
     border-radius: 5px
@@ -10,12 +11,14 @@
     font-family: general.$police-titre
 
     .imgbox
-        height: 44%
+        height: 16vh
         overflow: hidden
         img
             width: 100%
-            height: auto
-            display: block
+            height: 100%  // Assure que l'image couvre toute la hauteur de imgbox
+            object-fit: cover  // Garantit que l'image couvre la zone disponible, coupant l'excès de façon à préserver les proportions
+            object-position: bottom  // Positionne la partie visible de l'image vers le bas
+
 
     .content
         padding: 10px
@@ -56,22 +59,14 @@
             align-self: flex-start
             margin-top: auto
             display: flex
-            align-items: center
-
+            align-items: center  // Assure un alignement vertical parfait des éléments
+            flex-wrap: nowrap  // Assure que les éléments restent sur une seule ligne
 
             .note
+                flex: 1 0 auto  // Permet à .note de prendre de l'espace disponible
+                align-items: center
                 display: flex
-                max-width: 30vw
-                margin-right: 20px
+                margin-right: 10px  // Ajuste la marge droite pour créer de l'espace
 
-                .noteEtoile 
-                    width: 24px
-                    height: 24px
-                    transform: scale(0.8)
-                    margin-right: -4px
-
-        .avis
-            font-size: 0.9rem
-            font-weight: bold
-            color: black
-            margin-left: 10px
+            .avis
+                flex: 0 0 auto  // Empêche .avis de rétrécir et reste collé à .note
