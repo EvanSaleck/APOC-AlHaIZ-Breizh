@@ -6,7 +6,7 @@ $tablette: screen and (max-width: 960px)
 @mixin flexRow
     display: flex
     flex-flow: row nowrap
-    justify-content: center
+    justify-content: space-evenly
     align-items: center
 
 @mixin flexCol
@@ -15,20 +15,20 @@ $tablette: screen and (max-width: 960px)
     justify-content: center
     align-items: center
 
-#mainLogement
+#descLogement
     display: grid
     grid-template-columns: repeat(3, 1fr)
     @include flexCol
     font-family: 'DM Sans'
+    font-size: 0.9em
 
     #sectionDesc
         grid-column: 1 / 2
         grid-row: 1
 
     article
-        @include flexCol
-        margin: 10px 0
-        
+        @include flexCol  
+
     #imageLogement
         width: 100%
 
@@ -36,45 +36,83 @@ $tablette: screen and (max-width: 960px)
         display: flex
         flex-flow: row wrap
         justify-content: center
-        margin: 20px 10px 10px 10px
+        margin: 3vh 3vw
 
         h1
-            font-size: 18pt
-            margin: 0 5px
+            font-size: 1.3em
+            margin: 0 1vw
 
-    #note img
-        width: 25px
+    #note 
+        display: flex
+        flex-flow: row nowrap
+        justify-content: center
+
+        p
+            margin: 3vw
+
+        img
+            width: 7vw
 
     #divPrix
         @include flexRow
 
         #prix
-            font-size: 20pt
+            font-size: 2em
+
+    .barre
+        padding: 1px 120px
+        background-color: general.$couleur-front-bleu-nuageux
+        margin: 2.5vh 0
 
     h2
-        font-size: 15pt
+        font-size: 1.5em
 
     #divNbPersonnesMax
-        @include flexCol
-        margin: 10px 0
+        @include flexRow
+        margin: 1vh 0
 
         p
-            margin: 10px
             font-weight: 600
 
     #literie
         @include flexRow
+        width: 100vw
 
         div
             @include flexCol
-            margin: 10px 0
+            margin: 2vw
 
             p
-                margin: 10px
-                width: 100px
                 text-align: center
                 font-weight: 600
         
 
     #descDet
-        margin: 10px 20px
+        margin: 1.5vh 3vh
+
+    #listeAmenagements
+        display: flex
+        flex-flow: row wrap
+        justify-content: center
+        align-items: center
+        margin: 1vh 0
+
+        .badgeAmenagement
+            @include flexRow
+            background-color: general.$couleur-front-bleu-verdatre
+            color: white
+            margin: 1vh 5vw
+            border-radius: 10px
+            width: 35vw
+
+            img
+                padding: 1.2vh 2vw 1.2vh 3vw
+
+            h3
+                width: 20vw
+                padding: 1.2vh 3vw 1.2vh 2vw
+                font-size: 1.2em
+                font-weight: 600
+    
+    #buffer
+        height: 25vh
