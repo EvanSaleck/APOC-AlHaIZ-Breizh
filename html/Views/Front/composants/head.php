@@ -10,41 +10,29 @@
     <!-- Feuilles de style -->
     <link rel="stylesheet" href="/html/assets/SCSS/general.css" type="text/css">
 
-    <!-- Images -->
-    <link rel="icon" type="image/png" size="32x32" href="/html/assets/imgs/logo.png">
-
-    <!-- Scripts -->
-    <script src="/html/assets/JS/header.js"></script>
-
     <?php
+        $pageName = str_replace(".php", "", basename($_SERVER['PHP_SELF']));
+        $pagesIncluses = get_included_files();
 
-    function getPageNameFromPath($path) {
-        return basename($path, ".php");
-    }
+        foreach ($pagesIncluses as $page) {
+            $url = str_replace(".php", "", basename($page));
 
-    $pageName = str_replace(".php", "", basename($_SERVER['PHP_SELF']));
+            // CSS path
+            $cssPath = "/html/assets/SCSS/" . $url . ".css";
+            // JS path
+            $jsPath = "/html/assets/JS/" . $url . ".js";
 
-    $pagesIncluses = get_included_files();
-
-
-    for ($i = 0; $i < count($pagesIncluses); $i++) {
-        if (str_contains($pagesIncluses[$i], "Views/Front/")){
-            $pageName = getPageNameFromPath($pagesIncluses[$i]);
-            
-            $cssPath = __DIR__ . "/html/assets/SCSS/" . $pageName . ".css";
-            $jsPath = __DIR__ . "/html/assets/JS/" . $pageName . ".js";
-    
-            if (file_exists($cssPath)) {
-                echo '<link rel="stylesheet" href="/html/assets/SCSS/' . $pageName . '.css" type="text/css">' . PHP_EOL;
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cssPath)) {
+                echo '<link rel="stylesheet" href="' . $cssPath . '" type="text/css">' . PHP_EOL;
             }
-    
-            if (file_exists($jsPath)) {
-                echo '<script src="/html/assets/JS/' . $pageName . '.js"></script>' . PHP_EOL;
+
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $jsPath)) {
+                echo '<script src="' . $jsPath . '"></script>' . PHP_EOL;
             }
         }
-    }
     ?>
 
+    <link rel="stylesheet" href="/html/assets/SCSS/<?php echo $pageName; ?>.css" type="text/css">
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let path = window.location.pathname.split("/");
