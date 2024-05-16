@@ -8,8 +8,6 @@ use Controllers\Front\LogementController;
 // Initialisation des controllers
 $logementController = new LogementController();
 
-
-
 $requestUrl = $_SERVER['REQUEST_URI'];
 
 $requestUrl = substr($requestUrl, 5);
