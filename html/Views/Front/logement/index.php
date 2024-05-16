@@ -15,7 +15,23 @@
             <img src="assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
     </div>
-    <p>Bonjour <?php echo $user ?></p>
+    <?php print_r($logements) ?> 
+    
+    <script>
+        log = <?php echo $logementsJson ?>;
+        console.log(log);   
+
+
+        document.getElementById('buttonfiltresMobile').addEventListener('click', function() {
+            document.getElementById('ongletFiltres').classList.toggle('active');
+        });
+
+        // pareil en jquery 
+        $('#buttonfiltresMobile').click(function() {
+            $('#ongletFiltres').toggleClass('active');
+        });
+    </script>
+
     <div id="ongletFiltres">
         <h1>Filtres</h1>
         <span id="barreFiltresMobiles"></span>
