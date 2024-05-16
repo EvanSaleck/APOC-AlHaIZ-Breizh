@@ -2,7 +2,7 @@
 
 namespace Service;
 
-
+use Exception;
 use PDO;
 use PDOException;
 
@@ -34,7 +34,7 @@ class Database {
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         } catch (PDOException $e) {
-            die('Erreur lors de l\'exécution de la requête : ' . $e->getMessage());
+            throw new \Exception('Erreur lors de l\'exécution de la requête : ' . $e->getMessage());
         }
     }
 }

@@ -15,21 +15,19 @@
             <img src="assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
     </div>
-    <?php print_r($logements) ?> 
-    
+
     <script>
-        log = <?php echo $logementsJson ?>;
-        console.log(log);   
-
-
-        document.getElementById('buttonfiltresMobile').addEventListener('click', function() {
-            document.getElementById('ongletFiltres').classList.toggle('active');
+        fetch('api/getLogements')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            data.forEach(logement => {
+                console.log(logement);
+                console.log(logement.id_logement)
+            });
         });
 
-        // pareil en jquery 
-        $('#buttonfiltresMobile').click(function() {
-            $('#ongletFiltres').toggleClass('active');
-        });
+
     </script>
 
     <div id="ongletFiltres">
