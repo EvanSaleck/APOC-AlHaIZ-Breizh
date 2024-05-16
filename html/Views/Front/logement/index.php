@@ -1,26 +1,29 @@
-<?php 
-    include 'Views/Front/navbar.php' 
-?>
+<?php
+ require 'Views/Front/composants/head.php';
+ require 'Views/Front/composants/header.php';
+ ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des logements</title>
-    <link rel="stylesheet" href="/html/assets/SCSS/logement.css">
-</head>
-
-<script src="/html/assets/JS/logement.js"></script>
-
-<body>
+<!-- <body>
     <div id="headerAccueilMobile">
         <img src="/html/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
         <button id="buttonfiltresMobile">
             <img src="/html/assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
-    </div>
+    </div> -->
 
+    <script>
+        fetch('/html/api/getLogements')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            data.forEach(logement => {
+                console.log(logement);
+                console.log(logement.id_logement)
+            });
+        });
+
+
+    </script>
 
     <div id="ongletFiltres">
         <h1>Filtres</h1>
