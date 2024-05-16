@@ -1,5 +1,12 @@
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById('buttonfiltresMobile').onclick = function() {
-        document.getElementById('filtresMobile').classList.toggle('active');
-    }
+// au chargement du dom
+document.addEventListener('DOMContentLoaded', function() {
+    // on récupère les logements
+    fetch('api/getLogements')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            data.forEach(logement => {
+                
+            });
+        });
 });
