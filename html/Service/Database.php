@@ -1,4 +1,11 @@
 <?php
+
+namespace Service;
+
+
+use PDO;
+use PDOException;
+
 class Database {
     private $pdo;
     private $dsn = 'pgsql:host=localhost;dbname=apoc;port=5432';
