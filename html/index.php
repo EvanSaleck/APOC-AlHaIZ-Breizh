@@ -31,13 +31,3 @@ switch($requestUrl) {
         echo "BAHAHAHAH 404 CHHHEEHHH";
         exit;
 }
-
-function appelFunction($fonction) {
-    if (function_exists($fonction)) {
-        $fonction();
-        exit;
-    } else {
-        http_response_code(500);
-        echo "Erreur 500 - Fonction $fonction non trouvée";
-    }
-}
