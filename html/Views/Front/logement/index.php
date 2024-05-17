@@ -23,7 +23,7 @@
                 console.log(logement);
                 console.log(logement.id_logement)
             });
-        }); -->
+        });
 
 
     </script>
