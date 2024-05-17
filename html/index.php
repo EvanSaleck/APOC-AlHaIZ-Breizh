@@ -13,7 +13,7 @@ $reservationController = new ReservationController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
-$requestUrl = substr($requestUrl, 5);
+// $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
     // Routes des vues
