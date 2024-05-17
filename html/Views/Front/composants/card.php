@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Feuilles de style -->
-    <link rel="stylesheet" type="text/css" href="/html/assets/SCSS/card.css">
-</head>
-<body>
-<div class="card">
+<!-- import du css -->
+<link rel="stylesheet" href="/html/assets/SCSS/card.css" type="text/css">
+
+<!-- code template -->
+<template class="card">
     <div class="imgbox">
         <img class="imgloca" src="/html/assets/imgs/offres/Offre1.svg" alt="">
     </div>
@@ -30,6 +24,4 @@
             <h3 class="Avis">82 avis</h3>
         </div>
     </div>
-</div>
-</body>
-</html>
+</template>
