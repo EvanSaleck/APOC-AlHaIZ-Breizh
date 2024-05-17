@@ -16,7 +16,7 @@ switch($requestUrl) {
     // Routes des vues
     case '/':
     case '':
-        include 'Views/Front/logement/index.php';
+        include './Views/Front/logement/index.php';
         break;
 
     // Routes des API
