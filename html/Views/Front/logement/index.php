@@ -1,29 +1,27 @@
-<?php
- require 'Views/Front/composants/head.php';
- require 'Views/Front/composants/header.php';
- ?>
+<?php 
+    require_once './Views/Front/composants/card.php';
+?>
 
-<!-- <body>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste logements</title>
+    <link rel="stylesheet" href="/html/assets/SCSS/logement.css">
+</head>
+<body>
     <div id="headerAccueilMobile">
         <img src="/html/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
         <button id="buttonfiltresMobile">
             <img src="/html/assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
-    </div> -->
-
-    <script>
-        fetch('/html/api/getLogements')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            data.forEach(logement => {
-                console.log(logement);
-                console.log(logement.id_logement)
-            });
-        });
+    </div>
+    <div id="cardsContainer">
 
 
-    </script>
+    </div>
+
 
     <div id="ongletFiltres">
         <h1>Filtres</h1>
@@ -65,7 +63,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 </body>
-
 </html>
+<script src="/html/assets/JS/logement.js"></script>
