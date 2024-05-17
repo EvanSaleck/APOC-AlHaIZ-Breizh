@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if ("content" in document.createElement("template")) {
         // on récupère les logements
-        fetch('/html/api/getLogements')
+        fetch('/api/getLogements')
             .then(response => response.json())
             .then(data => {
                 data.forEach(logement => {
