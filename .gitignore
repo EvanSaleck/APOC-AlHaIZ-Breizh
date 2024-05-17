@@ -26,3 +26,6 @@ Homestead.json
 html/assets/general.css
 
 /html/assets/SCSS/*.css.map
+
+# database pour ne pas pull les logs des autres
+/html/Service/Database.php

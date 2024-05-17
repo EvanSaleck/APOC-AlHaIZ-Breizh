@@ -1,6 +1,6 @@
 @use './general' as general
 
-.HeaderContainer 
+.HeaderContainer
     /* Taille */
     height: 75px
 
@@ -9,15 +9,63 @@
     flex-direction: row
 
     /*Couleur de fond*/
+    color: #FFFFFF
     background-color: general.$couleur-front-bleu-verdatre
 
-.HeaderContainer > .Logo > a > img
-    margin-top: 10%
-    margin-left: 2%
-    width: 64px
-    height: 64px
 
-.HeaderContainer > .Menu > ul
-    list-style: none
-    text-decoration: none
+    .Menu
+        display: flex
+        flex-direction: row
+        margin-left: auto
 
+        gap: 25px
+        margin-right: 1%
+        ul
+            display: flex
+            flex-direction: row
+
+            margin-top: 7.5%
+            width: fit-content
+            gap: 70px
+            list-style-type: none
+            font-family: 'Reem Kufi'
+            font-size: 20px
+
+            li
+                a
+                    text-decoration: none
+                    white-space: nowrap   
+
+    .Logo
+        a
+            display: flex
+            flex-direction: row
+
+            gap: 10px
+            font-family: 'Poiret One'
+            font-weight: bold
+            font-size: 45px
+            text-decoration: none
+
+            img
+                margin-top: 1.5%
+                width: 78px
+                height: 64px
+            p
+                align-self: center
+
+#account
+    border: 1px solid white
+    width: 100%
+    height: 100%
+    background-color: general.$couleur-front-bleu-marine
+    border-radius: 100%
+    margin-right: 25%
+    margin-top: 5%
+
+@media screen and (max-width: 768px)
+    .HeaderContainer
+        .Logo
+            a
+                p
+                    display: none
