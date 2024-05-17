@@ -1,6 +1,7 @@
 DROP SCHEMA IF EXISTS sae3 CASCADE;
 CREATE SCHEMA sae3;
 SET SCHEMA 'sae3';
+SET datestyle = 'EUROPEAN,DMY';
 
 CREATE TABLE adresse (
    id_adresse serial PRIMARY KEY,
