@@ -8,9 +8,9 @@ use PDOException;
 
 class Database {
     private $pdo;
-    private $dsn = 'pgsql:host=servbdd;dbname=pg_cgautieraudi;port=5432';
-    private $username = 'cgautieraudi';
-    private $password = 'Euchre2566';
+    private $dsn = 'pgsql:host=localhost;dbname=apoc;port=5432';
+    private $username = 'apoc';
+    private $password = 'apoc';
 
     public function __construct() {
         try {

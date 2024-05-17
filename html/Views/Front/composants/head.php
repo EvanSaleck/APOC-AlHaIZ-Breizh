@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Feuilles de style -->
-    <link rel="stylesheet" href="/html/assets/SCSS/general.css" type="text/css">
+    <link rel="stylesheet" href="/assets/SCSS/general.css" type="text/css">
 
     <?php
         $pageName = str_replace(".php", "", basename($_SERVER['PHP_SELF']));
@@ -18,9 +18,9 @@
             $url = str_replace(".php", "", basename($page));
 
             // CSS path
-            $cssPath = "/html/assets/SCSS/" . $url . ".css";
+            $cssPath = "/assets/SCSS/" . $url . ".css";
             // JS path
-            $jsPath = "/html/assets/JS/" . $url . ".js";
+            $jsPath = "/assets/JS/" . $url . ".js";
 
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cssPath)) {
                 echo '<link rel="stylesheet" href="' . $cssPath . '" type="text/css">' . PHP_EOL;
@@ -32,7 +32,7 @@
         }
     ?>
 
-    <link rel="stylesheet" href="/html/assets/SCSS/<?php echo $pageName; ?>.css" type="text/css">
+    <link rel="stylesheet" href="/assets/SCSS/<?php echo $pageName; ?>.css" type="text/css">
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let path = window.location.pathname.split("/");
@@ -53,7 +53,7 @@
     $_SESSION['user'] = [
         'nom' => 'Jean',
         'prenom' => 'Dupont',
-        'url' => '/html/assets/imgs/Profils/user.png'
+        'url' => '/assets/imgs/Profils/user.png'
         ];
 
     if(isset($_SESSION['user'])){

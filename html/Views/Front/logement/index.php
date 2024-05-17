@@ -7,14 +7,14 @@
 
 <body>
     <div id="headerAccueilMobile">
-        <img src="/html/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
+        <img src="/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
         <button id="buttonfiltresMobile">
-            <img src="/html/assets/imgs/mobile/Menu.svg" alt="Logo menu">
+            <img src="/assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
     </div>
 
     <script>
-        fetch('/html/api/getLogements')
+        fetch('/api/getLogements')
         .then(response => response.json())
         .then(data => {
             console.log(data);
