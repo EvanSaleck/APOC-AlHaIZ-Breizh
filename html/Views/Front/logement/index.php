@@ -1,27 +1,32 @@
-<?php 
-    require_once './Views/Front/composants/card.php';
-?>
+<?php
+ include 'Views/Front/composants/header.php';
+//  include 'Views/Front/composants/navbar.php';
+//  require 'Views/Front/composants/card.php';
+ include 'Views/Front/composants/head.php';
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste logements</title>
-    <link rel="stylesheet" href="/html/assets/SCSS/logement.css">
-</head>
+ ?>
+
 <body>
     <div id="headerAccueilMobile">
-        <img src="/html/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
+        <img src="/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
         <button id="buttonfiltresMobile">
-            <img src="/html/assets/imgs/mobile/Menu.svg" alt="Logo menu">
+            <img src="/assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
     </div>
-    <div id="cardsContainer">
+
+    <script>
+        fetch('/api/getLogements')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            data.forEach(logement => {
+                console.log(logement);
+                console.log(logement.id_logement)
+            });
+        });
 
 
-    </div>
-
+    </script>
 
     <div id="ongletFiltres">
         <h1>Filtres</h1>

@@ -11,7 +11,11 @@ function AddListeners() {
   let account = document.getElementById("account");
   // Setting Listeners for Account Icon
   account.addEventListener("click", () => {
-    console.log("account icon clicked");
+    if (currentUser === null) {
+      ShowModalConnexion();
+    } else {
+      // ShowModalProfile();
+    }
   });
 }
 
@@ -26,15 +30,16 @@ function SetModalAndProfilePicture() { // Pass currentUser as an argument
     let account = document.getElementById("account");
 
     if (currentUser === null) {
-        let img = document.createElement("img");
-        img.src = "/assets/imgs/person-fill.svg";
-        img.width = 32;
-        account.appendChild(img); 
+      account.style.backgroundImage = "url('/html/assets/imgs/person-fill.svg')"; 
     } else if (currentUser && currentUser.url) { 
-        let img = document.createElement("img");
-        img.src = currentUser.url; 
-        img.width = 32;
-        account.appendChild(img); 
+      account.style.backgroundImage = `url('${currentUser.url}')`;
     }
+}
+
+function ShowModalConnexion() {
+  let modal = document.getElementById("ModalHovered");
+
+  modal.style.display = "block";
+  
 }
 
