@@ -1,6 +1,7 @@
 <?php
  include 'Views/Front/composants/header.php';
- include 'Views/Front/composants/navbar.php';
+//  include 'Views/Front/composants/navbar.php';
+//  require 'Views/Front/composants/card.php';
  include 'Views/Front/composants/head.php';
 
  ?>
@@ -22,7 +23,7 @@
                 console.log(logement);
                 console.log(logement.id_logement)
             });
-        });
+        }); -->
 
 
     </script>

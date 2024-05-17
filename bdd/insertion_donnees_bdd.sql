@@ -1,3 +1,4 @@
+ALTER DATABASE apoc SET DateStyle TO 'European, DMY';
 INSERT INTO type_logement(nom_type) 
 VALUES ('Studio');
 INSERT INTO type_logement(nom_type) 
@@ -134,7 +135,7 @@ INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, phot
 VALUES ('Mr', 'Le Goff', 'Yannick', 'yannick.le_goff@exemple.com', 'yg123456', 'YannickBreton', './images/yannick_le_goff.png', '20/05/1975', 2, './images/cni/identite_04', '20/05/2029', true);
 
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Mr','Dupont', 'Paul', 'paul.dupont@example.com', 'paul123456', 'PaulDupont', './images/paul_dupont.png', '1980-01-01', 3, './images/cni/identite_05', '2020-05-07', false);
+VALUES ('Mr','Dupont', 'Paul', 'paul.dupont@example.com', 'paul123456', 'PaulDupont', './images/paul_dupont.png', '01/01/1980', 3, './images/cni/identite_05', '07/05/2020', false);
 
 /* Insertion donnees avec accroches et description */
 
@@ -175,34 +176,34 @@ VALUES ('Maison de campagne', 7, './image/logements/image_12', 45.9876, 3.1234, 
 
 
 INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(3, '2024-06-01', '2024-06-04', 2, '2024-05-15', FALSE, 1, 1);
+(3, '01/06/2024', '04/06/2024', 2, '15/05/2024', FALSE, 1, 1);
 
 INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(5, '2024-06-10', '2024-06-15', 4, '2024-05-20', FALSE, 2, 2);
+(5, '10/06/2024', '15/06/2024', 4, '20/05/2024', FALSE, 2, 2);
 
 INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(2, '2024-06-18', '2024-06-20', 1, '2024-05-25', FALSE, 3, 3);
+(2, '18/06/2024', '20/06/2024', 1, '25/05/2024', FALSE, 3, 3);
 
 INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(7, '2024-06-05', '2024-06-12', 3, '2024-05-18', FALSE, 4, 4);
+(7, '05/06/2024', '12/06/2024', 3, '18/05/2024', FALSE, 4, 4);
 
 INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(4, '2024-06-22', '2024-06-26', 2, '2024-05-30', TRUE, 5, 3);
+(4, '22/06/2024', '26/06/2024', 2, '30/05/2024', TRUE, 5, 3);
 
 INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(6, '2024-06-13', '2024-06-19', 5, '2024-05-21', FALSE, 1, 2);
+(6, '13/06/2024', '19/06/2024', 5, '21/05/2024', FALSE, 1, 2);
 
 INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(1, '2024-06-25', '2024-06-26', 1, '2024-06-01', FALSE, 3, 1);
+(1, '25/06/2024', '26/06/2024', 1, '01/06/2024', FALSE, 3, 1);
 
 INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(3, '2024-07-01', '2024-07-04', 2, '2024-06-05', FALSE, 5, 4);
+(3, '01/07/2024', '04/07/2024', 2, '05/06/2024', FALSE, 5, 4);
 
 INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(2, '2024-07-08', '2024-07-10', 3, '2024-06-10', TRUE, 1, 3);
+(2, '08/07/2024', '10/07/2024', 3, '10/06/2024', TRUE, 1, 3);
 
 INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(5, '2024-07-15', '2024-07-20', 7, '2024-06-15', FALSE, 2, 6);
+(5, '15/07/2024', '20/07/2024', 7, '15/06/2024', FALSE, 2, 6);
 
 
 INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
