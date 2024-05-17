@@ -14,7 +14,7 @@ function AddListeners() {
     if (currentUser === null) {
       ShowModalConnexion();
     } else {
-      ShowModalProfile();
+      // ShowModalProfile();
     }
   });
 }
