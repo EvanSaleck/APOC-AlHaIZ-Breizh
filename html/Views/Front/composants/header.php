@@ -16,6 +16,14 @@
     </div>
 </body>
 
-<div id="ModalHovered">
+<div id="ModalHovered" style="display:none;">
+    <div id="ModalContent">
+        <div id="ModalHeader">
+            <h1>Se connecter </h1>
+            <button id="CloseModal">X</button>
+        </div>
+        <div id="ModalBody">
+            <form action="" method="post">
+                <div class="form-group
 
 </div>

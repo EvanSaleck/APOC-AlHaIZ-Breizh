@@ -1,12 +1,13 @@
 <?php
  include 'Views/Front/composants/header.php';
- include 'Views/Front/composants/navbar.php';
+//  include 'Views/Front/composants/navbar.php';
+//  require 'Views/Front/composants/card.php';
  include 'Views/Front/composants/head.php';
 
  ?>
 
 <body>
-    <div id="headerAccueilMobile">
+    <!-- <div id="headerAccueilMobile">
         <img src="/html/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
         <button id="buttonfiltresMobile">
             <img src="/html/assets/imgs/mobile/Menu.svg" alt="Logo menu">
@@ -22,7 +23,7 @@
                 console.log(logement);
                 console.log(logement.id_logement)
             });
-        });
+        }); -->
 
 
     </script>

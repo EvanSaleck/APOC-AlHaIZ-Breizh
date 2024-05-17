@@ -17,9 +17,7 @@
         foreach ($pagesIncluses as $page) {
             $url = str_replace(".php", "", basename($page));
 
-            // CSS path
             $cssPath = "/html/assets/SCSS/" . $url . ".css";
-            // JS path
             $jsPath = "/html/assets/JS/" . $url . ".js";
 
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cssPath)) {

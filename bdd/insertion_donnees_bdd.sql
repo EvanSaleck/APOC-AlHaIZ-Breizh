@@ -1,3 +1,4 @@
+ALTER DATABASE apoc SET DateStyle TO 'European, DMY';
 INSERT INTO type_logement(nom_type) 
 VALUES ('Studio');
 INSERT INTO type_logement(nom_type) 
