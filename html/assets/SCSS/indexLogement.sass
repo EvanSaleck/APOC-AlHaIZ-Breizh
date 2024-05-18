@@ -1,5 +1,8 @@
 @use './general' as general
 
+#ongletFiltres
+    display: none
+
 @media screen and (max-width: general.$max-width-telephone)
     #headerAccueilMobile 
         background-color: white
@@ -31,21 +34,20 @@
     #cardsContainer
         margin-bottom: 25%
 
-    #ongletFiltres
-        position: absolute
-        width: 100%
-        height: 100%
-        top: 0
-        left: 0
-        background-color: white
-        display: flex
-        flex-direction: column
-        justify-content: center
-        align-items: center
-        z-index: 1000
-        padding-top: 20px
-        overflow: scroll
-        display: none
+    // #ongletFiltres
+    //     position: absolute
+    //     width: 100%
+    //     height: 100%
+    //     top: 0
+    //     left: 0
+    //     background-color: white
+    //     display: flex
+    //     flex-direction: column
+    //     justify-content: center
+    //     align-items: center
+    //     z-index: 1000
+    //     padding-top: 20px
+    //     overflow: scroll
         
     //     div
     //       width: 100%
@@ -87,6 +89,12 @@
     // //     order: -1 // Permet de mettre le champ Max en dessous et à gauche
     // //     margin-right: auto // Pour aligner à gauche
 
-@media screen and (max-width: general.$max-width-tablette)
+@media screen and (min-width: general.$max-width-telephone)
     #headerAccueilMobile 
         display: none
+
+    #cardsContainer
+        display: grid
+        grid-template-columns: repeat(auto-fit, minmax(310px, 1fr))
+        grid-column-gap: 0px
+        padding: 0 5%
