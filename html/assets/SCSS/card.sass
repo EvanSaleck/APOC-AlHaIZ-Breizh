@@ -9,6 +9,9 @@
     border-radius: 5px
     background-color: #fff
     font-family: general.$police-titre
+    margin: 
+        top: 1em
+        bottom: 1em 
 
     .imgbox
         height: 16vh
@@ -26,8 +29,8 @@
         flex-direction: column
         justify-content: space-between
 
-        .lieu
-            font-size: 1.2rem
+        .nomVille
+            font-size: 1rem
             color: black
             margin-bottom: 0.3rem
 
@@ -36,12 +39,13 @@
             justify-content: space-between
             align-items: baseline
             margin-bottom: 0.3rem
+            gap: 20px
 
-        .logement
-            font-size: 1rem
+        .titre
+            font-size: 1.2rem
 
         .tarif
-            font-size: 1.5rem
+            font-size: 1.2rem
             font-weight: bold
             color: black
 
@@ -68,5 +72,5 @@
                 display: flex
                 margin-right: 10px  // Ajuste la marge droite pour créer de l'espace
 
-            .avis
+            .nbAvis
                 flex: 0 0 auto  // Empêche .avis de rétrécir et reste collé à .note
