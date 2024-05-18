@@ -1,12 +1,11 @@
 <?php
-//  include 'Views/Front/composants/header.php';
  include_once 'Views/Front/composants/navbar.php';
  include_once 'Views/Front/composants/card.php';
  include_once 'Views/Front/composants/head.php';
-
  ?>
 
 <body>
+
     <div id="headerAccueilMobile">
         <img src="/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
         <button id="buttonfiltresMobile">
@@ -14,9 +13,7 @@
         </button>
     </div>
 
-    <div id="cardsContainer">
-
-    </div>
+    <div id="cardsContainer"></div>
 
     <div id="ongletFiltres">
         <h1>Filtres</h1>
@@ -58,6 +55,8 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
+    <?php include_once 'Views/Front/composants/footer.php' ?>
+
 </body>
 </html>
