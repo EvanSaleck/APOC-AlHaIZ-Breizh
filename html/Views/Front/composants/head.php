@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -36,11 +35,13 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let path = window.location.pathname.split("/");
+            console.log(path);
             let page = path.slice(-1)[0];
+            console.log(page);
 
             switch (page) {
-                case "index.php":
-                    document.querySelector("head").innerHTML += '<title>Réservation</title>';
+                case "":
+                    document.querySelector("head").innerHTML += '<title>AlHAiZ Breizh</title>';
                     break;
                 default:
                     document.querySelector("head").innerHTML += `<title>${page.replace('.php', '')}</title>`;
@@ -60,7 +61,7 @@
         $user = $_SESSION['user'];
         ?> <script>sessionStorage.setItem('User', JSON.stringify(<?php echo json_encode($user);?>));</script>
     <?php } ?>
-    
+
 </head>
 
 
