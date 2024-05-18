@@ -1,38 +1,39 @@
 @use 'general'
 
-.navbar
-    position: fixed
-    bottom: 0
-    right: 0
-    left: 0
-    width: 100%
-    height: 10%
-    display: flex
-    justify-content: center
-    align-items: center
-    background-color: white
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25)
-
-    button
-        margin: 10px
-        background-color: white
-        border: 1px solid general.$couleur-front-bleu-nuageux
-        height: 62%
-        width: 25%
-        border-radius: 5px
-        padding: 20px
-        transition: background-color 0.1s ease
-        font-size: general.$taille-police-bouton-mobile
+@media screen and (max-width: general.$max-width-telephone)
+    .navbar
+        position: fixed
+        bottom: 0
+        right: 0
+        left: 0
+        width: 100%
+        height: 10%
         display: flex
-        flex-direction: column
         justify-content: center
         align-items: center
+        background-color: white
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.25)
 
-    button:active
-        background-color: general.$couleur-front-bleu-nuageux
+        button
+            margin: 10px
+            background-color: white
+            border: 1px solid general.$couleur-front-bleu-nuageux
+            height: 62%
+            width: 25%
+            border-radius: 5px
+            padding: 20px
+            transition: background-color 0.1s ease
+            font-size: general.$taille-police-bouton-mobile
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
 
-        img
-            height: 100%
-            width: auto
-            max-height: 100%
-            max-width: 100%
+        button:active
+            background-color: general.$couleur-front-bleu-nuageux
+
+            img
+                height: 100%
+                width: auto
+                max-height: 100%
+                max-width: 100%
