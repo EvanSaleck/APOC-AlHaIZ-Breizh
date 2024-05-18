@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    <?php include_once 'Views/Front/composants/footer.php' ?>
-
+    <!-- Dire a CA de faire les media queries pour le footer -->
+    <?php /*include_once 'Views/Front/composants/footer.php'*/ ?>
 </body>
 </html>
