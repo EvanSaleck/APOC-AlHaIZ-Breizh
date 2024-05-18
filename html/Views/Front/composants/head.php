@@ -27,12 +27,12 @@
             }
 
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . $jsPath)) {
-                echo '<script src="' . $jsPath . '"></script>' . PHP_EOL;
+                echo '<script src="' . $jsPath . ' " type="module"></script>' . PHP_EOL;
             }
         }
     ?>
 
-    <link rel="stylesheet" href="/assets/SCSS/<?php echo $pageName; ?>.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/assets/SCSS/<?php echo $pageName; ?>.css" type="text/css"> -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let path = window.location.pathname.split("/");
