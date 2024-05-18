@@ -3,60 +3,49 @@
 namespace Controllers\Front;
 
 include_once 'Service/Database.php';
-include_once 'Models/Logement.php';
 
 use Service\Database;
-use Models\Logement;
 
 class LogementController {
+
+    private $db;
+
+    public function __construct() {
+        $this->db = new Database();
+    }
         
-    public function getAllLogements() {
-        $db = new Database();
-        $result = $db->executeQuery('SELECT * FROM logement');
-
-        $logements = [];
-        if ($result !== false) {
-            foreach ($result as $row) {
-                $logements[] = new Logement(
-                    $row['id_logement'], 
-                    $row['titre'], 
-                    $row['accroche'], 
-                    $row['personnes_max'], 
-                    $row['image_principale'], 
-                    $row['description'], 
-                    $row['latitude'], 
-                    $row['longitude'], 
-                    $row['surface_hab'], 
-                    $row['nb_chambres'], 
-                    $row['nb_lits_simples'], 
-                    $row['nb_lits_doubles'], 
-                    $row['prix_nuit_ht'], 
-                    $row['prix_nuit_ttc'], 
-                    $row['statut_propriete'], 
-                    $row['duree_min_location'], 
-                    $row['avance_resa_min'], 
-                    $row['delai_annul_max'], 
-                    $row['L_id_adresse'], 
-                    $row['L_id_compte'], 
-                    $row['L_id_type'], 
-                    $row['L_id_categorie']
-                );
-            }
-        }
-
+    public function getAllLogements() {            
+        $logements = $this->db->executeQuery('SELECT * FROM logement');
+            
         header('Content-Type: application/json');
-        echo json_encode(array_map(function($logement) {
-            return $logement->toArray();
-        }, $logements));
+            
+        echo json_encode($logements);
     }
         
     public function getLogementById($id) {
             
-        $db = new Database();
-        $logement = $db->executeQuery('SELECT * FROM logement WHERE id_logement = ' . $id);
+        $logement = $this->db->executeQuery('SELECT * FROM logement WHERE id_logement = ' . $id);
             
         header('Content-Type: application/json');
             
         echo json_encode($logement);
-    }    
+    }
+    
+    public function getLogementsDataForCards() {
+        $dataLogements = $this->db->executeQuery('
+        select l.id_logement,l.titre,l.description,l.prix_nuit_ttc,ad.nom_ville,avg(av.note_avis) as moyenne_logement, count(av.id_avis) as nb_avis
+            from logement l 
+                inner join adresse ad
+                    on l.l_id_adresse  = ad.id_adresse 
+            left join reservation r 
+                on l.id_logement = r.r_id_logement 
+            left join avis av
+                on r.id_reservation = av.av_id_reservation 
+            group by (l.id_logement,ad.id_adresse);
+        ');
+
+        header('Content-Type: application/json');
+
+        echo json_encode($dataLogements);
+    }
 }
