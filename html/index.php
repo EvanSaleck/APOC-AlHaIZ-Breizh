@@ -19,13 +19,15 @@ switch($requestUrl) {
     // Routes des vues
     case '/':
     case '':
-        include './Views/Front/logement/index.php';
+        include './Views/Front/logement/indexLogement.php';
         break;
 
     // Routes des API
     case '/api/getLogements':
-    case 'api/getLogements':
         $logementController->getAllLogements();
+        break;
+    case '/api/getLogementsDataForCards':
+        $logementController->getLogementsDataForCards();
         break;
 
     case '/api/getReservations':
