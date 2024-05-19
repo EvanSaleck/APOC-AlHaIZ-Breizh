@@ -17,3 +17,13 @@ export function displayNoteEtoiles(div,note) {
         }
     }
 }
+
+export async function fileExists(path) {
+    try {
+        const response = await fetch(path, { method: 'HEAD' });
+        return response.ok;
+    } catch (error) {
+        console.error('Erreur:', error);
+        return false;
+    }
+}
