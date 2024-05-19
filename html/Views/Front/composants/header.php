@@ -1,5 +1,5 @@
-<body>
-    <div class="HeaderContainer">
+<header>
+    <div class="HeaderConteneur">
         <div class="Logo">
             <a href="./index.php">
                 <img src="/assets/imgs/logo.png" alt="Logo">
@@ -11,19 +11,12 @@
                 <li><a href="/Views/Front/index.php">Accueil</a></li>
                 <li><a href="/Views/Front/about.php">A propos</a></li>
             </ul>
-            <div id="account"></div>
+            <div id="Compte"></div>
         </div>
     </div>
-</body>
-
-<div id="ModalHovered" style="display:none;">
-    <div id="ModalContent">
-        <div id="ModalHeader">
-            <h1>Se connecter </h1>
-            <button id="CloseModal">X</button>
-        </div>
-        <div id="ModalBody">
-            <form action="" method="post">
-                <div class="form-group
-
-</div>
+    <div id="Bulle" class="d-none">
+        <div id="Profil"></div>
+        <div id="Connexion"></div>
+        <hr>
+    </div>
+</header>

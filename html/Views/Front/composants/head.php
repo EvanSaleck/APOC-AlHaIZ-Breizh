@@ -16,17 +16,16 @@
         foreach ($pagesIncluses as $page) {
             $url = str_replace(".php", "", basename($page));
 
-            // CSS path
-            $cssPath = "/assets/SCSS/" . $url . ".css";
-            // JS path
-            $jsPath = "/assets/JS/" . $url . ".js";
 
-            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cssPath)) {
-                echo '<link rel="stylesheet" href="' . $cssPath . '" type="text/css">' . PHP_EOL;
+            $cheminCSS = "/assets/SCSS/" . $url . ".css";
+            $cheminjs = "/assets/JS/" . $url . ".js";
+
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cheminCSS)) {
+                echo '<link rel="stylesheet" href="' . $cheminCSS . '" type="text/css">' . PHP_EOL;
             }
 
-            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $jsPath)) {
-                echo '<script src="' . $jsPath . '"></script>' . PHP_EOL;
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cheminjs)) {
+                echo '<script src="' . $cheminjs . '"></script>' . PHP_EOL;
             }
         }
     ?>
@@ -35,9 +34,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let path = window.location.pathname.split("/");
-            console.log(path);
             let page = path.slice(-1)[0];
-            console.log(page);
 
             switch (page) {
                 case "":
@@ -51,12 +48,6 @@
     </script>
 
     <?php
-    $_SESSION['user'] = [
-        'nom' => 'Jean',
-        'prenom' => 'Dupont',
-        'url' => '/assets/imgs/Profils/user.png'
-        ];
-
     if(isset($_SESSION['user'])){
         $user = $_SESSION['user'];
         ?> <script>sessionStorage.setItem('User', JSON.stringify(<?php echo json_encode($user);?>));</script>
