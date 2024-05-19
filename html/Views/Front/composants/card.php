@@ -1,6 +1,6 @@
 <template class="card">
     <div class="imgbox">
-        <img class="imgloca" src="/assets/imgs/offres/Offre1.svg" alt="">
+        <img class="imagePrincipale" src="" alt="">
     </div>
     <div class="content">
         <h3 class="nomVille"></h3>
