@@ -11,7 +11,7 @@
         <button id="buttonfiltresMobile">
             <img src="/assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
-    </div>
+    </div> -->
 
     <div id="cardsContainer"></div>
 
