@@ -1,0 +1,104 @@
+@charset "UTF-8";
+/* Définition des couleurs du Front par défaut */
+/* Définition des couleurs du Back par défaut */
+/* Import des polices Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+/* Import de la police dyslexique Lexend */
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+/* Définition des polices par défaut */
+/* Définition tailles de police desktop */
+/* Définition tailles de police mobile */
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Appliquer les polices */
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Reem Kufi", sans-serif;
+}
+
+.error {
+  border: 1px solid #D8000C !important;
+}
+
+#headerAccueilMobile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  padding: 20px 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+#logoAssoMobile {
+  width: 20%;
+}
+
+#buttonfiltresMobile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #000;
+}
+#buttonfiltresMobile svg {
+  width: 60%;
+  height: 60%;
+}
+
+#ongletFiltres {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding-top: 20px;
+  overflow: scroll;
+  display: none;
+}
+#ongletFiltres div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#barreFiltresMobiles {
+  display: inline-block;
+  width: 100px;
+  height: 5px;
+  background-color: #072241;
+  border-radius: 2px;
+}
+
+#prixOngletFiltreMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#prixOngletFiltreMobile label {
+  margin-bottom: 5px;
+}
+#prixOngletFiltreMobile #prixParMinDiv {
+  order: 1;
+  margin-left: auto;
+}
+#prixOngletFiltreMobile #parPrixMaxDiv {
+  order: -1;
+  margin-right: auto;
+}/*# sourceMappingURL=index.css.map */

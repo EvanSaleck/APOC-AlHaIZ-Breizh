@@ -1,0 +1,119 @@
+@charset "UTF-8";
+/* Définition des couleurs du Front par défaut */
+/* Définition des couleurs du Back par défaut */
+/* Import des polices Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+/* Import de la police dyslexique Lexend */
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+/* Définition des polices par défaut */
+/* Définition tailles de police desktop */
+/* Définition tailles de police mobile */
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Appliquer les polices */
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Reem Kufi", sans-serif;
+}
+
+.error {
+  border: 1px solid #D8000C !important;
+}
+
+/* Différents styles pour le background du footer */
+#front {
+  background-color: #377E81;
+}
+
+#back {
+  background-color: #102C57;
+}
+
+.FooterContainer {
+  /* Taille */
+  height: 20vh;
+  min-width: 80%;
+  width: 100%;
+  max-width: 100%;
+  /* Texte */
+  color: #FFFFFF;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1em;
+}
+.FooterContainer a:link {
+  color: #FFFFFF;
+}
+.FooterContainer h2 {
+  font-family: "Reem Kufi", sans-serif;
+  font-size: 1.6em;
+}
+.FooterContainer .FooterElements {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) minmax(200px, auto) minmax(100px, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  margin-bottom: 10px;
+}
+.FooterContainer .FooterElements img {
+  margin-top: 10px;
+  width: 8vh;
+  height: 7vh;
+}
+.FooterContainer .FooterElements div {
+  margin: 10px 30px;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.FooterContainer .FooterElements div ul {
+  list-style: none;
+  /* Différents styles pour les liens */
+}
+.FooterContainer .FooterElements div ul li {
+  margin-top: 10px;
+}
+.FooterContainer .FooterElements div ul .Front a:hover {
+  color: #F1D950;
+}
+.FooterContainer .FooterElements div ul .Front a:visited {
+  color: #F1D950;
+}
+.FooterContainer .FooterElements div ul .Back a:hover {
+  color: #F0AA1F;
+}
+.FooterContainer .FooterElements div ul .Back a:visited {
+  color: #F0AA1F;
+}
+.FooterContainer .FooterElements .DivAssistance {
+  grid-column: 1;
+  grid-row: 1;
+}
+.FooterContainer .FooterElements .DivLogo {
+  grid-column: 2;
+  grid-row: 1;
+  margin-top: 5px;
+  text-align: center;
+}
+.FooterContainer .FooterElements .DivContact {
+  float: right;
+  grid-column: 3;
+  grid-row: 1;
+}
+.FooterContainer .FooterElements .DivCopyright {
+  font-family: "Reem Kufi", sans-serif;
+  grid-column: 1/4;
+  grid-row: 2;
+  text-align: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.FooterContainer .FooterElements .DivCopyright p {
+  margin-top: 10px;
+}/*# sourceMappingURL=footer.css.map */
