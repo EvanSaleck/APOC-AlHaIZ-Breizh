@@ -1,0 +1,175 @@
+.devis
+  margin: 0% 3%
+
+  p
+    font-size: 4vw
+
+.headerDevis
+  display: flex
+  justify-content: space-evenly
+  align-items: center
+  margin-bottom: 20px
+
+.retour
+  border: 0
+  padding: 0
+  background-color: white
+
+.titreRecapDevis
+  text-align: center
+  font-size: 5vw
+
+.titreLogDevis
+  font-size: 5vw
+
+.infosLogement
+  display: flex
+  flex-direction: row
+  align-items: center
+
+  >
+    .logementResa, figure
+      width: 50%
+
+.noteResa
+  display: flex
+  align-items: center
+  margin-top: 2vw
+  font-size: 4vw
+
+.noteEtoile
+  width: 4vw
+
+.note
+  padding-left: 1.7vw
+
+.photoLogResa
+  width: 100%
+  border-radius: 10px
+
+.infosReservationDev
+  padding-bottom: 10px
+
+.info-row
+  display: flex
+  justify-content: space-between
+
+.info-label
+  flex: 1
+  text-align: left
+
+.info-value
+  flex: 1
+  text-align: right
+
+.PaiementResa
+  margin: 2vw 0
+  border: #8CB9BD solid 0.2vw
+  border-radius: 1vw
+
+  > p
+    margin-left: 2vh
+
+figure
+  margin: 0 2.5vh
+
+.ChoixPaiement
+  display: flex
+  flex-direction: column
+
+.PaiementVisa, .PaiementPaypal
+  display: flex
+  align-items: center
+  margin-left: 15vw
+
+.imageVisa, .imagePaypal
+  margin-right: 2vw
+  width: 25%
+
+.premiereBarre
+  width: 100%
+  height: 0.7vw
+  background-color: #8CB9BD
+  margin: 10px auto
+  border-radius: 1vw
+
+.deuxiemeBarre
+  width: 40%
+  height: 0.7vw
+  background-color: #8CB9BD
+  margin: 10px auto
+  border-radius: 1vw
+
+section
+  text-align: center
+  margin: 20px 0
+
+.proceder_paiement
+  padding: 2vw 3vw
+  background-color: #F0AA1F
+  border: none
+  border-radius: 1vw
+  cursor: pointer
+  font-size: 2.5vw
+  width: 30vw
+
+/* Styles pour l'overlay
+
+.overlay
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: rgba(0, 0, 0, 0.5)
+  display: none
+
+.modal-box
+  position: fixed
+  top: 0%
+  left: 50%
+  transform: translate(-50%, 0)
+
+  /* Centrer la modale
+  background: white
+  border: 0.7vw solid #8CB9BD
+  border-top: 0
+  border-radius: 2vw
+  text-align: center
+  display: none
+  width: 80%
+  padding: 2vw
+  box-shadow: 0px 0px 2vw rgba(0, 0, 0, 0.1)
+
+.headerPaiementValide
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 2vw
+  margin-bottom: 4vw
+
+  h2
+    margin: 0
+    font-size: 5vw
+
+  img
+    width: 5vw
+    height: auto
+
+  i
+    font-size: 5vw
+    color: #4CAF50
+
+.active
+  .overlay, .modal-box
+    display: block
+
+/* Ajustements de style pour les petits écrans
+@media (max-width: 600px)
+  .headerPaiementValide
+    flex-direction: column
+    gap: 5px
+
+    img, i
+      width: 5vw
+      font-size: 5vw
