@@ -23,14 +23,14 @@
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cheminCSS)) {
                 echo '<link rel="stylesheet" href="' . $cheminCSS . '" type="text/css">' . PHP_EOL;
             }
-
+            // echo '<script src="' . $cheminjs . '"></script>' . PHP_EOL;
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cheminjs)) {
                 echo '<script src="' . $cheminjs . '" type="module" ></script>' . PHP_EOL;
             }
         }
     ?>
 
-    <link rel="stylesheet" href="/assets/SCSS/<?php echo $pageName; ?>.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/assets/SCSS/<?php /*echo $pageName;*/ ?>.css" type="text/css"> -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let path = window.location.pathname.split("/");
