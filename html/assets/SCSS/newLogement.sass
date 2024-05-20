@@ -1,0 +1,61 @@
+@use './general' as general
+
+// body 
+//     background-color: red
+// 
+// div
+//     border: 1px solid black
+
+h1
+    font_size: 2em
+    color: general.$couleur-back-bleu-zodiac
+    font-family: general.$police-titre
+    text-align: center
+    margin: 1em
+
+// mettre tous les inputs en dessous des labels
+div
+    display: flex
+    flex-direction: column
+
+.containerPrincipal
+    font-family: general.$police-texte
+    color: general.$couleur-back-bleu-zodiac
+    font-size: 1em
+    padding: 
+        left: 10%
+        right: 10%
+
+    .infosEtPhoto
+        display: flex
+        flex-direction: row
+        width: 100%
+
+        .infosPrincipales
+            flex: 1
+            display: flex
+            flex-direction: column
+
+            .titreTarifs
+                flex-direction: row
+
+                .titre
+                    flex: 1
+                    margin-right: 1em 
+                
+                .tarif
+                    flex: 0.5
+                
+
+        .photo
+            flex: 0.5
+
+.infosComplementaires
+    display: flex
+    flex-direction: row
+
+    .amenagementEtDescription
+        flex: 1
+
+    .caracterisitquesLogements
+        flex: 0.5
