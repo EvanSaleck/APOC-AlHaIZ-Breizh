@@ -19,7 +19,7 @@ $requestUrl = $_SERVER['REQUEST_URI'];
 // $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
-    // Routes des vues
+    // Routes des vues front office
     case '/':
     case '':
         include './Views/Front/logement/indexLogement.php';
@@ -68,6 +68,12 @@ switch($requestUrl) {
     case '/api/getLogements':
         $logementController->getAllLogements();
         break;
+
+    // routes back office
+    case '/logement/new':
+        include_once 'Views/Back/logement/newLogement.php';
+        break;
+    
     case '/api/getLogementsDataForCards':
         $logementController->getLogementsDataForCards();
         break;
