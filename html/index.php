@@ -21,7 +21,12 @@ switch($requestUrl) {
     case '':
         include 'Views/Front/logement/index.php';
         break;
-
+    case '/reservation/devis':
+        include 'Views/Front/reservation/devis.php';
+        break;
+    case '/reservation/index':
+        include 'Views/Front/reservation/index.php';
+        break;
     // Routes des API
     case '/api/getLogements':
     case 'api/getLogements':
