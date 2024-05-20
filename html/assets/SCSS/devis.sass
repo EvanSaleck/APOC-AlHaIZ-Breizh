@@ -1,26 +1,48 @@
+@charset "UTF-8"
+
+/* Définition des couleurs du Front par défaut
+/* Définition des couleurs du Back par défaut
+/* Import des polices Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap")
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap")
+
+/* Import de la police dyslexique Lexend
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap")
+
+/* Définition des polices par défaut
+/* Définition tailles de police desktop
+/* Définition tailles de police mobile
+/* Reset CSS
+
+*
+  margin: 0
+  padding: 0
+
 .devis
   margin: 0% 3%
+  font-family: "Reem Kufi", sans-serif
 
   p
-    font-size: 4vw
+    font-size: 3vw
 
 .headerDevis
   display: flex
-  justify-content: space-evenly
   align-items: center
-  margin-bottom: 20px
+  margin-bottom: 4vw
 
 .retour
   border: 0
   padding: 0
+  margin: 0 10%
   background-color: white
 
 .titreRecapDevis
   text-align: center
-  font-size: 5vw
+  font-size: 4vw
 
 .titreLogDevis
-  font-size: 5vw
+  font-size: 4vw
 
 .infosLogement
   display: flex
@@ -48,7 +70,10 @@
   border-radius: 10px
 
 .infosReservationDev
-  padding-bottom: 10px
+  padding: 3vw 0
+
+  > div.info-row
+    padding-bottom: 3vw
 
 .info-row
   display: flex
@@ -66,6 +91,7 @@
   margin: 2vw 0
   border: #8CB9BD solid 0.2vw
   border-radius: 1vw
+  padding: 3% 0
 
   > p
     margin-left: 2vh
@@ -100,11 +126,15 @@ figure
   margin: 10px auto
   border-radius: 1vw
 
+.condAnnul > p
+  font-size: 2vw
+
 section
   text-align: center
   margin: 20px 0
 
 .proceder_paiement
+  font-family: "Reem Kufi", sans-serif
   padding: 2vw 3vw
   background-color: #F0AA1F
   border: none
@@ -165,7 +195,7 @@ section
     display: block
 
 /* Ajustements de style pour les petits écrans
-@media (max-width: 600px)
+@media (max-width: 800px)
   .headerPaiementValide
     flex-direction: column
     gap: 5px
@@ -173,3 +203,8 @@ section
     img, i
       width: 5vw
       font-size: 5vw
+
+  .condAnnul > h3
+    visibility: hidden
+
+/*# sourceMappingURL=devis.css.map

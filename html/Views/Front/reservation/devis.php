@@ -77,11 +77,13 @@
                 </div>
             </div>
         </div>
-        <p>
-            Annulation gratuite avant le 25 mai. Après cette date, des frais de 20% du montant total de la réservation (soit 512 euros ) seront appliqués.
-        </p>
+        <div class="condAnnul">
+            <h3> Conditions d'annulation </h3>
+            <p>
+                Annulation gratuite avant le 25 mai. Après cette date, des frais de 20% du montant total de la réservation (soit 512 euros ) seront appliqués.
+            </p>
         <section>
-        <button class="proceder_paiement">Proceder au paiement</button>
+        <button class="proceder_paiement">Payer</button>
         <span class="overlay"></span>
         <div class="modal-box">
             <div class="headerPaiementValide">
