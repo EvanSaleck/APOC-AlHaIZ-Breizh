@@ -8,4 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.classList.toggle('active');
             });
     });
+
+    let btnValider = document.querySelector('.btnValider button');
+
+    btnValider.addEventListener('click', function(e) {
+        var formCreate = document.getElementById("newLogement");
+        formData = new FormData(formCreate);
+        console.log(formData);
+    });
 });
