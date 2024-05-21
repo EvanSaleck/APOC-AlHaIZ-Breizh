@@ -8,14 +8,14 @@
 
 <body>
     <!-- <div id="headerAccueilMobile">
-        <img src="/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
+        <img src="/html/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
         <button id="buttonfiltresMobile">
-            <img src="/assets/imgs/mobile/Menu.svg" alt="Logo menu">
+            <img src="/html/assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
-    </div> -->
+    </div>
 
     <script>
-        fetch('/api/getLogements')
+        fetch('/html/api/getLogements')
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -23,7 +23,7 @@
                 console.log(logement);
                 console.log(logement.id_logement)
             });
-        });
+        }); -->
 
 
     </script>
