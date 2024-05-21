@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/assets/SCSS/footer.css" type="text/css">
+<link rel="stylesheet" href="/html/assets/SCSS/footer.css" type="text/css">
 
 <div class="FooterContainer" id="front">
     <section class="FooterElements">
@@ -12,7 +12,7 @@
         </div>
 
         <div class="DivLogo">
-        <img src="/assets/imgs/logo.png" alt="Logo">
+        <img src="/html/assets/imgs/logo.png" alt="Logo">
             <ul>
                 <!-- Pages à créer pour les liens -->
                 <li class="Front"><a href="./Views/MentionsLegales.php">Mentions légales</a></li>
