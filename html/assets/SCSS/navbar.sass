@@ -1,6 +1,6 @@
 @use 'general'
 
-div 
+.navbar
     position: fixed
     bottom: 0
     right: 0
@@ -13,10 +13,10 @@ div
     background-color: white
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.25)
 
-    button 
+    button
         margin: 10px
         background-color: white
-        border: 1px solid  general.$couleur-front-bleu-nuageux
+        border: 1px solid general.$couleur-front-bleu-nuageux
         height: 62%
         width: 25%
         border-radius: 5px
@@ -28,13 +28,11 @@ div
         justify-content: center
         align-items: center
 
-    button:active 
+    button:active
         background-color: general.$couleur-front-bleu-nuageux
-    
-    img 
-        height: 100%
-        width: auto
-        max-height: 100%
-        max-width: 100%
 
-        
+        img
+            height: 100%
+            width: auto
+            max-height: 100%
+            max-width: 100%
