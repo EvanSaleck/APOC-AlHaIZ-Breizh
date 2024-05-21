@@ -1,0 +1,195 @@
+@use './general' as general
+
+#headerAccueilMobile
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: end
+    padding: 20px 30px
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5)
+    
+
+#logoAssoMobile 
+    width: 20%
+
+#buttonfiltresMobile 
+    width: 40px
+    height: 40px
+    border-radius: 50%
+    background-color: white
+    border: 2px solid #000
+    
+    svg
+      width: 60%
+      height: 60%
+
+#ongletFiltres
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    background-color: white
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    z-index: 1000
+    padding-top: 20px
+    overflow: scroll
+    display: none
+    
+    div
+      width: 100%
+      height: 100%
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+
+#barreFiltresProprio
+  display: inline-block
+  width: 100px
+  height: 5px
+  background-color: general.$couleur-front-bleu-marine
+  border-radius: 2px
+
+// #prixOngletFiltreMobile
+//     background-color: red 
+//     display: flex
+//     flex-direction: row
+//     justify-content: space-between
+//     align-items: center
+//     width: 80%
+//     margin-bottom: 20px
+
+#prixOngletFiltreMobile 
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  label 
+    margin-bottom: 5px
+
+  #prixParMinDiv 
+    order: 1 // Permet de mettre le champ Min en dessous
+    margin-left: auto // Pour aligner à droite
+
+  #parPrixMaxDiv
+    order: -1 // Permet de mettre le champ Max en dessous et à gauche
+    margin-right: auto // Pour aligner à gauche
+
+
+
+body
+  color: general.$couleur-back-bleu-zodiac
+  font-family: general.$police-texte
+  align-items: center
+
+  h1, h2
+    font-family: general.$police-titre
+
+
+#msgBienvenue
+  margin: 20px 0px 20px 30px
+
+
+#etatResa
+  display: flex
+  justify-content: center
+
+  button
+    margin-right: 10px
+    width: 15%
+    height: 3%
+    background-color: general.$couleur-back-jaune-canteloup
+    border-width: 0px
+    border-radius: 5px 5px 0px 0px
+    
+  .ongletSelect
+    height: 2.5%
+    background-color: #FFFFFF
+    border: 2px solid general.$couleur-back-bleu-zodiac
+    border-bottom-color: #FFFFFF
+
+
+#barreEtat
+  display: inline-block
+  width: 100%
+  height: 2px
+  background-color: general.$couleur-front-bleu-marine
+
+
+#croissantDecroissant
+  width: 30%
+  height: 2.5%
+  border-radius: 5px
+  border: 2px solid general.$couleur-back-bleu-zodiac
+
+  margin: 30px 0px 30px 20px
+  background: url('../../../assests/imgs/mobile/Chevron2.svg') no-repeat left center
+  padding: 3px 10px
+
+  button
+    background-color: #FFFFFF
+    border: none
+    
+
+
+#listeResa
+  font-family: general.$police-texte
+  margin: 10px 5%
+
+  table
+    
+    padding: 10px 40px
+
+    width: auto
+    resize: none
+    overflow: auto
+
+    text-align: center
+    border-collapse: collapse
+
+    thead
+      border: 2px solid
+      border-color: general.$couleur-back-bleu-zodiac
+
+      tr
+        th
+          color: #FFFFFF
+          background-color: general.$couleur-back-bleu-zodiac
+          width: 16%
+          height: 2%
+
+    tbody
+      border: 2px solid
+      border-color: general.$couleur-back-bleu-zodiac
+
+      tr
+        td
+          width: 16%
+          background-color: #FFFFFF
+
+      tr:nth-child(even) 
+        td
+          background-color: #FBE6BC
+        
+        
+
+#voirPlus
+  font-family: general.$police-titre
+  text-align: center
+  align-items: center
+  margin: 15px 0px
+
+
+
+
+
+@media screen and (max-width: 768px)
+    .HeaderContainer
+        .Logo
+            a
+                p
+                    display: none
