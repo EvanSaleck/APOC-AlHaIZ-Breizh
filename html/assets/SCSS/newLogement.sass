@@ -17,12 +17,42 @@ div
     display: flex
     flex-direction: column
 
+input 
+    border: 2px solid  #ADC6E3
+    border-radius: 6px
+    height: 2em
+
+#photo
+    border: none
+    border-radius: 0
+    height: auto
+
+textarea
+    border: 2px solid  #ADC6E3
+    border-radius: 6px
+
 .containerPrincipal
     color: general.$couleur-back-bleu-zodiac
     font-size: 1rem
     padding: 
         left: 10%
         right: 10%
+
+    .souligne
+        display: inline-block
+        position: relative
+        margin:
+            bottom: 0.5em
+
+    .souligne::after
+        content: ''
+        position: absolute
+        left: 0
+        bottom: 0
+        width: 20%
+        height: 3px 
+        border-radius: 6px
+        background-color: general.$couleur-back-bleu-zodiac
 
     .infosEtPhoto
         display: flex
@@ -57,6 +87,17 @@ div
         display: flex
         padding-right: 7em 
 
+        .accrocheDescription
+            flex: 1
+            display: flex
+            gap: 10px 
+
+            > div
+                flex: 1 
+
+                textarea
+                    flex: 1
+
     #amenagementsBoutons 
         display: flex
         flex-direction: row
@@ -73,19 +114,31 @@ div
             font-size: 1rem
             border-radius: 5px
         
-        // effet original au passage de la souris
-        :hover
-            border-color: white
-            background-color: #E3E3E3
+        button:hover
+                border-color: white
+                background-color: #E3E3E3
             
-        .active
+        .active, .active:hover
             background-color: general.$couleur-back-bleu-zodiac
             color: white
-            // rendre les logo (balises img) blancs la couleur de base est  : #102C57
             img
-                  filter: brightness(0) saturate(100%) invert(100%) contrast(100%)
-
+                filter: brightness(0) saturate(100%) invert(100%) contrast(100%)
+            
     .caracterisitquesLogements
         flex: 0.5
+
+        #caracteristique, #conditionsReservations
+            display: flex
+            flex-direction: column
+            gap: 1em
+
+            div
+                display: flex
+                flex-direction: row
+                justify-content: space-between
+
+                input
+                    width: 40%
+
     
     
