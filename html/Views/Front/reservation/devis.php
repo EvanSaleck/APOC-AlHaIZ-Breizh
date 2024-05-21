@@ -6,6 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Feuilles de style -->
     <link rel="stylesheet" type="text/css" href="/assets/SCSS/devis.css">
+        <script>
+        // Récupérer les données de sessionStorage
+        <?php 
+            $resa = [
+                'date_arrivee' => '30/01/2024',
+                'date_depart' => '7/02/2024',
+                'nb_occupant' => '3',
+                'prix_nuit_ttc' => '56',
+                'taxe_sejour' => '5',
+                'total_tarif_ttc' => '89'
+            ];?>
+        sessionStorage.setItem('logement', JSON.stringify(<?php echo json_encode($resa);?>))
+        
+        var logementData = JSON.parse(sessionStorage.getItem('logement'));
+
+        // Fonction pour mettre à jour les éléments HTML avec les données de réservation
+        function updateReservationInfo() {
+            // Sélectionner le conteneur principal
+            let conteneur = document.querySelector('.infosReservationDev');
+
+            // Accéder aux éléments spécifiques dans le conteneur
+            let dateArriveeElement = conteneur.querySelector('#date_arrivee'); // Utilisez l'id pour sélectionner l'élément de date d'arrivée
+            let dateDepartElement = conteneur.querySelector('.date_depart');
+            let nbOccupantElement = conteneur.querySelector('.nb_occupant');
+            let prixNuitTtcElement = conteneur.querySelector('.prix_nuit_ttc');
+            let taxeSejourElement = conteneur.querySelector('.taxe_sejour');
+            let totalTarifTtcElement = conteneur.querySelector('.total_tarif_ttc');
+
+            // Mettre à jour les éléments avec les données de réservation
+            dateArriveeElement.textContent = logementData.date_arrivee;
+            dateDepartElement.textContent = logementData.date_depart;
+            nbOccupantElement.textContent = `${logementData.nb_occupant} occupants`;
+            prixNuitTtcElement.textContent = `${logementData.prix_nuit_ttc}€`;
+            taxeSejourElement.textContent = `${logementData.taxe_sejour}€`;
+            totalTarifTtcElement.textContent = `${(parseFloat(logementData.prix_nuit_ttc) * 12 + parseFloat(logementData.taxe_sejour)).toFixed(2)}€`; // Calcul du total pour 12 nuits
+        }
+
+        updateReservationInfo();
+    </script>
+          
 </head>
 <body>
     <div class="devis">
@@ -38,29 +78,29 @@
 
         <div class="infosReservationDev">
             <div class="info-row">
-                <p class="info-label">Date de départ :</p>
-                <p class="dateArrivee">30/02/2025</p>
+                <p class="info-label">Date d'arrivée :</p>
+                <p id="date_arrivee">30/02/2025</p>
             </div>
             <div class="info-row">
-                <p class="info-label">Date d'arrivée :</p>
-                <p class="dateDepart">31/02/2025</p>
+                <p class="info-label">Date de départ :</p>
+                <p class="date_depart">31/02/2025</p>
             </div>
             <div class="info-row">
                 <p class="info-label">Nombre d'occupants :</p>
-                <p class="nbPersonnes">3 occupants</p>
+                <p class="nb_occupant">3 occupants</p>
             </div>
             <div class="deuxiemeBarre"></div>
             <div class="info-row">
                 <p class="info-label">Tarif nuit :</p>
-                <p class="tarifNuit">210€</p>
+                <p class="prix_nuit_ttc">210€</p>
             </div>
             <div class="info-row">
                 <p class="info-label">Taxes :</p>
-                <p class="taxeSejour">25€</p>
+                <p class="taxe_sejour">25€</p>
             </div>
             <div class="info-row">
                 <p class="info-label">Total pour 12 nuits (en €) :</p>
-                <p class="tarifTTC">2560€</p>
+                <p class="total_tarif_ttc">2560€</p>
             </div>
         </div>
 
