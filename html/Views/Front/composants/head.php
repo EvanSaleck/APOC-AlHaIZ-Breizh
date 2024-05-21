@@ -30,7 +30,7 @@
         }
     ?>
 
-    <link rel="stylesheet" href="/assets/SCSS/<?php echo $pageName; ?>.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/assets/SCSS/<?php echo $pageName; ?>.css" type="text/css"> -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let path = window.location.pathname.split("/");

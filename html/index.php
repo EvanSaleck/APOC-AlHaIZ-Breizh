@@ -19,13 +19,27 @@ switch($requestUrl) {
     // Routes des vues
     case '/':
     case '':
-        include 'Views/Front/logement/index.php';
+        include './Views/Front/logement/indexLogement.php';
         break;
+    case preg_match('/^\/logement\/\d+$/', $requestUrl) ? true : false:
+            $url_parts = explode('/', $requestUrl);
+            $logement_id = end($url_parts);
+            
+            if ($logementController->logementExists($logement_id)) {
+                echo 'Logement n°' . $logement_id . ' trouvé !';
+            }
+            else { 
+                http_response_code(404);
+                echo "Logement non trouvé";
+            }
+            break;
 
     // Routes des API
     case '/api/getLogements':
-    case 'api/getLogements':
         $logementController->getAllLogements();
+        break;
+    case '/api/getLogementsDataForCards':
+        $logementController->getLogementsDataForCards();
         break;
 
     case '/api/getReservations':
