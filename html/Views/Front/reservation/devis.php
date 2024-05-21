@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Feuilles de style -->
     <link rel="stylesheet" type="text/css" href="/assets/SCSS/devis.css">
         <script>
@@ -57,28 +58,28 @@
 
                 <div class="infosReservationDev">
                     <h3> Votre réservation </h3>
-                    <div class="info-row">
+                    <div>
                         <p class="info-label">Date d'arrivée :</p>
                         <p id="date_arrivee">30/02/2025</p>
                     </div>
-                    <div class="info-row">
+                    <div>
                         <p class="info-label">Date de départ :</p>
                         <p class="date_depart">31/02/2025</p>
                     </div>
-                    <div class="info-row">
+                    <div>
                         <p class="info-label">Nombre d'occupants :</p>
                         <p class="nb_occupant">3 occupants</p>
                     </div>
                     <div class="deuxiemeBarre"></div>
-                    <div class="info-row">
+                    <div>
                         <p class="info-label">Tarif nuit :</p>
                         <p class="prix_nuit_ttc">210€</p>
                     </div>
-                    <div class="info-row">
+                    <div>
                         <p class="info-label">Taxes :</p>
                         <p class="taxe_sejour">25€</p>
                     </div>
-                    <div class="info-row">
+                    <div>
                         <p class="info-label">Total pour 12 nuits (en €) :</p>
                         <p class="total_tarif_ttc">2560€</p>
                     </div>
@@ -93,20 +94,21 @@
                     <img class="imageVisa" src="/assets/imgs/paiement/visa.png" alt="Image VISA">
                     <p> Carte bancaire </p>
                     <div class="styleInput">
-                        <input id="first-name" minlength="9" maxlength="9" placeholder="Carte de crédit ou débit" />
+                        <input id="carteCredit" maxlength="3" placeholder="Carte de crédit ou débit" />
                     </div>
                     <div class="styleInput">
-                        <input id="first-name" minlength="9" maxlength="9" placeholder="Expiration" />
-                        <input id="first-name" minlength="9" maxlength="9" placeholder="Cryptogramme" />
+                        <input id="expiration" maxlength="7" placeholder="Expiration" />
+                        <input id="cvv" maxlength="4" placeholder="Cryptogramme de sécurité" />
                     </div>
                     <div class="styleInput">
-                        <input id="first-name" minlength="9" maxlength="9" placeholder="Code postal" />
-                        <input id="first-name" minlength="9" maxlength="9" placeholder="Pays" />
+                        <input id="nom" placeholder="Nom sur la carte" />
+                        <input id="codePostal" maxlength="5" placeholder="Code postal" />
                     </div>
                 </div>
                 <div class="PaiementPaypal">
                     <img class="imagePaypal" src="/assets/imgs/paiement/paypal.png" alt="Image Paypal">
                     <p> Paypal </p>
+                    <img class="boutonPrecedent" src="/assets/imgs/paiement/paypal.png">
                 </div>
             </div>
         </div>

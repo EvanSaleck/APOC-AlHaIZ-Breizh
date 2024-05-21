@@ -13,15 +13,17 @@ class Database {
     private $password = 'Euchre2566';
 
     public function __construct() {
-        try {
+        /*try {
             $this->pdo = new PDO($this->dsn, $this->username, $this->password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
             $this->pdo->exec("set schema 'sae3'");
         }
+        /*
         catch (PDOException $e) {
             die('Erreur de connexion : ' . $e->getMessage());
         }
+        */
     }
 
     public function getPDO() {

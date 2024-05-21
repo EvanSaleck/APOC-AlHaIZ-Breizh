@@ -2,6 +2,9 @@
 document.querySelector('.retour').addEventListener('click', function() {
     window.location.href = 'index';
 });
+document.querySelector('.boutonPrecedent').addEventListener('click', function() {
+    window.location.href = 'index';
+});
 
 const section = document.querySelector("section"),
 overlay = document.querySelector(".overlay"),
@@ -38,7 +41,7 @@ function updateReservationInfo() {
 
     console.log(conteneur)
 
-    let tt = conteneur.querySelectorAll('.info-row');
+    let tt = conteneur.querySelectorAll('.infosReservationDev > div:not(.deuxiemeBarre)');
     console.log(tt)
 
     // Accéder aux éléments spécifiques dans le conteneur
