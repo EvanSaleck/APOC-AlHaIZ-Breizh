@@ -6,3 +6,4 @@ Service/
 html/assets/general.css
 
 /html/assets/SCSS/*.css.map
+/html/Service/Config.php

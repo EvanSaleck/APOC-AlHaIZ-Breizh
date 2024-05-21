@@ -1,7 +1,7 @@
 <?php
 // Inlcude des controllers
-include './Controllers/Front/LogementController.php';
-include './Controllers/Front/ReservationController.php';
+include_once './Controllers/Front/LogementController.php';
+include_once './Controllers/Front/ReservationController.php';
 
 // Use des controllers
 use Controllers\Front\LogementController;
@@ -28,22 +28,26 @@ switch($requestUrl) {
 
     // Routes des API
     case '/api/getLogements':
-        $logementController->getAllLogements();
+        header('Content-Type: application/json');
+        echo $logementController->getAllLogements();
         break;
     case '/api/getLogementsDataForCards':
-        $logementController->getLogementsDataForCards();
+        header('Content-Type: application/json');
+        echo $logementController->getLogementsDataForCards();
         break;
 
     case '/api/getReservations':
     case 'api/getReservations':
-        $reservationController->getAllReservations();
+        header('Content-Type: application/json');
+        echo $reservationController->getAllReservations();
         break;
     
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);
 
-        $logementController->getLogementDataById($logement_id);
+        header('Content-Type: application/json');
+        echo $logementController->getLogementDataById($logement_id);
         break;
         
         // if ($logementController->logementExists($logement_id)) {
