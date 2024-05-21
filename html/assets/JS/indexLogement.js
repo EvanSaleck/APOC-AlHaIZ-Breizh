@@ -55,7 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             });
 
                             divCard.addEventListener('click', function() {
-                                window.location.href = `/logement/${logement.id_logement}`;
+                                sessionStorage.setItem('idLogement', logement.id_logement);
+                                window.location.href = `/logement/`;
                             });
                         } else {
                             divCard.querySelector('.description').textContent = "Erreur lors du chargement des données du logement";

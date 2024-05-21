@@ -22,7 +22,7 @@ class LogementController {
         echo json_encode($logements);
     }
         
-    public function getLogementById($id) {
+    public function getLogementDataById($id) {
             
         $logement = $this->db->executeQuery('SELECT * FROM logement WHERE id_logement = ' . $id);
             

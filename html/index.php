@@ -21,18 +21,10 @@ switch($requestUrl) {
     case '':
         include './Views/Front/logement/indexLogement.php';
         break;
-    case preg_match('/^\/logement\/\d+$/', $requestUrl) ? true : false:
-            $url_parts = explode('/', $requestUrl);
-            $logement_id = end($url_parts);
-            
-            if ($logementController->logementExists($logement_id)) {
-                echo 'Logement n°' . $logement_id . ' trouvé !';
-            }
-            else { 
-                http_response_code(404);
-                echo "Logement non trouvé";
-            }
-            break;
+    case '/logement':
+    case '/logement/':
+        include './Views/Front/logement/detailsLogement.php';
+        break;
 
     // Routes des API
     case '/api/getLogements':
@@ -45,6 +37,22 @@ switch($requestUrl) {
     case '/api/getReservations':
     case 'api/getReservations':
         $reservationController->getAllReservations();
+        break;
+    
+    case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $logement_id = end($url_parts);
+
+        $logementController->getLogementDataById($logement_id);
+        break;
+        
+        // if ($logementController->logementExists($logement_id)) {
+        //     echo 'Logement n°' . $logement_id . ' trouvé !';
+        // }
+        // else { 
+        //     http_response_code(404);
+        //     echo "Logement non trouvé";
+        // }
         break;
 
     default:
