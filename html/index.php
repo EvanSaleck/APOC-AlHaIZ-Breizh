@@ -13,23 +13,45 @@ $reservationController = new ReservationController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
+<<<<<<< develop
+// $requestUrl = substr($requestUrl, 5);
+=======
+>>>>>>> US2.10_DevisVisiteurClient
 
 switch($requestUrl) {
     // Routes des vues
     case '/':
     case '':
-        include 'Views/Front/logement/index.php';
+        include './Views/Front/logement/indexLogement.php';
         break;
+<<<<<<< develop
+    case preg_match('/^\/logement\/\d+$/', $requestUrl) ? true : false:
+            $url_parts = explode('/', $requestUrl);
+            $logement_id = end($url_parts);
+            
+            if ($logementController->logementExists($logement_id)) {
+                echo 'Logement n°' . $logement_id . ' trouvé !';
+            }
+            else { 
+                http_response_code(404);
+                echo "Logement non trouvé";
+            }
+            break;
+
+=======
     case '/reservation/devis':
         include 'Views/Front/reservation/devis.php';
         break;
     case '/reservation/index':
         include 'Views/Front/reservation/index.php';
         break;
+>>>>>>> US2.10_DevisVisiteurClient
     // Routes des API
     case '/api/getLogements':
-    case 'api/getLogements':
         $logementController->getAllLogements();
+        break;
+    case '/api/getLogementsDataForCards':
+        $logementController->getLogementsDataForCards();
         break;
 
     case '/api/getReservations':
