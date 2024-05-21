@@ -15,16 +15,21 @@ $tablette: screen and (max-width: 960px)
     justify-content: center
     align-items: center
 
+/*@media mobile*/
 #descLogement
-    display: grid
-    grid-template-columns: repeat(3, 1fr)
     @include flexCol
     font-family: 'DM Sans'
     font-size: 0.9em
 
-    #sectionDesc
-        grid-column: 1 / 2
-        grid-row: 1
+    #btnRetourMobile
+        @include flexCol
+        position: fixed
+        top: 1.5vh
+        left: 3vw
+        width: 40px
+        height: 40px
+        border-radius: 20px
+        border: none
 
     article
         @include flexCol  
@@ -54,7 +59,9 @@ $tablette: screen and (max-width: 960px)
             width: 7vw
 
     #divPrix
-        @include flexRow
+        display: flex
+        flex-flow: row nowrap
+        justify-content: space-evenly
 
         #prix
             font-size: 2em
@@ -114,5 +121,59 @@ $tablette: screen and (max-width: 960px)
                 font-size: 1.2em
                 font-weight: 600
     
+    #reservation
+        @include flexRow
+        position: fixed
+        top: 80vh
+        height: 10vh
+        width: 100vw
+        background-color: white
+        border-radius: 5px 5px 0 0 
+        border: 1px solid
+        border-block-color: black
+
+        .btn
+            @include flexRow
+            width: 28vw
+            height: 5.5vh
+            border: none
+            border-radius: 5px
+            font-size: 1.2em
+            font-weight: 500
+
+        #btnRes
+            background-color: general.$couleur-front-jaune-pabo
+
+        #sctNbOccupants
+            padding: 1vh 2vw
+
     #buffer
         height: 25vh
+
+    #popupDate
+        @include flexCol
+        width: 80vw
+        padding: 5vw
+        display: none
+        background-color: white
+        box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, .2)
+        position: fixed
+        top: 50vh
+
+        h3
+            margin: 0 2vw
+        
+        .ligneSaisiePopup
+            @include flexRow
+            margin: 1vh 2vw
+
+            .labelPopup
+                display: block
+                width: 40vw
+                font-size: 1.2em
+
+            .champSaisiePopup
+                height: 4vh
+                width: 40vw
+                font-size: 1.5em
+                text-align: center
