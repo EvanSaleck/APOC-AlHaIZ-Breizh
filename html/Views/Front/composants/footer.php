@@ -11,6 +11,7 @@
 
         <div class="DivLogo">
         <img src="/assets/imgs/logo.png" alt="Logo">
+        <img src="/assets/imgs/logo.png" alt="Logo">
             <ul>
                 <!-- Pages à créer pour les liens -->
                 <li class="Front"><a href="/MentionsLegales">Mentions légales</a></li>
