@@ -1,10 +1,10 @@
 <?php
- include 'Views/Front/composants/header.php';
-//  include 'Views/Front/composants/navbar.php';
-//  require 'Views/Front/composants/card.php';
- include 'Views/Front/composants/head.php';
-
- ?>
+    include 'Views/Front/composants/header.php';
+    // include 'Views/Front/composants/navbar.php';
+    // require 'Views/Front/composants/card.php';
+    include 'Views/Front/composants/footer.php';
+    include 'Views/Front/composants/head.php';
+?>
 
 <body>
     <!-- <div id="headerAccueilMobile">
