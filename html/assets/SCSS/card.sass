@@ -1,17 +1,15 @@
-@use 'general'
+@use './general' as general
 
 .card
-    width: 76vw
-    min-width: 30vh
     min-height: 37vh
-    margin: auto
+    margin: 1em auto
     border: 1px solid black
     border-radius: 5px
     background-color: #fff
     font-family: general.$police-titre
 
     .imgbox
-        height: 16vh
+        height: 20vh
         overflow: hidden
         img
             width: 100%
@@ -19,15 +17,14 @@
             object-fit: cover  // Garantit que l'image couvre la zone disponible, coupant l'excès de façon à préserver les proportions
             object-position: bottom  // Positionne la partie visible de l'image vers le bas
 
-
     .content
         padding: 10px
         display: flex
         flex-direction: column
         justify-content: space-between
 
-        .lieu
-            font-size: 1.2rem
+        .nomVille
+            font-size: 1rem
             color: black
             margin-bottom: 0.3rem
 
@@ -36,12 +33,16 @@
             justify-content: space-between
             align-items: baseline
             margin-bottom: 0.3rem
+            gap: 20px
 
-        .logement
-            font-size: 1rem
+        .titre
+                font-size: 1rem
+                white-space: nowrap
+                overflow: hidden
+                text-overflow: ellipsis
 
         .tarif
-            font-size: 1.5rem
+            font-size: 1rem
             font-weight: bold
             color: black
 
@@ -63,10 +64,19 @@
             flex-wrap: nowrap  // Assure que les éléments restent sur une seule ligne
 
             .note
-                flex: 1 0 auto  // Permet à .note de prendre de l'espace disponible
+                flex: 1 0 auto  
                 align-items: center
                 display: flex
-                margin-right: 10px  // Ajuste la marge droite pour créer de l'espace
+                margin-right: 10px  
 
-            .avis
-                flex: 0 0 auto  // Empêche .avis de rétrécir et reste collé à .note
+            .nbAvis
+                flex: 0 0 auto 
+
+@media screen and (max-width: general.$max-width-telephone)
+    .card
+        width: 76vw
+
+
+@media screen and (min-width: general.$max-width-telephone)
+    .card 
+        width: 300px
