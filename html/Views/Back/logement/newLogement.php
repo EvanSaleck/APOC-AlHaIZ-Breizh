@@ -13,12 +13,12 @@
     <div class="containerPrincipal">
         <div class="infosEtPhoto">
             <div class="infosPrincipales">
-                <div class="titreTarifs">
-                    <div class="titre">
+                <div class="ligneDeuxInputs">
+                    <div class="input1">
                         <label for="titre">Titre</label>
                         <input type="text" name="titre" id="titre" required>
                     </div>
-                    <div class="tarif">
+                    <div class="input2">
                         <label for="tarif">Tarif par nuit</label>
                         <input type="text" name="tarif" id="tarif" required>    
                     </div>
@@ -29,12 +29,15 @@
                         <label for="nom_rue">N° et Nom de rue</label>
                         <input type="text" name="nom_rue" id="nom_rue">
                     </div>
-                    <div>
-                        <label for="ville">Ville</label>
-                        <input type="text" name="ville" id="ville" required>
-                
-                        <label for="cp">Code postal</label>
-                        <input type="text" name="cp" id="cp" required>
+                    <div class="ligneDeuxInputs">
+                        <div class="input1">
+                            <label for="ville">Ville</label>
+                            <input type="text" name="ville" id="ville" required>
+                        </div>
+                        <div class="input2">
+                            <label for="cp">Code postal</label>
+                            <input type="text" name="cp" id="cp" required>
+                        </div>
                     </div>
                     <div>
                         <label for="complement_adresse">Complément d'adresse</label>
@@ -50,28 +53,28 @@
         <div class="infosComplementaires">
             <div class="amenagementEtDescription">
                 <div>
-                    <label for="amenagements">Aménagements</label>
-                    <div id="amenagements">
-                        <label>
-                            <input type="checkbox" name="amenagement" value="Option1" class="amenagement-checkbox">
-                            <span class="button">Jardin</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="amenagement" value="Option2" class="amenagement-checkbox">
-                            <span class="button">Balcon</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="amenagement" value="Option3" class="amenagement-checkbox">
-                            <span class="button">Terrasse</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="amenagement" value="Option4" class="amenagement-checkbox">
-                            <span class="button">Piscine</span>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="amenagement" value="Option5" class="amenagement-checkbox">
-                            <span class="button">Jacuzzi</span>
-                        </label>
+                    <label for="amenagementsBoutons">Aménagements</label>
+                    <div id="amenagementsBoutons">
+                        <button id="jardin">
+                            <img src="/assets/imgs/iconsAmenagements/jardin.svg" alt="Logo représentant un jardin">
+                            Jardin
+                        </button>
+                        <button id="balcon">
+                            <img src="/assets/imgs/iconsAmenagements/balcon.svg" alt="Logo représentant un balcon">
+                            Balcon
+                        </button>
+                        <button id="terrasse">
+                            <img src="/assets/imgs/iconsAmenagements/terrasse.svg" alt="Logo représentant une terrasse">
+                            Terrasse
+                        </button>
+                        <button id="piscine">
+                            <img src="/assets/imgs/iconsAmenagements/piscine.svg" alt="Logo représentant une piscine">
+                            Piscine
+                        </button>
+                        <button id="jaccuzi">
+                            <img src="/assets/imgs/iconsAmenagements/jacuzzi.svg" alt="Logo représentant un jacuzzi">
+                            Jacuzzi
+                        </button>
                     </div>
                 </div>
                 <div>
@@ -118,12 +121,14 @@
                     <div id="conditionsReservations">
                         <div>
                             <label for="delaiResaArrivee">Délai réservation/arrivée</label>
-                            <input type="text" name="delaiResaArrivee" id="delaiResaArrivee">
-                            <select name="uniteDelaiResaArrivee" id="uniteDelaiResaArrivee">
-                                <option value="jours">Jour(s)</option>
-                                <option value="semaines">Semaine(s)</option>
-                                <option value="mois">Mois</option>
-                            </select>
+                            <div>
+                                <input type="text" name="delaiResaArrivee" id="delaiResaArrivee">
+                                <select name="uniteDelaiResaArrivee" id="uniteDelaiResaArrivee">
+                                    <option value="jours">Jour(s)</option>
+                                    <option value="semaines">Semaine(s)</option>
+                                    <option value="mois">Mois</option>
+                                </select>
+                            </div>
                         </div>
                         <div>
                             <label for="dureeMinLoc">Durée minimale location</label>
