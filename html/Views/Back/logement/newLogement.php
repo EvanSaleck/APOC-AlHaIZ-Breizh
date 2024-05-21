@@ -15,15 +15,15 @@
             <div class="infosPrincipales">
                 <div class="ligneDeuxInputs">
                     <div class="input1">
-                        <label for="titre">Titre</label>
+                        <label for="titre" class="souligne">Titre</label>
                         <input type="text" name="titre" id="titre" required>
                     </div>
                     <div class="input2">
-                        <label for="tarif">Tarif par nuit</label>
+                        <label for="tarif" class="souligne">Tarif par nuit</label>
                         <input type="text" name="tarif" id="tarif" required>    
                     </div>
                 </div>
-                <label for="adresse">Adresse</label>
+                <label for="adresse" class="souligne">Adresse</label>
                 <div id="adresse">
                     <div>
                         <label for="nom_rue">N° et Nom de rue</label>
@@ -46,14 +46,14 @@
                 </div>
             </div>
             <div class="photo">
-                <label for="photo">Photo du logement</label>
+                <label for="photo" class="souligne">Photo du logement</label>
                 <input type="file" name="photo" id="photo" required>
             </div>
         </div>
         <div class="infosComplementaires">
             <div class="amenagementEtDescription">
                 <div>
-                    <label for="amenagementsBoutons">Aménagements</label>
+                    <label for="amenagementsBoutons" class="souligne">Aménagements</label>
                     <div id="amenagementsBoutons">
                         <button id="jardin">
                             <img src="/assets/imgs/iconsAmenagements/jardin.svg" alt="Logo représentant un jardin">
@@ -77,18 +77,20 @@
                         </button>
                     </div>
                 </div>
-                <div>
-                    <label for="accroche">Accroche</label>
-                    <textarea name="accroche" id="accroche" required></textarea>
-                </div>
-                <div>
-                    <label for="description">Discription</label>
-                    <textarea name="description" id="description" required></textarea>
+                <div class="accrocheDescription">
+                    <div>
+                        <label for="accroche" class="souligne">Accroche</label>
+                        <textarea name="accroche" id="accroche" required></textarea>
+                    </div>
+                    <div>
+                        <label for="description" class="souligne">Description</label>
+                        <textarea name="description" id="description" required></textarea>
+                    </div>
                 </div>
             </div>
             <div class="caracterisitquesLogements">
                 <div>
-                    <label for="caracteristique">Caractéristiques du logement</label>
+                    <label for="caracteristique" class="souligne">Caractéristiques du logement</label>
                     <div id="caracteristique">
                         <div>
                             <label for="surface">Surface habitable</label>
@@ -117,7 +119,7 @@
                     </div>
                 </div>
                 <div>
-                    <label for="conditionsReservations">Conditions de réservation</label>
+                    <label for="conditionsReservations" class="souligne">Conditions de réservation</label>
                     <div id="conditionsReservations">
                         <div>
                             <label for="delaiResaArrivee">Délai réservation/arrivée</label>
