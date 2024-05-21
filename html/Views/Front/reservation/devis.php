@@ -18,32 +18,7 @@
                 'total_tarif_ttc' => '89'
             ];?>
         sessionStorage.setItem('logement', JSON.stringify(<?php echo json_encode($resa);?>))
-        
-        var logementData = JSON.parse(sessionStorage.getItem('logement'));
 
-        // Fonction pour mettre à jour les éléments HTML avec les données de réservation
-        function updateReservationInfo() {
-            // Sélectionner le conteneur principal
-            let conteneur = document.querySelector('.infosReservationDev');
-
-            // Accéder aux éléments spécifiques dans le conteneur
-            let dateArriveeElement = conteneur.querySelector('#date_arrivee'); // Utilisez l'id pour sélectionner l'élément de date d'arrivée
-            let dateDepartElement = conteneur.querySelector('.date_depart');
-            let nbOccupantElement = conteneur.querySelector('.nb_occupant');
-            let prixNuitTtcElement = conteneur.querySelector('.prix_nuit_ttc');
-            let taxeSejourElement = conteneur.querySelector('.taxe_sejour');
-            let totalTarifTtcElement = conteneur.querySelector('.total_tarif_ttc');
-
-            // Mettre à jour les éléments avec les données de réservation
-            dateArriveeElement.textContent = logementData.date_arrivee;
-            dateDepartElement.textContent = logementData.date_depart;
-            nbOccupantElement.textContent = `${logementData.nb_occupant} occupants`;
-            prixNuitTtcElement.textContent = `${logementData.prix_nuit_ttc}€`;
-            taxeSejourElement.textContent = `${logementData.taxe_sejour}€`;
-            totalTarifTtcElement.textContent = `${(parseFloat(logementData.prix_nuit_ttc) * 12 + parseFloat(logementData.taxe_sejour)).toFixed(2)}€`; // Calcul du total pour 12 nuits
-        }
-
-        updateReservationInfo();
     </script>
           
 </head>
