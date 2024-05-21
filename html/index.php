@@ -1,5 +1,5 @@
 <?php
-// Inlcude des controllers
+// Include des controllers
 include './Controllers/Front/LogementController.php';
 include './Controllers/Front/ReservationController.php';
 
@@ -11,12 +11,8 @@ use Controllers\Front\ReservationController;
 $logementController = new LogementController();
 $reservationController = new ReservationController();
 
-
 $requestUrl = $_SERVER['REQUEST_URI'];
-<<<<<<< develop
 // $requestUrl = substr($requestUrl, 5);
-=======
->>>>>>> US2.10_DevisVisiteurClient
 
 switch($requestUrl) {
     // Routes des vues
@@ -24,28 +20,26 @@ switch($requestUrl) {
     case '':
         include './Views/Front/logement/indexLogement.php';
         break;
-<<<<<<< develop
-    case preg_match('/^\/logement\/\d+$/', $requestUrl) ? true : false:
-            $url_parts = explode('/', $requestUrl);
-            $logement_id = end($url_parts);
-            
-            if ($logementController->logementExists($logement_id)) {
-                echo 'Logement n°' . $logement_id . ' trouvé !';
-            }
-            else { 
-                http_response_code(404);
-                echo "Logement non trouvé";
-            }
-            break;
 
-=======
+    case preg_match('/^\/logement\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $logement_id = end($url_parts);
+        
+        if ($logementController->logementExists($logement_id)) {
+            echo 'Logement n°' . $logement_id . ' trouvé !';
+        } else { 
+            http_response_code(404);
+            echo "Logement non trouvé";
+        }
+        break;
+
     case '/reservation/devis':
         include 'Views/Front/reservation/devis.php';
         break;
     case '/reservation/index':
         include 'Views/Front/reservation/index.php';
         break;
->>>>>>> US2.10_DevisVisiteurClient
+
     // Routes des API
     case '/api/getLogements':
         $logementController->getAllLogements();
@@ -69,8 +63,7 @@ function appelFunction($fonction) {
     if (function_exists($fonction)) {
         $fonction();
         exit;
-    }
-    else {
+    } else {
         http_response_code(500);
         echo "Erreur 500 - Fonction $fonction non trouvée";
     }

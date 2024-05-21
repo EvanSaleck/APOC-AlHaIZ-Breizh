@@ -1,25 +1,18 @@
-<template id="card">
-    <div class="card">
-        <div class="imgbox">
-            <img class="imgloca" src="/html/assets/imgs/offres/Offre1.svg" alt="">
+<template class="card">
+    <div class="imgbox">
+        <img class="imagePrincipale" src="" alt="">
+    </div>
+    <div class="content">
+        <h3 class="nomVille"></h3>
+        <div class="logementTarif">
+            <h3 class="titre"></h3>
+            <h3 class="tarif"></h3>
         </div>
-        <div class="content">
-            <h3 class="lieu">Brociélande</h3>
-            <div class="logementTarif">
-                <h3 class="logement">Cabanon rustique</h3>
-                <h3 class="tarif">210€</h3>
+        <p class="description"></p>
+        <div class="noteEtAvis">
+            <div class="note">
             </div>
-            <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis commodi ut praesentium quo, aspernatur quisquam ex. Accusantium nihil doloremque excepturi dolore eius, officiis quasi? Architecto magnam qui sequi aut id?</p>
-            <div class="noteEtAvis">
-                <div class="note">
-                    <img class="noteEtoile" src="/html/assets/imgs/notes/star_full.svg" alt="">
-                    <img class="noteEtoile" src="/html/assets/imgs/notes/star_full.svg" alt="">
-                    <img class="noteEtoile" src="/html/assets/imgs/notes/star_full.svg" alt="">
-                    <img class="noteEtoile" src="/html/assets/imgs/notes/star_half.svg" alt="">
-                    <img class="noteEtoile" src="/html/assets/imgs/notes/star_empty.svg" alt="">
-                </div>
-                <h3 class="Avis">82 avis</h3>
-            </div>
+            <h3 class="nbAvis"></h3>
         </div>
     </div>
 </template>
