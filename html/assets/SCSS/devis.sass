@@ -26,6 +26,9 @@
   p
     font-size: 3vw
 
+  h3
+    font-size: 2.2vw
+
 .headerDevis
   display: flex
   align-items: center
@@ -72,8 +75,17 @@
 .infosReservationDev
   padding: 3vw 0
 
-  > div.info-row
-    padding-bottom: 3vw
+  >
+    h3
+      text-align: center
+
+      /* Je veux que ce h3 ait une sorte de barre bleue en dessous (comme un soulignement)
+      font-size: 3vw
+      margin-bottom: 2vw
+      position: relative
+
+    div.info-row
+      padding-bottom: 3vw
 
 .info-row
   display: flex
@@ -103,6 +115,11 @@ figure
   display: flex
   flex-direction: column
 
+/*
+ *.ChoixPaiement > div {
+ *  padding-bottom: 2vw;
+ *}
+
 .PaiementVisa, .PaiementPaypal
   display: flex
   align-items: center
@@ -110,7 +127,12 @@ figure
 
 .imageVisa, .imagePaypal
   margin-right: 2vw
-  width: 25%
+
+  /*width: 25%;
+
+input::placeholder
+  font-weight: bold
+  opacity: 0.5
 
 .premiereBarre
   width: 100%
@@ -142,6 +164,17 @@ section
   cursor: pointer
   font-size: 2.5vw
   width: 30vw
+
+.boutonPrecedent
+  font-family: "Reem Kufi", sans-serif
+  padding: 2vw 3vw
+  background-color: #F0AA1F
+  border: none
+  border-radius: 1vw
+  cursor: pointer
+  font-size: 2.5vw
+  width: 30vw
+  margin: 5vw 0 0 5vw
 
 /* Styles pour l'overlay
 
@@ -204,7 +237,59 @@ section
       width: 5vw
       font-size: 5vw
 
-  .condAnnul > h3
-    visibility: hidden
+  input, h3, .boutonPrecedent
+    display: none
+
+@media (min-width: 800px)
+  .deuxiemeBarre, .premiereBarre, .headerDevis
+    display: none
+
+  .infosReservationDev
+    border: solid 0.2vw #8CB9BD
+    padding: 10vw
+
+  .infosLogementsTOTAL
+    display: flex
+
+  .infosLogementResa
+    display: flex
+    flex-direction: column
+    align-items: center
+
+  .note
+    padding-left: 0.5vw
+    display: flex
+    width: 1vw
+
+  .devis p
+    font-size: 2vw
+
+  .noteResa
+    display: flex
+    align-items: center
+    margin-top: 2vw
+    font-size: 2vw
+
+  .titreLogDevis
+    font-size: 2vw
+
+  .infosLogement
+    >
+      .logementResa, figure
+        width: 25%
+
+    display: flex
+    align-items: center
+    border: solid 0.2vw #8CB9BD
+
+  .PaiementVisa
+    flex-direction: column
+
+  .condAnnul > p
+    font-size: 1.3vw
+
+  .proceder_paiement
+    float: right
+    margin: 0 5vw 5vw 0
 
 /*# sourceMappingURL=devis.css.map
