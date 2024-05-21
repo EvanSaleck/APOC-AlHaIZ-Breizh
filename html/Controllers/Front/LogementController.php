@@ -38,12 +38,4 @@ class LogementController {
         
         echo json_encode($dataLogements);
     }
-    
-    public function logementExists($id) {
-        $logement = $this->logement->logementExists($id);
-
-        header('Content-Type: application/json');
-
-        echo ($logement ? 'true' : 'false');
-    }
 }

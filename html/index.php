@@ -1,15 +1,22 @@
 <?php
 // Inlcude des controllers
-include './Controllers/Front/LogementController.php';
-include './Controllers/Front/ReservationController.php';
+include_once './Controllers/Front/LogementController.php';
+include_once './Controllers/Front/ReservationController.php';
+include_once './Models/Logement.php';
 
 // Use des controllers
 use Controllers\Front\LogementController;
 use Controllers\Front\ReservationController;
 
+// use models
+use Models\Logement;
+
 // Initialisation des controllers
 $logementController = new LogementController();
 $reservationController = new ReservationController();
+
+// Initialisation des models
+$logement = new Logement();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
@@ -24,8 +31,8 @@ switch($requestUrl) {
     case preg_match('/^\/logement\/\d+$/', $requestUrl) ? true : false:
             $url_parts = explode('/', $requestUrl);
             $logement_id = end($url_parts);
-            
-            if ($logementController->logementExists($logement_id)) {
+
+            if ($logement->logementExists($logement_id)) {
                 echo 'Logement n°' . $logement_id . ' trouvé !';
             }
             else { 
