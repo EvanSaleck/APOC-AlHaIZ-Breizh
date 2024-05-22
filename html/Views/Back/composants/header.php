@@ -3,7 +3,7 @@
         <div class="Logo">
             <a href="./index.php">
                 <img src="/assets/imgs/logo.png" alt="Logo">
-                <p>AlHaIZ Breizh</p>
+                <p id="titre">AlHaIZ Breizh</p>
             </a>
         </div>
         <div class="Menu">
