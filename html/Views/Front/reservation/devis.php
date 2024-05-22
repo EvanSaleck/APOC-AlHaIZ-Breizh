@@ -1,7 +1,8 @@
 <?php 
-    require("Views/Front/composants/header.php");
-    require("Views/Front/composants/head.php");
-    // require("Views/Front/composants/navbar.php");
+    include_once 'Views/Front/composants/navbar.php';
+    include_once 'Views/Front/composants/card.php';
+    include_once 'Views/Front/composants/header.php';
+    include_once 'Views/Front/composants/head.php';
 ?>
 <script>
 // Récupérer les données de sessionStorage

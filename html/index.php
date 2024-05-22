@@ -20,6 +20,12 @@ switch($requestUrl) {
     case '':
         include 'Views/Front/logement/index.php';
         break;
+    case '/logement/indexLogement':
+        include 'Views/Front/logement/indexLogement.php';
+        break;
+    case '/logement/details':
+        include 'Views/Front/logement/detailsLogement.php';
+        break;
     case '/reservation/devis':
         include 'Views/Front/reservation/devis.php';
         break;
