@@ -5,11 +5,11 @@
     <div id=descLogement>
         <section id=sectionDesc>
             <button id=btnRetourMobile><img src="/assets/imgs/mobile/Chevron2.svg" alt="Retour"></button>
-            <img id=imageLogement src="/assets/imgs/imageLogementPlaceholder.png" alt="Image du logement">
+            <img id=imageLogement src="" alt="Image du logement">
             <div id=divTitre>
-                <h1 id=titreLog>Maison de campagne</h1>
+                <h1 id=titreLog></h1>
                 <h1> - </h1>
-                <h1 id=villeLog>LANDERNEAU</h1>
+                <h1 id=villeLog></h1>
             </div>
             <article id=artPrixNote>
                 <div id=note>
@@ -21,7 +21,7 @@
                     <img id=etoileNotation5 src="/assets/imgs/notes/star_empty.svg" alt="Etoile">
                 </div>
                 <div id="divPrix">
-                    <span id="prix">65</span>
+                    <span id="prix"></span>
                     <p>€ par nuit</p>
                 </div>
             </article>
@@ -30,20 +30,20 @@
                 <h2>Caratéristiques du logement</h2>
                 <div id=divNbPersonnesMax>
                     <p>Nombre de personnes maximum :</p>
-                    <span id=nbPersonnesMax>NB</span>
+                    <span id=nbPersonnesMax>---</span>
                 </div>
                 <div id=literie>
                     <div>
                         <p>Chambres : </p>
-                        <span id=nbChambres>NB</span>
+                        <span id=nbChambres>---</span>
                     </div>
                     <div>
                         <p>Lits doubles : </p>
-                        <span id=nbLitsDoubles>NB</span>
+                        <span id=nbLitsDoubles>---</span>
                     </div>
                     <div>
                         <p>Lits simples : </p>
-                        <span id=nbLitsSimples>NB</span>
+                        <span id=nbLitsSimples>---</span>
                     </div>
                 </div>
             
@@ -51,28 +51,18 @@
             <article>
                 <div class=barre></div>
                 <h2>Description</h2>
-                <p id=descDet>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.</p>
+                <p id=descDet>Pas de description</p>
             </article>
             
             <article>
                 <div class=barre></div>
                 <h2>Aménagements</h2>
-                <div id=listeAmenagements>
-                    <div class=badgeAmenagement>
-                        <img src="/assets/imgs/mobile/Sapin.svg" alt="Image aménagement 1">
-                        <h3>Jardin</p>
-                    </div>
-                    <div class=badgeAmenagement>
-                        <img src="/assets/imgs/mobile/Parasol.svg" alt="Image aménagement 2">
-                        <h3>Terasse</p>
-                    </div>
-                </div>
-                
+                <div id=listeAmenagements><p>- Aucun aménagement -</p></div>
             </article>
             <article>
+                <!--
                 <div class="barre"></div>
                 <h2>Activités à proximité</h2>
-                <!--
                 <div id=listeActivite>
                     <div class="activite">
                         <img src="" alt="Image activite">

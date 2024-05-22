@@ -47,5 +47,28 @@
         
             return json_encode($dataLogements);
         }
+
+        public function getLogementCompleteByID($id) {
+            $logements = $this->db->executeQuery('
+            SELECT * 
+            FROM logement 
+            JOIN adresse ON l_id_adresse = id_adresse
+            
+            WHERE id_logement = ' . $id);
+            
+            return json_encode($logements);
+        }
+
+        public function getAmenagementsOfLogementById($id) {
+            $logements = $this->db->executeQuery('
+            SELECT id_amenagement, nom_amenagement
+            FROM logement
+            JOIN amenagements_logement ON id_logement = al_id_logement
+            JOIN amenagement ON al_id_amenagement = id_amenagement
+            
+            WHERE id_logement = ' . $id);
+            
+            return json_encode($logements);
+        }
     }
 ?>

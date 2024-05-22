@@ -1,3 +1,5 @@
+SET SCHEMA 'sae3';
+
 INSERT INTO type_logement(nom_type) 
 VALUES ('Studio');
 INSERT INTO type_logement(nom_type) 

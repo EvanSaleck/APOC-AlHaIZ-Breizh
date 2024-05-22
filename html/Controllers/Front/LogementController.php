@@ -20,9 +20,15 @@
         }
             
         public function getLogementDataById($id) {
-            $logement = $this->logement->getLogementById($id);
-                
-            return $logement;
+            $logements = $this->logement->getLogementCompleteByID($id);
+            
+            return $logements;
+        }
+
+        public function getAmenagementsOfLogementById($id) {
+            $logements = $this->logement->getAmenagementsOfLogementById($id);
+            
+            return $logements;
         }
         
         public function getLogementsDataForCards() {
