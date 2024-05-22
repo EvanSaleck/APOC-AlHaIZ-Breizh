@@ -1,8 +1,8 @@
-
-# database pour ne pas pull les logs des autres
-Service/
-
-/html/assets/SCSS/*.css
-html/assets/general.css
+/html/assets/SCSS/Back/*.css
+/html/assets/SCSS/Front/*.css.map
+/html/assets/SCSS/Front/*.css
+/html/assets/SCSS/Back/*.css.map
+/html/assets/SCSS/Front/general.css
+/html/assets/SCSS/Front/general.css.map
 
 /html/assets/SCSS/*.css.map
