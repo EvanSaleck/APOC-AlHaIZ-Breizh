@@ -1,5 +1,5 @@
 <?php
-// Include des controllers
+// Inlcude des controllers
 include './Controllers/Front/LogementController.php';
 include './Controllers/Front/ReservationController.php';
 
@@ -11,28 +11,30 @@ use Controllers\Front\ReservationController;
 $logementController = new LogementController();
 $reservationController = new ReservationController();
 
+
 $requestUrl = $_SERVER['REQUEST_URI'];
 
 switch($requestUrl) {
     // Routes des vues
     case '/':
-
-    case '':
-        include 'Views/Front/logement/index.php';
-        break;
-    case '/logement/indexLogement':
-        include 'Views/Front/logement/indexLogement.php';
-        break;
-    case '/logement/details':
-        include 'Views/Front/logement/detailsLogement.php';
-        break;
-    case '/reservation/devis':
-        include 'Views/Front/reservation/devis.php';
-        break;
-    case '/reservation/index':
-        include 'Views/Front/reservation/index.php';
-        break;
-    // Routes des API
+        case '':
+    
+            include './Views/Front/logement/indexLogement.php';
+            break;
+        case preg_match('/^\/logement\/\d+$/', $requestUrl) ? true : false:
+                $url_parts = explode('/', $requestUrl);
+                $logement_id = end($url_parts);
+                
+                if ($logementController->logementExists($logement_id)) {
+                    echo 'Logement n°' . $logement_id . ' trouvé !';
+                }
+                else { 
+                    http_response_code(404);
+                    echo "Logement non trouvé";
+                }
+                break;
+    
+        // Routes des API
         case '/api/getLogements':
     case 'api/getLogements':
     case '':
@@ -81,7 +83,8 @@ function appelFunction($fonction) {
     if (function_exists($fonction)) {
         $fonction();
         exit;
-    } else {
+    }
+    else {
         http_response_code(500);
         echo "Erreur 500 - Fonction $fonction non trouvée";
     }
