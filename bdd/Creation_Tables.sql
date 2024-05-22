@@ -1,6 +1,7 @@
 DROP SCHEMA IF EXISTS sae3 CASCADE;
 CREATE SCHEMA sae3;
 SET SCHEMA 'sae3';
+SET datestyle = 'EUROPEAN,DMY';
 
 CREATE TABLE adresse (
    id_adresse serial PRIMARY KEY,
@@ -82,7 +83,7 @@ CREATE TABLE logement (
    titre varchar(50) NOT NULL,
    accroche varchar(100),
    personnes_max integer NOT NULL,
-   image_principale varchar(150),
+   image_principale varchar(150) NOT NULL,
    description varchar(200),
    latitude integer NOT NULL,
    longitude integer NOT NULL,

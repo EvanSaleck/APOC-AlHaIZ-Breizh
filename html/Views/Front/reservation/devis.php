@@ -88,22 +88,24 @@ sessionStorage.setItem('logement', JSON.stringify(<?php echo json_encode($resa);
                 <div class="PaiementVisa">
                     <img class="imageVisa" src="/assets/imgs/paiement/visa.png" alt="Image VISA">
                     <p> Carte bancaire </p>
-                    <div class="styleInput">
-                        <input id="carteCredit" maxlength="3" placeholder="Carte de crédit ou débit" />
-                    </div>
-                    <div class="styleInput">
-                        <input id="expiration" maxlength="7" placeholder="Expiration" />
-                        <input id="cvv" maxlength="4" placeholder="Cryptogramme de sécurité" />
-                    </div>
-                    <div class="styleInput">
-                        <input id="nom" placeholder="Nom sur la carte" />
-                        <input id="codePostal" maxlength="5" placeholder="Code postal" />
+                    <div class="coordonnesVisa">
+                        <div class="styleInput">
+                            <input id="carteCredit" maxlength="20" placeholder="Carte de crédit ou débit" />
+                        </div>
+                        <div class="styleInput">
+                            <input id="expiration" maxlength="7" placeholder="Expiration" />
+                            <input id="cvv" maxlength="4" placeholder="Cryptogramme de sécurité" />
+                        </div>
+                        <div class="styleInput">
+                            <input id="nom" placeholder="Nom sur la carte" />
+                            <input id="codePostal" maxlength="5" placeholder="Code postal" />
+                        </div>
                     </div>
                 </div>
                 <div class="PaiementPaypal">
                     <img class="imagePaypal" src="/assets/imgs/paiement/paypal.png" alt="Image Paypal">
                     <p> Paypal </p>
-                    <img class="boutonPrecedent" src="/assets/imgs/paiement/paypal.png">
+                    <button class="boutonPaypal"> Se connecter </button>
                 </div>
             </div>
         </div>

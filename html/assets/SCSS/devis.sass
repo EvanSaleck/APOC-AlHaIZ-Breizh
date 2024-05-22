@@ -144,7 +144,7 @@ input::placeholder
     border: 1px solid #ccd1d9
     border-radius: 5px
     padding: 1rem
-    font-size: 1rem
+    font-size: 1vw
     flex: 1
     margin-right: 1rem
     box-sizing: border-box
@@ -200,7 +200,7 @@ section
   font-size: 2.5vw
   width: 30vw
 
-.boutonPrecedent
+.boutonPrecedent, .boutonPaypal
   font-family: "Reem Kufi", sans-serif
   padding: 2vw 3vw
   background-color: #F0AA1F
@@ -208,6 +208,7 @@ section
   border-radius: 1vw
   cursor: pointer
   font-size: 2.5vw
+
   width: 30vw
   margin: 5vw 0 3vw 5vw
 
@@ -271,7 +272,7 @@ section
 
     /*     gap: 5px;
 
-  input, h3, .boutonPrecedent
+  input, h3, .boutonPrecedent, .boutonPaypal
     display: none
 
 @media (min-width: 800px)
@@ -328,17 +329,19 @@ section
     padding: 1vw
     border-radius: 1vw
 
-  .PaiementVisa, .PaiementPaypal
-    flex-direction: column
-
   .condAnnul > p
     font-size: 1.3vw
 
-  .boutonPrecedent
+  .boutonPrecedent, .boutonPaypal
     padding: 1vw 1.5vw
     border-radius: 0.7vw
     font-size: 1.8vw
-    width: 20vw
+  .boutonPrecedent
+    width: 20vw  
+  .boutonPaypal
+    width: 12vw
+    margin: 5vw 1vw 2vw 0
+    padding: 1.5vw 5vw
 
   .proceder_paiement
     padding: 1vw 1.5vw
@@ -352,7 +355,8 @@ section
     flex-direction: row
 
   .PaiementPaypal, .PaiementVisa
-    margin-left: 0vw
+    flex-direction: column
+    margin-left: 2vw
     flex: 1
 
 @media (min-width: 1400px)

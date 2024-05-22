@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fonction pour mettre à jour les éléments HTML avec les données de réservation
     function updateReservationInfo() {
-        // Sélectionner le conteneur principal
         let conteneur = document.querySelector('.infosReservationDev');
 
         console.log(conteneur)
@@ -67,4 +66,81 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     updateReservationInfo();
-});
+    /* Paiement par carte bancaire */
+    const procederPaiementButton = document.querySelector(".proceder_paiement");
+procederPaiementButton.addEventListener("click", function(e) {
+    e.preventDefault();
+
+    const carteCredit = document.getElementById("carteCredit").value;
+    const expiration = document.getElementById("expiration").value.split("/");
+    const cvv = document.getElementById("cvv").value;
+    const nom = document.getElementById("nom").value;
+    const codePostal = document.getElementById("codePostal").value; // Assurez-vous que cette ligne est correctement fermée
+
+    const luhnCheck = num => {
+        const arr = `${num}`
+         .split('')
+         .reverse()
+         .map(x => Number.parseInt(x));
+        const lastDigit = arr.shift();
+        let sum = arr.reduce(
+            (acc, val, i) =>
+                i % 2!== 0? acc + val : acc + ((val *= 2) > 9? val - 9 : val),
+            0
+        );
+        sum += lastDigit;
+        return sum % 10 === 0;
+    };
+
+    // Card type checks
+    const cardTypes = {
+        "visa": /^4\d{12}(?:\d{3})?$/,
+        "mastercard": /^(?:5[1-5]\d{14}|2(?:2[1-9]|[3-6][0-9]{2})\d{12})$/
+    };
+    let cardTypeMatched = false;
+    for (let type in cardTypes) {
+        if (cardTypes[type].test(carteCredit)) {
+            console.log(`La carte est une ${type}.`);
+            cardTypeMatched = true;
+            break;
+        }
+    }
+
+    // Existing validations...
+    const regexNumeros = /^[0-9]+$/;
+    if (!regexNumeros.test(carteCredit)) {
+        alert("Le numéro de carte doit contenir uniquement des chiffres.");
+        return;
+    }
+
+    const regexExpiration = /^(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
+    if (!regexExpiration.test(`${expiration[0]}/${expiration[1]}`)) {
+        alert("La date d'expiration doit être au format MM/AAAA.");
+        return;
+    }
+
+    const currentDate = new Date();
+    const expirationDate = new Date(`20${expiration[1]}`, expiration[0] - 1);
+    if (expirationDate <= currentDate) {
+        alert("La carte n'est pas encore valide.");
+        return;
+    }
+
+    const threeYearsFromNow = new Date(currentDate.getFullYear() + 3, currentDate.getMonth(), currentDate.getDate());
+    if (expirationDate < threeYearsFromNow) {
+        alert("La carte n'est valide que pendant au moins trois ans.");
+        return;
+    }
+
+    if (!cvv ||!nom ||!codePostal) { // Assurez-vous que cette condition est correctement fermée
+        alert("Veuillez vérifier les informations de paiement.");
+        return;
+    }
+
+    // Only display the payment confirmation popup if all validations pass
+    if (luhnCheck(carteCredit) && cardTypeMatched) {
+        alert("Paiement validé!");
+    } else {
+        alert("Il semble y avoir eu une erreur avec votre carte de crédit. Veuillez réessayer.");
+    }
+})});
