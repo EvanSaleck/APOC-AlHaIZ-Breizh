@@ -2,14 +2,17 @@
 // Inlcude des controllers
 include './Controllers/Front/LogementController.php';
 include './Controllers/Front/ReservationController.php';
+include './Controllers/Front/UtilisateurController.php';
 
 // Use des controllers
 use Controllers\Front\LogementController;
 use Controllers\Front\ReservationController;
+use Controllers\Front\UtilisateurController;
 
 // Initialisation des controllers
 $logementController = new LogementController();
 $reservationController = new ReservationController();
+$utilisateurController = new UtilisateurController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
@@ -21,6 +24,16 @@ switch($requestUrl) {
     case '':
         include './Views/Front/logement/indexLogement.php';
         break;
+    case '/compte':
+        include './Views/Front/compte/detailsCompte.php';
+        break;
+
+    case '/api/getCompteClientDetails':
+        // $idCompte = $_SESSION['client'];
+        $idCompte = 1;
+        $utilisateurController->getCompteClientDetails($idCompte);
+        break;
+
     case preg_match('/^\/logement\/\d+$/', $requestUrl) ? true : false:
             $url_parts = explode('/', $requestUrl);
             $logement_id = end($url_parts);
