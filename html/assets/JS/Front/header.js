@@ -28,7 +28,7 @@ function GetConnected() {
   }
 }
 
-function SetModalAndProfilePicture() { // Pass currentUser as an argument
+function SetModalAndProfilePicture() { 
     let compte = document.getElementById("Compte");
     if (currentUser === undefined || currentUser === null) {
       compte.style.backgroundImage = "url('assets/imgs/person-fill.svg')"; 

@@ -43,13 +43,12 @@ function Connexion(){
     .then(data => {
         console.log(data);
         if(data === 'Connexion réussie'){
-
+            ThrowAlertPopup(data,'succes');
             setTimeout(() => {
                 let url = window.location.href;
-                // window.location.href = url;
+                window.location.href = url;
             }, 1000);
         }else{
-            // Select all input elements inside the element with id 'connexionModale'
             let inputs = document.querySelectorAll('#connexionModal .modal-content #connexionForm input');
             console.log(inputs);
 
@@ -60,6 +59,8 @@ function Connexion(){
                 inputs[1].classList.add('error');
             }
 
+            ThrowAlertPopup(data,'error');
+
             setTimeout(() => {
                 inputs[0].classList.remove('error');
                 inputs[1].classList.remove('error');
@@ -68,6 +69,32 @@ function Connexion(){
         }
     });
 }
+
+function ThrowAlertPopup(message,type) {
+    if (document.getElementsByClassName('alert-popup').length > 0) {
+        document.getElementsByClassName('alert-popup')[0].remove();
+    }
+    let alertPopup = document.createElement('div');
+    alertPopup.className = 'alert-popup';
+    val = null;
+    if (type === 'error') {
+        val = 'Erreur';
+    } else if (type === 'succes') {
+        val = 'Succès';
+    }
+    alertPopup.innerHTML = `
+    <div class="alert-popup-content ${type}">   
+        <span class="titre">${val}</span>
+        <p>${message}</p>
+    </div>
+    `;
+    document.body.appendChild(alertPopup);
+
+    SetTimeout(() => {
+        alertPopup.remove();
+    }, 5000);
+}
+
 
 
 function CreateConnexionModal() {
