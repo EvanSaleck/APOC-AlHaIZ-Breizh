@@ -74,29 +74,87 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             });
             console.log(htmlAmenagement)
+            if (htmlAmenagement == "") {
+                htmlAmenagement = "<p>- Aucun aménagement -</p>"
+            }
             listeAmenagements.innerHTML = htmlAmenagement
         });
 
         let sctNbOccupants = document.getElementById("sctNbOccupants");
         console.log(data[0]['personnes_max']);
         let htmlSelectNbPersonnes = ""
-        for (let i = 0; i < data[0]['personnes_max']; i++) {
+        for (let i = 1; i <= data[0]['personnes_max']; i++) {
             htmlSelectNbPersonnes = htmlSelectNbPersonnes + "<option value='" + i + "'>" + i + " Pers.</option>"
         }
         sctNbOccupants.innerHTML = htmlSelectNbPersonnes;
 
         let btnDate = document.getElementById("btnDate");
         btnDate.addEventListener("click", () => {
-            console.log("click");
             let popupDate = document.getElementById("popupDate");
-            if (popupDate.style.display == "none") {
-                console.log("affiche");
-                popupDate.style.display = "block"
-            } else {
+            if (popupDate.style.display == "block") {
                 console.log("disparait");
                 popupDate.style.display = "none"
+            } else {
+                console.log("affiche");
+                popupDate.style.display = "block"
             }
-            console.log("finclick");
         });
+
+        let totalTtc = document.getElementById("totalTtc");
+        let dateDebut = document.getElementById("dateDebut");
+        let dateArrivee = document.getElementById("dateArrivee");
+        let dateFin = document.getElementById("dateFin");
+        let dateDepart = document.getElementById("dateDepart");
+
+        console.log(dateDebut.value)
+        /*
+        if (dateDebut.value == "") {
+            console.log("ça marche !")
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            console.log(mm + '-' + dd + '-' + yyyy);
+            // dateDebut.innerText = mm + '-' + dd + '-' + yyyy;
+            dateDebut.setAttribute("value", mm + '-' + dd + '-' + yyyy )
+            dateDebut.placeholder = mm + '-' + dd + '-' + yyyy
+            console.log(dateDebut.value)
+        }
+        if (dateFin.value == "") {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            dateFin.value = mm + '-' + dd + '-' + yyyy;
+        }
+        */
+        dateArrivee.innerHTML = dateDebut.value
+        dateDepart.innerHTML = dateFin.value
+
+        dateDebut.setAttribute("max",dateFin.value);
+        dateFin.setAttribute("min",dateDebut.value);
+
+        dateDebut.addEventListener("input", () => {
+            console.log((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
+
+            dateFin.setAttribute("min",dateDebut.value);
+
+            dateArrivee.innerHTML = dateDebut.value
+
+            totalTtc.innerHTML = parseFloat(data[0]['prix_nuit_ttc'])* ((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
+        });
+        
+        dateFin.addEventListener("input", () => {
+            console.log((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
+            
+            dateDebut.setAttribute("max",dateFin.value);
+
+            dateDepart.innerHTML = dateFin.value
+            
+            totalTtc.innerHTML = parseFloat(data[0]['prix_nuit_ttc'])* ((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
+        });
+        totalTtc.innerHTML = parseFloat(data[0]['prix_nuit_ttc'])* ((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
     });
 });

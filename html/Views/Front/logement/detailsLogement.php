@@ -1,4 +1,5 @@
 <?php 
+    include_once 'Views/Front/composants/navbar.php';
     include_once 'Views/Front/composants/head.php';
 ?>
 <body>
@@ -83,26 +84,30 @@
             <div class=barre></div>
             <div class=ligneSaisiePopup>
                 <label class=labelPopup for="dateDebut">Date d'arivée :</label>
-                <input type="date" class=champSaisiePopup id=dateDebut name="dateDebut" value="2024-07-22" min="2024-06-01" max="2024-12-31" />
+                <input type="date" class=champSaisiePopup id=dateDebut name="dateDebut" min="2024-06-01" max="2024-12-31"/>
             </div>
             <div class=ligneSaisiePopup>
                 <label class=labelPopup for="dateFin">Date de départ :</label>
-                <input type="date" class=champSaisiePopup id=dateFin name="dateFin" value="2024-07-22" min="2024-06-01" max="2024-12-31" />
+                <input type="date" class=champSaisiePopup id=dateFin name="dateFin" min="2024-06-01" max="2024-12-31"/>
+            </div>
+        </div>
+        <div id=recap>
+            <div>
+                <p>Date d'arivée :</p>
+                <span id=dateArrivee></span>
+            </div>
+            <div>
+                <p>Date de départ :</p>
+                <span id=dateDepart></span>
+            </div>
+            <div>
+                <p>Total TTC :</p>
+                <p><span id=totalTtc></span> €</p>
             </div>
         </div>
         <div id=reservation>
             <button id=btnDate class=btn><img src="/assets/imgs/mobile/Calendrier.svg" alt="Calendrier"></button>
             <select id=sctNbOccupants  class=btn name="nbOccupants">
-                <option value="1">1 Pers.</option>
-                <option value="2">2 Pers.</option>
-                <option value="3">3 Pers.</option>
-                <option value="3">4 Pers.</option>
-                <option value="3">5 Pers.</option>
-                <option value="3">6 Pers.</option>
-                <option value="3">7 Pers.</option>
-                <option value="3">8 Pers.</option>
-                <option value="3">9 Pers.</option>
-                <option value="3">10 Pers.</option>
             </select>
             <button id=btnRes class=btn>Réserver</button>
         </div>
