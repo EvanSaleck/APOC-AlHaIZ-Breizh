@@ -86,12 +86,17 @@ body
   font-family: general.$police-texte
   align-items: center
 
-  h1, h2
+  h1
     font-family: general.$police-titre
+    font-size: 3vw
+  
+  h2
+    font-family: general.$police-titre
+    font-size: 2vw
 
 
 #msgBienvenue
-  margin: 20px 0px 20px 30px
+  margin: 2.5vw 3.5vw
 
 
 #etatResa
@@ -100,14 +105,15 @@ body
 
   button
     margin-right: 10px
-    width: 15%
-    height: 3%
+    width: 13vw
+    height: 2.5vw
     background-color: general.$couleur-back-jaune-canteloup
     border-width: 0px
     border-radius: 5px 5px 0px 0px
+    font-size: 1.2vw
     
   .ongletSelect
-    height: 2.5%
+    height: 2.5vw
     background-color: #FFFFFF
     border: 2px solid general.$couleur-back-bleu-zodiac
     border-bottom-color: #FFFFFF
@@ -121,69 +127,71 @@ body
 
 
 #croissantDecroissant
-  width: 30%
-  height: 2.5%
   border-radius: 5px
-  border: 2px solid general.$couleur-back-bleu-zodiac
+  border: 0.3vw solid general.$couleur-back-bleu-zodiac
 
-  margin: 30px 0px 30px 20px
+  margin: 2vw 3vw
   background: url('../../../assests/imgs/mobile/Chevron2.svg') no-repeat left center
-  padding: 3px 10px
+
+  padding: 0.8vw 0.8vw
+
+  display: flex
+  flex-direction: row
+  flex-basis: content
 
   button
     background-color: #FFFFFF
+    margin-left: 1vw
     border: none
-    
+    font-size: 1.2vw
 
 
 #listeResa
+  height: 55%
   font-family: general.$police-texte
-  margin: 10px 5%
+  padding: 0px 10%
 
   table
-    
-    padding: 10px 40px
+    text-align: center
 
-    width: auto
     resize: none
     overflow: auto
-
-    text-align: center
     border-collapse: collapse
+
+    font-size: 1.5vw
+
+    tr
+      display: flex
+      max-height: 88px
+      background-color: #FFFFFF
+      td 
+        padding: 2vw
+
+    tr:nth-child(even)
+      background-color: #FBE6BC
 
     thead
       border: 2px solid
-      border-color: general.$couleur-back-bleu-zodiac
+      border-color: general.$couleur-back-bleu-zodiac      
 
       tr
+        background-color: general.$couleur-back-bleu-zodiac
+        padding: 1vw 0vw
         th
-          color: #FFFFFF
+          width: 20%
           background-color: general.$couleur-back-bleu-zodiac
-          width: 16%
-          height: 2%
+          color: #FFFFFF
 
     tbody
       border: 2px solid
       border-color: general.$couleur-back-bleu-zodiac
 
-      tr
-        td
-          width: 16%
-          background-color: #FFFFFF
 
-      tr:nth-child(even) 
-        td
-          background-color: #FBE6BC
-        
-        
-
-#voirPlus
-  font-family: general.$police-titre
-  text-align: center
-  align-items: center
-  margin: 15px 0px
-
-
+  #voirPlus
+    font-family: general.$police-titre
+    text-align: center
+    align-items: center
+    margin: 2vw 0vw
 
 
 

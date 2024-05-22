@@ -16,7 +16,7 @@
     </div>
 
     <div id="etatResa">
-        <button id="enCours" class="ongletSelect">En cours (3)</button>
+        <button id="enCours" onclick="reloadReservations('enCours')" class="ongletSelect">En cours (3)</button>
         <button id="aVenir">A venir (3)</button>
         <button id="passe">Passé (5)</button>
         <button id="tout">Tout</button>
@@ -89,8 +89,21 @@
                     <td>563€</td>
                     <td>J.Valjean</td>
                 </tr>
+                <tr>
+                    <td>Maisonette bord de plage</td>
+                    <td>12/09/2024</td>
+                    <td>25/13/2024</td>
+                    <td>563€</td>
+                    <td>J.Valjean</td>
+                </tr>
+                <tr>
+                    <td>Maisonette bord de plage</td>
+                    <td>12/09/2024</td>
+                    <td>25/13/2024</td>
+                    <td>563€</td>
+                    <td>J.Valjean</td>
+                </tr>
             </tbody>
-
 
         </table>
 

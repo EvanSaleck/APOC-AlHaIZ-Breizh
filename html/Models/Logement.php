@@ -21,4 +21,4 @@
             return count($logement) > 0;
         }
     }
-    
+?>

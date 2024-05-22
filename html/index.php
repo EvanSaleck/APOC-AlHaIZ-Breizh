@@ -34,6 +34,11 @@ switch($requestUrl) {
             }
             break;
 
+    case '/Back/':
+    case 'Back/':
+        include_once('Views/Back/reservation/listeResa.php');
+        break;
+
     // Routes des API
     case '/api/getLogements':
         $logementController->getAllLogements();
