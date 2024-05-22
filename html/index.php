@@ -1,15 +1,18 @@
 <?php
 // Inlcude des controllers
-include './Controllers/Front/LogementController.php';
-include './Controllers/Front/ReservationController.php';
+include_once './Controllers/Front/LogementController.php';
+include_once './Controllers/Front/ReservationController.php';
+include_once './Controllers/Front/UtilisateurController.php';
 
 // Use des controllers
 use Controllers\Front\LogementController;
 use Controllers\Front\ReservationController;
+use Controllers\Front\UtilisateurController;
 
 // Initialisation des controllers
 $logementController = new LogementController();
 $reservationController = new ReservationController();
+$utilisateurController = new UtilisateurController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
@@ -35,6 +38,23 @@ switch($requestUrl) {
             break;
 
     // Routes des API
+    case '/Deconnexion':
+    case 'Deconnexion':
+        session_start();
+        $_SESSION = array();
+        session_destroy();
+        header('Location: /');
+    break;
+    case '/api/ConnexionClient':
+    case 'api/ConnexionClient':
+        $data = $_POST;
+        $utilisateurController->connexionClient($data);
+    break;
+    case 'api/InscriptionClient':
+    case '/api/InscriptionClient':
+        $data = $_POST;
+        $utilisateurController->inscriptionClient($data);
+    
     case '/api/getLogements':
         $logementController->getAllLogements();
         break;

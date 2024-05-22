@@ -17,6 +17,5 @@
     <div id="Bulle" class="d-none">
         <div id="Profil"></div>
         <div id="Connexion"></div>
-        <hr>
     </div>
 </header>
