@@ -32,7 +32,9 @@ switch($requestUrl) {
             echo "Logement non trouvé";
         }
         break;
-
+    case '/logement/détailsLogement':
+        include 'Views/Front/logement/détailsLogement.php';
+        break;
     case '/reservation/devis':
         include 'Views/Front/reservation/devis.php';
         break;

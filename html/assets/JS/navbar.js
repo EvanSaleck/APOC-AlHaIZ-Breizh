@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener("scroll", function() {
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        if (scrollTop > lastScrollTop && lastScrollTop > 20) {
+        if (scrollTop > lastScrollTop && lastScrollTop >= 0) {
             navbar.classList.add('navbar-hidden');
         } else {
             navbar.classList.remove('navbar-hidden');

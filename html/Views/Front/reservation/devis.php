@@ -46,7 +46,7 @@ sessionStorage.setItem('logement', JSON.stringify(<?php echo json_encode($resa);
                         </div>
                     </div>
                     <figure>
-                        <img class="photoLogResa" src="/assets/imgs/offres/MaisonLanderneau.png" alt="Maison landerneau"> 
+                        <img class="photoLogResa" src="/assets/imgs/logements/MaisonLanderneau.png" alt="Maison landerneau"> 
                     </figure>
                 </div>
 
@@ -56,28 +56,28 @@ sessionStorage.setItem('logement', JSON.stringify(<?php echo json_encode($resa);
                     <h3> Votre réservation </h3>
                     <div>
                         <p class="info-label">Date d'arrivée :</p>
-                        <p id="date_arrivee">30/02/2025</p>
+                        <p id="dateArrivee"></p>
                     </div>
                     <div>
                         <p class="info-label">Date de départ :</p>
-                        <p class="date_depart">31/02/2025</p>
+                        <p id="dateFin"></p>
                     </div>
                     <div>
                         <p class="info-label">Nombre d'occupants :</p>
-                        <p class="nb_occupant">3 occupants</p>
+                        <p id="sctNbOccupants"></p>
                     </div>
                     <div class="deuxiemeBarre"></div>
                     <div>
                         <p class="info-label">Tarif nuit :</p>
-                        <p class="prix_nuit_ttc">210€</p>
+                        <p id="prixNuitTtc"></p>
                     </div>
                     <div>
                         <p class="info-label">Taxes :</p>
-                        <p class="taxe_sejour">25€</p>
+                        <p id="taxeSejour"></p>
                     </div>
                     <div>
                         <p class="info-label">Total pour 12 nuits (en €) :</p>
-                        <p class="total_tarif_ttc">2560€</p>
+                        <p id="totalTtc"></p>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@ sessionStorage.setItem('logement', JSON.stringify(<?php echo json_encode($resa);
                 <div class="PaiementPaypal">
                     <img class="imagePaypal" src="/assets/imgs/paiement/paypal.png" alt="Image Paypal">
                     <p> Paypal </p>
-                    <button class="boutonPaypal"> Se connecter </button>
+                    <button class="boutonPaypal"> Connexion à paypal</button>
                 </div>
             </div>
         </div>
