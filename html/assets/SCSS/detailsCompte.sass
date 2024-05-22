@@ -1,13 +1,85 @@
 @use './general' as general
 
-
 .compte
-    font-size: general.$taille-police-texte-mobile
-    font-family: general.$police-texte
-    h1, h2
-        font-size: general.$taille-police-titre-mobile
-        font-family: general.$police-titre
-    
+  font-family: general.$police-texte
+  color: general.$couleur-front-bleu-charbon
+  width: 80vw
+  max-width: 500px
+  margin: 0 auto
+  overflow-y: auto
+  padding-bottom: 12vh
 
-    
-    
+  h1, h2, h3
+    font-family: general.$police-titre
+    color: general.$couleur-front-bleu-verdatre
+
+  h1
+    font-size: general.$taille-police-titre-mobile
+    margin-bottom: 20px
+
+  h2
+    font-size: general.$taille-police-titre-mobile * 0.9
+    margin-bottom: 15px
+
+  h3
+    font-size: general.$taille-police-texte-mobile
+    margin-bottom: 5px
+
+  .détailEtPhoto
+    position: sticky
+    top: 0
+    background: white
+    z-index: 10
+    padding: 20px 0
+
+  .divPP
+    display: flex
+    justify-content: center
+    margin-bottom: 20px
+
+    .imgProfil
+      border-radius: 50%
+      width: 80px
+      height: 80px
+      object-fit: cover
+      border: 2px solid black
+
+  .divNom, .divPrenom, .divCivilite, .divAdresse, .divPseudo, .divEmail
+    margin-bottom: 10px
+
+    h3, p
+      margin: 5px 0
+
+    p
+      background-color: white
+      border: 1px solid general.$couleur-front-bleu-nuageux
+      border-radius: 5px
+      padding: 5px
+      color: general.$couleur-front-bleu-charbon
+
+  button.mdp
+    background-color: general.$couleur-front-bleu-verdatre
+    color: white
+    border: none
+    padding: 10px 20px
+    font-size: general.$taille-police-texte-mobile
+    border-radius: 5px
+    cursor: pointer
+    transition: background-color 0.3s ease
+    display: block
+    width: 100%
+    text-align: center
+
+    &:hover
+      background-color: darken(general.$couleur-front-bleu-verdatre, 10%)
+
+  .divAdresse
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    gap: 5px
+
+    p
+      grid-column: span 2
+
+    .rue, .pays
+      grid-column: span 2
