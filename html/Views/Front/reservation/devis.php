@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+    require("Views/Front/composants/header.php");
+    require("Views/Front/composants/head.php");
+    // require("Views/Front/composants/navbar.php");
+?>
+<script>
+// Récupérer les données de sessionStorage
+<?php 
+    $resa = [
+        'date_arrivee' => '30/01/2024',
+        'date_depart' => '7/02/2024',
+        'nb_occupant' => '3',
+        'prix_nuit_ttc' => '56',
+        'taxe_sejour' => '5',
+        'total_tarif_ttc' => '89'
+    ];?>
+sessionStorage.setItem('logement', JSON.stringify(<?php echo json_encode($resa);?>))
 
-    <!-- Feuilles de style -->
-    <link rel="stylesheet" type="text/css" href="/assets/SCSS/devis.css">
-        <script>
-        // Récupérer les données de sessionStorage
-        <?php 
-            $resa = [
-                'date_arrivee' => '30/01/2024',
-                'date_depart' => '7/02/2024',
-                'nb_occupant' => '3',
-                'prix_nuit_ttc' => '56',
-                'taxe_sejour' => '5',
-                'total_tarif_ttc' => '89'
-            ];?>
-        sessionStorage.setItem('logement', JSON.stringify(<?php echo json_encode($resa);?>))
-        
-        </script>
-          
-</head>
+</script>
+
 <body>
     <button class="boutonPrecedent">Précédent</button>
         
@@ -129,7 +124,6 @@
             <p>Vous recevrez la confirmation de votre demande de réservation par mail dans les prochaines 24 heures</p>
         </div>
         </section>
-        <script src="/assets/JS/devis.js"></script>
     </div>
 </body>
 </html>

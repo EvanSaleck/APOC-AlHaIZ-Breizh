@@ -1,6 +1,6 @@
 @use './general' as general
 
-.HeaderContainer
+.HeaderConteneur
     /* Taille */
     height: 75px
 
@@ -24,7 +24,7 @@
             display: flex
             flex-direction: row
 
-            margin-top: 7.5%
+            margin-top: 6%
 
             width: fit-content
             gap: 70px
@@ -36,7 +36,7 @@
                 a
                     color: #FFFFFF
                     text-decoration: none
-                    white-space: nowrap   
+                    white-space: nowrap
 
     .Logo
         a
@@ -58,20 +58,77 @@
             p
                 align-self: center
 
-#account
-    border: 1px solid white
+#Compte
     width: 65px
     height: 55px
+
+    border: 1px solid white
+
     background-color: general.$couleur-front-bleu-marine
+    background-size: cover
+    background-position: center
     background-repeat: no-repeat
     background-size: 100% 100%
     border-radius: 100%
+
+
     margin-right: 2%
     margin-top: 3%
 
+    cursor: pointer
+
+#Bulle
+    display: flex
+    flex-direction: column
+
+
+    float: right
+
+    border: 2px solid #D0CDC4
+    border-radius: 10px
+
+    background-color: #FDFBF5
+
+    margin-top: 0.5%
+    margin-right: 0.5%
+    hr 
+        width: 75%
+        margin: 0 auto
+        margin-top: 2%
+    #Profil
+        margin-top: 0.5%
+        display: flex
+        flex-direction: row
+        justify-content: center
+
+
+        gap: 10px   
+        p
+            font-family: 'Reem Kufi'
+            font-size: 20px
+            vertical-align: middle
+    #Connexion
+        margin-top: 2%
+        display: flex
+        flex-direction: row
+        justify-content: center
+        gap: 10px
+        p
+            font-family: 'Reem Kufi'
+            font-size: 20px
+            vertical-align: middle
+        a
+            font-family: 'Reem Kufi'
+            font-size: 20px
+            color: #FFFFFF
+            text-decoration: none
+            vertical-align: middle
+
+.d-none 
+    display: none !important
+        
+
+
 @media screen and (max-width: 768px)
-    .HeaderContainer
-        .Logo
-            a
-                p
-                    display: none
+    #titre
+        display: none
