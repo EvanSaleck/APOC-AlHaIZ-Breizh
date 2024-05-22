@@ -35,7 +35,7 @@ function Connexion(){
     data.append('pseudo', pseudo);
     data.append('password', password);
 
-    fetch('/api/ConnexionClient', {
+    fetch('/api/ConnexionProprio', {
         method: 'POST',
         body: data
     })
@@ -46,7 +46,7 @@ function Connexion(){
 
             setTimeout(() => {
                 let url = window.location.href;
-                window.location.href = url;
+                // window.location.href = url;
             }, 1000);
         }else{
             // Select all input elements inside the element with id 'connexionModale'
@@ -69,6 +69,7 @@ function Connexion(){
     });
 }
 
+
 function CreateConnexionModal() {
     // Remove existing modals if they exist
     if (document.getElementById('connexionModal') != null) {
@@ -90,7 +91,7 @@ function CreateConnexionModal() {
             <input type="password" id="password" name="password" placeholder="*********" required>
             <button id="Connexion" onclick="Connexion()">Se connecter</button>
         </div>
-        <p>Vous n'avez pas de compte ? <span id="inscription" onclick="CreateInscriptionModal()">Inscrivez-vous</span></p>
+        <p>Vous n'avez pas de compte ? <span id="inscription" onclick="">Inscrivez-vous</span></p>
     </div>
     `;
     document.body.appendChild(modal);
@@ -155,7 +156,7 @@ function CreateInscriptionModal() {
 
 
 function Deconnexion() {
-    sessionStorage.removeItem('User');
+    sessionStorage.removeItem('Proprio');
     window.location.href = '/Deconnexion';
 }
 

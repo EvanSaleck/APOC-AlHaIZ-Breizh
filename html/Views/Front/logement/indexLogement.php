@@ -1,13 +1,12 @@
 <?php
 //  include_once 'Views/Front/composants/navbar.php';
- include_once 'Views/Front/composants/card.php';
- include_once 'Views/Front/composants/header.php';
+//  include_once 'Views/Front/composants/card.php';
+ include_once 'Views/Back/composants/header.php';
 //  include_once 'Views/Front/composants/footer.php';
- include_once 'Views/Front/composants/head.php';
+ include_once 'Views/Back/composants/head.php';
  ?>
 
 <body>
-
     <div id="headerAccueilMobile">
         <img src="/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
         <button id="buttonfiltresMobile">
@@ -59,7 +58,7 @@
         </div>
     </div>
 
-    <div class="modal-content">
+    <!-- <div class="modal-content">
         <span class="fermer">&times;</span>   
         <h2>Inscription</h2>
         <div id="connexionForm">
@@ -90,6 +89,6 @@
             <button id="Connexion" onclick="Inscription()">S'inscrire</button>
         </div>
         <p>Déjà un compte ?<span id="inscription" onclick="CreateConnexionModal()">Connectez vous</span></p>
-    </div>
+    </div> -->
 </body>
 </html>

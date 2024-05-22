@@ -1,0 +1,91 @@
+@use '../Front/general' as general
+
+.modal-content
+    position: absolute
+    top: 0
+    bottom: 0
+    left:0
+    right: 0
+    z-index: 9999
+    color: general.$couleur-front-bleu-charbon
+    background-color: #FFFFFF !important
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25)
+
+    width: 30%
+    height: fit-content
+    margin: auto
+    margin-top: 10%
+
+    border-radius: 10px
+
+    display: flex
+    flex-direction: column
+
+    user-select: none
+    text-align: center
+    h2
+       vertical-align: middle
+       text-align: center
+
+    .fermer
+        font-size: 1.5em
+        font-weight: bold
+        cursor: pointer
+        margin-right: auto
+        margin-left: 0.5em
+
+
+    #connexionForm
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        input 
+            margin: 10px
+            padding: 10px
+            border-radius: 5px
+            border: 1px solid general.$couleur-front-bleu-charbon
+            border: 1px solid general.$couleur-front-bleu-nuageux
+
+            &:focus
+                border: 1px solid general.$couleur-front-bleu-verdatre
+
+        button 
+            margin: 10px
+            padding: 10px
+            border-radius: 5px
+            border: 1px solid general.$couleur-front-bleu-charbon
+            border: 1px solid general.$couleur-front-bleu-nuageux
+            background-color: general.$couleur-front-bleu-verdatre
+            color: white
+        
+    #inscription
+        margin-top: 10px
+        text-decoration: underline
+        text-align: center
+        cursor: pointer
+
+
+
+.blur 
+    filter: blur(5px)
+    pointer-events: none
+
+/* Ensure the modal is not blurred */
+.exception 
+    filter: none
+    pointer-events: auto
+
+.succes
+    display: flex
+    flex-direction: row
+    justify-content: center
+    color: #38A356
+    border: 1px solid #38A35640
+
+    svg 
+        margin-top: 0.5%
+
+.error
+    border: 1px solid #D8000C !important

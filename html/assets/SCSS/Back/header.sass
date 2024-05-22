@@ -1,4 +1,4 @@
-@use './general' as general
+@use '../Front/general' as general
 
 .HeaderConteneur
     /* Taille */
@@ -10,7 +10,7 @@
 
     /*Couleur de fond*/
     color: #FFFFFF
-    background-color: general.$couleur-front-bleu-verdatre
+    background-color: general.$couleur-back-bleu-zodiac
 
 
     .Menu
@@ -24,7 +24,7 @@
             display: flex
             flex-direction: row
 
-            margin-top: 6%
+            margin-top: 4%
 
             width: fit-content
             gap: 70px
@@ -59,7 +59,7 @@
                 align-self: center
 
 #Compte
-    width: 65px
+    width: 70px
     height: 55px
 
     border: 1px solid white
@@ -73,7 +73,7 @@
 
 
     margin-right: 2%
-    margin-top: 3%
+    margin-top: 1.5%
 
     cursor: pointer
 
@@ -101,6 +101,7 @@
         flex-direction: row
         justify-content: center
 
+        cursor: pointer
 
         gap: 10px   
         p
@@ -113,6 +114,8 @@
         flex-direction: row
         justify-content: center
         gap: 10px
+
+        cursor: pointer
         p
             font-family: 'Reem Kufi'
             font-size: 20px
@@ -129,6 +132,6 @@
         
 
 
-@media screen and (max-width: 768px)
+@media screen and (max-width: 1100px)
     #titre
         display: none

@@ -54,7 +54,17 @@ switch($requestUrl) {
     case '/api/InscriptionClient':
         $data = $_POST;
         $utilisateurController->inscriptionClient($data);
-    
+    break;
+    case '/api/ConnexionProprio':
+        case 'api/ConnexionProprio':
+            $data = $_POST;
+            $utilisateurController->connexionProprio($data);
+        break;
+        case 'api/InscriptionProprio':
+        case '/api/InscriptionProprio':
+            $data = $_POST;
+            $utilisateurController->inscriptionProprio($data);
+        break;
     case '/api/getLogements':
         $logementController->getAllLogements();
         break;

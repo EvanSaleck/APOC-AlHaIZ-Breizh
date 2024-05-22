@@ -1,0 +1,137 @@
+@use './general' as general
+
+.HeaderConteneur
+    /* Taille */
+    height: 75px
+
+    /* Display */
+    display: flex
+    flex-direction: row
+
+    /*Couleur de fond*/
+    color: #FFFFFF
+    background-color: general.$couleur-front-bleu-verdatre
+
+
+    .Menu
+        display: flex
+        flex-direction: row
+        margin-left: auto
+
+        gap: 50px
+        margin-right: 1%
+        ul
+            display: flex
+            flex-direction: row
+
+            margin-top: 6%
+
+            width: fit-content
+            gap: 70px
+            list-style-type: none
+            font-family: 'Reem Kufi'
+            font-size: 20px
+
+            li
+                a
+                    color: #FFFFFF
+                    text-decoration: none
+                    white-space: nowrap
+
+    .Logo
+        a
+            display: flex
+            flex-direction: row
+
+            gap: 10px
+            font-family: 'Poiret One'
+            font-weight: bold
+            font-size: 45px
+            text-decoration: none
+
+            color: #FFFFFF
+
+            img
+                margin-top: 1.5%
+                width: 78px
+                height: 64px
+            p
+                align-self: center
+
+#Compte
+    width: 65px
+    height: 55px
+
+    border: 1px solid white
+
+    background-color: general.$couleur-front-bleu-marine
+    background-size: cover
+    background-position: center
+    background-repeat: no-repeat
+    background-size: 100% 100%
+    border-radius: 100%
+
+
+    margin-right: 2%
+    margin-top: 3%
+
+    cursor: pointer
+
+#Bulle
+    display: flex
+    flex-direction: column
+
+
+    float: right
+
+    border: 2px solid #D0CDC4
+    border-radius: 10px
+
+    background-color: #FDFBF5
+
+    margin-top: 0.5%
+    margin-right: 0.5%
+    hr 
+        width: 75%
+        margin: 0 auto
+        margin-top: 2%
+    #Profil
+        margin-top: 0.5%
+        display: flex
+        flex-direction: row
+        justify-content: center
+
+        cursor: pointer
+
+        gap: 10px   
+        p
+            font-family: 'Reem Kufi'
+            font-size: 20px
+            vertical-align: middle
+    #Connexion
+        margin-top: 2%
+        display: flex
+        flex-direction: row
+        justify-content: center
+        gap: 10px
+
+        cursor: pointer
+        p
+            font-family: 'Reem Kufi'
+            font-size: 20px
+            vertical-align: middle
+        a
+            font-family: 'Reem Kufi'
+            font-size: 20px
+            color: #FFFFFF
+            text-decoration: none
+            vertical-align: middle
+
+.d-none 
+    display: none !important
+        
+
+
+@media screen and (max-width: 768px)
+    #titre
+        display: none
