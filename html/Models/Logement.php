@@ -6,8 +6,8 @@
     use Service\Database;
 
     class Logement {
-
         private $db;
+
 
         public function __construct() {
             $this->db = new Database();
@@ -18,14 +18,14 @@
             
             return $logements;
         }
-
+      
         public function getLogementById($id) {
             
             $logement = $this->db->executeQuery('SELECT * FROM logement WHERE id_logement = ' . $id);
                 
             return $logement;
         }
-
+      
         public function getLogementsDataForCards() {
             $dataLogements = $this->db->executeQuery('
             select l.id_logement,l.titre,l.description,l.image_principale,l.prix_nuit_ttc,ad.nom_ville,avg(av.note_avis) as moyenne_logement, count(av.id_avis) as nb_avis
@@ -41,9 +41,11 @@
             
             return $dataLogements;
         }
-
+      
         public function logementExists($id) {
             $logement = $this->db->executeQuery('SELECT * FROM logement WHERE id_logement = ' . $id);
             return count($logement) > 0;
         }
     }
+?>
+    
