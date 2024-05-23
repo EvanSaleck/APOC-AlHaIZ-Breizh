@@ -1,0 +1,150 @@
+@use '../Front/general' as general
+
+.modal-content
+    position: absolute
+    top: 0
+    bottom: 0
+    left:0
+    right: 0
+    z-index: 9999
+    color: general.$couleur-front-bleu-charbon
+    background-color: #FFFFFF !important
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25)
+
+    width: 30%
+    height: fit-content
+    margin: auto
+    margin-top: 10%
+
+    border-radius: 10px
+
+    display: flex
+    flex-direction: column
+
+    user-select: none
+    text-align: center
+    h2
+       vertical-align: middle
+       text-align: center
+
+    .fermer
+        font-size: 1.5em
+        font-weight: bold
+        cursor: pointer
+        margin-right: auto
+        margin-left: 0.5em
+
+
+    #connexionForm
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        input 
+            margin: 10px
+            padding: 10px
+            border-radius: 5px
+            border: 1px solid general.$couleur-front-bleu-charbon
+            outline-color: general.$couleur-front-bleu-verdatre
+
+
+        button 
+            margin: 10px
+            padding: 10px
+            border-radius: 5px
+            border: 1px solid general.$couleur-front-bleu-charbon
+            background-color: general.$couleur-front-bleu-verdatre
+            color: white
+        
+    #inscription
+        margin-top: 10px
+        text-decoration: underline
+        text-align: center
+        cursor: pointer
+
+
+
+.blur 
+    filter: blur(5px)
+    pointer-events: none
+
+/* Ensure the modal is not blurred */
+.exception 
+    filter: none
+    pointer-events: auto
+
+
+.alert-popup-content
+    display: flex
+
+    position: absolute
+    top: 0
+    left: 47.5%
+
+    z-index:999999
+
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    padding: 10px
+    border-radius: 5px
+
+    margin: 10px
+    text-align: center
+
+    svg
+        margin-top: 0.5%
+    p
+        margin-top: 10px
+
+    a
+        text-decoration: underline
+        cursor: pointer
+.error
+    border: 1px solid #D8000C !important
+    background-color: #F8D7DA
+    color: #D8000C
+
+.succes
+    border: 1px solid #38A356 !important
+    background-color: #D4EDDA
+    color: #38A356
+
+@media screen and (max-width: general.$max-width-tablette)
+    .modal-content
+        width: 50%
+        margin-top: 5%
+        h2
+            font-size: 1.5em
+        .fermer
+            font-size: 1em
+        #connexionForm
+            input
+                width: 80%
+                font-size: 1em
+            button
+                width: 80%
+                font-size: 1em
+        #inscription
+            font-size: 1em
+
+@media screen and (max-width: 560px)
+    .modal-content
+        width: 100%
+        margin-top: 5% !important
+        margin-left: 10% !important
+        h2
+            font-size: 1.5em
+        .fermer
+            font-size: 1em
+        #connexionForm
+            input
+                width: 80%
+                font-size: 1em
+            button
+                width: 80%
+                font-size: 1em
+        #inscription
+            font-size: 1em
+    

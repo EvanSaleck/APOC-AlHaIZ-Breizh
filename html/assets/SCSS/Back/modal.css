@@ -1,0 +1,174 @@
+@charset "UTF-8";
+/* Définition des couleurs du Front par défaut */
+/* Définition des couleurs du Back par défaut */
+/* Définition des tailles d'écran par défaut */
+/* Import des polices Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+/* Import de la police dyslexique Lexend */
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+/* Définition des polices par défaut */
+/* Définition tailles de police desktop */
+/* Définition tailles de police mobile */
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.modal-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  color: #020E1C;
+  background-color: #FFFFFF !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  width: 30%;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: auto;
+  margin-top: 10%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  text-align: center;
+}
+.modal-content h2 {
+  vertical-align: middle;
+  text-align: center;
+}
+.modal-content .fermer {
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: auto;
+  margin-left: 0.5em;
+}
+.modal-content #connexionForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-content #connexionForm input {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #020E1C;
+  outline-color: #377E81;
+}
+.modal-content #connexionForm button {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #020E1C;
+  background-color: #377E81;
+  color: white;
+}
+.modal-content #inscription {
+  margin-top: 10px;
+  text-decoration: underline;
+  text-align: center;
+  cursor: pointer;
+}
+
+.blur {
+  filter: blur(5px);
+  pointer-events: none;
+}
+
+/* Ensure the modal is not blurred */
+.exception {
+  filter: none;
+  pointer-events: auto;
+}
+
+.alert-popup-content {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 47.5%;
+  z-index: 999999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px;
+  text-align: center;
+}
+.alert-popup-content svg {
+  margin-top: 0.5%;
+}
+.alert-popup-content p {
+  margin-top: 10px;
+}
+.alert-popup-content a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.error {
+  border: 1px solid #D8000C !important;
+  background-color: #F8D7DA;
+  color: #D8000C;
+}
+
+.succes {
+  border: 1px solid #38A356 !important;
+  background-color: #D4EDDA;
+  color: #38A356;
+}
+
+@media screen and (max-width: 1023px) {
+  .modal-content {
+    width: 50%;
+    margin-top: 5%;
+  }
+  .modal-content h2 {
+    font-size: 1.5em;
+  }
+  .modal-content .fermer {
+    font-size: 1em;
+  }
+  .modal-content #connexionForm input {
+    width: 80%;
+    font-size: 1em;
+  }
+  .modal-content #connexionForm button {
+    width: 80%;
+    font-size: 1em;
+  }
+  .modal-content #inscription {
+    font-size: 1em;
+  }
+}
+@media screen and (max-width: 560px) {
+  .modal-content {
+    width: 100%;
+    margin-top: 5% !important;
+    margin-left: 10% !important;
+  }
+  .modal-content h2 {
+    font-size: 1.5em;
+  }
+  .modal-content .fermer {
+    font-size: 1em;
+  }
+  .modal-content #connexionForm input {
+    width: 80%;
+    font-size: 1em;
+  }
+  .modal-content #connexionForm button {
+    width: 80%;
+    font-size: 1em;
+  }
+  .modal-content #inscription {
+    font-size: 1em;
+  }
+}/*# sourceMappingURL=modal.css.map */
