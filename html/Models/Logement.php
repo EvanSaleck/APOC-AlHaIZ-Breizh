@@ -163,7 +163,7 @@ class Logement {
 
             // on gère l'insert de la photo après avoir eu l'id du logement
             if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
-                $dossier = 'assets/imgs/logements/';
+                $dossier = '/assets/imgs/logements/';
                 $extension = pathinfo($_FILES['photo']['name'])['extension'];
                 $fichier = $dossier . 'image_' . $idLogement . '.' . $extension;
 
@@ -205,9 +205,7 @@ class Logement {
         
         WHERE id_logement = ' . $id);
         
-        header('Content-Type: application/json');
-        
-        echo json_encode($logements);
+        return $logements;
     }
 
     public function getAmenagementsOfLogementById($id) {
@@ -219,8 +217,6 @@ class Logement {
         
         WHERE id_logement = ' . $id);
         
-        header('Content-Type: application/json');
-
-        echo json_encode($logements);
+        return $logements;
     }
 }

@@ -33,6 +33,30 @@ class LogementController {
         echo json_encode($logement);
     }    
 
+    public function getLogementsDataForCards() {
+        $dataLogements = $this->logement->getLogementsDataForCards();
+
+        header('Content-Type: application/json');
+
+        echo json_encode($dataLogements);
+    }
+
+    public function getLogementDataById($id) {
+        $logement = $this->logement->getLogementCompleteByID($id);
+
+        header('Content-Type: application/json');
+
+        echo json_encode($logement);
+    }
+
+    public function getAmenagementsOfLogementById($id) {
+        $amenagements = $this->logement->getAmenagementsOfLogementById($id);
+
+        header('Content-Type: application/json');
+
+        echo json_encode($amenagements);
+    }
+
     public function processFormNewLogement() { 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

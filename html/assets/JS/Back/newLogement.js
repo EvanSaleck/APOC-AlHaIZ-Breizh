@@ -47,7 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
           })
           .then((data) => {
-            ThrowAlertPopup(data, "succes");
+            ThrowAlertPopup("Le logement à bien été mis en ligne !", "succes");
+            window.location.href = "/logements";
           })
           .catch((error) => {
             ThrowAlertPopup("Erreur: " + error, "error");

@@ -21,8 +21,7 @@ $requestUrl = $_SERVER['REQUEST_URI'];
 // $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
-    // Routes des vues front office
-    // Routes des vues front office
+    // Routes des vues front office 
     case '/':
     case '':
         include './Views/Front/logement/indexLogement.php';
@@ -37,6 +36,26 @@ switch($requestUrl) {
     case '/logement/new/':
         include './Views/Back/logement/newLogement.php';
         break;
+    
+    // routes back office
+    case '/logements':
+    case '/logements/':
+        include './Views/Back/logement/listeLogements.php';
+        break;
+    case '/logement/new':
+    case '/logement/new/':
+        include_once 'Views/Back/logement/newLogement.php';
+        break;
+
+    case '/api/getLogementsDataForCards':
+        header('Content-Type: application/json');
+        echo $logementController->getLogementsDataForCards();
+        break;
+    
+    case '/api/processFormNewLogement/':
+    case '/api/processFormNewLogement':
+        $logementController->processFormNewLogement();
+        break;
 
 
     // Routes des API
@@ -46,40 +65,36 @@ switch($requestUrl) {
         $_SESSION = array();
         session_destroy();
         header('Location: /');
-    break;
+        break;
+
     case '/api/ConnexionClient':
     case 'api/ConnexionClient':
         $data = $_POST;
         $utilisateurController->connexionClient($data);
-    break;
+        break;
+
     case 'api/InscriptionClient':
     case '/api/InscriptionClient':
         $data = $_POST;
         $utilisateurController->inscriptionClient($data);
-    break;
+        break;
     case '/api/ConnexionProprio':
-        case 'api/ConnexionProprio':
+    case 'api/ConnexionProprio':
             $data = $_POST;
             $utilisateurController->connexionProprio($data);
         break;
-        case 'api/InscriptionProprio':
-        case '/api/InscriptionProprio':
-            $data = $_POST;
-            $utilisateurController->inscriptionProprio($data);
+
+    case 'api/InscriptionProprio':
+    case '/api/InscriptionProprio':
+        $data = $_POST;
+        $utilisateurController->inscriptionProprio($data);
         break;
+
     case '/api/getLogements':
         header('Content-Type: application/json');
         echo $logementController->getAllLogements();
         break;
 
-    // routes back office
-    case '/logement/new':
-        include_once 'Views/Back/logement/newLogement.php';
-    case '/api/getLogementsDataForCards':
-        header('Content-Type: application/json');
-        echo $logementController->getLogementsDataForCards();
-        break;
-    
     case '/api/getReservations':
     case 'api/getReservations':
         header('Content-Type: application/json');
@@ -90,35 +105,16 @@ switch($requestUrl) {
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);
 
-        header('Content-Type: application/json');
-        echo $logementController->getLogementDataById($logement_id);
-        break;
-        
-        // if ($logementController->logementExists($logement_id)) {
-        //     echo 'Logement n°' . $logement_id . ' trouvé !';
-        // }
-        // else { 
-        //     http_response_code(404);
-        //     echo "Logement non trouvé";
-        // }
+        $logementController->getLogementDataById($logement_id);
         break;
 
-        case preg_match('/^\/api\/getAmenagementsOfLogementById\/\d+$/', $requestUrl) ? true : false:
-            $url_parts = explode('/', $requestUrl);
-            $logement_id = end($url_parts);
-    
-            header('Content-Type: application/json');
-            echo $logementController->getAmenagementsOfLogementById($logement_id);
-            break;
-            
-            // if ($logementController->logementExists($logement_id)) {
-            //     echo 'Logement n°' . $logement_id . ' trouvé !';
-            // }
-            // else { 
-            //     http_response_code(404);
-            //     echo "Logement non trouvé";
-            // }
-            break;
+    case preg_match('/^\/api\/getAmenagementsOfLogementById\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $logement_id = end($url_parts);
+
+        header('Content-Type: application/json');
+        echo $logementController->getAmenagementsOfLogementById($logement_id);
+        break;
 
     default:
         http_response_code(404);

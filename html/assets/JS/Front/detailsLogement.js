@@ -167,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
         btnRes.disabled = true;
 
         let imagePrinc = document.getElementById("imageLogement");
+        console.log(data[0]['image_principale']);
         imagePrinc.setAttribute("src",data[0]['image_principale']);
     });
 });
