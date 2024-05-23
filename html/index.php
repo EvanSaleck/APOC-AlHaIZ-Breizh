@@ -30,6 +30,9 @@ switch($requestUrl) {
     case '/logement/':
         include './Views/Front/logement/detailsLogement.php';
         break;
+    case '/compte':
+        include './Views/Front/compte/detailsCompte.php';
+        break;
 
     // routes du back
     case '/logement/new':
@@ -78,6 +81,7 @@ switch($requestUrl) {
         $data = $_POST;
         $utilisateurController->inscriptionClient($data);
         break;
+
     case '/api/ConnexionProprio':
     case 'api/ConnexionProprio':
             $data = $_POST;
@@ -93,6 +97,12 @@ switch($requestUrl) {
     case '/api/getLogements':
         header('Content-Type: application/json');
         echo $logementController->getAllLogements();
+        break;
+
+    case '/api/getCompteClientDetails':
+        // $idCompte = $_SESSION['client'];
+        $idCompte = 1;
+        $utilisateurController->getCompteClientDetails($idCompte);
         break;
 
     case '/api/getReservations':

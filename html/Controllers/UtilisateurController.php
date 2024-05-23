@@ -8,10 +8,23 @@
 
     class UtilisateurController {
 
+        private $user;
+
+        public function __construct(){
+            $this->user = new Utilisateur();
+        }
+
+        public function getCompteClientDetails($idCompte) {
+            
+            $dataCompteClient = $this->user->getCompteClientDetails($idCompte);
+        
+            header('Content-Type: application/json');
+            echo json_encode($dataCompteClient);
+        }
+
         public function connexionClient($data) {
             try {
-                $utilisateur = new Utilisateur();
-                $return = $utilisateur->connexionClient($data);
+                $return = $this->user->connexionClient($data);
 
                 header('Content-Type: application/json');
                 echo json_encode($return);
@@ -25,8 +38,7 @@
 
         public function inscriptionClient($data) {
             try {
-                $utilisateur = new Utilisateur();
-                $return = $utilisateur->inscriptionClient($data);
+                $return = $this->user->inscriptionClient($data);
 
                 header('Content-Type: application/json');
                 echo json_encode($return);
@@ -40,8 +52,7 @@
 
         public function connexionProprio($data) {
             try {
-                $utilisateur = new Utilisateur();
-                $return = $utilisateur->connexionProprio($data);
+                $return = $this->user->connexionProprio($data);
 
                 header('Content-Type: application/json');
                 echo json_encode($return);
@@ -55,8 +66,7 @@
 
         public function inscriptionProprio($data) {
             try {
-                $utilisateur = new Utilisateur();
-                $return = $utilisateur->inscriptionProprio($data);
+                $return = $this->user->inscriptionProprio($data);
 
                 header('Content-Type: application/json');
                 echo json_encode($return);

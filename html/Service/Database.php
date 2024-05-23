@@ -1,21 +1,19 @@
 <?php
     namespace Service;
 
-    require_once 'Config.php';
-    use const DB_DSN;
-    use const DB_USERNAME;
-    use const DB_PASSWORD;
-
     use Exception;
     use PDO;
     use PDOException;
 
     class Database {
         private $pdo;
+        private $dsn = 'pgsql:host=localhost;dbname=apoc;port=5432';
+        private $username = 'apoc';
+        private $password = 'apoc';
 
         public function __construct() {
             try {
-                $this->pdo = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+                $this->pdo = new PDO($this->dsn, $this->username, $this->password);
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 
                 $this->pdo->exec("set schema 'sae3'");
