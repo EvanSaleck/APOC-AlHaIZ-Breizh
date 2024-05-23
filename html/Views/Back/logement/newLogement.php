@@ -1,4 +1,5 @@
 <?php
+    include_once("Views/Back/composants/header.php");
     include_once("Views/Back/composants/head.php");
 ?>
 </head>
@@ -216,10 +217,7 @@
                 </div>
             </div>
             <div class="btnValider">
-                <a href="#">
-                    <input type="submit" value="Valider">
-
-                </a>
+                <input type="submit" value="Valider">
             </div>
         </div>
     </form>

@@ -4,10 +4,12 @@ include_once './Controllers/LogementController.php';
 include_once './Controllers/ReservationController.php';
 include_once './Controllers/UtilisateurController.php';
 
+
 // Use des controllers
 use Controllers\LogementController;
 use Controllers\ReservationController;
 use Controllers\UtilisateurController;
+
 
 // Initialisation des controllers
 $logementController = new LogementController();
@@ -19,7 +21,8 @@ $requestUrl = $_SERVER['REQUEST_URI'];
 // $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
-    // Routes des vues
+    // Routes des vues front office
+    // Routes des vues front office
     case '/':
     case '':
         include './Views/Front/logement/indexLogement.php';
@@ -68,11 +71,15 @@ switch($requestUrl) {
         header('Content-Type: application/json');
         echo $logementController->getAllLogements();
         break;
+
+    // routes back office
+    case '/logement/new':
+        include_once 'Views/Back/logement/newLogement.php';
     case '/api/getLogementsDataForCards':
         header('Content-Type: application/json');
         echo $logementController->getLogementsDataForCards();
         break;
-
+    
     case '/api/getReservations':
     case 'api/getReservations':
         header('Content-Type: application/json');
@@ -117,15 +124,4 @@ switch($requestUrl) {
         http_response_code(404);
         echo "BAHAHAHAH 404 CHHHEEHHH";
         exit;
-}
-
-function appelFunction($fonction) {
-    if (function_exists($fonction)) {
-        $fonction();
-        exit;
-    }
-    else {
-        http_response_code(500);
-        echo "Erreur 500 - Fonction $fonction non trouvée";
-    }
 }
