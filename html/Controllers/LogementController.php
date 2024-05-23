@@ -33,6 +33,14 @@ class LogementController {
         echo json_encode($logement);
     }    
 
+    public function getLogementsDataForCards() {
+        $dataLogements = $this->logement->getLogementsDataForCards();
+
+        header('Content-Type: application/json');
+        
+        echo json_encode($dataLogements);
+    }
+
     public function processFormNewLogement() { 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
