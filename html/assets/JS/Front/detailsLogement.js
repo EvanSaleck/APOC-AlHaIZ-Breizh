@@ -49,9 +49,7 @@ function afficheRecap(valide) {
     }
 }
 
-console.log('detailsLogement.js');
 document.addEventListener('DOMContentLoaded', function() {
-    console.log(sessionStorage.getItem('idLogement'));
     fetch('/api/getLogementDataById/' + sessionStorage.getItem('idLogement'))
     .then(response => response.json())
     .then(data => {
@@ -141,7 +139,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let dateFin = document.getElementById("dateFin");
         let dateDepart = document.getElementById("dateDepart");
 
-        console.log(dateDebut.value)
         dateArrivee.innerHTML = dateDebut.value
         dateDepart.innerHTML = dateFin.value
 
@@ -170,6 +167,6 @@ document.addEventListener('DOMContentLoaded', function() {
         btnRes.disabled = true;
 
         let imagePrinc = document.getElementById("imageLogement");
-        imagePrinc.setAttribute("src",data[0]['image_principale']+".svg");
+        imagePrinc.setAttribute("src",data[0]['image_principale']);
     });
 });

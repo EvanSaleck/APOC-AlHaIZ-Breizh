@@ -1,6 +1,11 @@
 @use './general' as general
 
 .HeaderConteneur
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+
     /* Taille */
     height: 75px
 
@@ -129,9 +134,8 @@
 
 .d-none 
     display: none !important
-        
 
-
-@media screen and (max-width: 768px)
-    #titre
+@media screen and (max-width: general.$max-width-telephone)
+    .HeaderConteneur
         display: none
+    

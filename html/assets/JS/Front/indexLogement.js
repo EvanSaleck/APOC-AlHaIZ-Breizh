@@ -1,5 +1,3 @@
-var header = document.getElementById('headerAccueilMobile');
-
 // au chargement du dom
 document.addEventListener('DOMContentLoaded', function() {
     adjustMarginTop();
@@ -7,9 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var cardTemplate = document.getElementsByClassName('card')[0];
     var cardsContainer = document.getElementById('cardsContainer');
-
-
-
 
     if ("content" in document.createElement("template")) {
         // on récupère les logements
@@ -40,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             divCard.querySelector('.description').textContent = logement.description;
                             divCard.querySelector('.nbAvis').textContent = logement.nb_avis + ' avis';
                             displayNoteEtoiles(divCard.querySelector('.note'), logement.moyenne_logement);
-                            let pathImage = logement.image_principale + '.svg';
+                            let pathImage = logement.image_principale;
                             
                             fileExists(pathImage).then(exists => {
                                 if (exists) {
@@ -51,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             });
 
                             divCard.addEventListener('click', function() {
+                                sessionStorage.setItem('idLogement', logement.id_logement);
+                                window.location.href = `/logement/`;
                                 sessionStorage.setItem('idLogement', logement.id_logement);
                                 window.location.href = `/logement/`;
                             });
@@ -69,11 +66,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function adjustMarginTop() {
-    if (header == null){
-        return;
-    } else {
-        var marginTopValue = (header.offsetHeight + 20) + 'px'; 
-        cardsContainer.style.marginTop = marginTopValue; 
+    var header = document.querySelector('#headerAccueilMobile');
+    var cardsContainer = document.querySelector('#cardsContainer');
+
+    if (header && cardsContainer) {
+        if (header.offsetHeight > 0) {
+            var marginTopValue = (header.offsetHeight + 20) + 'px'; 
+            cardsContainer.style.marginTop = marginTopValue;
+        } else {
+            cardsContainer.style.marginTop = "90px";
+        }
     }
 
 }
+
