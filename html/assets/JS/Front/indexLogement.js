@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         divCard.setAttribute('id', logement.id_logement);
                         
                         divCard.appendChild(cardContent.cloneNode(true));
-                        
-                        if (logement.nom_ville && logement.titre && logement.prix_nuit_ttc && logement.description) {
+
+                        if (logement.nom_ville && logement.titre && logement.prix_nuit_ttc) {
                             divCard.querySelector('.nomVille').textContent = logement.nom_ville.toUpperCase();
                             divCard.querySelector('.titre').textContent = logement.titre;
                             divCard.querySelector('.tarif').textContent = logement.prix_nuit_ttc + '€/nuit';
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 if (exists) {
                                     divCard.querySelector('.imagePrincipale').src = pathImage;
                                 } else {
-                                    divCard.querySelector('.imagePrincipale').src = '/assets/imgs/error.png';
+                                    divCard.querySelector('.imgbox').textContent = 'Erreur lors du chargement de l\'image';
                                 }
                             });
 
@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             });
                         } else {
                             divCard.querySelector('.description').textContent = "Erreur lors du chargement des données du logement";
-                            divCard.querySelector('.imagePrincipale').src = '/assets/imgs/error.png';
                         }
                         
                         cardsContainer.appendChild(divCard);
@@ -68,6 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function adjustMarginTop() {
-    var marginTopValue = (header.offsetHeight + 20) + 'px'; 
-    cardsContainer.style.marginTop = marginTopValue; 
+    if(header == null){
+        return;
+    }else {
+        var marginTopValue = (header.offsetHeight + 20) + 'px'; 
+        cardsContainer.style.marginTop = marginTopValue; 
+    }
 }

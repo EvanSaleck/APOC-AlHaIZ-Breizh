@@ -46,7 +46,8 @@ switch($requestUrl) {
         $data = $_POST;
         $utilisateurController->connexionClient($data);
     break;
-    case 'api/InscriptionClient':
+    case 'api/InscriptionClient'://  include_once 'Views/Front/composants/footer.php';
+
     case '/api/InscriptionClient':
         $data = $_POST;
         $utilisateurController->inscriptionClient($data);
