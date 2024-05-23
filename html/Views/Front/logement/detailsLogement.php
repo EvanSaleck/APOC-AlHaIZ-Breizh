@@ -1,10 +1,8 @@
 <?php
     include_once 'Views/Front/composants/navbar.php';
-    //include_once 'Views/Front/composants/header.php';
+    include_once 'Views/Front/composants/header.php';
     include_once 'Views/Front/composants/head.php';
-
-
- ?>
+?>
 
 <body>
     <div id=descLogement>
@@ -26,15 +24,17 @@
                     <img id=etoileNotation5 src="/assets/imgs/notes/star_empty.svg" alt="Etoile">
                 </div>
                 <div id="divPrix">
+                    <p labelTarifDesktop>Tarif:</p>
                     <span id="prix"></span>
-                    <p>€ par nuit</p>
+                    <p>€</p>
+                    <p>par nuit</p>
                 </div>
             </article>
             <article id=carateristiques>
                 <div class=barre></div>
                 <h2>Caratéristiques du logement</h2>
                 <div id=divNbPersonnesMax>
-                    <p>Nombre de personnes maximum :</p>
+                    <p>Nombre de personnes maximum:</p>
                     <span id=nbPersonnesMax>---</span>
                 </div>
                 <div id=literie>
@@ -84,35 +84,34 @@
             </article>
         </section>
         <div id=popupDate>
-            <h3>Renseignez les date de début et de fin de votre séjour :</h2>
+            <h3>Renseignez les date de début et de fin de votre séjour:</h2>
             <div class=barre></div>
             <div class=ligneSaisiePopup>
-                <label class=labelPopup for="dateDebut">Date d'arivée :</label>
+                <label class=labelPopup for="dateDebut">Date d'arivée:</label>
                 <input type="date" class=champSaisiePopup id=dateDebut name="dateDebut" min="2024-06-01" max="2024-12-31"/>
             </div>
             <div class=ligneSaisiePopup>
-                <label class=labelPopup for="dateFin">Date de départ :</label>
+                <label class=labelPopup for="dateFin">Date de départ:</label>
                 <input type="date" class=champSaisiePopup id=dateFin name="dateFin" min="2024-06-01" max="2024-12-31"/>
             </div>
         </div>
         <div id=recap>
             <div>
-                <p>Date d'arivée :</p>
+                <p>Date d'arivée:</p>
                 <span id=dateArrivee></span>
             </div>
             <div>
-                <p>Date de départ :</p>
+                <p>Date de départ:</p>
                 <span id=dateDepart></span>
             </div>
             <div>
-                <p>Total TTC :</p>
+                <p>Total TTC:</p>
                 <p><span id=totalTtc></span> €</p>
             </div>
         </div>
         <div id=reservation>
             <button id=btnDate class=btn><img src="/assets/imgs/mobile/Calendrier.svg" alt="Calendrier"></button>
-            <select id=sctNbOccupants  class=btn name="nbOccupants">
-            </select>
+            <select id=sctNbOccupants  class=btn name="nbOccupants"></select>
             <button id=btnRes class=btn>Réserver</button>
         </div>
         <div id=buffer></div>
