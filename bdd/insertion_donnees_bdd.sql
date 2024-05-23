@@ -151,9 +151,6 @@ INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude
 VALUES ('Appartement moderne', 4, '/assets/imgs/logements/image_4.svg', 48.3456, -2.5678, 60, 1, 0, 1, 90, true, 2, 4, 7, 4, 9, 3, 3, 'Appartement moderne', 'Un appartement moderne et confortable, parfait pour quatre personnes, situé dans un quartier dynamique.', 99);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Studio design', 2, '/assets/imgs/logements/image_5.svg', 48.4567, -2.6789, 20, 1, 0, 1, 70, false, 1, 3, 7, 4, 4, 'Studio design', 'Un studio design et élégant, idéal pour deux personnes, offrant tout le confort nécessaire pour un séjour agréable.', 77);
-
-INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
 VALUES ('Maison', 6, '/assets/imgs/logements/image_6.svg', 48.2345, -2.4567, 90, 4, 2, 1, 120, true, 4, 6, 7, 4, 11, 3, 3, 'Maison familiale', 'Une maison familiale pouvant accueillir jusquà six personnes, avec toutes les commodités nécessaires pour un séjour confortable.', 132);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
