@@ -66,34 +66,29 @@ switch($requestUrl) {
             $utilisateurController->inscriptionProprio($data);
         break;
     case '/api/getLogements':
-        header('Content-Type: application/json');
-        echo $logementController->getAllLogements();
+        $logementController->getAllLogements();
         break;
     case '/api/getLogementsDataForCards':
-        header('Content-Type: application/json');
-        echo $logementController->getLogementsDataForCards();
+        $logementController->getLogementsDataForCards();
         break;
     
     case '/api/getReservations':
     case 'api/getReservations':
-        header('Content-Type: application/json');
-        echo $reservationController->getAllReservations();
+        $reservationController->getAllReservations();
         break;
     
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);
 
-        header('Content-Type: application/json');
-        echo $logementController->getLogementDataById($logement_id);
+        $logementController->getLogementDataById($logement_id);
         break;
 
     case preg_match('/^\/api\/getAmenagementsOfLogementById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);
 
-        header('Content-Type: application/json');
-        echo $logementController->getAmenagementsOfLogementById($logement_id);
+        $logementController->getAmenagementsOfLogementById($logement_id);
         break;
         
         // if ($logementController->logementExists($logement_id)) {
