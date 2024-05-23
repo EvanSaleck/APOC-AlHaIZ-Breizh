@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/assets/SCSS/footer.css" type="text/css">
+<link rel="stylesheet" href="/assets/SCSS/Front/footer.css" type="text/css">
 
 <div class="FooterContainer" id="front">
     <section class="FooterElements">

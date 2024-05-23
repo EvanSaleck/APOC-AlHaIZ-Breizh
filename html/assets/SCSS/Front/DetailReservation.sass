@@ -1,25 +1,15 @@
+@charset "UTF-8"
+@use '../general.sass' as general
 
-@use '../general' as general
 
-.devis
+.detailResa
   margin: 0% 3%
   font-family: "Reem Kufi", sans-serif
 
-  p
-    font-size: 3vw
-
-  h3
-    font-size: 2.2vw
-
-.headerDevis
-  display: flex
-  align-items: center
-  margin-bottom: 4vw
-
-.retour
+.detailResa .retour
   border: 0
   padding: 0
-  margin: 0 10%
+  margin: 0 16%
   background-color: white
 
 .titreRecapDevis
@@ -31,30 +21,28 @@
 
 .infosLogement
   display: flex
+  height: fit-content
   flex-direction: row
   align-items: center
+  border: 0.2vw solid #8CB9BD
 
   >
     .logementResa, figure
       flex: 1
 
-.noteResa
+.infosLogementResa
   display: flex
+  height: fit-content
+  flex-direction: column !important
   align-items: center
-  margin-top: 2vw
-  font-size: 4vw
 
-.noteEtoile
-  width: 4vw
-
-.note
-  padding-left: 1.7vw
 
 .photoLogResa
   width: 100%
   border-radius: 2vw
 
-.infosReservationDev
+.infosDetailsResa
+  height: fit-content
   padding: 3vw 0
 
   > h3
@@ -62,11 +50,11 @@
 
     /* Je veux que ce h3 ait une sorte de barre bleue en dessous (comme un soulignement)
     font-size: 3vw
-    margin-bottom: 2vw
+    margin-bottom: 5vw
     position: relative
 
   h3::after
-    content: ''
+    content: ""
     position: absolute
     left: 50%
     transform: translateX(-50%)
@@ -76,7 +64,7 @@
     background-color: #8CB9BD
 
   > div:not(.deuxiemeBarre)
-    padding-bottom: 3vw
+    padding-bottom: 2vw
     display: flex
     justify-content: space-between
 
@@ -84,58 +72,13 @@
   flex: 1
   text-align: left
 
-.info-value
-  flex: 1
-  text-align: right
-
-.PaiementResa
-  margin: 2vw 0
-  border: #8CB9BD solid 0.2vw
-  border-radius: 1vw
-  padding: 3% 0
-
-  > p
-    margin-left: 2vh
-
 figure
   margin: 0 2.5vh
 
-.ChoixPaiement
-  display: flex
-  flex-direction: column
-
-.PaiementVisa, .PaiementPaypal
-  display: flex
-  align-items: center
-  margin-left: 15vw
-
-.imageVisa, .imagePaypal
-  margin: 0 2vw 2vw 0
-  width: 13vw
-
-input::placeholder
-  font-weight: bold
-  opacity: 0.5
-
-.styleInput
-  display: flex
-  justify-content: space-between
-  margin-bottom: 1rem
-
-  input
-    border: 1px solid #ccd1d9
-    border-radius: 5px
-    padding: 1rem
-    font-size: 1vw
-    flex: 1
-    margin-right: 1rem
-    box-sizing: border-box
-
-    &:last-child
-      margin-right: 0
-
-#carteCredit
-  flex: 2
+input
+  &::-moz-placeholder, &::placeholder
+    font-weight: bold
+    opacity: 0.5
 
 .premiereBarre
   width: 100%
@@ -152,35 +95,28 @@ input::placeholder
   border-radius: 1vw
 
 .condAnnul
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  margin-top: 5vw
+
   > p
     font-size: 2vw
 
   h3
     position: relative
     margin-bottom: 1.7vw
+    font-size: 3vw
 
     &::after
       content: ""
       position: absolute
       bottom: -0.6vw
       left: 0
-      width: calc(10 * 0.75ch)
+      width: 17ch
       height: 0.3vw
       background-color: #8CB9BD
-
-section
-  text-align: center
-  margin: 20px 0
-
-.proceder_paiement, .boutonPaypal
-  font-family: "Reem Kufi", sans-serif
-  padding: 2vw 3vw
-  background-color: #F0AA1F
-  border: none
-  border-radius: 1vw
-  cursor: pointer
-  font-size: 2.5vw
-  width: 30vw
 
 .boutonPrecedent
   font-family: "Reem Kufi", sans-serif
@@ -190,74 +126,35 @@ section
   border-radius: 1vw
   cursor: pointer
   font-size: 2.5vw
-
   width: 30vw
   margin: 5vw 0 3vw 5vw
 
-/* Styles pour l'overlay
 
-.overlay
-  position: fixed
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  background: rgba(0, 0, 0, 0.5)
-  display: none
+img#photoProprio
+  border-radius: 1vw
 
-.modal-box
-  position: fixed
-  top: 0%
-  left: 50%
-  transform: translate(-50%, 0)
-
-  /* Centrer la modale
-  background: white
-  border: 0.7vw solid #8CB9BD
-  border-top: 0
-  border-radius: 2vw
+.proprio
+  width: fit-content
+  padding:2vw 5vw
   text-align: center
-  display: none
-  width: 80%
-  padding: 2vw
-  box-shadow: 0px 0px 2vw rgba(0, 0, 0, 0.1)
-
-.headerPaiementValide
-  display: flex
-  align-items: center
-  justify-content: center
-  gap: 2vw
-  margin-bottom: 4vw
-
-  h2
-    margin: 0
-    font-size: 5vw
-
-  img
-    width: 5vw
-    height: auto
-
-  i
-    font-size: 5vw
-    color: #4CAF50
-
-.active
-  .overlay, .modal-box
-    display: block
+  margin:4vw
+  
+  #photoProprio
+    width: 10vw
+    height: 9.5vw
+    border-radius: 50%
+    border: 0.2vw solid general.$couleur-front-bleu-marine
+    margin: 0 auto 2vw auto
 
 /* Ajustements de style pour les petits écrans
-@media (max-width: 800px)
-  .HeaderConteneur 
-    display: none
-  .headerPaiementValide
-    flex-direction: column
-
-    /*     gap: 5px;
+@media (max-width: 768px)
+  .HeaderConteneur
+    display: none !important
 
   input, h3, .boutonPrecedent, .boutonPaypal
     display: none
 
-@media (min-width: 800px)
+@media (min-width: 768px)
   .headerPaiementValide >
     h2
       font-size: 3vw
@@ -268,7 +165,7 @@ section
   .deuxiemeBarre, .premiereBarre, .headerDevis, .PaiementResa p
     display: none
 
-  .infosReservationDev
+  .infosDetailsResa
     border: solid 0.2vw #8CB9BD
     padding: 0vw
     display: flex
@@ -284,6 +181,7 @@ section
     display: flex
     flex-direction: row
     width: 100%
+    flex: 2
 
   .note
     display: flex
@@ -301,12 +199,11 @@ section
   .titreLogDevis
     font-size: 2.7vw
 
-  .infosLogement
+  .detailResa .infosLogement
     margin-right: 5vw
     display: flex
     align-items: center
     justify-content: center
-    border: solid 0.2vw #8CB9BD
     flex: 1
     padding: 1vw
     border-radius: 1vw
@@ -318,15 +215,16 @@ section
     padding: 1vw 1.5vw
     border-radius: 0.7vw
     font-size: 1.8vw
+
   .boutonPrecedent
-    width: 20vw  
+    width: 20vw
+
   .boutonPaypal
     width: 12vw
     margin: 5vw 1vw 2vw 0
     padding: 1.5vw 5vw
-    margin: 5vw 0 0 5vw
 
-  .proceder_paiement, .boutonPaypal
+  .proceder_paiement
     padding: 1vw 1.5vw
     border-radius: 0.7vw
     font-size: 1.8vw
@@ -342,8 +240,4 @@ section
     margin-left: 2vw
     flex: 1
 
-@media (min-width: 1400px)
-  .PaiementVisa
-    border-right: 0.2vw solid black
-
-/*# sourceMappingURL=devis.css.map
+/*# sourceMappingURL=DetailReservation.css.map

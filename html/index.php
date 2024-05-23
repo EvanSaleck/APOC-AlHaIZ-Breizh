@@ -24,14 +24,23 @@ switch($requestUrl) {
     // Routes des vues front office 
     case '/':
     case '':
-        include './Views/Front/logement/indexLogement.php';
+        include_once './Views/Front/logement/indexLogement.php';
         break;
     case '/logement':
     case '/logement/':
-        include './Views/Front/logement/detailsLogement.php';
+        include_once './Views/Front/logement/detailsLogement.php';
         break;
     case '/compte':
-        include './Views/Front/compte/detailsCompte.php';
+        include_once './Views/Front/compte/detailsCompte.php';
+        break;
+    case '/reservation/devis':
+    case '/reservation/devis/':
+        include_once './Views/Front/reservation/devis.php';
+        break;
+
+    case '/reservations':
+    case '/reservations/':
+        include_once('Views/Back/reservation/listeReservations.php');
         break;
 
     // routes du back
@@ -58,6 +67,28 @@ switch($requestUrl) {
     case '/api/processFormNewLogement/':
     case '/api/processFormNewLogement':
         $logementController->processFormNewLogement();
+        break;
+    
+    case '/api/getReservations':
+    case 'api/getReservations':
+        //$reservationController->getAllReservation();
+        $idProp = 7;
+        $reservationController->getReservationByOwnerId(7);
+        break;
+    case '/api/getReservationById':
+    case 'api/getReservationById':
+        $data = $_POST;
+        $reservationController->getReservationById($data);
+        break;
+    case '/api/getProprioById':
+    case 'api/getProprioById':
+        $data = $_POST;
+        $utilisateurController->getProprioById($data['id']);
+        break;
+    case '/api/getLogementById':
+    case 'api/getLogementById':
+        $data = $_POST;
+        $logementController->getLogementById($data['id']);
         break;
 
 
@@ -107,9 +138,21 @@ switch($requestUrl) {
 
     case '/api/getReservations':
     case 'api/getReservations':
-        header('Content-Type: application/json');
-        echo $reservationController->getAllReservations();
+        $reservationController->getAllReservations();
         break;
+    
+    case '/api/insertReservation':
+    case '/api/insertReservation/':
+        $data = $_POST;
+        $reservationController->saveReservation($data, 1);
+        break;
+
+    case '/detailReservation':
+    case '/detailReservation/':
+        include './Views/Front/reservation/DetailReservation.php';
+        break;
+
+
     
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);

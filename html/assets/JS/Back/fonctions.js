@@ -70,37 +70,46 @@ function Connexion(){
     });
 }
 
-function ThrowAlertPopup(message, type) {
-    // Vérifie s'il y a déjà une popup affichée et la supprime
-    if (document.getElementsByClassName('alert-popup').length > 0) {
-        document.getElementsByClassName('alert-popup')[0].remove();
-    }
+function Connexion(){
+    let pseudo = document.getElementById('pseudo').value;
+    let password = document.getElementById('password').value;
+    let data = new FormData();
+    data.append('pseudo', pseudo);
+    data.append('password', password);
 
-    // Crée une nouvelle popup
-    let alertPopup = document.createElement('div');
-    alertPopup.className = 'alert-popup';
-    let val = null;
-    if (type === 'error') {
-        val = 'Erreur';
-    } else if (type === 'succes') {
-        val = 'Succès';
-    }
-    alertPopup.innerHTML = `
-    <div class="alert-popup-content ${type}">   
-        <span class="titre">${val}</span>
-        <p>${message}</p>
-    </div>
-    `;
-    document.body.appendChild(alertPopup);
+    fetch('/api/ConnexionProprio', {
+        method: 'POST',
+        body: data
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if(data === 'Connexion réussie'){
+            ThrowAlertPopup(data,'succes');
+            setTimeout(() => {
+                let url = window.location.href;
+                window.location.href = url;
+            }, 1000);
+        }else{
+            let inputs = document.querySelectorAll('#connexionModal .modal-content #connexionForm input');
+            console.log(inputs);
 
-    // Stocke les informations de la popup dans localStorage
-    localStorage.setItem('alertPopup', JSON.stringify({ message, type }));
+            if (inputs.length > 0) {
+                inputs[0].classList.add('error');
+            }
+            if (inputs.length > 1) {
+                inputs[1].classList.add('error');
+            }
 
-    // Supprime la popup après 5 secondes et nettoie le localStorage
-    setTimeout(() => {
-        alertPopup.remove();
-        localStorage.removeItem('alertPopup');
-    }, 3000);
+            ThrowAlertPopup(data,'error');
+
+            setTimeout(() => {
+                inputs[0].classList.remove('error');
+                inputs[1].classList.remove('error');
+            }
+            , 2000);
+        }
+    });
 }
 
 function CreateConnexionModal() {

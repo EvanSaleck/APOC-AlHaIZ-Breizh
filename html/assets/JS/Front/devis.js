@@ -1,61 +1,163 @@
-// Renvoyer à la page précédente (page de réservation)
-document.querySelector('.retour').addEventListener('click', function() {
-    window.location.href = 'index';
+document.addEventListener('DOMContentLoaded', function() {
+    
+    document.querySelector('.retour').addEventListener('click', function() {
+        window.location.href = 'index';
+    });
+    
+    document.querySelector('.boutonPrecedent').addEventListener('click', function() {
+        window.location.href = 'index';
+    });
+
+    function updateReservationInfo() {
+        let conteneur = document.querySelector('.infosReservationDev');
+    
+        // Récupération des données depuis le sessionStorage
+        const dateArrivee = JSON.parse(sessionStorage.getItem('Logement')).dateDebut;
+        const dateDepart = JSON.parse(sessionStorage.getItem('Logement')).dateFin;
+        const nbOccupants = JSON.parse(sessionStorage.getItem('Logement')).sctNbOccupants;
+        const prixNuitTtc1 = parseFloat(JSON.parse(sessionStorage.getItem('Logement')).tarifnuit); // Convertit en nombre pour utiliser toFixed
+        const taxeSejour1 = parseFloat(JSON.parse(sessionStorage.getItem('Logement')).taxeSejour); // Convertit en nombre pour utiliser toFixed
+        const totalTtc1 = parseFloat(JSON.parse(sessionStorage.getItem('Logement')).prixSejourTTC); // Convertit en nombre pour utiliser toFixed
+        const titreLogement = JSON.parse(sessionStorage.getItem('Logement')).titrelogement;
+        const imageLogement = JSON.parse(sessionStorage.getItem('Logement')).image;
+        const fraisService1 = parseFloat(JSON.parse(sessionStorage.getItem('Logement')).fraisServices); // Convertit en nombre pour utiliser toFixed
+        const prixParNuit1 = parseFloat(JSON.parse(sessionStorage.getItem('Logement')).prixparnuit); // Convertit en nombre pour utiliser toFixed
+    
+        // Conversion en nombre pour utiliser toFixed
+        const prixNuitTtc = prixNuitTtc1.toFixed(2);
+        const taxeSejour = taxeSejour1.toFixed(2);
+        const totalTtc = totalTtc1.toFixed(2);
+        const fraisService = fraisService1.toFixed(2);
+        const prixParNuit = prixParNuit1.toFixed(2);
+        
+    
+        // Mettre à jour les éléments avec les données de réservation
+        let dateArriveeElement = document.getElementById('dateArrivee');
+        let dateDepartElement = document.getElementById('dateFin');
+        let nbOccupantElement = document.getElementById('sctNbOccupants');
+        let prixNuitTtcElement = document.getElementById('prixNuitTtc');
+        let taxeSejourElement = document.getElementById('taxeSejour');
+        let totalTarifTtcElement = document.getElementById('totalTtc');
+        let titreLogementElement = document.querySelector('.titreLogDevis');
+        let imageLogementElement = document.querySelector('.photoLogResa');
+        let fraisServiceElement = document.getElementById('fraisService');
+        let prixParNuitElement = document.getElementById('prixParNuit');
+    
+        dateArriveeElement.textContent = dateArrivee;
+        dateDepartElement.textContent = dateDepart;
+        nbOccupantElement.textContent = `${nbOccupants} occupants`;
+        prixNuitTtcElement.textContent = `${prixNuitTtc}€`;
+        taxeSejourElement.textContent = `${taxeSejour}€`;
+        totalTarifTtcElement.textContent = `${totalTtc}€`;
+        titreLogementElement.textContent = titreLogement;
+        imageLogementElement.src = imageLogement;
+    
+        // Mise à jour des frais de service et du prix par nuit
+        fraisServiceElement.textContent = `${fraisService}€`;
+        prixParNuitElement.textContent = `${prixParNuit}€`;
+    }
+    
+    updateReservationInfo();
+    
+
+    const section = document.querySelector("section"),
+        overlay = document.querySelector(".overlay"),
+        procederPaiementButton = document.querySelector(".proceder_paiement"),
+        modalBox = document.querySelector(".modal-box");
+
+        procederPaiementButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            const carteCredit = document.getElementById("carteCredit").value;
+            const expiration = document.getElementById("expiration").value.split("/");
+            const cvv = document.getElementById("cvv").value;
+            const nom = document.getElementById("nom").value;
+            const codePostal = document.getElementById("codePostal").value;
+        
+            const regexNumeros = /^[0-9]+$/;
+            if (!regexNumeros.test(carteCredit)) {
+                alert("Le numéro de carte doit contenir uniquement des chiffres.");
+                return;
+            }
+        
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth() + 1;
+            const expirationMonth = parseInt(expiration[0]);
+            const expirationYear = parseInt(expiration[1]);
+        
+            // Vérifier le format de la date
+            if (expiration.length !== 2 || isNaN(expirationMonth) || isNaN(expirationYear)) {
+                alert("La date d'expiration doit être au format MM/AAAA.");
+                return;
+            }
+        
+            // Vérifier date supérieure
+            if (expirationYear < currentYear || (expirationYear === currentYear && expirationMonth <= currentMonth)) {
+                alert("La date d'expiration doit être ultérieure à la date actuelle.");
+                return;
+            }
+        
+            // Vérifier validite CB
+            const maxExpirationYear = currentYear + 3;
+            if (expirationYear > maxExpirationYear) {
+                alert("La date d'expiration ne peut pas dépasser trois ans à partir de la date actuelle.");
+                return;
+            }
+        
+            // Vérifier code CVV
+            const regexCVV = /^[0-9]{3,4}$/;
+            if (!regexCVV.test(cvv)) {
+                alert("Le code CVV doit contenir uniquement des chiffres et avoir une longueur de 3 ou 4 caractères.");
+                return;
+            }
+        
+            // Empêcher le nom vide
+            if (nom.trim() === "") {
+                alert("Veuillez saisir un nom.");
+                return;
+            }
+
+            if (nom.trim().toLowerCase() === "tottereau" || nom.trim().toLowerCase() === "guigner" || nom.trim().toLowerCase() === "le gall" ) {
+                alert("Bravo champion !");
+            }
+        
+            // Vérifier le code postal
+            const regexCodePostal = /^[0-9]{5}$/;
+            if (!regexCodePostal.test(codePostal)) {
+                alert("Le code postal doit contenir 5 chiffres.");
+                return;
+            }
+        
+            // Affichage de la pop up après validation
+            console.log("Toutes les vérifications sont passées, affichage de la popup de paiement.");
+            section.classList.add("active");
+            
+            let formData = new FormData();
+            formData.append('dateArrivee', document.getElementById('dateArrivee').textContent);
+            formData.append('dateDepart', document.getElementById('dateFin').textContent);
+            formData.append('Nbnuits', JSON.parse(sessionStorage.getItem('Logement')).nbNuits);
+            formData.append('nbOccupants', document.getElementById('sctNbOccupants').textContent);
+            formData.append('taxeSejour', document.getElementById('taxeSejour').textContent);
+            formData.append('totalTtc', document.getElementById('totalTtc').textContent);
+            formData.append('fraisService', document.getElementById('fraisService').textContent);
+            formData.append('tariftotalnuit', document.getElementById('prixNuitTtc').textContent);
+            formData.append('id_logement', sessionStorage.getItem('idLogement'));
+
+            fetch("/api/insertReservation", {
+                method: "POST",
+                body: formData,
+            }).then(response => response.json())
+                .then((data) => {
+                console.log(data);
+                ThrowAlertPopup("Réservation ajoutée avec succès", "succes");
+                // on envoie sur la page de gestion des logements
+                window.location.href = "../detailReservation";
+            })
+            
+            // Disparition de la pop up au bout de 3 secondes
+            setTimeout(() => {
+                section.classList.remove("active");
+            }, 3000);
+        });
 });
-
-const section = document.querySelector("section"),
-overlay = document.querySelector(".overlay"),
-procederPaiement = document.querySelector(".proceder_paiement"),
-modalBox = document.querySelector(".modal-box");
-
-procederPaiement.addEventListener("click", () => {
-    section.classList.add("active");
-
-    // Faire disparaitre le bouton au bout de 3 secondes
-    setTimeout(() => {
-        section.classList.remove("active");
-    }, 3000);
-});
-
-// Cacher la modale avec clic sur la modale
-modalBox.addEventListener("click", () => {
-    section.classList.remove("active"); 
-});
-
-// Cacher la modale avec clic sur le reste de la page
-overlay.addEventListener("click", () => {
-    section.classList.remove("active"); 
-});
-
-var logementData = JSON.parse(sessionStorage.getItem('logement'));
-
-console.log(logementData);
-
-// Fonction pour mettre à jour les éléments HTML avec les données de réservation
-function updateReservationInfo() {
-    // Sélectionner le conteneur principal
-    let conteneur = document.querySelector('.infosReservationDev');
-
-    console.log(conteneur)
-
-    let tt = conteneur.querySelectorAll('.info-row');
-    console.log(tt)
-
-    // Accéder aux éléments spécifiques dans le conteneur
-    let dateArriveeElement = tt[0].querySelector('#date_arrivee');
-    let dateDepartElement = tt[1].querySelector('.date_depart');
-    let nbOccupantElement = tt[2].querySelector('.nb_occupant');
-    let prixNuitTtcElement = tt[3].querySelector('.prix_nuit_ttc');
-    let taxeSejourElement = tt[4].querySelector('.taxe_sejour');
-    let totalTarifTtcElement = tt[5].querySelector('.total_tarif_ttc');
-
-    // Mettre à jour les éléments avec les données de réservation
-    dateArriveeElement.textContent = logementData.date_arrivee;
-    dateDepartElement.textContent = logementData.date_depart;
-    nbOccupantElement.textContent = `${logementData.nb_occupant} occupants`;
-    prixNuitTtcElement.textContent = `${logementData.prix_nuit_ttc}€`;
-    taxeSejourElement.textContent = `${logementData.taxe_sejour}€`;
-    totalTarifTtcElement.textContent = `${(parseFloat(logementData.prix_nuit_ttc) * 12 + parseFloat(logementData.taxe_sejour)).toFixed(2)}€`; // Calcul du total pour 12 nuits
-}
-
-updateReservationInfo();

@@ -5,6 +5,7 @@
  include_once 'Views/Front/composants/header.php';
  include_once 'Views/Front/composants/head.php';
  ?>
+ 
 
 <body>
 
@@ -59,7 +60,5 @@
         </div>
     </div>
 </body>
-
-<!-- Dire a CA de faire les media queries pour le footer -->
-<?php /*include_once 'Views/Front/composants/footer.php'*/ ?>
+<?php include_once 'Views/Front/composants/footer.php' ?>
 </html>

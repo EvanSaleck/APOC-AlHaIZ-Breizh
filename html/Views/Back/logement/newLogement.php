@@ -222,4 +222,5 @@
         </div>
     </form>
 </body>
+<?php include_once 'Views/Back/composants/footer.php' ?>
 </html>
