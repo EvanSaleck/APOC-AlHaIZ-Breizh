@@ -1,4 +1,5 @@
 <?php
+
  include_once 'Views/Front/composants/navbar.php';
  include_once 'Views/Front/composants/card.php';
  include_once 'Views/Front/composants/header.php';

@@ -15,26 +15,26 @@
 
         public function getAllLogements() {            
             $logements = $this->logement->getAllLogements();
-            header('Content-Type: application/json');
-            echo $logements;
+                
+            return $logements;
         }
             
         public function getLogementDataById($id) {
             $logements = $this->logement->getLogementCompleteByID($id);
-            header('Content-Type: application/json');
-            echo $logements;
+            
+            return $logements;
         }
 
         public function getAmenagementsOfLogementById($id) {
             $logements = $this->logement->getAmenagementsOfLogementById($id);
-            header('Content-Type: application/json');
-            echo $logements;
+            
+            return $logements;
         }
         
         public function getLogementsDataForCards() {
             $dataLogements = $this->logement->getLogementsDataForCards();
-            header('Content-Type: application/json');
-            echo $dataLogements;
+
+            return $dataLogements;
         }
 
         public function logementExists($id) {

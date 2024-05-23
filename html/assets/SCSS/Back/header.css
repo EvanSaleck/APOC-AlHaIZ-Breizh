@@ -16,19 +16,6 @@
   padding: 0;
 }
 
-/* Appliquer les polices */
-body {
-  font-family: "DM Sans", sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Reem Kufi", sans-serif;
-}
-
-.error {
-  border: 1px solid #D8000C !important;
-}
-
 .HeaderConteneur {
   /* Taille */
   height: 75px;
@@ -150,7 +137,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media screen and (max-width: 1100px) {
-  .HeaderConteneur #titre {
+  #titre {
     display: none;
   }
 }/*# sourceMappingURL=header.css.map */

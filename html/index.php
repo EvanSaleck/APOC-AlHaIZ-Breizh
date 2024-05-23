@@ -1,13 +1,13 @@
 <?php
 // Inlcude des controllers
-include_once './Controllers/LogementController.php';
-include_once './Controllers/ReservationController.php';
-include_once './Controllers/UtilisateurController.php';
+include_once './Controllers/Front/LogementController.php';
+include_once './Controllers/Front/ReservationController.php';
+include_once './Controllers/Front/UtilisateurController.php';
 
 // Use des controllers
-use Controllers\LogementController;
-use Controllers\ReservationController;
-use Controllers\UtilisateurController;
+use Controllers\Front\LogementController;
+use Controllers\Front\ReservationController;
+use Controllers\Front\UtilisateurController;
 
 // Initialisation des controllers
 $logementController = new LogementController();
@@ -19,7 +19,7 @@ $requestUrl = $_SERVER['REQUEST_URI'];
 // $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
-    // Routes des vues front office
+    // Routes des vues
     case '/':
     case '':
         include './Views/Front/logement/indexLogement.php';
@@ -27,13 +27,6 @@ switch($requestUrl) {
     case '/logement':
     case '/logement/':
         include './Views/Front/logement/detailsLogement.php';
-
-    // routes back office
-    case '/back/logements':
-        include_once 'Views/Back/logement/listeLogement.php';
-        break;
-    case '/back/logement/new':
-        include_once 'Views/Back/logement/newLogement.php';
         break;
 
     // Routes des API
@@ -49,8 +42,7 @@ switch($requestUrl) {
         $data = $_POST;
         $utilisateurController->connexionClient($data);
     break;
-    case 'api/InscriptionClient'://  include_once 'Views/Front/composants/footer.php';
-
+    case 'api/InscriptionClient':
     case '/api/InscriptionClient':
         $data = $_POST;
         $utilisateurController->inscriptionClient($data);
@@ -66,29 +58,26 @@ switch($requestUrl) {
             $utilisateurController->inscriptionProprio($data);
         break;
     case '/api/getLogements':
-        $logementController->getAllLogements();
+        header('Content-Type: application/json');
+        echo $logementController->getAllLogements();
         break;
     case '/api/getLogementsDataForCards':
-        $logementController->getLogementsDataForCards();
+        header('Content-Type: application/json');
+        echo $logementController->getLogementsDataForCards();
         break;
-    
+
     case '/api/getReservations':
     case 'api/getReservations':
-        $reservationController->getAllReservations();
+        header('Content-Type: application/json');
+        echo $reservationController->getAllReservations();
         break;
     
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);
 
-        $logementController->getLogementDataById($logement_id);
-        break;
-
-    case preg_match('/^\/api\/getAmenagementsOfLogementById\/\d+$/', $requestUrl) ? true : false:
-        $url_parts = explode('/', $requestUrl);
-        $logement_id = end($url_parts);
-
-        $logementController->getAmenagementsOfLogementById($logement_id);
+        header('Content-Type: application/json');
+        echo $logementController->getLogementDataById($logement_id);
         break;
         
         // if ($logementController->logementExists($logement_id)) {
@@ -99,12 +88,37 @@ switch($requestUrl) {
         //     echo "Logement non trouvé";
         // }
         break;
-    case '/api/processFormNewLogement':
-        $logementController->processFormNewLogement();
-        break;
+
+        case preg_match('/^\/api\/getAmenagementsOfLogementById\/\d+$/', $requestUrl) ? true : false:
+            $url_parts = explode('/', $requestUrl);
+            $logement_id = end($url_parts);
+    
+            header('Content-Type: application/json');
+            echo $logementController->getAmenagementsOfLogementById($logement_id);
+            break;
+            
+            // if ($logementController->logementExists($logement_id)) {
+            //     echo 'Logement n°' . $logement_id . ' trouvé !';
+            // }
+            // else { 
+            //     http_response_code(404);
+            //     echo "Logement non trouvé";
+            // }
+            break;
 
     default:
         http_response_code(404);
         echo "BAHAHAHAH 404 CHHHEEHHH";
         exit;
+}
+
+function appelFunction($fonction) {
+    if (function_exists($fonction)) {
+        $fonction();
+        exit;
+    }
+    else {
+        http_response_code(500);
+        echo "Erreur 500 - Fonction $fonction non trouvée";
+    }
 }
