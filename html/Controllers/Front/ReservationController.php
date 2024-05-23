@@ -17,14 +17,4 @@ class ReservationController {
             
         echo json_encode($reservations);
     }
-        
-    /*public function getReservationById($id){
-            
-        $db = new Database();
-        $reservation = $db->executeQuery('SELECT * FROM reservation WHERE id_reservation = ' . $id);
-            
-        header('Content-Type: application/json');
-            
-        echo json_encode($reservation);
-    }*/
 }

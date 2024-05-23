@@ -1,12 +1,12 @@
 <?php
 // Inlcude des controllers
 include_once './Controllers/Front/LogementController.php';
-include_once './Controllers/Front/ReservationController.php';
+include_once './Controllers/Back/ReservationController.php';
 include_once './Controllers/Front/UtilisateurController.php';
 
 // Use des controllers
 use Controllers\Front\LogementController;
-use Controllers\Front\ReservationController;
+use Controllers\Back\ReservationController;
 use Controllers\Front\UtilisateurController;
 
 // Initialisation des controllers
@@ -39,8 +39,13 @@ switch($requestUrl) {
 
     case '/Back/':
     case 'Back/':
-        include_once('Views/Back/reservation/listeResa.php');
-        break;
+        include_once('Views/Back/reservation/listeReservations.php');
+    break;
+
+    case '/Back/reservation/':
+    case '/Back/reservation':
+        include_once('Views/Back/reservation/listeReservations.php');
+    break;
 
     // Routes des API
     case '/Deconnexion':
@@ -50,6 +55,8 @@ switch($requestUrl) {
         session_destroy();
         header('Location: /');
     break;
+
+
     case '/api/ConnexionClient':
     case 'api/ConnexionClient':
         $data = $_POST;
@@ -60,6 +67,8 @@ switch($requestUrl) {
         $data = $_POST;
         $utilisateurController->inscriptionClient($data);
     break;
+    
+
     case '/api/ConnexionProprio':
         case 'api/ConnexionProprio':
             $data = $_POST;
@@ -70,6 +79,8 @@ switch($requestUrl) {
             $data = $_POST;
             $utilisateurController->inscriptionProprio($data);
         break;
+    
+    
     case '/api/getLogements':
         $logementController->getAllLogements();
         break;
@@ -77,10 +88,30 @@ switch($requestUrl) {
         $logementController->getLogementsDataForCards();
         break;
 
+
     case '/api/getReservations':
     case 'api/getReservations':
-        $reservationController->getAllReservations();
+        //$reservationController->getAllReservation();
+        $idProp = 7;
+        $reservationController->getReservationByOwnerId(7);
         break;
+
+
+
+        /*
+        case preg_match('api\/getReservations\?idProprio=\d+', $requestUrl) ? true : false:
+
+            $url_parts = explode('=', $requestUrl);
+            $idProprio = end($url_parts);
+            
+            if ($reservationController->proprietaireExists($idProprio)) { echo 'Proprietaire n°' . $idProprio . ' trouvé !'; }
+            else { 
+                http_response_code(404);
+                echo "Proprietaire non trouvé";
+            }
+            $reservationController->getReservationByOwnerId(7);
+        */
+
 
     default:
         http_response_code(404);

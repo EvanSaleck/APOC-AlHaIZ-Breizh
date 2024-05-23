@@ -1,28 +1,5 @@
 @use '../Front/general' as general
 
-#headerAccueilMobile
-    display: flex
-    flex-direction: row
-    justify-content: space-between
-    align-items: end
-    padding: 20px 30px
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5)
-    
-
-#logoAssoMobile 
-    width: 20%
-
-#buttonfiltresMobile 
-    width: 40px
-    height: 40px
-    border-radius: 50%
-    background-color: white
-    border: 2px solid #000
-    
-    svg
-      width: 60%
-      height: 60%
-
 #ongletFiltres
     position: absolute
     width: 100%
@@ -54,31 +31,6 @@
   background-color: general.$couleur-front-bleu-marine
   border-radius: 2px
 
-// #prixOngletFiltreMobile
-//     background-color: red 
-//     display: flex
-//     flex-direction: row
-//     justify-content: space-between
-//     align-items: center
-//     width: 80%
-//     margin-bottom: 20px
-
-#prixOngletFiltreMobile 
-  display: flex
-  flex-direction: column
-  align-items: center
-
-  label 
-    margin-bottom: 5px
-
-  #prixParMinDiv 
-    order: 1 // Permet de mettre le champ Min en dessous
-    margin-left: auto // Pour aligner à droite
-
-  #parPrixMaxDiv
-    order: -1 // Permet de mettre le champ Max en dessous et à gauche
-    margin-right: auto // Pour aligner à gauche
-
 
 
 body
@@ -88,7 +40,7 @@ body
 
   h1
     font-family: general.$police-titre
-    font-size: 3vw
+    font-size: 2.5vw
   
   h2
     font-family: general.$police-titre
@@ -107,6 +59,10 @@ body
     margin-right: 10px
     width: 13vw
     height: 2.5vw
+
+    @media screen and ( max-width: 960 )
+      font-size: 1.4vw
+
     background-color: general.$couleur-back-jaune-canteloup
     border-width: 0px
     border-radius: 5px 5px 0px 0px
@@ -127,6 +83,7 @@ body
 
 
 #croissantDecroissant
+  width: 30%
   border-radius: 5px
   border: 0.3vw solid general.$couleur-back-bleu-zodiac
 
@@ -146,22 +103,29 @@ body
     font-size: 1.2vw
 
 
-#listeResa
+#listeReservations
   height: 55%
+  
+  overflow-x: auto
+  
+  justify-content: center
+  align-items: center
   font-family: general.$police-texte
-  padding: 0px 10%
+
+  margin: 5vw 10%
 
   table
     text-align: center
+    font-size: 1.5vw
 
     resize: none
     overflow: auto
     border-collapse: collapse
 
-    font-size: 1.5vw
+    border: 2px solid
+    border-color: general.$couleur-back-bleu-zodiac 
 
     tr
-      display: flex
       max-height: 88px
       background-color: #FFFFFF
       td 
@@ -171,9 +135,7 @@ body
       background-color: #FBE6BC
 
     thead
-      border: 2px solid
-      border-color: general.$couleur-back-bleu-zodiac      
-
+      height: 2.5vh
       tr
         background-color: general.$couleur-back-bleu-zodiac
         padding: 1vw 0vw
@@ -182,22 +144,16 @@ body
           background-color: general.$couleur-back-bleu-zodiac
           color: #FFFFFF
 
-    tbody
-      border: 2px solid
-      border-color: general.$couleur-back-bleu-zodiac
 
+// Utile pour plus tard pour afficher plus de réservations
+section
+
+  #notFound
+    display: flex
+    justify-content: center
+    align-items: center
+    text-align: center
 
   #voirPlus
     font-family: general.$police-titre
     text-align: center
-    align-items: center
-    margin: 2vw 0vw
-
-
-
-@media screen and (max-width: 768px)
-    .HeaderContainer
-        .Logo
-            a
-                p
-                    display: none
