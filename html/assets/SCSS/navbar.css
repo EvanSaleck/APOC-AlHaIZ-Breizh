@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/* Définition des couleurs du Front par défaut */
+/* Définition des couleurs du Back par défaut */
+/* Définition des tailles d'écran par défaut */
+/* Import des polices Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+/* Import de la police dyslexique Lexend */
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+/* Définition des polices par défaut */
+/* Définition tailles de police desktop */
+/* Définition tailles de police mobile */
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .navbar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  }
+  .navbar button {
+    margin: 10px;
+    background-color: white;
+    border: none;
+    height: 62%;
+    width: 25%;
+    padding: 20px;
+    transition: background-color 0.1s ease;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar button:active {
+    background-color: #ADC6E3;
+  }
+  .navbar button:active img {
+    height: 100%;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+@media screen and (min-width: 767px) {
+  .navbar {
+    display: none;
+  }
+}/*# sourceMappingURL=navbar.css.map */

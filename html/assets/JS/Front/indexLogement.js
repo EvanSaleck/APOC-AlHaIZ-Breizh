@@ -1,7 +1,3 @@
-// import des fonctions JS
-import { displayNoteEtoiles } from './fonctions.js';
-import { fileExists } from './fonctions.js';
-
 var header = document.getElementById('headerAccueilMobile');
 
 // au chargement du dom

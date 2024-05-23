@@ -1,0 +1,152 @@
+@charset "UTF-8";
+/* Définition des couleurs du Front par défaut */
+/* Définition des couleurs du Back par défaut */
+/* Définition des tailles d'écran par défaut */
+/* Import des polices Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+/* Import de la police dyslexique Lexend */
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+/* Définition des polices par défaut */
+/* Définition tailles de police desktop */
+/* Définition tailles de police mobile */
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.HeaderConteneur {
+  /* Taille */
+  height: 75px;
+  /* Display */
+  display: flex;
+  flex-direction: row;
+  /*Couleur de fond*/
+  color: #FFFFFF;
+  background-color: #102C57;
+}
+.HeaderConteneur .Menu {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  gap: 50px;
+  margin-right: 1%;
+}
+.HeaderConteneur .Menu ul {
+  display: flex;
+  flex-direction: row;
+  margin-top: 4%;
+  width: -moz-fit-content;
+  width: fit-content;
+  gap: 70px;
+  list-style-type: none;
+  font-family: "Reem Kufi";
+  font-size: 20px;
+}
+.HeaderConteneur .Menu ul li a {
+  color: #FFFFFF;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.HeaderConteneur .Logo a {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  font-family: "Poiret One";
+  font-weight: bold;
+  font-size: 45px;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.HeaderConteneur .Logo a img {
+  margin-top: 1.5%;
+  width: 78px;
+  height: 64px;
+}
+.HeaderConteneur .Logo a p {
+  align-self: center;
+}
+
+#Compte {
+  width: 70px;
+  height: 55px;
+  border: 1px solid white;
+  background-color: #072241;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-radius: 100%;
+  margin-right: 2%;
+  margin-top: 1.5%;
+  cursor: pointer;
+}
+
+#Bulle {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  border: 2px solid #D0CDC4;
+  border-radius: 10px;
+  background-color: #FDFBF5;
+  margin-top: 0.5%;
+  margin-right: 0.5%;
+}
+#Bulle hr {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 2%;
+}
+#Bulle #Profil {
+  margin-top: 0.5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  cursor: pointer;
+  gap: 10px;
+}
+#Bulle #Profil p {
+  font-family: "Reem Kufi";
+  font-size: 20px;
+  vertical-align: middle;
+}
+#Bulle #Connexion {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+#Bulle #Connexion p {
+  font-family: "Reem Kufi";
+  font-size: 20px;
+  vertical-align: middle;
+}
+#Bulle #Connexion a {
+  font-family: "Reem Kufi";
+  font-size: 20px;
+  color: #FFFFFF;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.d-none {
+  display: none !important;
+}
+
+@media screen and (max-width: 1100px) {
+  #titre {
+    display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .Menu {
+    gap: 10px;
+  }
+  .Menu ul {
+    gap: 35px !important;
+    font-size: 15px;
+  }
+}/*# sourceMappingURL=header.css.map */
