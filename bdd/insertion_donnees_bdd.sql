@@ -113,30 +113,30 @@ VALUES ('Allemand');
 
 
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mr', 'Neymar', 'Jean', 'Jean.Neymar@gmail.com', 'jeje92NEY', 'Jejean','/assets/imgs/Profils/jean_neymar.png', '10/08/1992', '1', 'NEYJEAN01', 1);
+VALUES ('Mr', 'Neymar', 'Jean', 'Jean.Neymar@gmail.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'Jejean','/assets/imgs/Profils/jean_neymar.png', '10/08/1992', '1', 'NEYJEAN01', 1);
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mme', 'Waxson', 'Emmi', 'emmmi.waxson@outlook.com', 'Wemmimi19', 'Wemimi', '/assets/imgs/Profils/emmi_waxson.png', '15/04/1990', '2', 'WAXEMMI02', 2);
+VALUES ('Mme', 'Waxson', 'Emmi', 'emmmi.waxson@outlook.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'Wemimi', '/assets/imgs/Profils/emmi_waxson.png', '15/04/1990', '2', 'WAXEMMI02', 2);
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mr', 'Daip', 'Jauni', 'Daip.Jauni@wanadoo.com', 'jaujau12', 'JauniPaid','/assets/imgs/Profils/jauni_daip.png', '09/06/1963', '3', 'DAIJAUNI03', 3);
+VALUES ('Mr', 'Daip', 'Jauni', 'Daip.Jauni@wanadoo.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'JauniPaid','/assets/imgs/Profils/jauni_daip.png', '09/06/1963', '3', 'DAIJAUNI03', 3);
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Non spécifié', 'Magi', 'Renou', 'magi.renou@gmail.eu', 'magi1234', 'MagiRenou','/assets/imgs/Profils/renou_magi.png', '23/02/2000','6', 'MAGRENOU06', 6);
+VALUES ('Non spécifié', 'Magi', 'Renou', 'magi.renou@gmail.eu', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'MagiRenou','/assets/imgs/Profils/renou_magi.png', '23/02/2000','6', 'MAGRENOU06', 6);
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mr', 'Renault', 'Guillaume', 'guillaume.renault@gmail.com', 'guigui14', 'guiguirenault','/assets/imgs/Profils/guillaume_renault.png', '25/04/1992','1', 'RENGUILLAUME07', 1);
+VALUES ('Mr', 'Renault', 'Guillaume', 'guillaume.renault@gmail.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'guiguirenault','/assets/imgs/Profils/guillaume_renault.png', '25/04/1992','1', 'RENGUILLAUME07', 1);
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mme', 'Mir', 'Ador', 'mir.ador@gmail.fr', '1234567', 'mimir78','/assets/imgs/Profils/mir_ador.png', '21/09/1999','4', 'MIRADOR09', 4);
+VALUES ('Mme', 'Mir', 'Ador', 'mir.ador@gmail.fr', '2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'mimir78','/assets/imgs/Profils/mir_ador.png', '21/09/1999','4', 'MIRADOR09', 4);
 
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Mme', 'Kniglait', 'Keira', 'Keira.Kniglait@gmail.fr', 'keirakni89', 'KeiraSwann','/assets/imgs/Profils/keira_kniglait.png', '26/05/1985', '4', '/assets/imgs/cni/identite_01','21/12/2025', true );
+VALUES ('Mme', 'Kniglait', 'Keira', 'Keira.Kniglait@gmail.fr', '2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'KeiraSwann','/assets/imgs/Profils/keira_kniglait.png', '26/05/1985', '4', '/assets/imgs/cni/identite_01','21/12/2025', true );
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Mr', 'Toman', 'Ks', 'toman.ks@apple.us', 'totom11111', 'TomanWar','/assets/imgs/Profils/Toman_ks.png', '09/07/1956','5', '/assets/imgs/cni/identite_02', '27/05/2027', true );
+VALUES ('Mr', 'Toman', 'Ks', 'toman.ks@apple.us', '2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'TomanWar','/assets/imgs/Profils/Toman_ks.png', '09/07/1956','5', '/assets/imgs/cni/identite_02', '27/05/2027', true );
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Non spécifié', 'Cam', 'Ailaion', 'Ailaion.cam@gmail.fr', 'camAil21', 'AilCamXX','/assets/imgs/Profils/ailaion_cam.png', '31/12/1956','2', './assets/imgs/cni/identite_03', '21/05/2020', false );
+VALUES ('Non spécifié', 'Cam', 'Ailaion', 'Ailaion.cam@gmail.fr', '2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'AilCamXX','/assets/imgs/Profils/ailaion_cam.png', '31/12/1956','2', './assets/imgs/cni/identite_03', '21/05/2020', false );
 
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Mr', 'Le Goff', 'Yannick', 'yannick.le_goff@exemple.com', 'yg123456', 'YannickBreton', '/assets/imgs/Profils/yannick_le_goff.png', '20/05/1975', 2, '/assets/imgs/cni/identite_04', '20/05/2029', true);
+VALUES ('Mr', 'Le Goff', 'Yannick', 'yannick.le_goff@exemple.com', '2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'YannickBreton', '/assets/imgs/Profils/yannick_le_goff.png', '20/05/1975', 2, '/assets/imgs/cni/identite_04', '20/05/2029', true);
 
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Mr','Dupont', 'Paul', 'paul.dupont@example.com', 'paul123456', 'PaulDupont', '/assets/imgs/Profils/paul_dupont.png', '01/01/1980', 3, '/assets/imgs/cni/identite_05', '07/05/2020', false);
+VALUES ('Mr','Dupont', 'Paul', 'paul.dupont@example.com', '2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'PaulDupont', '/assets/imgs/Profils/paul_dupont.png', '01/01/1980', 3, '/assets/imgs/cni/identite_05', '07/05/2020', false);
 
 /* Insertion donnees avec accroches et description */
 

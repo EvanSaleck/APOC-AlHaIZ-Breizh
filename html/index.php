@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Inlcude des controllers
 include_once './Controllers/LogementController.php';
 include_once './Controllers/ReservationController.php';
@@ -35,18 +36,31 @@ switch($requestUrl) {
         break;
     case '/reservation/devis':
     case '/reservation/devis/':
-        include_once './Views/Front/reservation/devis.php';
+        if(!isset($_SESSION['client'])) {
+            header('Location: /');
+        }else {
+            include_once './Views/Front/reservation/devis.php';
+        }
+
         break;
 
     case '/reservations':
     case '/reservations/':
-        include_once('Views/Back/reservation/listeReservations.php');
+        if(!isset($_SESSION['client'])) {
+            header('Location: /');
+        }else {
+            include_once('Views/Back/reservation/listeReservations.php');
+        }
         break;
 
     // routes du back
     case '/logement/new':
     case '/logement/new/':
-        include './Views/Back/logement/newLogement.php';
+        if(!isset($_SESSION['proprio'])) {
+            header('Location: /');
+        }else {
+            include './Views/Back/logement/newLogement.php';
+        }
         break;
     
     // routes back office
@@ -54,11 +68,6 @@ switch($requestUrl) {
     case '/logements/':
         include './Views/Back/logement/listeLogements.php';
         break;
-    case '/logement/new':
-    case '/logement/new/':
-        include_once 'Views/Back/logement/newLogement.php';
-        break;
-
     case '/api/getLogementsDataForCards':
         header('Content-Type: application/json');
         echo $logementController->getLogementsDataForCards();
@@ -136,8 +145,8 @@ switch($requestUrl) {
         $utilisateurController->getCompteClientDetails($idCompte);
         break;
 
-    case '/api/getReservations':
-    case 'api/getReservations':
+    case '/api/getReservations/all':
+    case 'api/getReservations/all/':
         $reservationController->getAllReservations();
         break;
     
@@ -149,7 +158,11 @@ switch($requestUrl) {
 
     case '/detailReservation':
     case '/detailReservation/':
-        include './Views/Front/reservation/DetailReservation.php';
+        if(!isset($_SESSION['client'])) {
+            header('Location: /');
+        }else {
+            include './Views/Front/reservation/DetailReservation.php';
+        }
         break;
 
 

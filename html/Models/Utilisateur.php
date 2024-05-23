@@ -41,7 +41,6 @@ class Utilisateur {
         $utilisateur = $statement->fetch(\PDO::FETCH_ASSOC);
 
         if ($utilisateur && password_verify($data['password'], $utilisateur['mdp'])) {
-            session_start();
             $_SESSION['client'] = json_encode($utilisateur);
             return 'Connexion réussie';
         } else {
@@ -70,7 +69,6 @@ class Utilisateur {
         $utilisateur = $statement->fetch(\PDO::FETCH_ASSOC);
 
         if ($utilisateur && password_verify($data['password'], $utilisateur['mdp'])) {
-            session_start();
             $_SESSION['proprio'] = json_encode($utilisateur);
             return 'Connexion réussie';
         } else {

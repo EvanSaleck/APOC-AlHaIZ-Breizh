@@ -35,7 +35,7 @@ function Connexion(){
     data.append('pseudo', pseudo);
     data.append('password', password);
 
-    fetch('/api/ConnexionProprio', {
+    fetch('/api/ConnexionClient', {
         method: 'POST',
         body: data
     })
@@ -183,7 +183,7 @@ function CreateInscriptionModal() {
 
 
 function Deconnexion() {
-    sessionStorage.removeItem('Proprio');
+    sessionStorage.removeItem('User');
     window.location.href = '/Deconnexion';
 }
 

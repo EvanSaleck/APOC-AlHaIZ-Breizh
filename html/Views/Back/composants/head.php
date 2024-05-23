@@ -11,7 +11,6 @@
     <script src="/assets/JS/Back/fonctions.js"></script>
     
     <?php
-        session_start();
         
         $pageName = str_replace(".php", "", basename($_SERVER['PHP_SELF']));
         
