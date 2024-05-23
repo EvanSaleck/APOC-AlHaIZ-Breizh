@@ -1,5 +1,5 @@
 <?php
-    namespace Controllers\Front;
+    namespace Controllers;
 
     include_once 'Models/Utilisateur.php';
 

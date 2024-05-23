@@ -1,5 +1,6 @@
 <?php
-    include_once("Views/Front/composants/head.php");
+    include_once("Views/Back/composants/header.php");
+    include_once("Views/Back/composants/head.php");
 ?>
 </head>
 <body>

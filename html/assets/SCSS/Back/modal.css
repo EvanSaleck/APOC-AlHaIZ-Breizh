@@ -16,6 +16,19 @@
   padding: 0;
 }
 
+/* Appliquer les polices */
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Reem Kufi", sans-serif;
+}
+
+.error {
+  border: 1px solid #D8000C !important;
+}
+
 .modal-content {
   position: absolute;
   top: 0;
@@ -60,17 +73,13 @@
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #020E1C;
-  border: 1px solid #ADC6E3;
-}
-.modal-content #connexionForm input:focus {
-  border: 1px solid #377E81;
+  outline-color: #377E81;
 }
 .modal-content #connexionForm button {
   margin: 10px;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #020E1C;
-  border: 1px solid #ADC6E3;
   background-color: #377E81;
   color: white;
 }
@@ -92,17 +101,87 @@
   pointer-events: auto;
 }
 
-.succes {
+.alert-popup-content {
   display: flex;
-  flex-direction: row;
+  position: absolute;
+  top: 0;
+  left: 47.5%;
+  z-index: 999999;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  color: #38A356;
-  border: 1px solid rgba(56, 163, 86, 0.2509803922);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px;
+  text-align: center;
 }
-.succes svg {
+.alert-popup-content svg {
   margin-top: 0.5%;
+}
+.alert-popup-content p {
+  margin-top: 10px;
+}
+.alert-popup-content a {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .error {
   border: 1px solid #D8000C !important;
+  background-color: #F8D7DA;
+  color: #D8000C;
+}
+
+.succes {
+  border: 1px solid #38A356 !important;
+  background-color: #D4EDDA;
+  color: #38A356;
+}
+
+@media screen and (max-width: 1023px) {
+  .modal-content {
+    width: 50%;
+    margin-top: 5%;
+  }
+  .modal-content h2 {
+    font-size: 1.5em;
+  }
+  .modal-content .fermer {
+    font-size: 1em;
+  }
+  .modal-content #connexionForm input {
+    width: 80%;
+    font-size: 1em;
+  }
+  .modal-content #connexionForm button {
+    width: 80%;
+    font-size: 1em;
+  }
+  .modal-content #inscription {
+    font-size: 1em;
+  }
+}
+@media screen and (max-width: 560px) {
+  .modal-content {
+    width: 100%;
+    margin-top: 5% !important;
+    margin-left: 10% !important;
+  }
+  .modal-content h2 {
+    font-size: 1.5em;
+  }
+  .modal-content .fermer {
+    font-size: 1em;
+  }
+  .modal-content #connexionForm input {
+    width: 80%;
+    font-size: 1em;
+  }
+  .modal-content #connexionForm button {
+    width: 80%;
+    font-size: 1em;
+  }
+  .modal-content #inscription {
+    font-size: 1em;
+  }
 }/*# sourceMappingURL=modal.css.map */

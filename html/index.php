@@ -1,13 +1,13 @@
 <?php
 // Inlcude des controllers
-include_once './Controllers/Front/LogementController.php';
-include_once './Controllers/Front/ReservationController.php';
-include_once './Controllers/Front/UtilisateurController.php';
+include_once './Controllers/LogementController.php';
+include_once './Controllers/ReservationController.php';
+include_once './Controllers/UtilisateurController.php';
 
 // Use des controllers
-use Controllers\Front\LogementController;
-use Controllers\Front\ReservationController;
-use Controllers\Front\UtilisateurController;
+use Controllers\LogementController;
+use Controllers\ReservationController;
+use Controllers\UtilisateurController;
 
 // Initialisation des controllers
 $logementController = new LogementController();

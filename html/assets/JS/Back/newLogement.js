@@ -47,10 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
           })
           .then((data) => {
-            console.log(data);
+            ThrowAlertPopup(data, "succes");
           })
           .catch((error) => {
-            console.error("Erreur:", error);
+            ThrowAlertPopup("Erreur: " + error, "error");
           });
       }
     });
