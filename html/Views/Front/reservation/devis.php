@@ -45,7 +45,7 @@
                 </div>
             </div>
             <figure>
-                <img class="photoLogResa" src="/assets/imgs/offres/MaisonLanderneau.png" alt="Maison landerneau"> 
+                <img class="photoLogResa" src="/assets/imgs/logements/MaisonLanderneau.png" alt="Maison landerneau"> 
             </figure>
         </div>
 

@@ -13,7 +13,7 @@
             $this->db = new Database();
         }
 
-        public function getAllLogements() {
+        public function GetIdReservation() {
             $logements = $this->db->executeQuery('SELECT * FROM logement');
             
             return $logements;

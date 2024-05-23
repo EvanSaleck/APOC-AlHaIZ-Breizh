@@ -69,4 +69,12 @@
     grid-column-gap: 0px;
     padding: 0 5%;
   }
+}
+@media screen and (max-width: 410px) {
+  #cardsContainer {
+    width: 120%;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-column-gap: 0px;
+    padding: 0 5%;
+  }
 }/*# sourceMappingURL=indexLogement.css.map */

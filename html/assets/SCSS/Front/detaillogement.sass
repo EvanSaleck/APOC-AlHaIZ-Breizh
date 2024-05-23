@@ -121,11 +121,29 @@ $tablette: screen and (max-width: 960px)
                 font-size: 1.2em
                 font-weight: 600
     
+    #recap
+        @include flexRow
+        position: fixed
+        top: 76vh
+        height: 6vh
+        width: 100vw
+        background-color: white
+        border-radius: 5px 5px 0 0 
+        border: 1px solid
+        border-block-color: black
+
+        div
+            @include flexCol
+            width: 28vw
+
+            p
+                font-weight: 500
+
     #reservation
         @include flexRow
         position: fixed
-        top: 80vh
-        height: 10vh
+        top: 82vh
+        height: 8vh
         width: 100vw
         background-color: white
         border-radius: 5px 5px 0 0 
@@ -177,3 +195,6 @@ $tablette: screen and (max-width: 960px)
                 width: 40vw
                 font-size: 1.5em
                 text-align: center
+
+    span
+        margin: 0 1vw

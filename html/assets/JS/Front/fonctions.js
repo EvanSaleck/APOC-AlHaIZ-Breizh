@@ -35,7 +35,7 @@ function Connexion(){
     data.append('pseudo', pseudo);
     data.append('password', password);
 
-    fetch('/api/ConnexionProprio', {
+    fetch('/api/ConnexionClient', {
         method: 'POST',
         body: data
     })
@@ -70,27 +70,34 @@ function Connexion(){
     });
 }
 
-function ThrowAlertPopup(message,type) {
-    if (document.getElementsByClassName('alert-popup').length > 0) {
-        document.getElementsByClassName('alert-popup')[0].remove();
+function ThrowAlertPopup(message, type) {
+    const existingAlert = document.getElementsByClassName('alert-popup');
+    if (existingAlert.length > 0) {
+        existingAlert[0].remove();
     }
-    let alertPopup = document.createElement('div');
+
+    const alertPopup = document.createElement('div');
     alertPopup.className = 'alert-popup';
-    val = null;
+
+    let val;
     if (type === 'error') {
         val = 'Erreur';
     } else if (type === 'succes') {
         val = 'Succès';
+    } else {
+        console.error('Invalid type specified for alert popup.');
+        return;
     }
-    alertPopup.innerHTML = `
-    <div class="alert-popup-content ${type}">   
-        <span class="titre">${val}</span>
-        <p>${message}</p>
-    </div>
-    `;
-    document.body.appendChild(alertPopup);
 
-    SetTimeout(() => {
+    alertPopup.innerHTML = `
+        <div class="alert-popup-content ${type}">   
+            <span class="titre">${val}</span>
+            <p>${message}</p>
+        </div>
+    `;
+
+    document.body.appendChild(alertPopup);
+    setTimeout(() => {
         alertPopup.remove();
     }, 5000);
 }
@@ -183,7 +190,7 @@ function CreateInscriptionModal() {
 
 
 function Deconnexion() {
-    sessionStorage.removeItem('Proprio');
+    sessionStorage.removeItem('User');
     window.location.href = '/Deconnexion';
 }
 

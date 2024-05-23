@@ -89,8 +89,7 @@ function ThrowAlertPopup(message,type) {
     </div>
     `;
     document.body.appendChild(alertPopup);
-
-    SetTimeout(() => {
+    setTimeout(() => {
         alertPopup.remove();
     }, 5000);
 }

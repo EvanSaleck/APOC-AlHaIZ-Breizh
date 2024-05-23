@@ -16,6 +16,8 @@ $utilisateurController = new UtilisateurController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
+
+$user = isset($_SESSION['client']) ? json_encode($_SESSION['client']) : null;
 // $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
@@ -36,7 +38,21 @@ switch($requestUrl) {
                 echo "Logement non trouvé";
             }
             break;
-
+    case '/logement':
+    case '/logement/':
+        include './Views/Front/logement/detaillogement.php';
+     break;
+            
+    case '/reservation/detail':
+        case 'reservation/detail':
+            // print_r($_SESSION['client']);
+            // if (isset($_SESSION['client'])) {
+                include './Views/Front/reservation/DetailReservation.php';
+            // }
+            // else {
+                // header('Location: /');
+            // }
+        break;
     // Routes des API
     case '/Deconnexion':
     case 'Deconnexion':
@@ -75,6 +91,11 @@ switch($requestUrl) {
     case '/api/getReservations':
     case 'api/getReservations':
         $reservationController->getAllReservations();
+        break;
+    case '/api/getReservationById':
+    case 'api/getReservationById':
+        $data = $_POST;
+        $reservationController->getReservationById($data);
         break;
 
     default:

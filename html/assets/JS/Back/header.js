@@ -23,7 +23,6 @@ function AddListeners() {
 function GetConnected() {
   if (sessionStorage.getItem("Proprio") != null) {
     let user = JSON.parse(sessionStorage.getItem('Proprio'));
-    console.log(user);
     currentUser = user;
   }
 }
@@ -31,7 +30,7 @@ function GetConnected() {
 function SetModalAndProfilePicture() { 
     let compte = document.getElementById("Compte");
     if (currentUser === undefined || currentUser === null) {
-      compte.style.backgroundImage = "url('assets/imgs/person-fill.svg')"; 
+      compte.style.backgroundImage = "url('/assets/imgs/person-fill.svg')"; 
     } else if (currentUser && currentUser.photo_profil) { 
       compte.style.backgroundImage = "url('" + currentUser.photo_profil + "')";
     }

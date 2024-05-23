@@ -8,9 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var cardTemplate = document.getElementsByClassName('card')[0];
     var cardsContainer = document.getElementById('cardsContainer');
 
-
-
-
     if ("content" in document.createElement("template")) {
         // on récupère les logements
         fetch('/api/getLogementsDataForCards')
@@ -18,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 // Test tableau vide
                 // data = [];
+                console.log(data);
                 
                 if(data.length == 0){
                     cardsContainer.innerHTML = '<h2 class="error">Aucun logement trouvé ಥ_ಥ</h2>';
@@ -68,6 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function adjustMarginTop() {
-    var marginTopValue = (header.offsetHeight + 20) + 'px'; 
-    cardsContainer.style.marginTop = marginTopValue; 
+    if(header == null){
+        return;
+    }else {
+        var marginTopValue = (header.offsetHeight + 20) + 'px'; 
+        cardsContainer.style.marginTop = marginTopValue; 
+    }
+
 }
