@@ -36,48 +36,49 @@ function envoiDevis(prixNuitTTC,data) {
     sessionStorage.setItem('dataLogement', data);
 }
 
+function afficheRecap(valide) {
+    let btnRes = document.getElementById("btnRes");
+    let recapitulatifDevis = document.getElementById("recap");
+    
+    if (valide) {
+        btnRes.disabled = false;
+        recapitulatifDevis.style.display = "flex"
+    } else {
+        btnRes.disabled = true;
+        recapitulatifDevis.style.display = "none"
+    }
+}
+
 console.log('detailsLogement.js');
 document.addEventListener('DOMContentLoaded', function() {
     console.log(sessionStorage.getItem('idLogement'));
     fetch('/api/getLogementDataById/' + sessionStorage.getItem('idLogement'))
     .then(response => response.json())
     .then(data => {
-        console.log('data');
-        console.log(data);
-        let imagePrinc = document.getElementById("imageLogement");
-        console.log(data[0]['image_principale']);
-        imagePrinc.setAttribute("src",data[0]['image_principale']+".svg");
+        afficheRecap(false)
 
         let titreLogement = document.getElementById("titreLog");
-        console.log(data[0]['titre']);
         titreLogement.innerHTML = data[0]['titre'];
 
         let villeLogement = document.getElementById("villeLog");
-        console.log(data[0]['nom_ville']);
         villeLogement.innerHTML = data[0]['nom_ville'];
 
         let prixLogement = document.getElementById("prix");
-        console.log(data[0]['prix_nuit_ttc']);
         prixLogement.innerHTML = parseFloat(data[0]['prix_nuit_ttc']);
 
         let nbPersonnesMax = document.getElementById("nbPersonnesMax");
-        console.log(data[0]['personnes_max']);
         nbPersonnesMax.innerHTML = data[0]['personnes_max'];
 
         let nbChambres = document.getElementById("nbChambres");
-        console.log(data[0]['nb_chambres']);
         nbChambres.innerHTML = data[0]['nb_chambres'];
 
         let nbLitsDoubles = document.getElementById("nbLitsDoubles");
-        console.log(data[0]['nb_lits_doubles']);
         nbLitsDoubles.innerHTML = data[0]['nb_lits_doubles'];
 
         let nbLitsSimples = document.getElementById("nbLitsSimples");
-        console.log(data[0]['nb_lits_simples']);
         nbLitsSimples.innerHTML = data[0]['nb_lits_simples'];
 
         let descDet = document.getElementById("descDet");
-        console.log(data[0]['description']);
         descDet.innerHTML = data[0]['description'];
 
         let listeAmenagements = document.getElementById("listeAmenagements");
@@ -111,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 htmlAmenagement = htmlAmenagement + "<div class=badgeAmenagement><img src='" + imgAmenagement + "' alt='" + amenagement['nom_amenagement'] + "'><h3>Jardin</p></div>"
                 
             });
-            console.log(htmlAmenagement)
             if (htmlAmenagement == "") {
                 htmlAmenagement = "<p>- Aucun aménagement -</p>"
             }
@@ -119,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         let sctNbOccupants = document.getElementById("sctNbOccupants");
-        console.log(data[0]['personnes_max']);
         let htmlSelectNbPersonnes = ""
         for (let i = 1; i <= data[0]['personnes_max']; i++) {
             htmlSelectNbPersonnes = htmlSelectNbPersonnes + "<option value='" + i + "'>" + i + " Pers.</option>"
@@ -130,10 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
         btnDate.addEventListener("click", () => {
             let popupDate = document.getElementById("popupDate");
             if (popupDate.style.display == "block") {
-                console.log("disparait");
                 popupDate.style.display = "none"
             } else {
-                console.log("affiche");
                 popupDate.style.display = "block"
             }
         });
@@ -145,29 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let dateDepart = document.getElementById("dateDepart");
 
         console.log(dateDebut.value)
-        /*
-        if (dateDebut.value == "") {
-            console.log("ça marche !")
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            var yyyy = today.getFullYear();
-
-            console.log(mm + '-' + dd + '-' + yyyy);
-            // dateDebut.innerText = mm + '-' + dd + '-' + yyyy;
-            dateDebut.setAttribute("value", mm + '-' + dd + '-' + yyyy )
-            dateDebut.placeholder = mm + '-' + dd + '-' + yyyy
-            console.log(dateDebut.value)
-        }
-        if (dateFin.value == "") {
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            var yyyy = today.getFullYear();
-
-            dateFin.value = mm + '-' + dd + '-' + yyyy;
-        }
-        */
         dateArrivee.innerHTML = dateDebut.value
         dateDepart.innerHTML = dateFin.value
 
@@ -178,12 +152,13 @@ document.addEventListener('DOMContentLoaded', function() {
             dateFin.setAttribute("min",dateDebut.value)
             dateArrivee.innerHTML = dateDebut.value
             totalTtc.innerHTML = calculDevis(data[0]['prix_nuit_ttc'])
+            afficheRecap(new Date(dateDebut.value).getTime() - new Date(dateFin.value).getTime() <= 0 )
         });
-        
         dateFin.addEventListener("input", () => {
             dateDebut.setAttribute("max",dateFin.value)
             dateDepart.innerHTML = dateFin.value
             totalTtc.innerHTML = calculDevis(data[0]['prix_nuit_ttc'])
+            afficheRecap(new Date(dateDebut.value).getTime() - new Date(dateFin.value).getTime() <= 0 )
         });
         totalTtc.innerHTML = calculDevis(data[0]['prix_nuit_ttc'])
     
@@ -192,5 +167,9 @@ document.addEventListener('DOMContentLoaded', function() {
             envoiDevis(data[0]['prix_nuit_ttc'],data[0])
             window.location.href = `/reservation/devis`;
         });
+        btnRes.disabled = true;
+
+        let imagePrinc = document.getElementById("imageLogement");
+        imagePrinc.setAttribute("src",data[0]['image_principale']+".svg");
     });
 });
