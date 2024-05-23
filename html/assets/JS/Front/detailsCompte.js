@@ -10,7 +10,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 compteContainer.innerHTML = '<h2 class="error">Détails du compte non trouvés ಥ_ಥ</h2>';
             } else {
                 var compte = data[0];
-                document.querySelector('.imgProfil').src = compte.photo_profil || '/assets/imgs/default.png';
+                let img = new Image();
+                img.alt = "Profil";
+
+                // Fonction pour définir la source de l'image
+                const setImageSource = (source) => {
+                    img.src = source;
+                    document.querySelector('.imgProfil').src = img.src;
+                };
+
+                // Définir la source initiale de l'image
+                setImageSource(compte.photo_profil);
+
+                // Gestionnaire d'erreur pour charger une image par défaut
+                img.onerror = () => {
+                    console.log('Image non trouvée, chargement de l\'image par défaut...');
+                    setImageSource('/assets/imgs/Profils/root_root.png');
+                };
                 document.querySelector('.nom').textContent = compte.nom;
                 document.querySelector('.prenom').textContent = compte.prenom;
                 document.querySelector('.civilite').textContent = compte.civilite;
