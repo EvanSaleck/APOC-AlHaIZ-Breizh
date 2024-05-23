@@ -20,7 +20,7 @@ CREATE TABLE compte (
    nom varchar(70) NOT NULL,
    prenom varchar(70) NOT NULL,
    e_mail varchar(120) NOT NULL,
-   mdp varchar(255) NOT NULL,
+   mdp varchar(200) NOT NULL,
    pseudo varchar(50) NOT NULL,
    photo_profil varchar(150),
    ddn date NOT NULL,
