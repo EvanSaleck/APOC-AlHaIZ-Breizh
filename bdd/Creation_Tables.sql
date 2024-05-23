@@ -92,7 +92,7 @@ CREATE TABLE logement (
    nb_lits_simples integer NOT NULL,
    nb_lits_doubles integer NOT NULL,
    prix_nuit_ht decimal(10,2) NOT NULL,
-   prix_nuit_ttc decimal(10,2),
+   prix_nuit_ttc decimal(10,2) GENERATED ALWAYS AS (prix_nuit_ht * 1.10) STORED,
    statut_propriete boolean NOT NULL,
    duree_min_location integer,
    avance_resa_min integer,
