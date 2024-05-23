@@ -24,21 +24,12 @@ switch($requestUrl) {
     case '':
         include './Views/Front/logement/indexLogement.php';
         break;
-    case preg_match('/^\/logement\/\d+$/', $requestUrl) ? true : false:
-            $url_parts = explode('/', $requestUrl);
-            $logement_id = end($url_parts);
-            
-            if ($logementController->logementExists($logement_id)) {
-                echo 'Logement n°' . $logement_id . ' trouvé !';
-            }
-            else { 
-                http_response_code(404);
-                echo "Logement non trouvé";
-            }
-        break;
 
     // routes back office
-    case '/logement/new':
+    case '/back/logements':
+        include_once 'Views/Back/logement/listeLogement.php';
+        break;
+    case '/back/logement/new':
         include_once 'Views/Back/logement/newLogement.php';
         break;
 
