@@ -172,35 +172,35 @@ VALUES ('Maison de campagne', 7, '/assets/imgs/logements/image_11.svg', 45.9876,
 /* Reservation */
 
 
-INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(3, '01/06/2024', '04/06/2024', 2, '15/05/2024', FALSE, 1, 1);
 
-INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(5, '10/06/2024', '15/06/2024', 4, '20/05/2024', FALSE, 2, 2);
+INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
+(3, '01/06/2024', '04/06/2024', 2, '15/05/2024', FALSE, 1, 1, 528, 5.28, 6, 539.28);
 
-INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(2, '18/06/2024', '20/06/2024', 1, '25/05/2024', FALSE, 3, 3);
+INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
+(5, '10/06/2024', '15/06/2024', 4, '20/05/2024', FALSE, 2, 2, 1320, 13.2, 20, 1353.2);
 
-INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(7, '05/06/2024', '12/06/2024', 3, '18/05/2024', FALSE, 4, 4);
+INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
+(2, '18/06/2024', '20/06/2024', 1, '25/05/2024', FALSE, 3, 3, 264, 2.64, 2, 268.64);
+INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
+(7, '05/06/2024', '12/06/2024', 3, '18/05/2024', FALSE, 4, 4, 2073, 20.73, 21, 2114.73);
 
-INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(4, '22/06/2024', '26/06/2024', 2, '30/05/2024', TRUE, 5, 3);
+INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
+(4, '22/06/2024', '26/06/2024', 2, '30/05/2024', TRUE, 5, 3, 1056, 10.56, 8, 1074.56);
 
-INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(6, '13/06/2024', '19/06/2024', 5, '21/05/2024', FALSE, 1, 2);
+INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
+(6, '13/06/2024', '19/06/2024', 5, '21/05/2024', FALSE, 1, 2, 4950, 49.5, 30, 5029.5);
 
-INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(1, '25/06/2024', '26/06/2024', 1, '01/06/2024', FALSE, 3, 1);
+INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
+(1, '25/06/2024', '26/06/2024', 1, '01/06/2024', FALSE, 3, 1, 88, 0.88, 1, 89.88);
 
-INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(3, '01/07/2024', '04/07/2024', 2, '05/06/2024', FALSE, 5, 4);
+INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
+(3, '01/07/2024', '04/07/2024', 2, '05/06/2024', FALSE, 5, 4, 396, 3.96, 6, 405.96);
 
-INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(2, '08/07/2024', '10/07/2024', 3, '10/06/2024', TRUE, 1, 3);
+INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
+(2, '08/07/2024', '10/07/2024', 3, '10/06/2024', TRUE, 1, 3, 792, 7.92, 6, 805.92);
 
-INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES
-(5, '15/07/2024', '20/07/2024', 7, '15/06/2024', FALSE, 2, 6);
+INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
+(5, '15/07/2024', '20/07/2024', 7, '15/06/2024', FALSE, 2, 6, 5775, 57.75, 35, 5867.75);
 
 
 INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
