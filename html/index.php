@@ -152,7 +152,6 @@ switch($requestUrl) {
         include './Views/Front/reservation/DetailReservation.php';
         break;
 
-
     
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
