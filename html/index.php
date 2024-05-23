@@ -20,22 +20,11 @@ $requestUrl = $_SERVER['REQUEST_URI'];
 
 switch($requestUrl) {
     // Routes des vues front office
+    // Routes des vues front office
     case '/':
     case '':
-        include './Views/Front/logement/indexLogement.php';
+        include_once 'Views/Front/logement/index.php';
         break;
-    case preg_match('/^\/logement\/\d+$/', $requestUrl) ? true : false:
-            $url_parts = explode('/', $requestUrl);
-            $logement_id = end($url_parts);
-            
-            if ($logementController->logementExists($logement_id)) {
-                echo 'Logement n°' . $logement_id . ' trouvé !';
-            }
-            else { 
-                http_response_code(404);
-                echo "Logement non trouvé";
-            }
-            break;
 
     // Routes des API
     case '/Deconnexion':
@@ -74,10 +63,6 @@ switch($requestUrl) {
         include_once 'Views/Back/logement/newLogement.php';
         break;
     
-    case '/api/getLogementsDataForCards':
-        $logementController->getLogementsDataForCards();
-        break;
-
     case '/api/getReservations':
     case 'api/getReservations':
         $reservationController->getAllReservations();
