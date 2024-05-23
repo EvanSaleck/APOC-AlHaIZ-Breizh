@@ -95,6 +95,12 @@ VALUES
 INSERT INTO adresse (numero_rue, nom_rue, code_postal, nom_ville, pays) 
 VALUES 
  (13, 'rue du kernic', 29430, 'Plouescat', 'France');
+INSERT INTO adresse (numero_rue, nom_rue, code_postal, nom_ville, pays) 
+VALUES 
+ (8, 'rue claire dreaunau', 56100, 'Lorient', 'France');
+INSERT INTO adresse (numero_rue, nom_rue, code_postal, nom_ville, pays) 
+VALUES 
+ (13, 'Hent an aod', 29910 , 'Trégunc', 'France');
 
 
 
