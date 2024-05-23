@@ -1,10 +1,9 @@
 <?php
-    namespace Controllers;
+    namespace Controllers\Front;
 
     include_once 'Models/Utilisateur.php';
 
     use Models\Utilisateur;
-    use \Exception;
 
 
     class UtilisateurController {
