@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers\Front;
+namespace Controllers;
 
 include_once 'Service/Database.php';
 

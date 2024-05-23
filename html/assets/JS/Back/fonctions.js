@@ -70,13 +70,16 @@ function Connexion(){
     });
 }
 
-function ThrowAlertPopup(message,type) {
+function ThrowAlertPopup(message, type) {
+    // Vérifie s'il y a déjà une popup affichée et la supprime
     if (document.getElementsByClassName('alert-popup').length > 0) {
         document.getElementsByClassName('alert-popup')[0].remove();
     }
+
+    // Crée une nouvelle popup
     let alertPopup = document.createElement('div');
     alertPopup.className = 'alert-popup';
-    val = null;
+    let val = null;
     if (type === 'error') {
         val = 'Erreur';
     } else if (type === 'succes') {
@@ -90,12 +93,20 @@ function ThrowAlertPopup(message,type) {
     `;
     document.body.appendChild(alertPopup);
 
-    SetTimeout(() => {
+    alertPopup.addEventListener('click', () => {
         alertPopup.remove();
-    }, 5000);
+        localStorage.removeItem('alertPopup');
+    });
+
+    // Stocke les informations de la popup dans localStorage
+    localStorage.setItem('alertPopup', JSON.stringify({ message, type }));
+
+    // Supprime la popup après 5 secondes et nettoie le localStorage
+    setTimeout(() => {
+        alertPopup.remove();
+        localStorage.removeItem('alertPopup');
+    }, 3000);
 }
-
-
 
 function CreateConnexionModal() {
     // Remove existing modals if they exist
