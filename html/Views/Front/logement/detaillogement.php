@@ -1,10 +1,11 @@
 <?php
     include_once 'Views/Front/composants/navbar.php';
-    include_once 'Views/Front/composants/header.php';
+    //include_once 'Views/Front/composants/header.php';
     include_once 'Views/Front/composants/head.php';
 
 
  ?>
+
 <body>
     <div id=descLogement>
         <section id=sectionDesc>

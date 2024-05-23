@@ -45,13 +45,7 @@ switch($requestUrl) {
             
     case '/reservation/detail':
         case 'reservation/detail':
-            // print_r($_SESSION['client']);
-            // if (isset($_SESSION['client'])) {
-                include './Views/Front/reservation/DetailReservation.php';
-            // }
-            // else {
-                // header('Location: /');
-            // }
+            include './Views/Front/reservation/DetailReservation.php';
         break;
     // Routes des API
     case '/Deconnexion':
@@ -93,10 +87,41 @@ switch($requestUrl) {
         $reservationController->getAllReservations();
         break;
     case '/api/getReservationById':
-    case 'api/getReservationById':
+        case 'api/getReservationById':
         $data = $_POST;
         $reservationController->getReservationById($data);
         break;
+    case '/api/getProprioById':
+        case 'api/getProprioById':
+        $data = $_POST;
+        $utilisateurController->getProprioById($data['id']);
+        break;
+    case '/api/getLogementById':
+        case 'api/getLogementById':
+        $data = $_POST;
+        $logementController->getLogementById($data['id']);
+        break;
+
+    case '/api/resa':
+        case 'api/resa':
+        $data = $_POST;
+        $reservationController->saveReservation($data, 1);
+        break;
+    
+    case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $logement_id = end($url_parts);
+    
+        $logementController->getLogementDataById($logement_id);
+    break;
+    
+    case preg_match('/^\/api\/getAmenagementsOfLogementById\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $logement_id = end($url_parts);
+    
+        header('Content-Type: application/json');
+        echo $logementController->getAmenagementsOfLogementById($logement_id);
+    break;
 
     default:
         http_response_code(404);

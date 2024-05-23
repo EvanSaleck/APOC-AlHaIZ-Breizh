@@ -76,4 +76,17 @@ class Utilisateur {
 
         return 'Inscription réussie';
     }
+
+    public function getProprioById($id) {
+        $db = new Database();
+        $pdo = $db->getPDO();
+
+        $query = "SELECT * FROM sae3.compte_proprietaire WHERE id_compte = ?";
+        $statement = $pdo->prepare($query);
+        $statement->execute([$id]);
+
+        $proprio = $statement->fetch(\PDO::FETCH_ASSOC);
+
+        return $proprio;
+    }   
 }

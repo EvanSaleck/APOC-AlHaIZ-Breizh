@@ -4,43 +4,38 @@
     include_once 'Views/Front/composants/header.php';
     include_once 'Views/Front/composants/head.php';
 ?>
-<body>
-    <a href="/"><button class="boutonPrecedent">Précédent</button></a>
+<div class="detailResa">
+    <a href="../reservations"><button class="boutonPrecedent">Précédent</button></a>
 
-        
-    <div class="devis">
+
         <div class="headerDevis">
             <button class="retour">
                 <img src="/assets/imgs/mobile/Chevron2.svg" alt="retourPagePrecedente" />
             </button>
-            <h1 class="titreRecapDevis"> Récapitulatif de la réservation </h1>
+            <h1 class="titreRecapDevis"> Réservation détaillée </h1>
         </div>
         <div class="infosLogementsTOTAL">
             <div class="infosLogementResa">
                 <div class="infosLogement">
                     <div class="logementResa">
-                        <h2 class="titreLogDevis" id="titrelogement"></h2>
-                        <p id="adresselogement"></p>
-                        <p id="villeLogement"></p>
-                        <div class="noteResa">
-                            <p> Note </p>
-                            <div class="note">
-                                <img class="noteEtoile" src="/assets/imgs/notes/star_full.svg" alt="">
-                                <img class="noteEtoile" src="/assets/imgs/notes/star_full.svg" alt="">
-                                <img class="noteEtoile" src="/assets/imgs/notes/star_full.svg" alt="">
-                                <img class="noteEtoile" src="/assets/imgs/notes/star_full.svg" alt="">
-                                <img class="noteEtoile" src="/assets/imgs/notes/star_empty.svg" alt="">
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="titreLogDevis" id="titrelogement"></h2>
                     <figure>
                         <img class="photoLogResa" id="photologresa"> 
                     </figure>
+                    </div>
+                    <div class="Proprio">
+                      <h2>Propriétaire</h2>
+                      <img id="photoproprio">
+                        <p id="nomproprio"></p>
+                        <p id="mailproprio"></p>
+                        <p id="telproprio"></p>
+                    </div>
                 </div>
+            </div>
 
                 <div class="premiereBarre"></div>
 
-                <div class="infosReservationDev">
+                <div class="infosDetailsResa">
                     <h3> Votre réservation </h3>
                     <div>
                         <p class="info-label">Date d'arrivée :</p>
@@ -56,7 +51,7 @@
                     </div>
                     <div class="deuxiemeBarre"></div>
                     <div>
-                        <p class="info-label">Tarif ttc :</p>
+                        <p class="info-label">Tarif TTC :</p>
                         <p id="tarifTTC"></p>
                     </div>
                     <div>
@@ -69,12 +64,13 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="condAnnul">
-            <h3> Conditions d'annulation </h3>
-            <p>
-                Annulation gratuite avant le <span id="date"></span>. Après cette date, des frais de 20% du montant total de la réservation (soit <span id="prixfrais"></span> euros ) seront appliqués.
-            </p>
+            <div class="condAnnul">
+                <h3> Conditions d'annulation </h3>
+                <p>
+                    Annulation gratuite avant le <span id="date">30 mai</span>. Après cette date, des frais de 20% du montant total de la réservation (soit <span id="prixfrais">250</span> euros ) seront appliqués.
+                </p>
+            </div>
+            
+
     </div>
-</body>
-</html>
+</div>

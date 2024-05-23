@@ -2,31 +2,39 @@
 
 namespace Controllers\Front;
 
-include_once 'Service/Database.php';
-
-use Service\Database;
-
 include_once 'Models/Reservation.php';
 
 use Models\Reservation;
 
+use Exception;
+
 class ReservationController {
+
+    private $reservation;
+
+    public function __construct() {
+        $this->reservation = new Reservation();
+    }
         
     public function getAllReservations(){
-            
-        $db = new Database();
-        $reservations = $db->executeQuery('SELECT * FROM reservation');
-            
-        header('Content-Type: application/json');
-            
-        echo json_encode($reservations);
+        try {
+            $reservations = $this->reservation->getAllReservations();
+
+            header('Content-Type: application/json');
+
+            echo json_encode($reservations);
+        }
+        catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode($e->getMessage());
+            exit;
+        }
     }
 
     public function GetIdReservation($data){
         try {
             $id = $data['id'];
-            $reservation = new Reservation();
-            $return = $reservation->GetIdReservation($id);
+            $return = $this->reservation->GetIdReservation($id);
 
             header('Content-Type: application/json');
             echo json_encode($return);
@@ -41,8 +49,7 @@ class ReservationController {
     public function getReservationById($data) {
         try {
             $id = $data['id'];
-            $reservation = new Reservation();
-            $return = $reservation->getReservationById($id);
+            $return = $this->reservation->getReservationById($id);
 
             header('Content-Type: application/json');
             echo json_encode($return);
@@ -53,4 +60,20 @@ class ReservationController {
             exit;
         }
     }
+
+    public function saveReservation($data, $idcpt){
+        try{
+
+            $return = $this->reservation->saveReservation($data, $idcpt);
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode($e->getMessage());
+            exit;
+        }
+
+    }
 }
+

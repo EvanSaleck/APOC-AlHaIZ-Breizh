@@ -50,7 +50,7 @@
 
     <?php
     if (isset($_SESSION['client'])) {
-        $user = json_encode($_SESSION['client']);
+        $user = $_SESSION['client'];
         ?>
         <script>
             sessionStorage.setItem('User', JSON.stringify(<?php echo $user; ?>));
