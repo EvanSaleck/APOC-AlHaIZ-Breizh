@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Autres écouteurs d'événements...
     document.querySelector('.retour').addEventListener('click', function() {
         window.location.href = 'index';
     });
