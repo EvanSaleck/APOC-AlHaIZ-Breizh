@@ -1,10 +1,9 @@
 <html>
-<link rel="stylesheet" type="text/css" href="../../../assets/SCSS/footer.css"/>
+<link rel="stylesheet" type="text/css" href="/assets/SCSS/Back/footer.css"/>
 
 <?php
-    // include 'Views/Front/composants/header.php';
-    // include 'Views/Back/composants/navbar.php';
-    include_once 'Views/Front/composants/head.php';
+    include 'Views/Back/composants/header.php';
+    include_once 'Views/Back/composants/head.php';
 ?>
 
 <body>

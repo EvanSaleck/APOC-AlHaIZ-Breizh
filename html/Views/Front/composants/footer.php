@@ -1,11 +1,11 @@
-<div class="FooterContainer" id="front">
+<div class="FooterContainer">
     <section class="FooterElements">
         <div class="DivAssistance">
             <ul>
                 <!-- Pages à créer pour les liens -->
                 <li><h2>Assistance</h2></li>
-                <li class="Front"><a href="/DemandeAnnulation">Demander une annulation de compte</a></li>
-                <li class="Front"><a href="/DemandePropriétaire">Devenir Propriétaire</a></li>
+                <li><a href="/DemandeAnnulation">Demander une annulation de compte</a></li>
+                <li><a href="/DemandePropriétaire">Devenir Propriétaire</a></li>
             </ul>
         </div>
 
@@ -14,7 +14,7 @@
         <img src="/assets/imgs/logo.png" alt="Logo">
             <ul>
                 <!-- Pages à créer pour les liens -->
-                <li class="Front"><a href="/MentionsLegales">Mentions légales</a></li>
+                <li><a href="/MentionsLegales">Mentions légales</a></li>
             </ul>
         </div>
 
@@ -22,7 +22,7 @@
             <ul>
                 <!-- Page à créer pour le lien -->
                 <li><h2>Nous contacter</h2></li>
-                <li class="Front"><a href="/Contact">Formulaire de contact</a></li>
+                <li><a href="/Contact">Formulaire de contact</a></li>
             </ul>
         </div>
 

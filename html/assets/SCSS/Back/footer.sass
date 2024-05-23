@@ -1,4 +1,4 @@
-@use './general' as general
+@use '../Front/general' as general
 
 .FooterContainer
     /* Taille */
@@ -12,7 +12,7 @@
     font-family: general.$police-texte
     font-size: 1em  
 
-    background-color: general.$couleur-front-bleu-verdatre
+    background-color: general.$couleur-back-bleu-zodiac
 
     a
         &:link
@@ -49,10 +49,10 @@
 
                     a
                         &:hover
-                            color: #F1D950
-
+                                color: #F0AA1F
+                
                         &:visited
-                            color: #F1D950
+                            color: #F0AA1F
 
         .DivAssistance
             grid-column: 1
