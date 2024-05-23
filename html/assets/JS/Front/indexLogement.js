@@ -69,6 +69,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function adjustMarginTop() {
-    var marginTopValue = (header.offsetHeight + 20) + 'px'; 
-    cardsContainer.style.marginTop = marginTopValue; 
+    if (header == null){
+        return;
+    } else {
+        var marginTopValue = (header.offsetHeight + 20) + 'px'; 
+        cardsContainer.style.marginTop = marginTopValue; 
+    }
+
 }

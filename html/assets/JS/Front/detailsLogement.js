@@ -156,5 +156,11 @@ document.addEventListener('DOMContentLoaded', function() {
             totalTtc.innerHTML = parseFloat(data[0]['prix_nuit_ttc'])* ((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
         });
         totalTtc.innerHTML = parseFloat(data[0]['prix_nuit_ttc'])* ((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
+    
+        let btnRes = document.getElementById("btnRes");
+        btnRes.addEventListener('click', function() {
+            sessionStorage.setItem('idLogement', logement.id_logement);
+            window.location.href = `/reservation/devis`;
+        });
     });
 });

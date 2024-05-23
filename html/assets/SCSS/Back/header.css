@@ -140,13 +140,4 @@
   #titre {
     display: none;
   }
-}
-@media screen and (max-width: 768px) {
-  .Menu {
-    gap: 10px;
-  }
-  .Menu ul {
-    gap: 35px !important;
-    font-size: 15px;
-  }
 }/*# sourceMappingURL=header.css.map */
