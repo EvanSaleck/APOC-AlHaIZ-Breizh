@@ -8,8 +8,8 @@
         </div>
         <div class="Menu">
             <ul>
-                <li><a href="/Views/Front/about.php">A propos</a></li>
                 <li><a href="/Views/Front/index.php">Accueil</a></li>
+                <li><a href="/Views/Front/about.php">A propos</a></li>
             </ul>
             <div id="Compte"></div>
         </div>

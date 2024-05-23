@@ -28,7 +28,7 @@
             }
 
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cheminJS)) {
-                echo '<script src="' . $cheminJS . '"></script>' . PHP_EOL;
+                echo '<script src="' . $cheminJS . '" type="module"></script>' . PHP_EOL;
             }
         }
     ?>

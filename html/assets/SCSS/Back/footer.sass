@@ -1,4 +1,8 @@
-@use '../Front/general' as general
+@use './general' as general
+
+footer
+    background-color: general.$couleur-back-bleu-zodiac
+
 
 .FooterContainer
     /* Taille */
@@ -10,9 +14,10 @@
     /* Texte */
     color: #FFFFFF
     font-family: general.$police-texte
-    font-size: 1em  
+    font-size: 1em 
 
-    background-color: general.$couleur-back-bleu-zodiac
+    @media screen and ( max-width: 960px )
+        font-size: 0.8em
 
     a
         &:link
@@ -20,12 +25,12 @@
 
     h2
         font-family: general.$police-titre
-        font-size: 1.6em
+        font-size: 1.4em
 
     .FooterElements
-        display: grid
-        grid-template-columns: minmax(100px, 1fr) minmax(200px, auto) minmax(100px, 1fr)
-        grid-auto-rows: minmax(100px, auto)
+        display: flex
+        justify-content: center
+        align-items: center
 
         margin-bottom: 10px
 
@@ -35,11 +40,8 @@
             height: 7vh
 
         div
-            margin: 10px 30px
-            flex-direction: column
+            margin: 1vw 3vw
             align-items: center
-
-            margin-bottom: 10px
             
             ul
                 list-style: none
@@ -49,33 +51,16 @@
 
                     a
                         &:hover
-                                color: #F0AA1F
+                            color: #F0AA1F
                 
                         &:visited
                             color: #F0AA1F
 
-        .DivAssistance
-            grid-column: 1
-            grid-row: 1
+.DivCopyright
+    display: flex
+    justify-content: center
+    align-items: center
+    text-align: center
 
-        .DivLogo
-            grid-column: 2
-            grid-row: 1
-            margin-top: 5px
-            text-align: center
-
-        .DivContact
-            float: right
-            grid-column: 3
-            grid-row: 1
-
-        .DivCopyright
-            font-family: general.$police-titre
-            grid-column: 1 / 4
-            grid-row: 2
-            text-align: center
-            align-items: center
-            margin-top: 10px
-
-            p
-                margin-top: 10px
+    font-family: general.$police-titre
+    margin-top: 10px
