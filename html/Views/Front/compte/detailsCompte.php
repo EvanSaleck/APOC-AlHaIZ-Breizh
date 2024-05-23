@@ -14,7 +14,7 @@ include_once 'Views/Front/composants/head.php';
       </div>
       <h1>Détails du compte</h1>
     </div>
-    <div>
+    <div class="infos">
       <div class="infoCo">
         <h2>Informations de connexion</h2>
         <div class="divPseudo">
@@ -54,7 +54,6 @@ include_once 'Views/Front/composants/head.php';
 
     </div>
     <div>
-
       <button class="update">Modifier le profil</button>
     </div>
   </div>
