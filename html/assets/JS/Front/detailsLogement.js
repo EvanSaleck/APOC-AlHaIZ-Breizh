@@ -1,3 +1,41 @@
+function calculDevis(prixNuitTTC) {
+    let dateDebut = document.getElementById("dateDebut");
+    let dateFin = document.getElementById("dateFin");
+    let sctNbOccupants = document.getElementById("sctNbOccupants");
+
+    let tempsDateArrivee = new Date(dateDebut.value).getTime()
+    let tempsDateDepart = new Date(dateFin.value).getTime()
+    let nbNuits = (tempsDateDepart - tempsDateArrivee)/ (1000 * 3600 * 24)
+    let prixSejourTTC = prixNuitTTC * nbNuits
+    let fraisServices = prixSejourTTC * 0.01
+    let taxeSejour = sctNbOccupants.value * nbNuits
+    let totalDevis = prixSejourTTC + fraisServices + taxeSejour
+    return totalDevis
+}
+
+function envoiDevis(prixNuitTTC,data) {
+    let dateDebut = document.getElementById("dateDebut");
+    let dateFin = document.getElementById("dateFin");
+    let sctNbOccupants = document.getElementById("sctNbOccupants");
+
+    let tempsDateArrivee = new Date(dateDebut.value).getTime()
+    let tempsDateDepart = new Date(dateFin.value).getTime()
+    let nbNuits = (tempsDateDepart - tempsDateArrivee)/ (1000 * 3600 * 24)
+    let prixSejourTTC = prixNuitTTC * nbNuits
+    let fraisServices = prixSejourTTC * 0.01
+    let taxeSejour = sctNbOccupants.value * nbNuits
+    let totalDevis = prixSejourTTC + fraisServices + taxeSejour
+
+    sessionStorage.setItem('dateArrivee', dateDebut.value);
+    sessionStorage.setItem('dateDepart', dateFin.value);
+    sessionStorage.setItem('nbOccupants', sctNbOccupants.value);
+    sessionStorage.setItem('totalLocation', prixSejourTTC);
+    sessionStorage.setItem('fraisService', fraisServices);
+    sessionStorage.setItem('taxeSejour', taxeSejour);
+    sessionStorage.setItem('totalTTC', totalDevis);
+    sessionStorage.setItem('dataLogement', data);
+}
+
 console.log('detailsLogement.js');
 document.addEventListener('DOMContentLoaded', function() {
     console.log(sessionStorage.getItem('idLogement'));
@@ -137,29 +175,21 @@ document.addEventListener('DOMContentLoaded', function() {
         dateFin.setAttribute("min",dateDebut.value);
 
         dateDebut.addEventListener("input", () => {
-            console.log((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
-
-            dateFin.setAttribute("min",dateDebut.value);
-
+            dateFin.setAttribute("min",dateDebut.value)
             dateArrivee.innerHTML = dateDebut.value
-
-            totalTtc.innerHTML = parseFloat(data[0]['prix_nuit_ttc'])* ((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
+            totalTtc.innerHTML = calculDevis(data[0]['prix_nuit_ttc'])
         });
         
         dateFin.addEventListener("input", () => {
-            console.log((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
-            
-            dateDebut.setAttribute("max",dateFin.value);
-
+            dateDebut.setAttribute("max",dateFin.value)
             dateDepart.innerHTML = dateFin.value
-            
-            totalTtc.innerHTML = parseFloat(data[0]['prix_nuit_ttc'])* ((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
+            totalTtc.innerHTML = calculDevis(data[0]['prix_nuit_ttc'])
         });
-        totalTtc.innerHTML = parseFloat(data[0]['prix_nuit_ttc'])* ((new Date(dateFin.value).getTime() - new Date(dateDebut.value).getTime())/ (1000 * 3600 * 24))
+        totalTtc.innerHTML = calculDevis(data[0]['prix_nuit_ttc'])
     
         let btnRes = document.getElementById("btnRes");
         btnRes.addEventListener('click', function() {
-            sessionStorage.setItem('idLogement', logement.id_logement);
+            envoiDevis(data[0]['prix_nuit_ttc'],data[0])
             window.location.href = `/reservation/devis`;
         });
     });

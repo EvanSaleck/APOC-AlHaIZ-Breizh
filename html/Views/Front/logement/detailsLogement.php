@@ -1,17 +1,11 @@
 <?php
-    //include_once 'Views/Front/composants/head.php';
-    //include_once 'Views/Front/composants/navbar.php';
+    include_once 'Views/Front/composants/navbar.php';
     //include_once 'Views/Front/composants/header.php';
+    include_once 'Views/Front/composants/head.php';
+
 
  ?>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/assets/SCSS/Front/detailsLogement.css" type="text/css">
-    <script src="/assets/JS/Front/detailsLogement.js"></script>
-</head>
+
 <body>
     <div id=descLogement>
         <section id=sectionDesc>
