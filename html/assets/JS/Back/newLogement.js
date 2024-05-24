@@ -34,7 +34,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("formNewLogement")
     .addEventListener("submit", function (event) {
       event.preventDefault(); // Empêche la soumission par défaut du formulaire
-
+      window.scroll({
+        top: 0,
+        behavior: 'smooth'
+      });
       // Crée un nouvel objet FormData à partir du formulaire
       var formData = new FormData(this);
 
@@ -47,8 +50,12 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
           })
           .then((data) => {
-            ThrowAlertPopup("Le logement à bien été mis en ligne !", "succes");
-            window.location.href = "/logements";
+            if(data['error']){
+              ThrowAlertPopup(data['error'], "error");
+            } else {
+              ThrowAlertPopup("Le logement à bien été mis en ligne !", "succes");
+              window.location.href = "/logements";
+            }
           })
           .catch((error) => {
             ThrowAlertPopup("Erreur: " + error, "error");

@@ -56,11 +56,11 @@ switch($requestUrl) {
     // routes du back
     case '/logement/new':
     case '/logement/new/':
-        if(!isset($_SESSION['proprio'])) {
-            header('Location: /');
-        }else {
+        // if(!isset($_SESSION['proprio'])) {
+        //     header('Location: /');
+        // }else {
             include './Views/Back/logement/newLogement.php';
-        }
+        // }
         break;
     
     // routes back office

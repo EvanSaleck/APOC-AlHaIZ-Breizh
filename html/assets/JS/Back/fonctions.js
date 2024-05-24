@@ -202,3 +202,36 @@ function Deconnexion() {
     window.location.href = '/Deconnexion';
 }
 
+function ThrowAlertPopup(message, type) {
+    // Vérifie s'il y a déjà une popup affichée et la supprime
+    if (document.getElementsByClassName('alert-popup').length > 0) {
+        document.getElementsByClassName('alert-popup')[0].remove();
+    }
+
+    // Crée une nouvelle popup
+    let alertPopup = document.createElement('div');
+    alertPopup.className = 'alert-popup';
+    let val = null;
+    if (type === 'error') {
+        val = 'Erreur';
+    } else if (type === 'succes') {
+        val = 'Succès';
+    }
+    alertPopup.innerHTML = `
+    <div class="alert-popup-content ${type}">   
+        <span class="titre">${val}</span>
+        <p>${message}</p>
+    </div>
+    `;
+    document.body.appendChild(alertPopup);
+
+    // Stocke les informations de la popup dans localStorage
+    localStorage.setItem('alertPopup', JSON.stringify({ message, type }));
+
+    // Supprime la popup après 5 secondes et nettoie le localStorage
+    setTimeout(() => {
+        alertPopup.remove();
+        localStorage.removeItem('alertPopup');
+    }, 10000);
+}
+

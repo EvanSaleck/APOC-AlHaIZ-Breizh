@@ -163,10 +163,10 @@ class Logement {
 
             // on gère l'insert de la photo après avoir eu l'id du logement
             if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
-                $dossier = '/assets/imgs/logements/';
+                $dossier = './assets/imgs/logements/';
                 $extension = pathinfo($_FILES['photo']['name'])['extension'];
                 $fichier = $dossier . 'image_' . $idLogement . '.' . $extension;
-
+                
                 if (!move_uploaded_file($_FILES['photo']['tmp_name'], $fichier)) {
                     throw new Exception('Erreur lors de l\'upload de la photo. :,(');
                     return false;
