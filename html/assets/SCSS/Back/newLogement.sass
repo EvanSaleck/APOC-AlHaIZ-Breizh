@@ -11,13 +11,15 @@ div
     display: flex
     flex-direction: column
 
+.paysEtat
+    display: none
+
 input 
     border: 2px solid  #ADC6E3
     border-radius: 6px
     height: 2em
     font-size: 1rem
     padding-left: 0.5em
-
 
 select
     border: 2px solid #ADC6E3
@@ -74,6 +76,7 @@ select
 textarea
     border: 2px solid  #ADC6E3
     border-radius: 6px
+    padding: 0.5em
 
 .containerPrincipal
     color: general.$couleur-back-bleu-zodiac
@@ -109,6 +112,17 @@ textarea
             display: flex
             flex-direction: column
             padding-right: 7em
+        
+        .divTarif
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+            gap: 1em
+            align-items: center
+
+            span
+                font-size: 1.5rem
+
                 
         .photo
             flex: 0.5
