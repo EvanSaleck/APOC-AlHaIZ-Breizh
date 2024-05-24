@@ -3,7 +3,7 @@
         <div class="Logo">
             <a href="/reservations">
                 <img src="/assets/imgs/logo.png" id="logoAssoHeaderDesktop" alt="Logo">
-                <p id="titre">AlHaIZ Breizh</p>
+                <p id="titreHeader">AlHaIZ Breizh</p>
             </a>
         </div>
         <div class="Menu">

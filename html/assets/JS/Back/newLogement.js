@@ -80,6 +80,11 @@ function validateFormData(formData) {
     getNextErrorSpan('photo').textContent = 'L\'image ne doit pas dépasser 200 Ko';
     document.querySelector('#photo').classList.add('error');
   }
+  // on teste si une image a été sélectionnée
+  if (formData.get('photo').size === 0) {
+    getNextErrorSpan('photo').textContent = 'Veuillez sélectionner une image';
+    document.querySelector('#photo').classList.add('error');
+  }
 
   validateField(formData, 'titre', [
     { check: value => value.trim() !== '', errorMessage: 'Le titre ne peut pas être vide' },

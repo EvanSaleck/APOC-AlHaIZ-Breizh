@@ -179,12 +179,12 @@ switch($requestUrl) {
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);
 
-        header('Content-Type: application/json');
         echo $logementController->getAmenagementsOfLogementById($logement_id);
         break;
 
     default:
         http_response_code(404);
-        echo "BAHAHAHAH 404 CHHHEEHHH";
+        echo "Erreur 404 - Page non trouvée";
+        // echo "BAHAHAHAH 404 CHHHEEHHH";
         exit;
 }
