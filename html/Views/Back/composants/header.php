@@ -1,16 +1,16 @@
 <header>
     <div class="HeaderConteneur">
         <div class="Logo">
-            <a href="/reservations">
+            <a href="./index.php">
                 <img src="/assets/imgs/logo.png" id="logoAssoHeaderDesktop" alt="Logo">
                 <p id="titre">AlHaIZ Breizh</p>
             </a>
         </div>
         <div class="Menu">
             <ul>
-                <li><a href="/">A propos</a></li>
-                <li><a href="/">Logements</a></li>
-                <li><a href="/">Réservations</a></li>
+                <li><a href="/about">A propos</a></li>
+                <li><a href="/logement">Logements</a></li>
+                <li><a href="/Back/reservations">Réservations</a></li>
                 <li><a href="/">Accueil</a></li>
             </ul>
             <div id="Compte"></div>
