@@ -141,7 +141,8 @@ switch($requestUrl) {
 
     case '/api/getCompteClientDetails':
         // $idCompte = $_SESSION['client'];
-        $idCompte = 1;
+        $client = json_decode($_SESSION['client']);
+        $idCompte = $client->id_compte;
         $utilisateurController->getCompteClientDetails($idCompte);
         break;
 
@@ -149,11 +150,12 @@ switch($requestUrl) {
     case 'api/getReservations/all/':
         $reservationController->getAllReservations();
         break;
-    
     case '/api/insertReservation':
     case '/api/insertReservation/':
         $data = $_POST;
-        $reservationController->saveReservation($data, 1);
+        $client = json_decode($_SESSION['client']);
+        $idcpt = $client->id_compte;
+        $reservationController->saveReservation($data, $idcpt);
         break;
 
     case '/detailReservation':

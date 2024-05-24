@@ -62,6 +62,23 @@ class ReservationController {
 
     }
 
+    public function getLastReservationfromDateDebutAndDateFin($data, $idcpt) {
+        try {
+            $date_arrivee = $data['date_arrivee'];
+            $date_depart = $data['date_depart'];
+
+            $return = $this->reservation->getLastReservationfromDateDebutAndDateFin($date_arrivee, $date_depart);
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        }
+        catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode($e->getMessage());
+            exit;
+        }
+    }
+
     public function getReservationById($data) {
         try {
             $id = $data['id'];

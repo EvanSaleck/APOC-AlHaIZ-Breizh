@@ -10,18 +10,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateReservationInfo() {
         let conteneur = document.querySelector('.infosReservationDev');
-    
+        
+        let data = JSON.parse(sessionStorage.getItem('Logement'));
         // Récupération des données depuis le sessionStorage
-        const dateArrivee = JSON.parse(sessionStorage.getItem('Logement')).dateDebut;
-        const dateDepart = JSON.parse(sessionStorage.getItem('Logement')).dateFin;
-        const nbOccupants = JSON.parse(sessionStorage.getItem('Logement')).sctNbOccupants;
-        const prixNuitTtc1 = parseFloat(JSON.parse(sessionStorage.getItem('Logement')).tarifnuit); // Convertit en nombre pour utiliser toFixed
-        const taxeSejour1 = parseFloat(JSON.parse(sessionStorage.getItem('Logement')).taxeSejour); // Convertit en nombre pour utiliser toFixed
-        const totalTtc1 = parseFloat(JSON.parse(sessionStorage.getItem('Logement')).prixSejourTTC); // Convertit en nombre pour utiliser toFixed
-        const titreLogement = JSON.parse(sessionStorage.getItem('Logement')).titrelogement;
-        const imageLogement = JSON.parse(sessionStorage.getItem('Logement')).image;
-        const fraisService1 = parseFloat(JSON.parse(sessionStorage.getItem('Logement')).fraisServices); // Convertit en nombre pour utiliser toFixed
-        const prixParNuit1 = parseFloat(JSON.parse(sessionStorage.getItem('Logement')).prixparnuit); // Convertit en nombre pour utiliser toFixed
+        const dateArrivee = data.dateDebut;
+        const dateDepart = data.dateFin;
+        const nbOccupants = data.sctNbOccupants;
+        const prixNuitTtc1 = parseFloat(data.tarifnuit); // Convertit en nombre pour utiliser toFixed
+        const taxeSejour1 = parseFloat(data.taxeSejour); // Convertit en nombre pour utiliser toFixed
+        const totalTtc1 = parseFloat(data.totalDevis); // Convertit en nombre pour utiliser toFixed
+        const titreLogement = data.titrelogement;
+        const imageLogement = data.image;
+        const fraisService1 = parseFloat(data.fraisServices); // Convertit en nombre pour utiliser toFixed
+        const prixParNuit1 = parseFloat(data.prixparnuit);
+        
+        document.getElementById('Nbnuits').innerText = data.nbNuits// Convertit en nombre pour utiliser toFixed
     
         // Conversion en nombre pour utiliser toFixed
         const prixNuitTtc = prixNuitTtc1.toFixed(2);
@@ -132,16 +135,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // Affichage de la pop up après validation
             console.log("Toutes les vérifications sont passées, affichage de la popup de paiement.");
             section.classList.add("active");
+
+            let data = JSON.parse(sessionStorage.getItem('Logement'));
             
             let formData = new FormData();
             formData.append('dateArrivee', document.getElementById('dateArrivee').textContent);
             formData.append('dateDepart', document.getElementById('dateFin').textContent);
-            formData.append('Nbnuits', JSON.parse(sessionStorage.getItem('Logement')).nbNuits);
-            formData.append('nbOccupants', document.getElementById('sctNbOccupants').textContent);
-            formData.append('taxeSejour', document.getElementById('taxeSejour').textContent);
-            formData.append('totalTtc', document.getElementById('totalTtc').textContent);
-            formData.append('fraisService', document.getElementById('fraisService').textContent);
-            formData.append('tariftotalnuit', document.getElementById('prixNuitTtc').textContent);
+            formData.append('Nbnuits', data.nbNuits);
+            formData.append('nbOccupants', document.getElementById('sctNbOccupants').textContent.split(" ")[0]);
+            formData.append('taxeSejour', document.getElementById('taxeSejour').textContent.split("€")[0]);
+            formData.append('totalTtc', document.getElementById('totalTtc').textContent.split("€")[0]);
+            formData.append('fraisService', document.getElementById('fraisService').textContent.split("€")[0]);
+            formData.append('tariftotalnuit', document.getElementById('prixNuitTtc').textContent.split("€")[0]);
             formData.append('id_logement', sessionStorage.getItem('idLogement'));
 
             fetch("/api/insertReservation", {
@@ -150,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }).then(response => response.json())
                 .then((data) => {
                 console.log(data);
+                sessionStorage.setItem('idresa', data);
                 ThrowAlertPopup("Réservation ajoutée avec succès", "succes");
                 // on envoie sur la page de gestion des logements
                 window.location.href = "../detailReservation";
