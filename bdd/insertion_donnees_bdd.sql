@@ -133,7 +133,7 @@ VALUES ('Mme', 'Mir', 'Ador', 'mir.ador@gmail.fr', '$2y$10$K9Pqj5NAb9LHPaf/WDVNI
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
 VALUES ('Mme', 'Kniglait', 'Keira', 'Keira.Kniglait@gmail.fr', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'KeiraSwann','/assets/imgs/Profils/keira_kniglait.webp', '26/05/1985', '4', '/assets/imgs/cni/identite_01','21/12/2025', true );
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Mr', 'Toman', 'Ks', 'toman.ks@apple.us', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'TomanWar','/assets/imgs/Profils/Toman_ks.webp', '09/07/1956','5', '/assets/imgs/cni/identite_02', '27/05/2027', true );
+VALUES ('Mr', 'Toman', 'Ks', 'toman.ks@apple.us', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'TomanWar','/assets/imgs/Profils/toman_ks.webp', '09/07/1956','5', '/assets/imgs/cni/identite_02', '27/05/2027', true );
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
 VALUES ('Non spécifié', 'Cam', 'Ailaion', 'Ailaion.cam@gmail.fr', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'AilCamXX','/assets/imgs/Profils/ailaion_cam.webp', '31/12/1956','2', './assets/imgs/cni/identite_03', '21/05/2020', false );
 
