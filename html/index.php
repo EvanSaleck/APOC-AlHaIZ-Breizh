@@ -44,9 +44,9 @@ switch($requestUrl) {
 
         break;
 
-    case '/reservations':
-    case '/reservations/':
-        if(!isset($_SESSION['client'])) {
+    case '/Back/reservations':
+    case '/Back/reservations/':
+        if(!isset($_SESSION['proprio'])) {
             header('Location: /');
         }else {
             include_once('Views/Back/reservation/listeReservations.php');
@@ -104,7 +104,6 @@ switch($requestUrl) {
     // Routes des API
     case '/Deconnexion':
     case 'Deconnexion':
-        session_start();
         $_SESSION = array();
         session_destroy();
         header('Location: /');

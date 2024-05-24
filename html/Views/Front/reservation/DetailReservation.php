@@ -5,7 +5,7 @@
     include_once 'Views/Front/composants/head.php';
 ?>
 <div class="detailResa">
-    <a href="../reservations"><button class="boutonPrecedent">Précédent</button></a>
+    <a href="/"><button class="boutonPrecedent">Précédent</button></a>
 
 
         <div class="headerDevis">
