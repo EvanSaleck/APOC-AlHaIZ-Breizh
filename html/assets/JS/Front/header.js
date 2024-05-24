@@ -7,7 +7,13 @@ addEventListener("DOMContentLoaded", () => {
 });
 
 function AddListeners() {
-  let compte = document.getElementById("Compte");
+  // Si la taille de l'écran est inférieure à 992px, on ajoute un listener sur le bouton de connexion
+  let compte;
+  if (window.innerWidth < 768) {
+    compte = document.getElementById("navcpt");
+  } else {  
+    compte = document.getElementById("Compte")
+  }
   compte.addEventListener("click", () => {
     if (currentUser === null) {
       ShowModalConnexion();
@@ -38,6 +44,7 @@ function SetModalAndProfilePicture() {
 }
 
 function ShowModalConnexion() {
+
   let modal = document.getElementById("Bulle");
   let profile = document.getElementById("Profil");
   profile.innerHTML = `<p>S'inscrire</p><svg width="35" height="35" viewBox="0 0 55 46" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,6 +60,10 @@ function ShowModalConnexion() {
   connexion.setAttribute("onclick", "CreateConnexionModal()");
 
   modal.classList.remove("d-none");
+
+  setTimeout(() => {
+    document.addEventListener("click", closeModal);
+  }, 1000); // Ajou
 }
 
 function ShowModalProfile() {
@@ -70,15 +81,19 @@ function ShowModalProfile() {
 
   modal.classList.remove("d-none");
 
-
-  function closeModal(e) {
-    if (!modal.contains(e.target) && e.target.id != "Connexion") {
-      modal.classList.add("d-none");
-      document.removeEventListener("click", closeModal);
-    }
-  }
-
   setTimeout(() => {
     document.addEventListener("click", closeModal);
-  }, 100); // Ajout d'un délai pour éviter la fermeture immédiate
+  }, 1000); // Ajou
+
+
+}
+
+
+function closeModal(e) {
+  let modal = document.getElementById("Bulle");
+  if (!modal.contains(e.target) && e.target.id != "Connexion") {
+    console.log("close")
+    modal.classList.toggle("d-none");
+    document.removeEventListener("click", closeModal);
+  }
 }

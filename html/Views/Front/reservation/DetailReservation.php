@@ -10,7 +10,9 @@
 
         <div class="headerDevis">
             <button class="retour">
+                <a href="/">
                 <img src="/assets/imgs/mobile/Chevron2.svg" alt="retourPagePrecedente" />
+                </a>
             </button>
             <h1 class="titreRecapDevis"> Réservation détaillée </h1>
         </div>
