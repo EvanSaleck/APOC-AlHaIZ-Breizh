@@ -8,8 +8,8 @@
             <img class="imgLogements" src="/assets/imgs/mobile/MaisonArbre.svg" alt=""> 
             <p class="nomBoutton">Logements</p>
         </button>
-        <button class="bouttonCompte">
-            <img class="imgCompte" src="/assets/imgs/mobile/User.svg" alt=""> 
+        <button class="bouttonCompte" id="navcpt">
+            <img class="imgCompte" src="/assets/imgs/mobile/User.svg" alt="" > 
             <p class="nomBoutton">Compte</p>
         </button>
     </div>
