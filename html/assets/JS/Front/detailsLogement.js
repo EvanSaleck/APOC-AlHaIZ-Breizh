@@ -33,7 +33,6 @@ function envoiDevis(prixNuitTTC,data) {
         "prixparnuit": prixNuitTTC,
         "tarifnuit": prixSejourTTC,
         "nbNuits": nbNuits,
-        "prixSejourTTC": prixSejourTTC,
         "fraisServices": fraisServices,
         "taxeSejour": taxeSejour,
         "totalDevis": totalDevis,

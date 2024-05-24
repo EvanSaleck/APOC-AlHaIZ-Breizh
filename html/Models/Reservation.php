@@ -51,7 +51,7 @@
 
         public function saveReservation($data, $idcpt){
 
-            $query = "INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES (?, ?, ?, ?, ?, FALSE, ?, ?)";
+            $query = "INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, total_tarif_ttc, frais_service, taxe_sejour, tarif_total,  date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, FALSE, ?, ?)";
     
             $statement = $this->pdo->prepare($query);
     
@@ -61,13 +61,19 @@
                 $data['Nbnuits'],        // nb_nuit
                 $data['dateArrivee'],    // date_arrivee
                 $data['dateDepart'],     // date_depart
-                $data['NbOccupants'],    // nb_occupant
+                $data['nbOccupants'],    // nb_occupant
+                $data['totalTtc'],    // total_tarif_ttc
+                $data['fraisService'],    // frais_service
+                $data['taxeSejour'],    // taxe_sejour
+                $data['tariftotalnuit'],    // tarif_total
                 $dateReservation,        // date_reservation
                 $data['id_logement'],    // R_id_logement
                 $idcpt                   // R_id_compte
             ]);
                         
-            return "Réussi";
+            $lastInsertId = $this->pdo->lastInsertId();
+
+            return $lastInsertId;
         }
     }
 ?>

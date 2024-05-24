@@ -21,7 +21,8 @@
             <div class="infosLogementResa">
                 <div class="infosLogement">
                     <div class="logementResa">
-                        <h2 class="titreLogDevis"> Maison de campagne LANDERNEAU </h2>
+                        <h2 class="titreLogDevis" id="titreLogement"> 
+                        </h2>
                         <div class="noteResa">
                             <p> Note </p>
                             <div class="note">
@@ -72,7 +73,7 @@
                         <p id="taxeSejour"></p>
                     </div>
                     <div>
-                        <p class="info-label">Total pour 12 nuits (en €) :</p>
+                        <p class="info-label">Total pour <span id="Nbnuits"></span> nuits (en €) :</p>
                         <p id="totalTtc"></p>
                     </div>
 
