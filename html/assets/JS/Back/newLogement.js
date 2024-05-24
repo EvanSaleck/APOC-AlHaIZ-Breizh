@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
           })
           .then((data) => {
+            console.log(data['error']);
             if(data['error']){
               ThrowAlertPopup(data['error'], "error");
             } else {
@@ -58,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           })
           .catch((error) => {
+            console.log("Erreur: " + error);
             ThrowAlertPopup("Erreur: " + error, "error");
           });
       }
@@ -70,13 +72,18 @@ function validateFormData(formData) {
   // on commence par tester le type de la photo ...
   if (!isValidImageType(formData.get('photo'))) {
     getNextErrorSpan('photo').textContent = 'Le fichier doit être une image de type jpeg, png, gif ou webp';
-    return false;
+    document.querySelector('#photo').classList.add('error');
   }
   
   // puis on teste la taille de la photo
   if (!isValidImageSize(formData.get('photo'))) {
     getNextErrorSpan('photo').textContent = 'L\'image ne doit pas dépasser 200 Ko';
-    return false;
+    document.querySelector('#photo').classList.add('error');
+  }
+  // on teste si une image a été sélectionnée
+  if (formData.get('photo').size === 0) {
+    getNextErrorSpan('photo').textContent = 'Veuillez sélectionner une image';
+    document.querySelector('#photo').classList.add('error');
   }
 
   validateField(formData, 'titre', [
@@ -86,8 +93,8 @@ function validateFormData(formData) {
   
   validateField(formData, 'tarif', [
     { check: value => value.trim() !== '', errorMessage: 'Le tarif ne peut pas être vide' },
-    { check: value => !isNaN(value), errorMessage: 'Le tarif doit être une valeur numérique' },
-    { check: value => value > 0, errorMessage: 'Le tarif doit être supérieur à 0' }
+    { check: value => value > 0, errorMessage: 'Le tarif doit être supérieur à 0' },
+    { check: value => !isNaN(value), errorMessage: 'Le tarif doit être une valeur numérique' }
   ]);
 
   validateField(formData, 'nom_rue', [
@@ -102,8 +109,8 @@ function validateFormData(formData) {
 
   validateField(formData, 'cp', [
     { check: value => value.trim() !== '', errorMessage: 'Le code postal ne peut pas être vide' },
-    { check: value => !isNaN(value), errorMessage: 'Le code postal doit être une valeur numérique' },
-    { check: value => value.length === 5, errorMessage: 'Le code postal doit contenir 5 chiffres' }
+    { check: value => value.length === 5, errorMessage: 'Le code postal doit contenir 5 chiffres' },
+    { check: value => !isNaN(value), errorMessage: 'Le code postal doit être une valeur numérique' }
   ]);
 
   validateField(formData, 'complement_adresse', [
@@ -121,47 +128,47 @@ function validateFormData(formData) {
 
   validateField(formData, 'surface', [
     { check: value => value.trim() !== '', errorMessage: 'La surface ne peut pas être vide' },
-    { check: value => !isNaN(value), errorMessage: 'La surface doit être une valeur numérique' },
-    { check: value => value > 0, errorMessage: 'La surface doit être supérieur à 0' }
+    { check: value => value > 0, errorMessage: 'La surface doit être supérieur à 0' },
+    { check: value => !isNaN(value), errorMessage: 'La surface doit être une valeur numérique' }
   ]);
 
   validateField(formData, 'nbPersMax', [
     { check: value => value.trim() !== '', errorMessage: 'Le nombre de personnes maximum ne peut pas être vide' },
-    { check: value => !isNaN(value), errorMessage: 'Le nombre de personnes maximum doit être une valeur numérique' },
-    { check: value => value > 0, errorMessage: 'Le nombre de personnes maximum doit être supérieur à 0' }
+    { check: value => value > 0, errorMessage: 'Le nombre de personnes maximum doit être supérieur à 0' },
+    { check: value => !isNaN(value), errorMessage: 'Le nombre de personnes maximum doit être une valeur numérique' }
   ]);
 
   validateField(formData, 'nbChambres', [
     { check: value => value.trim() !== '', errorMessage: 'Le nombre de chambres ne peut pas être vide' },
-    { check: value => !isNaN(value), errorMessage: 'Le nombre de chambres doit être une valeur numérique' },
-    { check: value => value > 0, errorMessage: 'Le nombre de chambres doit être supérieur à 0' }
+    { check: value => value > 0, errorMessage: 'Le nombre de chambres doit être supérieur à 0' },
+    { check: value => !isNaN(value), errorMessage: 'Le nombre de chambres doit être une valeur numérique' }
   ]);
 
   validateField(formData, 'nbLitsSimples', [
     { check: value => value.trim() !== '', errorMessage: 'Le nombre de lits simples ne peut pas être vide' },
-    { check: value => !isNaN(value), errorMessage: 'Le nombre de lits simples doit être une valeur numérique' },
-    { check: value => value >= 0, errorMessage: 'Le nombre de lits simples doit être supérieur ou égal à 0' }
+    { check: value => value >= 0, errorMessage: 'Le nombre de lits simples doit être supérieur ou égal à 0' },
+    { check: value => !isNaN(value), errorMessage: 'Le nombre de lits simples doit être une valeur numérique' }
   ]);
 
   validateField(formData, 'nbLitsDoubles', [
     { check: value => value.trim() !== '', errorMessage: 'Le nombre de lits doubles ne peut pas être vide' },
-    { check: value => !isNaN(value), errorMessage: 'Le nombre de lits doubles doit être une valeur numérique' },
-    { check: value => value >= 0, errorMessage: 'Le nombre de lits doubles doit être supérieur ou égal à 0' }
+    { check: value => value >= 0, errorMessage: 'Le nombre de lits doubles doit être supérieur ou égal à 0' },
+    { check: value => !isNaN(value), errorMessage: 'Le nombre de lits doubles doit être une valeur numérique' }
   ]);
 
   validateField(formData, 'delaiResaArrivee', [
-    { check: value => !isNaN(value), errorMessage: 'Le délai de réservation d\'arrivée doit être une valeur numérique' },
-    { check: value => value >= 0, errorMessage: 'Le délai de réservation d\'arrivée doit être supérieur ou égal à 0' }
+    { check: value => value >= 0, errorMessage: 'Le délai de réservation d\'arrivée doit être supérieur ou égal à 0' },
+    { check: value => !isNaN(value), errorMessage: 'Le délai de réservation d\'arrivée doit être une valeur numérique' }
   ]);
 
   validateField(formData, 'dureeMinLoc', [
-    { check: value => !isNaN(value), errorMessage: 'La durée minimale de location doit être une valeur numérique' },
-    { check: value => value >= 0, errorMessage: 'La durée minimale de location doit être supérieur ou égal à 0' }
+    { check: value => value >= 0, errorMessage: 'La durée minimale de location doit être supérieur ou égal à 0' },
+    { check: value => !isNaN(value), errorMessage: 'La durée minimale de location doit être une valeur numérique' }
   ]);
 
   validateField(formData, 'delaiAnnulMax', [
-    { check: value => !isNaN(value), errorMessage: 'Le délai d\'annulation maximal doit être une valeur numérique' },
-    { check: value => value >= 0, errorMessage: 'Le délai d\'annulation maximal doit être supérieur ou égal à 0' }
+    { check: value => value >= 0, errorMessage: 'Le délai d\'annulation maximal doit être supérieur ou égal à 0' },
+    { check: value => !isNaN(value), errorMessage: 'Le délai d\'annulation maximal doit être une valeur numérique' }
   ]);
 
   return document.querySelectorAll('.error').length === 0;
@@ -282,4 +289,3 @@ function isValidImageSize(file) {
   // Vérifier si la taille du fichier est inférieure à la taille maximale
   return file.size <= maxSize;
 }
-

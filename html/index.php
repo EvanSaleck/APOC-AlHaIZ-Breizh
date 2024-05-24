@@ -44,9 +44,9 @@ switch($requestUrl) {
 
         break;
 
-    case '/reservations':
-    case '/reservations/':
-        if(!isset($_SESSION['client'])) {
+    case '/Back/reservations':
+    case '/Back/reservations/':
+        if(!isset($_SESSION['proprio'])) {
             header('Location: /');
         }else {
             include_once('Views/Back/reservation/listeReservations.php');
@@ -104,7 +104,6 @@ switch($requestUrl) {
     // Routes des API
     case '/Deconnexion':
     case 'Deconnexion':
-        session_start();
         $_SESSION = array();
         session_destroy();
         header('Location: /');
@@ -179,12 +178,12 @@ switch($requestUrl) {
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);
 
-        header('Content-Type: application/json');
         echo $logementController->getAmenagementsOfLogementById($logement_id);
         break;
 
     default:
         http_response_code(404);
-        echo "BAHAHAHAH 404 CHHHEEHHH";
+        echo "Erreur 404 - Page non trouvée";
+        // echo "BAHAHAHAH 404 CHHHEEHHH";
         exit;
 }

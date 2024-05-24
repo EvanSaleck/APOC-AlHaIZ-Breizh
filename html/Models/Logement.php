@@ -177,13 +177,15 @@ class Logement {
             }
 
             // on update le logement avec le nom de la photo
-            $this->db->update('logement', ['image_principale'], [$fichier], 'id_logement', $idLogement);
+            $this->db->update('logement', ['image_principale'], [substr($fichier,1)], 'id_logement', $idLogement);
 
             // amenagement est un tableau json
             $amenagements = json_decode($formLogement->getAmenagements());
 
-            foreach ($amenagements as $amenagement) {
-                $this->db->insert('amenagements_logement', ['al_id_logement', 'al_id_amenagement'], [$idLogement, $amenagement]);
+            if(isset($amenagements)){
+                foreach ($amenagements as $amenagement) {
+                    $this->db->insert('amenagements_logement', ['al_id_logement', 'al_id_amenagement'], [$idLogement, $amenagement]);
+                }
             }
 
             $this->db->getPDO()->commit();
