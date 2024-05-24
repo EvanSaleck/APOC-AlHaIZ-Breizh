@@ -2,7 +2,7 @@
     <div class="HeaderConteneur">
         <div class="Logo">
             <a href="/">
-                <img src="/assets/imgs/logo.png" alt="Logo">
+                <img src="/assets/imgs/logo.webp" alt="Logo">
                 <p id="titre">AlHaIZ Breizh</p>
             </a>
         </div>

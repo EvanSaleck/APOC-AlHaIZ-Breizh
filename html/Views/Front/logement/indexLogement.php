@@ -10,7 +10,7 @@
 <body>
 
     <div id="headerAccueilMobile">
-        <img src="/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
+        <img src="/assets/imgs/logo.webp" id="logoAssoMobile" alt="Logo de l'association">
         <button id="buttonfiltresMobile">
             <img src="/assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>

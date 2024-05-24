@@ -85,7 +85,7 @@
             <p> Payer via </p>
             <div class="ChoixPaiement">
                 <div class="PaiementVisa">
-                    <img class="imageVisa" src="/assets/imgs/paiement/visa.png" alt="Image VISA">
+                    <img class="imageVisa" src="/assets/imgs/paiement/visa_small.webp" alt="Image VISA">
                     <p> Carte bancaire </p>
                     <div class="coordonnesVisa">
                         <div class="styleInput">
@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="PaiementPaypal">
-                    <img class="imagePaypal" src="/assets/imgs/paiement/paypal.png" alt="Image Paypal">
+                    <img class="imagePaypal" src="/assets/imgs/paiement/paypal.webp" alt="Image Paypal">
                     <p> Paypal </p>
                     <button class="boutonPaypal"> Connexion à paypal</button>
                 </div>
@@ -119,7 +119,7 @@
         <div class="modal-box">
             <div class="headerPaiementValide">
                 <i class="fa-regular fa-circle-check"></i>
-                <img class="paiementValide" src="/assets/imgs/paiement/validPaiement.png" alt="Paiement validé">
+                <img class="paiementValide" src="/assets/imgs/paiement/validPaiement.webp" alt="Paiement validé">
                 <h2>Paiement effectué</h2>
             </div>
             <p>Vous recevrez la confirmation de votre demande de réservation par mail dans les prochaines 24 heures</p>

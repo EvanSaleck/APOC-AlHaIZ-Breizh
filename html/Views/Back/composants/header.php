@@ -2,7 +2,7 @@
     <div class="HeaderConteneur">
         <div class="Logo">
             <a href="./index.php">
-                <img src="/assets/imgs/logo.png" id="logoAssoHeaderDesktop" alt="Logo">
+                <img src="/assets/imgs/logo.webp" id="logoAssoHeaderDesktop" alt="Logo">
                 <p id="titreHeader">AlHaIZ Breizh</p>
             </a>
         </div>

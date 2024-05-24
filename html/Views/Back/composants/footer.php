@@ -12,7 +12,7 @@
         </div>
 
         <div class="DivLogo">
-        <img src="/assets/imgs/logo.png" alt="Logo">
+        <img src="/assets/imgs/logo.webp" alt="Logo">
             <ul>
                 <!-- Pages à créer pour les liens -->
                 <li class="Back"><a href="./Views/MentionsLegales.php">Mentions légales</a></li>
