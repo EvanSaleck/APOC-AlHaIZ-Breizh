@@ -43,13 +43,24 @@ switch($requestUrl) {
         }
 
         break;
-
+        
     case '/Back/reservations':
     case '/Back/reservations/':
+        include_once('Views/Back/reservation/listeReservations.php');
         if(!isset($_SESSION['proprio'])) {
-            header('Location: /');
-        }else {
             include_once('Views/Back/reservation/listeReservations.php');
+            
+        }else {
+            header('Location: /');
+        }
+        break;
+
+    case '/Back/logements':
+    case '/Back/logements/':
+        if(!isset($_SESSION['proprio'])) {
+            include_once('Views/Back/logement/listeLogements.php');
+        }else {
+            header('Location: /');
         }
         break;
 
