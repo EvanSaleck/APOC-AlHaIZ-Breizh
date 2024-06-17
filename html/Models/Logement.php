@@ -26,6 +26,12 @@ class Logement {
         return $logements;
     }
 
+    public function getLogementsByProprietaireId($id) {
+        $logements = $this->db->executeQuery('SELECT * FROM logement WHERE L_id_compte = ' . $id);
+
+        return $logements;
+    }
+
     public function getLogementById($id) {
 
         $logement = $this->db->executeQuery('SELECT * FROM logement WHERE id_logement = ' . $id);

@@ -23,6 +23,14 @@ class LogementController {
             
         echo json_encode($logements);
     }
+
+    public function getLogementsByProprietaireId($id) {
+        $logements = $this->logement->getLogementsByProprietaireId($id);
+
+        header('Content-Type: application/json');
+
+        echo json_encode($logements);
+    }
         
     public function getLogementById($id) {
             

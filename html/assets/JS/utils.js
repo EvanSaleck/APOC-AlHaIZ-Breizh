@@ -185,3 +185,15 @@ export function Deconnexion() {
     window.location.href = '/Deconnexion';
 }
 
+
+export function resetErrors(){
+    // reinitialiser les divs erreurs
+    document.querySelectorAll('.error').forEach((el) => {
+        el.classList.remove('error');
+    });
+    // reinitialiser les messages d'erreur
+    document.querySelectorAll('.messageError').forEach((el) => {
+        el.textContent = '';
+    });
+}
+
