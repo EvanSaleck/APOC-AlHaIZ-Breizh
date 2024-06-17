@@ -1,5 +1,46 @@
+@charset "UTF-8"
 
-@use '../general' as general
+/* Définition des couleurs du Front par défaut
+/* Définition des couleurs du Back par défaut
+/* Définition des tailles d'écran par défaut
+/* Import des polices Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap")
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap")
+
+/* Import de la police dyslexique Lexend
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap")
+
+/* Définition des polices par défaut
+/* Définition tailles de police desktop
+/* Définition tailles de police mobile
+/* Reset CSS
+
+*
+  margin: 0
+  padding: 0
+
+/* Appliquer les polices
+
+body
+  font-family: "DM Sans", sans-serif
+
+h1, h2, h3, h4, h5, h6
+  font-family: "Reem Kufi", sans-serif
+
+.error
+  border: 1px solid #D8000C !important
+
+/* Appliquer les polices
+
+body
+  font-family: "DM Sans", sans-serif
+
+h1, h2, h3, h4, h5, h6
+  font-family: "Reem Kufi", sans-serif
+
+.error
+  border: 1px solid #D8000C !important
 
 .devis
   margin: 0% 3%
@@ -66,7 +107,7 @@
     position: relative
 
   h3::after
-    content: ''
+    content: ""
     position: absolute
     left: 50%
     transform: translateX(-50%)
@@ -104,23 +145,33 @@ figure
   display: flex
   flex-direction: column
 
-.PaiementVisa, .PaiementPaypal
+.PaiementVisa
   display: flex
   align-items: center
   margin-left: 15vw
+
+.coordonnesVisa
+  width: 90%
 
 .imageVisa, .imagePaypal
   margin: 0 2vw 2vw 0
   width: 13vw
 
-input::placeholder
-  font-weight: bold
-  opacity: 0.5
+input
+  &::-moz-placeholder
+    font-weight: bold
+    opacity: 0.5
+    font-weight: bold
+    opacity: 0.5
+
+  &::placeholder
+    font-weight: bold
+    opacity: 0.5
 
 .styleInput
   display: flex
   justify-content: space-between
-  margin-bottom: 1rem
+  margin-bottom: 2vw
 
   input
     border: 1px solid #ccd1d9
@@ -153,7 +204,7 @@ input::placeholder
 
 .condAnnul
   > p
-    font-size: 2vw
+    font-size: 3vw
 
   h3
     position: relative
@@ -164,7 +215,7 @@ input::placeholder
       position: absolute
       bottom: -0.6vw
       left: 0
-      width: calc(10 * 0.75ch)
+      width: 7.5ch
       height: 0.3vw
       background-color: #8CB9BD
 
@@ -181,6 +232,8 @@ section
   cursor: pointer
   font-size: 2.5vw
   width: 30vw
+  float: right
+  margin-top: 3vw
 
 .boutonPrecedent
   font-family: "Reem Kufi", sans-serif
@@ -190,7 +243,6 @@ section
   border-radius: 1vw
   cursor: pointer
   font-size: 2.5vw
-
   width: 30vw
   margin: 5vw 0 3vw 5vw
 
@@ -245,19 +297,27 @@ section
   .overlay, .modal-box
     display: block
 
+.basPage
+  display: flex
+
 /* Ajustements de style pour les petits écrans
-@media (max-width: 800px)
-  .HeaderConteneur 
+@media (max-width: 767px)
+  .HeaderConteneur
     display: none
+
   .headerPaiementValide
     flex-direction: column
 
     /*     gap: 5px;
 
-  input, h3, .boutonPrecedent, .boutonPaypal
+  h3, .boutonPrecedent
     display: none
 
-@media (min-width: 800px)
+  .PaiementVisa
+    flex-direction: column
+    margin-left: 0
+
+@media (min-width: 767px)
   .headerPaiementValide >
     h2
       font-size: 3vw
@@ -285,9 +345,6 @@ section
     flex-direction: row
     width: 100%
 
-  .note
-    display: flex
-    width: 10vw
 
   .devis p
     font-size: 2vw
@@ -312,21 +369,22 @@ section
     border-radius: 1vw
 
   .condAnnul > p
-    font-size: 1.3vw
+    font-size: 2.5vw
 
   .boutonPrecedent, .boutonPaypal
     padding: 1vw 1.5vw
     border-radius: 0.7vw
     font-size: 1.8vw
+    margin-top: 10%
+
   .boutonPrecedent
-    width: 20vw  
+    width: 20vw
+
   .boutonPaypal
     width: 12vw
     margin: 5vw 1vw 2vw 0
     padding: 1.5vw 5vw
     margin: 5vw 0 0 5vw
-
-  .proceder_paiement, .boutonPaypal
     padding: 1vw 1.5vw
     border-radius: 0.7vw
     font-size: 1.8vw
@@ -334,20 +392,25 @@ section
     float: right
     margin: 0 5vw 5vw 0
 
+  .proceder_paiement
+    padding: 1vw 1.5vw
+    border-radius: 0.7vw
+    font-size: 1.8vw
+    width: 20vw
+    float: right
+    margin: 2vw 0vw 5vw 0
+
   .ChoixPaiement
     flex-direction: row
 
-  .PaiementPaypal, .PaiementVisa
+  .PaiementVisa
     flex-direction: column
     margin-left: 2vw
     flex: 1
 
 @media (min-width: 1400px)
-  .PaiementVisa
-    border-right: 0.2vw solid black
 
-
-#Bulle 
-    margin-top: 5%
+#Bulle
+  margin-top: 5%
 
 /*# sourceMappingURL=devis.css.map

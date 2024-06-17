@@ -23,6 +23,7 @@
                     <div class="logementResa">
                         <h2 class="titreLogDevis" id="titreLogement"> 
                         </h2>
+                        <!--
                         <div class="noteResa">
                             <p> Note </p>
                             <div class="note">
@@ -33,6 +34,7 @@
                                 <img class="noteEtoile" src="/assets/imgs/notes/star_empty.svg" alt="">
                             </div>
                         </div>
+                        -->
                     </div>
                     <figure>
                         <img class="photoLogResa" src="" alt="Maison landerneau"> 
@@ -101,31 +103,34 @@
                         </div>
                     </div>
                 </div>
+                <!--
                 <div class="PaiementPaypal">
                     <img class="imagePaypal" src="/assets/imgs/paiement/paypal.webp" alt="Image Paypal">
                     <p> Paypal </p>
                     <button class="boutonPaypal"> Connexion à paypal</button>
                 </div>
+-->
             </div>
         </div>
-        <div class="condAnnul">
-            <h3> Conditions d'annulation </h3>
-            <p>
-                Annulation gratuite avant le 25 mai. Après cette date, des frais de 20% du montant total de la réservation (soit 512 euros ) seront appliqués.
-            </p>
-        <section>
-        <button class="proceder_paiement">Payer</button>
-        <span class="overlay"></span>
-        <div class="modal-box">
-            <div class="headerPaiementValide">
-                <i class="fa-regular fa-circle-check"></i>
-                <img class="paiementValide" src="/assets/imgs/paiement/validPaiement.webp" alt="Paiement validé">
-                <h2>Paiement effectué</h2>
-            </div>
-            <p>Vous recevrez la confirmation de votre demande de réservation par mail dans les prochaines 24 heures</p>
+        <div class="basPage">
+            <div class="condAnnul">
+                <h3> Conditions d'annulation </h3>
+                <p>
+                    Annulation gratuite avant le 25 mai. Après cette date, des frais de 20% du montant total de la réservation (soit 512 euros ) seront appliqués.
+                </p>
+                <button class="proceder_paiement">Payer</button>
+                <span class="overlay"></span>
+                <div class="modal-box">
+                    <div class="headerPaiementValide">
+                        <i class="fa-regular fa-circle-check"></i>
+                        <img class="paiementValide" src="/assets/imgs/paiement/validPaiement.webp" alt="Paiement validé">
+                        <h2>Paiement effectué</h2>
+                    </div>
+                    <p>Vous recevrez la confirmation de votre demande de réservation par mail dans les prochaines 24 heures</p>
+                </div>
         </div>
-        </section>
     </div>
+</div>
 </body>
 <?php include_once 'Views/Front/composants/footer.php' ?>
 </html>
