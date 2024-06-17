@@ -1,3 +1,5 @@
+import * as utils from '../utils.js';
+
 // dom chargé
 document.addEventListener("DOMContentLoaded", function () {
   // resetErrors();
@@ -33,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("formNewLogement")
     .addEventListener("submit", function (event) {
+      
       event.preventDefault(); // Empêche la soumission par défaut du formulaire
       window.scroll({
         top: 0,
@@ -41,6 +44,21 @@ document.addEventListener("DOMContentLoaded", function () {
       // Crée un nouvel objet FormData à partir du formulaire
       var formData = new FormData(this);
 
+      formData.append('pays','France');
+      formData.append('etat','');
+
+      
+      const fileInput = document.getElementById("photo-input");
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        formData.append("photo", file);
+      }
+     
+      // lister dans la console les données du formulaire
+      // for (var pair of formData.entries()) {
+      //   console.log(pair[0] + ", " + pair[1]);
+      // }
+        
       if (validateFormData(formData)) {
         fetch("/api/processFormNewLogement", {
           method: "POST",
@@ -52,9 +70,11 @@ document.addEventListener("DOMContentLoaded", function () {
           .then((data) => {
             console.log(data['error']);
             if(data['error']){
-              ThrowAlertPopup(data['error'], "error");
+              utils.ThrowAlertPopup(data['error'], "error");
             } else {
-              ThrowAlertPopup("Le logement à bien été mis en ligne !", "succes");
+              let message = "Le logement à bien été mis en ligne !";
+              utils.ThrowAlertPopup(message, "success");
+              localStorage.setItem('alertPopup', JSON.stringify({ message: message, type: 'success' }));
               window.location.href = "/logements";
             }
           })
@@ -64,96 +84,120 @@ document.addEventListener("DOMContentLoaded", function () {
           });
       }
     });
+
+    // Gestion du drag and drop pour l'upload de la photo
+    const dropZone = document.getElementById("drop-photo");
+    const fileInput = document.getElementById("photo-input");
+    const fileButton = document.getElementById("photo-button");
+
+    // Ajoute la classe "dragover" lorsque l'utilisateur fait glisser un fichier sur la zone de drop
+    dropZone.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        dropZone.classList.add("dragover");
+    });
+
+    // Supprime la classe "dragover" lorsque l'utilisateur quitte la zone de drop
+    dropZone.addEventListener("dragleave", () => {
+        dropZone.classList.remove("dragover");
+    });
+
+    // Gère le dépôt de fichier
+    dropZone.addEventListener("drop", (event) => {
+        event.preventDefault();
+        dropZone.classList.remove("dragover");
+        console.log('drop file', event.dataTransfer.files);
+        fileInput.files = event.dataTransfer.files;
+
+        // Déclenche manuellement l'événement 'change'
+        const changeEvent = new Event('change');
+        fileInput.dispatchEvent(changeEvent);
+    });
+
+    // Ouvre le sélecteur de fichiers lorsque l'utilisateur clique sur le bouton
+    fileButton.addEventListener("click", () => {
+        fileInput.click();
+    });
+
+    // Gère la sélection de fichier via le sélecteur de fichiers
+    fileInput.addEventListener("change", (event) => {
+        console.log('file change');
+        const files = event.target.files;
+        resetErrors(); 
+        if (verifPhoto(files)) {
+            const file = files[0];
+            console.log(fileInput.files);
+            fileInput.files[0] = file;
+        }
+    });
+
 });
 
 function validateFormData(formData) {
   resetErrors();
 
-  // on commence par tester le type de la photo ...
-  if (!isValidImageType(formData.get('photo'))) {
-    getNextErrorSpan('photo').textContent = 'Le fichier doit être une image de type jpeg, png, gif ou webp';
-    document.querySelector('#photo').classList.add('error');
-  }
-  
-  // puis on teste la taille de la photo
-  if (!isValidImageSize(formData.get('photo'))) {
-    getNextErrorSpan('photo').textContent = 'L\'image ne doit pas dépasser 200 Ko';
-    document.querySelector('#photo').classList.add('error');
-  }
-  // on teste si une image a été sélectionnée
-  if (formData.get('photo').size === 0) {
-    getNextErrorSpan('photo').textContent = 'Veuillez sélectionner une image';
-    document.querySelector('#photo').classList.add('error');
-  }
+  verifPhoto([formData.get('photo')]);
 
   validateField(formData, 'titre', [
     { check: value => value.trim() !== '', errorMessage: 'Le titre ne peut pas être vide' },
-    { check: value => /^[a-zA-Z0-9\s]*$/.test(value), errorMessage: 'Le titre ne peut pas contenir de caractères spéciaux' }
+    // on ajoute la possibilité de mettre des -
+    { check: value => /^[a-zA-Z0-9\s\-]*$/.test(value), errorMessage: 'Le titre ne peut pas contenir de caractères spéciaux' }
   ]);
   
   validateField(formData, 'tarif', [
-    { check: value => value.trim() !== '', errorMessage: 'Le tarif ne peut pas être vide' },
     { check: value => value > 0, errorMessage: 'Le tarif doit être supérieur à 0' },
-    { check: value => !isNaN(value), errorMessage: 'Le tarif doit être une valeur numérique' }
+    { check: value => !isNaN(value), errorMessage: 'Le tarif doit être une valeur numérique' },
+    { check: value => value.trim() !== '', errorMessage: 'Le tarif ne peut pas être vide' }
   ]);
 
   validateField(formData, 'nom_rue', [
     { check: value => value.trim() !== '', errorMessage: 'Le nom de rue ne peut pas être vide' },
-    { check: value => /^[a-zA-Z0-9\s]*$/.test(value), errorMessage: 'Le nom de rue ne peut pas contenir de caractères spéciaux', condition: value => isNaN(value.split(' ')[0]) }
+    { check: value => /^[a-zA-Z0-9\s\-]*$/.test(value), errorMessage: 'Le nom de rue ne peut pas contenir de caractères spéciaux', condition: value => isNaN(value.split(' ')[0]) }
   ]);
   
   validateField(formData, 'ville', [
     { check: value => value.trim() !== '', errorMessage: 'La ville ne peut pas être vide' },
-    { check: value => /^[a-zA-Z\s]*$/.test(value), errorMessage: 'La ville ne peut pas contenir de caractères spéciaux ni de caractères numériques' }
+    { check: value => /^[a-zA-Z\s\-\'éèêëïîöôùûüàç]*$/.test(value), errorMessage: 'La ville ne peut pas contenir de caractères spéciaux' }
   ]);
 
   validateField(formData, 'cp', [
-    { check: value => value.trim() !== '', errorMessage: 'Le code postal ne peut pas être vide' },
+    { check: value => value.startsWith('29') || value.startsWith('22') || value.startsWith('35') || value.startsWith('56'), errorMessage: 'Le code postal doit être en Bretagne' },
     { check: value => value.length === 5, errorMessage: 'Le code postal doit contenir 5 chiffres' },
-    { check: value => !isNaN(value), errorMessage: 'Le code postal doit être une valeur numérique' }
+    { check: value => !isNaN(value), errorMessage: 'Le code postal doit être une valeur numérique' },
+    { check: value => value.trim() !== '', errorMessage: 'Le code postal ne peut pas être vide' }
   ]);
 
   validateField(formData, 'complement_adresse', [
-    { check: value => /^[a-zA-Z0-9\s]*$/.test(value), errorMessage: 'Le complément d\'adresse ne peut pas contenir de caractères spéciaux' }
-  ]);
-
-  validateField(formData, 'pays', [
-    { check: value => value.trim() !== '', errorMessage: 'Le pays ne peut pas être vide' },
-    { check: value => /^[a-zA-Z\s]*$/.test(value), errorMessage: 'Le pays ne peut pas contenir de caractères spéciaux' }
-  ]);
-
-  validateField(formData, 'etat', [
-    { check: value => /^[a-zA-Z0-9\s]*$/.test(value), errorMessage: 'L\'Etat ne peut pas contenir de caractère spéciaux' }
+    { check: value => /^[a-zA-Z0-9\s\-\'éèêëïîöôùûüàç]*$/.test(value), errorMessage: 'Le complément d\'adresse ne peut pas contenir de caractères spéciaux autres que les tirets, apostrophes, et accents' }
   ]);
 
   validateField(formData, 'surface', [
-    { check: value => value.trim() !== '', errorMessage: 'La surface ne peut pas être vide' },
     { check: value => value > 0, errorMessage: 'La surface doit être supérieur à 0' },
-    { check: value => !isNaN(value), errorMessage: 'La surface doit être une valeur numérique' }
+    { check: value => !isNaN(value), errorMessage: 'La surface doit être une valeur numérique' },
+    { check: value => value.trim() !== '', errorMessage: 'La surface ne peut pas être vide' }
   ]);
 
   validateField(formData, 'nbPersMax', [
-    { check: value => value.trim() !== '', errorMessage: 'Le nombre de personnes maximum ne peut pas être vide' },
     { check: value => value > 0, errorMessage: 'Le nombre de personnes maximum doit être supérieur à 0' },
-    { check: value => !isNaN(value), errorMessage: 'Le nombre de personnes maximum doit être une valeur numérique' }
+    { check: value => !isNaN(value), errorMessage: 'Le nombre de personnes maximum doit être une valeur numérique' },
+    { check: value => value.trim() !== '', errorMessage: 'Le nombre de personnes maximum ne peut pas être vide' }
   ]);
 
   validateField(formData, 'nbChambres', [
-    { check: value => value.trim() !== '', errorMessage: 'Le nombre de chambres ne peut pas être vide' },
     { check: value => value > 0, errorMessage: 'Le nombre de chambres doit être supérieur à 0' },
-    { check: value => !isNaN(value), errorMessage: 'Le nombre de chambres doit être une valeur numérique' }
+    { check: value => !isNaN(value), errorMessage: 'Le nombre de chambres doit être une valeur numérique' },
+    { check: value => value.trim() !== '', errorMessage: 'Le nombre de chambres ne peut pas être vide' }
   ]);
 
   validateField(formData, 'nbLitsSimples', [
-    { check: value => value.trim() !== '', errorMessage: 'Le nombre de lits simples ne peut pas être vide' },
     { check: value => value >= 0, errorMessage: 'Le nombre de lits simples doit être supérieur ou égal à 0' },
-    { check: value => !isNaN(value), errorMessage: 'Le nombre de lits simples doit être une valeur numérique' }
+    { check: value => !isNaN(value), errorMessage: 'Le nombre de lits simples doit être une valeur numérique' },
+    { check: value => value.trim() !== '', errorMessage: 'Le nombre de lits simples ne peut pas être vide' }
   ]);
 
   validateField(formData, 'nbLitsDoubles', [
-    { check: value => value.trim() !== '', errorMessage: 'Le nombre de lits doubles ne peut pas être vide' },
     { check: value => value >= 0, errorMessage: 'Le nombre de lits doubles doit être supérieur ou égal à 0' },
-    { check: value => !isNaN(value), errorMessage: 'Le nombre de lits doubles doit être une valeur numérique' }
+    { check: value => !isNaN(value), errorMessage: 'Le nombre de lits doubles doit être une valeur numérique' },
+    { check: value => value.trim() !== '', errorMessage: 'Le nombre de lits doubles ne peut pas être vide' }
   ]);
 
   validateField(formData, 'delaiResaArrivee', [
@@ -288,4 +332,45 @@ function isValidImageSize(file) {
 
   // Vérifier si la taille du fichier est inférieure à la taille maximale
   return file.size <= maxSize;
+}
+
+function verifPhoto(files) {
+  // on remet a zero les erreurs
+  document.querySelector('#photo-input').classList.remove('error');
+  getNextErrorSpan('photo-input').textContent = '';
+
+  // on affiche une erreur si il y a plus d'un fichier
+  if (files.length > 1) {
+      getNextErrorSpan('photo-input').textContent = 'Veuillez sélectionner une seule image';
+      document.querySelector('#photo-input').classList.add('error');
+      return false;
+  }
+
+  // on affiche une erreur si il n'y a pas de fichier
+  if (files.length === 0) {
+      getNextErrorSpan('photo-input').textContent = 'Veuillez sélectionner une image';
+      document.querySelector('#photo-input').classList.add('error');
+      return false;
+  }
+
+  var file = files[0];
+  document.querySelector('#photo-nom-image').textContent = file.name;
+
+  if (file && !isValidImageType(file)) {
+      getNextErrorSpan('photo-input').textContent = 'Le fichier doit être une image de type jpeg, png, gif ou webp';
+      document.querySelector('#photo-input').classList.add('error');
+  }
+
+  if (file && !isValidImageSize(file)) {
+      getNextErrorSpan('photo-input').textContent = 'L\'image ne doit pas dépasser 200 Ko';
+      document.querySelector('#photo-input').classList.add('error');
+  }
+
+  if (!file || file.size === 0) {
+      getNextErrorSpan('photo-input').textContent = 'Veuillez sélectionner une image';
+      document.querySelector('#photo-input').classList.add('error');
+  }
+
+  // on retourne si il y a une erreur
+  return document.querySelectorAll('.error').length === 0;
 }

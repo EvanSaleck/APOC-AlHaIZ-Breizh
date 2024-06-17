@@ -15,7 +15,42 @@
             <img src="/assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
     </div>
+    <div id="filtresDesktop">
+    <form id="formFiltresDesktop">
+        <div title="Commune">
+            <label for="commune">Commune</label>
+            <input type="text" name="commune" id="commune" placeholder="Ville">
+        </div>
 
+        <div title="Département">
+            <label for="departement">Département</label>
+            <input type="text" name="departement" id="departement" placeholder="Dépt.">
+        </div>
+
+        <div title="Date d'arrivée">
+            <label for="dateArrivee">Date d'arrivée</label>
+            <input type="date" name="dateArrivee" id="dateArrivee" placeholder="Arrivée">
+        </div>
+
+        <div title="Date de départ">
+            <label for="dateDepart">Date de départ</label>
+            <input type="date" name="dateDepart" id="dateDepart" placeholder="Départ">
+        </div>
+
+        <div title="Prix max">
+            <label for="prixMa">Prix max</label>
+            <input type="text" name="prixMa" id="prixMa" placeholder="Max (€)">
+        </div>
+
+        <div title="Prix min">
+            <label for="prixMin">Prix min</label>
+            <input type="text" name="prixMin" id="prixMin" placeholder="Min (€)">
+        </div>
+
+        <button type="submit" title="Trouver mon logement">Trouver mon logement</button>
+    </form>
+
+    </div>
     <div id="cardsContainer"></div>
 
     <div id="ongletFiltres">

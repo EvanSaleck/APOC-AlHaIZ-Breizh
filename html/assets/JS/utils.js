@@ -1,9 +1,8 @@
-
 var starFull = '<img class="noteEtoile" src="/assets/imgs/notes/star_full.svg" alt="">';
 var starEmpty = '<img class="noteEtoile" src="/assets/imgs/notes/star_empty.svg" alt="">';
 var starHalf = '<img class="noteEtoile" src="/assets/imgs/notes/star_half.svg" alt="">';
 
-function displayNoteEtoiles(div,note) {
+export function displayNoteEtoiles(div,note) {
     div.innerHTML = '';
     for (let i = 0; i < 5; i++) {
         if (note >= 1) {
@@ -18,7 +17,7 @@ function displayNoteEtoiles(div,note) {
     }
 }
 
-async function fileExists(path) {
+export async function fileExists(path) {
     try {
         const response = await fetch(path, { method: 'HEAD' });
         return response.ok;
@@ -28,7 +27,7 @@ async function fileExists(path) {
     }
 }
 
-function Connexion(){
+export function Connexion(){
     let pseudo = document.getElementById('pseudo').value;
     let password = document.getElementById('password').value;
     let data = new FormData();
@@ -70,34 +69,33 @@ function Connexion(){
     });
 }
 
-function ThrowAlertPopup(message,type) {
+export function ThrowAlertPopup(message,type) {
     if (document.getElementsByClassName('alert-popup').length > 0) {
         document.getElementsByClassName('alert-popup')[0].remove();
     }
     let alertPopup = document.createElement('div');
     alertPopup.className = 'alert-popup';
-    val = null;
+    let imgSrc = null;
     if (type === 'error') {
-        val = 'Erreur';
-    } else if (type === 'succes') {
-        val = 'Succès';
+        imgSrc = 'error.jpeg';
+    } else if (type === 'success') {
+        imgSrc = 'success.jpeg';
     }
     alertPopup.innerHTML = `
-    <div class="alert-popup-content ${type}">   
-        <span class="titre">${val}</span>
+        <img src="/assets/imgs/alerts/${imgSrc}" alt=""> 
         <p>${message}</p>
     </div>
     `;
     document.body.appendChild(alertPopup);
 
-    setTimeout(() => {
+    alertPopup.onclick = function() {
         alertPopup.remove();
-    }, 5000);
+    };
 }
 
 
 
-function CreateConnexionModal() {
+export function CreateConnexionModal() {
     // Remove existing modals if they exist
     if (document.getElementById('connexionModal') != null) {
         document.getElementById('connexionModal').remove();
@@ -140,7 +138,7 @@ function CreateConnexionModal() {
     };
 }
 
-function CreateInscriptionModal() {
+export function CreateInscriptionModal() {
     // Remove existing modals if they exist
     if (document.getElementById('inscriptionModal') != null) {
         document.getElementById('inscriptionModal').remove();
@@ -182,7 +180,7 @@ function CreateInscriptionModal() {
 }
 
 
-function Deconnexion() {
+export function Deconnexion() {
     sessionStorage.removeItem('User');
     window.location.href = '/Deconnexion';
 }

@@ -14,8 +14,6 @@
         private $ville;
         private $cp;
         private $complementAdresse;
-        private $pays;
-        private $etat;
         private $amenagements;
         private $accroche;
         private $description;
@@ -30,6 +28,8 @@
         private $delaiAnnulMax;
         private $idType;
         private $idCategorie;
+        private $pays;
+        private $etat;
 
         private $logement;
 
@@ -40,7 +40,6 @@
             $nomRue,
             $ville,
             $cp,
-            $pays,
             $photo,
             $amenagements,
             $surfaceHabitable,
@@ -49,14 +48,15 @@
             $nbLitsSimples,
             $nbLitsDoubles,
             $idType,
-            $idCategorie       
+            $idCategorie,
+            $pays,
+            $etat
         ){
             $this->titre = $titre;
             $this->tarif = $tarif;
             $this->nomRue = $nomRue;
             $this->ville = $ville;
             $this->cp = $cp;
-            $this->pays = $pays;
             $this->photo = $photo;
             $this->amenagements = $amenagements;
             $this->surfaceHabitable = $surfaceHabitable;
@@ -66,6 +66,8 @@
             $this->nbLitsDoubles = $nbLitsDoubles;
             $this->idType = $idType;
             $this->idCategorie = $idCategorie;
+            $this->pays = $pays;
+            $this->etat = $etat;
 
             $this->logement = new Logement();
         }
@@ -73,7 +75,6 @@
         public function setNotRequiredFields(
             $noRue,
             $complementAdresse,
-            $etat,
             $accroche,
             $description,
             $avanceResaMin,
@@ -87,10 +88,6 @@
 
             if (!empty($complementAdresse)) {
                 $this->setComplementAdresse($complementAdresse);
-            }
-
-            if (!empty($etat)) {
-                $this->setEtat($etat);
             }
 
             if (!empty($accroche)) {
@@ -141,14 +138,6 @@
 
         public function getComplementAdresse() {
             return $this->complementAdresse;
-        }
-
-        public function getPays() {
-            return $this->pays;
-        }
-
-        public function getEtat() {
-            return $this->etat;
         }
 
         public function getAmenagements() {
@@ -207,6 +196,14 @@
             return $this->idCategorie;
         }
 
+        public function getPays() {
+            return $this->pays;
+        }
+
+        public function getEtat() {
+            return $this->etat;
+        }
+
         public function setTitre($titre) {
             $this->titre = $titre;
 
@@ -245,18 +242,6 @@
 
         public function setComplementAdresse($complementAdresse) {
             $this->complementAdresse = $complementAdresse;
-
-            return $this;
-        }
-
-        public function setPays($pays) {
-            $this->pays = $pays;
-
-            return $this;
-        }
-
-        public function setEtat($etat) {
-            $this->etat = $etat;
 
             return $this;
         }
@@ -345,6 +330,18 @@
             return $this;
         }
 
+        public function setPays($pays) {
+            $this->pays = $pays;
+
+            return $this;
+        }
+
+        public function setEtat($etat) {
+            $this->etat = $etat;
+
+            return $this;
+        }
+
         public function toArray(){
             return [
                 'titre' => $this->titre,
@@ -354,8 +351,6 @@
                 'ville' => $this->ville,
                 'cp' => $this->cp,
                 'complementAdresse' => $this->complementAdresse,
-                'pays' => $this->pays,
-                'etat' => $this->etat,
                 'amenagements' => $this->amenagements,
                 'accroche' => $this->accroche,
                 'description' => $this->description,
@@ -369,7 +364,9 @@
                 'dureeMinLocation' => $this->dureeMinLocation,
                 'delaiAnnulMax' => $this->delaiAnnulMax,
                 'idType' => $this->idType,
-                'idCategorie' => $this->idCategorie
+                'idCategorie' => $this->idCategorie,
+                'pays' => $this->pays,
+                'etat' => $this->etat
             ];
         
         }
