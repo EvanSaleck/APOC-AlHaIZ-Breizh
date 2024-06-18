@@ -7,6 +7,8 @@
     include_once 'Views/Back/composants/head.php';
 ?>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <body>
     <section id="msgBienvenue">
         <h1>Bonjour Jean,</h1>
@@ -63,49 +65,10 @@
                         <th>Modifier le logement</th>
                     </tr>
                 </thead>
-
                 <tbody id="ListeLogements">
-                    <tr>
-                        <td>Maisonette bord de plage</td>
-                        <td>12/09/2024</td>
-                        <td>25/13/2024</td>
-                        <td>563€</td>
-                        <td>J.Valjean</td>
-                    </tr>
-                    <tr>
-                        <td>Maisonette bord de plage</td>
-                        <td>12/09/2024</td>
-                        <td>25/13/2024</td>
-                        <td>563€</td>
-                        <td>J.Valjean</td>
-                    </tr>
-                    <tr>
-                        <td>Maisonette bord de plage</td>
-                        <td>12/09/2024</td>
-                        <td>25/13/2024</td>
-                        <td>563€</td>
-                        <td>J.Valjean</td>
-                    </tr>
-                    <tr>
-                        <td>Maisonette bord de plage</td>
-                        <td>12/09/2024</td>
-                        <td>25/13/2024</td>
-                        <td>563€</td>
-                        <td>J.Valjean</td>
-                    </tr>
-                    <tr>
-                        <td>Maisonette bord de plage</td>
-                        <td>12/09/2024</td>
-                        <td>25/13/2024</td>
-                        <td>563€</td>
-                        <td>J.Valjean</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
-
-        <!-- <h1 id="voirPlus">Voir plus</h1> -->
-        
     </section>
     
 </body>

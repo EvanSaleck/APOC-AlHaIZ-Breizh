@@ -39,6 +39,7 @@ switch($requestUrl) {
     case '':
         include_once './Views/Front/logement/indexLogement.php';
         break;
+        
     case '/logement':
     case '/logement/':
         include_once './Views/Front/logement/detailsLogement.php';
@@ -194,6 +195,16 @@ switch($requestUrl) {
             include './Views/Front/reservation/DetailReservation.php';
         }
         break;
+
+    case '/api/updateLogementStatus':
+    case '/api/updateLogementStatus/':
+        $id = $_POST['logementId'];
+        $status = $_POST['status'];
+        // var_dump($data);
+        // die();
+        $logementController->updateStatus($id, $status);
+        break;
+            
 
     
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:

@@ -13,11 +13,12 @@ use \Exception;
 class Logement {
     // constante du montant pour passer du ht au ttc
     const TAUX_TVA = 0.1; 
-
     private $db;
+    private $pdo;
 
     public function __construct() {
         $this->db = new Database();
+        $this->pdo = $this->db->getPDO(); 
     }
 
     public function getAllLogements() {
@@ -266,4 +267,22 @@ class Logement {
         
         return $logements;
     }
+
+    public function updateStatutLogement($id, $nouveauStatut) {
+        // Correction de la syntaxe SQL pour l'insertion de variables
+        $sql = 'UPDATE logement SET statut_propriete = ? WHERE id_logement =?';
+        
+        // Préparation et exécution de la requête
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([$nouveauStatut, $id]);
+
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+        
+        // Retourner le nombre de lignes affectées
+        return $result;
+    }
+    
+
+    
+    
 }

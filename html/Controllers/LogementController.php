@@ -39,8 +39,15 @@ class LogementController {
         header('Content-Type: application/json');
             
         echo json_encode($logement);
-    }    
+    }  
+    
+    public function updateStatus($id, $status){
+        $logement = $this->logement->updateStatutLogement($id, $status);
 
+        header('Content-Type: application/json');
+            
+        echo json_encode($logement);
+    }
     public function getLogementsDataForCards() {
         $dataLogements = $this->logement->getLogementsDataForCards();
 
@@ -122,5 +129,7 @@ class LogementController {
         } else {
             echo json_encode(['error' => 'uniquement accessible avec la methode POST']);
         }
-    }    
+    }
+    
+        
 }
