@@ -50,9 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
               checkbox.id = toggleId;
               checkbox.checked = logement.statut_propriete;
               checkbox.addEventListener('change', function() {
-                  tr.classList.toggle('offline',!this.checked); // Change la classe CSS en fonction de l'état de la case à cocher
-                  updateLogementStatus(toggleId, this.checked); // Met à jour le statut sur le serveur
-                  console.log(this.checked); // Log l'état actuel de la case à cocher
+                  tr.classList.toggle('offline',!this.checked); 
+                  updateLogementStatus(toggleId, this.checked); // MAJ du statut
+                  console.log(this.checked); 
               });
               
               let label = document.createElement('label');
@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
               let tdModifier = document.createElement('td');
               let icon = document.createElement('i');
               icon.className = 'fa-solid fa-pen';
-              icon.onclick = () => window.location.href = `/logement/edit/${logement.id_logement}`;
               tdModifier.appendChild(icon);
 
               tr.appendChild(tdImage);
@@ -75,6 +74,20 @@ document.addEventListener('DOMContentLoaded', function() {
               tr.appendChild(tdModifier);
 
               listeLogements.appendChild(tr);
+
+            // Sélectionnez tous les éléments cibles
+            const elementsCibles = document.querySelectorAll('tr');
+
+            elementsCibles.forEach(element => {
+                element.addEventListener('click', function() {
+        
+                    sessionStorage.setItem('idLogement', this.dataset.id); 
+
+                    window.location.href = `/logements/details`;
+                });
+            });
+
+
           });
     })
    .catch(error => {

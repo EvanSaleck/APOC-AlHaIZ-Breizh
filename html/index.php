@@ -68,8 +68,8 @@ switch($requestUrl) {
         }
         break;
 
-    case '/Back/logements':
-    case '/Back/logements/':
+    case '/logements':
+    case '/logements/':
         if(!isset($_SESSION['proprio'])) {
             include_once('Views/Back/logement/listeLogements.php');
         }else {
@@ -80,17 +80,21 @@ switch($requestUrl) {
     // routes du back
     case '/logement/new':
     case '/logement/new/':
-        // if(!isset($_SESSION['proprio'])) {
-        //     header('Location: /');
-        // }else {
+         if(!isset($_SESSION['proprio'])) {
             include './Views/Back/logement/newLogement.php';
-        // }
+        }else {
+            header('Location: /');
+        }
         break;
     
     // routes back office
-    case '/logements':
-    case '/logements/':
+    case '/logement':
+    case '/logement/':
         include './Views/Back/logement/listeLogements.php';
+        break;
+    case '/logements/details':
+    case '/logements/details/';
+        include './Views/Back/logement/detailsLogement.php';
         break;
     case '/api/getLogementsDataForCards':
         header('Content-Type: application/json');

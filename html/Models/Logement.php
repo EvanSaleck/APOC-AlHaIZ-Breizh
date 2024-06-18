@@ -282,6 +282,7 @@ class Logement {
         return $result;
     }
     
+    
 
     
     
