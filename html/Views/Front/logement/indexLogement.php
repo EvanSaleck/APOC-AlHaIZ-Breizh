@@ -95,5 +95,7 @@
         </div>
     </div>
 </body>
-<?php include_once 'Views/Front/composants/footer.php' ?>
+<?php 
+    include_once 'Views/Front/composants/footer.php' 
+?>
 </html>

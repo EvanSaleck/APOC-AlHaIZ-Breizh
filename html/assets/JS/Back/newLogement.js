@@ -304,18 +304,6 @@ function getNextErrorSpan(id) {
 }
 
 
-function resetErrors(){
-  // reinitialiser les divs erreurs
-  document.querySelectorAll('.error').forEach((el) => {
-    el.classList.remove('error');
-  });
-  // reinitialiser les messages d'erreur
-  document.querySelectorAll('.messageError').forEach((el) => {
-    el.textContent = '';
-  });
-}
-
-
 // a mettre dans le function.js à un moment donné
 function isValidImageType(file) {
   // Types d'images valides

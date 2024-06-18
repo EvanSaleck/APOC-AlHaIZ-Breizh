@@ -7,9 +7,9 @@
 
     class Database {
         private $pdo;
-        private $dsn = 'pgsql:host=localhost;dbname=apoc;port=5432';
-        private $username = 'apoc';
-        private $password = 'apoc';
+        private $dsn = 'pgsql:host=servbdd;dbname=pg_ymear;port=5432';
+        private $username = 'ymear';
+        private $password = 'YOHyohm2929.&';
 
         public function __construct() {
             try {
@@ -27,12 +27,11 @@
             return $this->pdo;
         }
 
-    public function executeQuery($query) {
+    public function executeQuery($query, $params = null) {
         try {
             $statement = $this->pdo->prepare($query);
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
+            $statement->execute($params);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $e) {
             throw new \Exception('Erreur lors de l\'exécution de la requête : ' . $e->getMessage());
