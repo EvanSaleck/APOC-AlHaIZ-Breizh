@@ -10,6 +10,7 @@
 <body>
     <section id="msgBienvenue">
         <h1>Bonjour Jean,</h1>
+        <h1> Voici la liste de vos logements </h1>
 
     </section>
 
@@ -50,20 +51,20 @@
     
 
     <!-- Table d'affichage des réservations -->
-    <section id="contentReservations">
-        <div id="listeReservations">
+    <section id="sectionLogements">
+        <div id="listeLogements">
             <table>
                 <thead>
                     <tr>
-                        <th>Logement</th>
-                        <th>Date d'arrivée</th>
-                        <th>Date de départ</th>
-                        <th>Tarif global</th>
-                        <th>Client</th>
+                        <th>Photo principale</th>
+                        <th>Titre logement</th>
+                        <th>Accroche</th>
+                        <th>En ligne / Hors ligne</th>
+                        <th>Modifier le logement</th>
                     </tr>
                 </thead>
 
-                <tbody id="tableContent">
+                <tbody id="ListeLogements">
                     <tr>
                         <td>Maisonette bord de plage</td>
                         <td>12/09/2024</td>
