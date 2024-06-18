@@ -36,21 +36,18 @@ switch($requestUrl) {
         break;
     case '/reservation/devis':
     case '/reservation/devis/':
-        if(!isset($_SESSION['client'])) {
-            header('Location: /');
-        }else {
-            include_once './Views/Front/reservation/devis.php';
-        }
+        if(!isset($_SESSION['client'])) { header('Location: /'); }
+        else { include_once './Views/Front/reservation/devis.php'; }
 
         break;
 
     case '/Back/reservations':
     case '/Back/reservations/':
         if(!isset($_SESSION['proprio'])) {
-            header('Location: /');
-        }else {
             include_once('Views/Back/reservation/listeReservations.php');
+            // header('Location: /');
         }
+        else { include_once('Views/Back/reservation/listeReservations.php'); }
         break;
 
     // routes du back

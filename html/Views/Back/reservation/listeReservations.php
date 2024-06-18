@@ -10,15 +10,15 @@
 <body>
     <section id="msgBienvenue">
         <h1>Bonjour Jean,</h1>
-        <h2>vous avez 3 réservations en cours</h2>
+        <h2 id="nbReservationsEnCours">vous avez 0 réservations en cours</h2>
     </section>
 
     <!-- Boutons pour trier les réservations affichées par état -->
     <section id="etatResa">
-        <button id="enCours" onclick="reloadReservations(1)">En cours</button>
-        <button id="aVenir" onclick="reloadReservations(2)">A venir</button>
-        <button id="passe" onclick="reloadReservations(3)">Passé</button>
-        <button id="tout" onclick="reloadReservations(4)" class="ongletSelect">Tout</button>
+        <button id="enCours">En cours</button>
+        <button id="aVenir">A venir</button>
+        <button id="passe">Passé</button>
+        <button id="tout" class="ongletSelect">Tout</button>
     </section>
     <span id="barreEtat"></span>
 
@@ -74,36 +74,36 @@
                 <tbody id="tableContent">
                     <tr>
                         <td>Maisonette bord de plage</td>
-                        <td>12/09/2024</td>
-                        <td>25/13/2024</td>
+                        <td>12-09-2024</td>
+                        <td>25-13-2024</td>
                         <td>563€</td>
                         <td>J.Valjean</td>
                     </tr>
                     <tr>
                         <td>Maisonette bord de plage</td>
-                        <td>12/09/2024</td>
-                        <td>25/13/2024</td>
+                        <td>12-09-2024</td>
+                        <td>25-13-2024</td>
                         <td>563€</td>
                         <td>J.Valjean</td>
                     </tr>
                     <tr>
                         <td>Maisonette bord de plage</td>
-                        <td>12/09/2024</td>
-                        <td>25/13/2024</td>
+                        <td>12-09-2024</td>
+                        <td>25-13-2024</td>
                         <td>563€</td>
                         <td>J.Valjean</td>
                     </tr>
                     <tr>
                         <td>Maisonette bord de plage</td>
-                        <td>12/09/2024</td>
-                        <td>25/13/2024</td>
+                        <td>12-09-2024</td>
+                        <td>25-13-2024</td>
                         <td>563€</td>
                         <td>J.Valjean</td>
                     </tr>
                     <tr>
                         <td>Maisonette bord de plage</td>
-                        <td>12/09/2024</td>
-                        <td>25/13/2024</td>
+                        <td>12-09-2024</td>
+                        <td>25-13-2024</td>
                         <td>563€</td>
                         <td>J.Valjean</td>
                     </tr>
