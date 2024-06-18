@@ -124,6 +124,8 @@ body
     border: none
     font-size: 1.2vw
 
+/* Styles existants
+
 #listeLogements
   height: 55%
   overflow-x: auto
@@ -138,17 +140,11 @@ body
     resize: none
     overflow: auto
     border-collapse: separate
-
-    /* Change de collapse à separate pour avoir plus de contrôle sur les bordures
     border-spacing: 0
-
-    /* Supprime l'espace entre les cellules
     border: 2px solid #102C57
 
     tr
       height: 20vw
-
-      /* Augmente la hauteur des lignes
       background-color: #FFFFFF
 
     thead tr
@@ -164,16 +160,12 @@ body
     thead
       height: 3vh
 
-      /* Augmente la hauteur du thead
-
       tr
         background-color: #102C57
         padding: 1vw 0vw
 
         th
-          width: 20%
-
-          /* Largeur fixe pour toutes les colonnes du thead
+          width: 15%
           background-color: #102C57
           color: #FFFFFF
 
@@ -181,16 +173,83 @@ body
       &:first-child
         width: 40%
 
-        /* Double la largeur pour la première colonne
-
       &:not(:first-child)
-        width: 20%
+        width: 15%
 
-        /* Largeur uniforme pour les autres colonnes
+    #listeLogements td img
+      max-width: 90%
+
+/* Styles pour les logements hors ligne
+
+.offline
+  background-color: #d3d3d3
+
+  /* Grisé
+
+  img
+    filter: grayscale(100%)
+
+/* Styles pour le toggle switch
+
+input[type=checkbox]
+  height: 0
+  width: 0
+  visibility: hidden
+
+label
+  cursor: pointer
+  text-indent: -9999px
+  width: 6.6vw
+
+  /* 66px
+  height: 3.3vw
+
+  /* 33px
+  background: grey
+  display: block
+  border-radius: 3.3vw
+
+  /* 33px
+  position: relative
+
+  &:after
+    content: ''
+    position: absolute
+    top: 0.2vw
+
+    /* 2px
+    left: 0.2vw
+
+    /* 2px
+    width: 3vw
+
+    /* 30px
+    height: 3vw
+
+    /* 30px
+    background: #fff
+    border-radius: 3vw
+
+    /* 30px
+    transition: 0.3s
+
+input:checked + label
+  background: #072241
+
+  &:after
+    left: calc(100% - 0.2vw)
+
+    /* 2px
+    transform: translateX(-100%)
+
+label:active:after
+  width: 4.3vw
+
+  /* 43px
 
 /* *#listeLogements table tr:first-child {
- * *  height: 10vw;
- * *}
+ * * *  height: 10vw;
+ * * *}
 /* Spécifie la largeur des colonnes pour le corps du tableau
 
 section
@@ -203,5 +262,3 @@ section
   #voirPlus
     font-family: "Reem Kufi", sans-serif
     text-align: center
-
-/*# sourceMappingURL=listeLogements.css.map
