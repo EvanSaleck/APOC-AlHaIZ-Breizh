@@ -2,7 +2,6 @@
     include_once("Views/Back/composants/header.php");
     include_once("Views/Back/composants/head.php");
 ?>
-</head>
 <body>
     <pre>
         <?php 
@@ -53,25 +52,21 @@
                             <label for="complement_adresse">Complément d'adresse</label>
                             <input type="text" name="complement_adresse" id="complement_adresse" placeholder="ex : 2ème étage">
                         </div>
-                        <span class="messageError"></span>  
-                        <div class="ligneDeuxInputs paysEtat">
-                            <div class="input1">
-                                <label for="pays">Pays*</label>
-                                <input type="text" name="pays" id="pays" value="France" >
-                                <span class="messageError"></span>  
-                            </div>
-                            <div class="input3">
-                                <label for="etat">Etat</label>
-                                <input type="text" name="etat" id="etat">
-                                <span class="messageError"></span>  
-                            </div>
-                        </div>        
+                        <span class="messageError"></span>   
                     </div>
                 </div>
                 <div class="photo">
-                    <label for="photo" class="souligne">Photo du logement*</label>
-                    <input type="file" name="photo" id="photo">
-                    <span class="messageError"></span>  
+                    <div>
+                        <label for="photo-input" class="souligne" id="labelDropPhoto">Photo du logement*</label>
+                        <input type="file" id="photo-input" style="display: none;">
+                    </div>
+                    <div class="drop-photo" id="drop-photo">
+                        <img src="/assets/imgs/logoDragImg.svg" alt="Logo d'image">
+                        Déposez votre photo ici
+                        <button id="photo-button" type="button">Ou sélectionnez un fichier</button>
+                        <span id="photo-nom-image"></span>
+                        <span class="messageError"></span>  
+                    </div>
                 </div>
             </div>
             <div class="infosComplementaires">

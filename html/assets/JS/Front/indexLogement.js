@@ -1,7 +1,11 @@
+import * as utils from '../utils.js';
+
 // au chargement du dom
 document.addEventListener('DOMContentLoaded', function() {
     adjustMarginTop();
     window.addEventListener('resize', adjustMarginTop);
+
+    // utils.ThrowAlertPopup('Bienvenue sur notre site de location de logements !', 'success');
 
     var cardTemplate = document.getElementsByClassName('card')[0];
     var cardsContainer = document.getElementById('cardsContainer');
@@ -34,10 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             divCard.querySelector('.tarif').textContent = logement.prix_nuit_ttc + '€/nuit';
                             divCard.querySelector('.description').textContent = logement.description;
                             divCard.querySelector('.nbAvis').textContent = logement.nb_avis + ' avis';
-                            displayNoteEtoiles(divCard.querySelector('.note'), logement.moyenne_logement);
+                            utils.displayNoteEtoiles(divCard.querySelector('.note'), logement.moyenne_logement);
                             let pathImage = logement.image_principale;
                             
-                            fileExists(pathImage).then(exists => {
+                            utils.fileExists(pathImage).then(exists => {
                                 if (exists) {
                                     divCard.querySelector('.imagePrincipale').src = pathImage;
                                 } else {

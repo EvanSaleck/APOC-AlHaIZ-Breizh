@@ -27,12 +27,11 @@
             return $this->pdo;
         }
 
-    public function executeQuery($query) {
+    public function executeQuery($query, $params = null) {
         try {
             $statement = $this->pdo->prepare($query);
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
+            $statement->execute($params);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
         catch (PDOException $e) {
             throw new \Exception('Erreur lors de l\'exécution de la requête : ' . $e->getMessage());

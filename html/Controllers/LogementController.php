@@ -23,6 +23,14 @@ class LogementController {
             
         echo json_encode($logements);
     }
+
+    public function getLogementsByProprietaireId($id) {
+        $logements = $this->logement->getLogementsByProprietaireId($id);
+
+        header('Content-Type: application/json');
+
+        echo json_encode($logements);
+    }
         
     public function getLogementById($id) {
             
@@ -60,42 +68,47 @@ class LogementController {
     public function processFormNewLogement() { 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $tabNomRue = explode(' ', $_POST['nom_rue']);
-            $numeroRue = $tabNomRue[0];
-            $nomRue = '';
-            for ($i = 1; $i < count($tabNomRue); $i++) {
-                $nomRue .= $tabNomRue[$i] . ' ';
-            } 
+            $tabNomRue = explode(' ', htmlentities($_POST['nom_rue']));
+            if(is_numeric($tabNomRue[0])) {
+                $numeroRue = $tabNomRue[0];
+                $nomRue = '';
+                for ($i = 1; $i < count($tabNomRue); $i++) {
+                    $nomRue .= $tabNomRue[$i] . ' ';
+                } 
+            } else {
+                $numeroRue = null;
+                $nomRue = htmlentities($_POST['nom_rue']);
+            }
 
             $photo = null;
 
             $formLogement = new FormNewLogement(
-                $_POST['titre'],
-                $_POST['tarif'],
+                htmlentities($_POST['titre']),
+                htmlentities($_POST['tarif']),
                 $nomRue,
-                $_POST['ville'],
-                $_POST['cp'],
-                $_POST['pays'],
+                htmlentities($_POST['ville']),
+                htmlentities($_POST['cp']),
                 $photo,
-                $_POST['amenagements'],
-                $_POST['surface'],
-                $_POST['nbPersMax'],
-                $_POST['nbChambres'],
-                $_POST['nbLitsSimples'],
-                $_POST['nbLitsDoubles'],
-                $_POST['type'],
-                $_POST['categorie']
+                htmlentities($_POST['amenagements']),
+                htmlentities($_POST['surface']),
+                htmlentities($_POST['nbPersMax']),
+                htmlentities($_POST['nbChambres']),
+                htmlentities($_POST['nbLitsSimples']),
+                htmlentities($_POST['nbLitsDoubles']),
+                htmlentities($_POST['type']),
+                htmlentities($_POST['categorie']),
+                htmlentities($_POST['pays']),
+                htmlentities($_POST['etat'])
             );
 
             $formLogement->setNotRequiredFields(
                 $numeroRue,
-                (isset($_POST['complement_adresse']) ? $_POST['complement_adresse'] : ''),
-                (isset($_POST['etat']) ? $_POST['etat'] : ''),
-                (isset($_POST['accroche']) ? $_POST['accroche'] : ''),
-                (isset($_POST['description']) ? $_POST['description'] : ''),
-                (isset($_POST['delaiResaArrivee']) ? $_POST['delaiResaArrivee'] : ''),
-                (isset($_POST['dureeMinLoc']) ? $_POST['dureeMinLoc'] : ''),
-                (isset($_POST['delaiAnnulMax']) ? $_POST['delaiAnnulMax'] : '')
+                (isset($_POST['complement_adresse']) ? htmlentities($_POST['complement_adresse']) : ''),
+                (isset($_POST['accroche']) ? htmlentities($_POST['accroche']) : ''),
+                (isset($_POST['description']) ? htmlentities($_POST['description']) : ''),
+                (isset($_POST['delaiResaArrivee']) ? htmlentities($_POST['delaiResaArrivee']) : ''),
+                (isset($_POST['dureeMinLoc']) ? htmlentities($_POST['dureeMinLoc']) : ''),
+                (isset($_POST['delaiAnnulMax']) ? htmlentities($_POST['delaiAnnulMax']) : '')
             );     
             
             header('Content-Type: application/json');

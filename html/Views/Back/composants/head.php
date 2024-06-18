@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Feuilles de style -->
-    <link rel="stylesheet" href="/assets/SCSS/Back/modal.css" type="text/css">
-    <script src="/assets/JS/Back/fonctions.js"></script>
+    <link rel="stylesheet" href="/assets/SCSS/modal.css" type="text/css">
     
     <?php
         
@@ -27,7 +26,7 @@
             }
 
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cheminJS)) {
-                echo '<script src="' . $cheminJS . '"></script>' . PHP_EOL;
+                echo '<script type="module" src="' . $cheminJS . '"></script>' . PHP_EOL;
             }
         }
     ?>

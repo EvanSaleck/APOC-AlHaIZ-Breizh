@@ -4,8 +4,10 @@
 namespace Models;
 
 include_once 'Service/Database.php';
+include_once 'Service/MapsService.php';
 
 use Service\Database;
+use Service\MapsService;
 use \Exception;
 
 class Logement {
@@ -20,6 +22,12 @@ class Logement {
 
     public function getAllLogements() {
         $logements = $this->db->executeQuery('SELECT * FROM logement');
+
+        return $logements;
+    }
+
+    public function getLogementsByProprietaireId($id) {
+        $logements = $this->db->executeQuery('SELECT * FROM logement WHERE L_id_compte = ' . $id);
 
         return $logements;
     }
@@ -56,26 +64,40 @@ class Logement {
         try {
             $this->db->getPDO()->beginTransaction();
 
+            
+            if ($formLogement->getNoRue() != '' && is_numeric($formLogement->getNoRue())) {
+                $numeroRue = $formLogement->getNoRue();
+                
+                // on fait en sorte que le nom de rue ne compporte pas le numéro de rue
+            } else {
+                $numeroRue = null;
+            }
+            
             /**Colonnes et valeurs de l'adresse */
             $colonnesAdresse = [
-                'numero_rue',
                 'nom_rue',
                 'code_postal',
                 'nom_ville',
                 'pays'
             ];
             $valeursAdresse = [];
-
-            if ($formLogement->getNoRue() != '') {
-                $valeursAdresse[] = $formLogement->getNoRue();
-            }
+            
+            
             $valeursAdresse[] = $formLogement->getNomRue();
             $valeursAdresse[] = $formLogement->getCp();
             $valeursAdresse[] = $formLogement->getVille();
             $valeursAdresse[] = $formLogement->getPays();
+            
+            // on ajoute le numéro de rue seulement si c'est un chiffre
+            if ($formLogement->getNoRue() != '') {
+                $colonnesAdresse[] = 'numero_rue';
+                $valeursAdresse[] = $formLogement->getNoRue();
+            }
+            
+
 
             if ($formLogement->getComplementAdresse() != '') {
-                $colonnesAdresse[] = 'complement_adresse';
+                $colonnesAdresse[] = 'complement';
                 $valeursAdresse[] = $formLogement->getComplementAdresse();
             }
 
@@ -109,9 +131,31 @@ class Logement {
             // $idProrietaire = $_SESSION['Proprio']['id_compte'];
             $idProrietaire = 7;
 
+            try {
+                // on initialise la chaine de caractère de l'adresse
+                $adresse = $formLogement->getNoRue() . ' ' . $formLogement->getNomRue() . ', ' . $formLogement->getVille() . ', ' . $formLogement->getCp() . ', ' . $formLogement->getPays();
+                
+                // Vérifier si les parties nécessaires de l'adresse ne sont pas vides
+                if (empty($formLogement->getNoRue()) || empty($formLogement->getNomRue()) || empty($formLogement->getVille()) || empty($formLogement->getCp()) || empty($formLogement->getPays())) {
+                    throw new Exception("Certaines parties de l'adresse sont manquantes.");
+                }
+            
+                $mapsService = new MapsService();
+                $coordonnees = $mapsService->getCoordinatesFromAddress(trim($adresse));
+            
+                // Vérifier si les coordonnées ont bien été récupérées
+                if (empty($coordonnees)) {
+                    throw new Exception("Les coordonnées n'ont pas pu être récupérées pour l'adresse fournie.");
+                }
+            
+            } catch (Exception $e) {
+                // Gestion des exceptions
+                echo 'Erreur : ' . $e->getMessage();
+            }            
+
             $valeursLogement[] = $formLogement->getTitre();
-            $valeursLogement[] = 0;
-            $valeursLogement[] = 0;
+            $valeursLogement[] = $coordonnees[0];
+            $valeursLogement[] = $coordonnees[1];
             $valeursLogement[] = $formLogement->getSurfaceHabitable();
             $valeursLogement[] = $formLogement->getNbPersMax();
             $valeursLogement[] = $formLogement->getNbChambres();
@@ -142,7 +186,7 @@ class Logement {
             // conditions de réservation
             if ($formLogement->getAvanceResaMin() != '') {
                 $colonnesLogement[] = 'avance_resa_min';
-                $valeursLogement[] = $formLogement->getDelaiResaArrivee();
+                $valeursLogement[] = $formLogement->getAvanceResaMin();
             }
 
             if ($formLogement->getDureeMinLocation() != '') {
@@ -155,6 +199,7 @@ class Logement {
                 $valeursLogement[] = $formLogement->getDelaiAnnulMax();
             }
 
+            
             $this->db->insert('logement', $colonnesLogement, $valeursLogement);
 
             // Amenagements

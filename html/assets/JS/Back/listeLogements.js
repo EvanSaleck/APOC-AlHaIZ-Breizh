@@ -1,3 +1,5 @@
+import { ThrowAlertPopup } from '../utils.js';
+
 // au chargement du dom js 
 document.addEventListener('DOMContentLoaded', function() {
     const storedPopup = localStorage.getItem('alertPopup');

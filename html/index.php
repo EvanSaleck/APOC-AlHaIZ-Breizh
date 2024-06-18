@@ -22,6 +22,18 @@ $requestUrl = $_SERVER['REQUEST_URI'];
 // $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
+    // routes gildas
+    case '/export/ical':
+    case '/export/ical/':
+        // $reservationController->exportIcal();
+        include_once './Views/Back/reservation/exportICal.php';
+        break;
+    
+    case '/service/exportICal':
+    case '/service/exportICal/':
+        $reservationController->exportIcal();
+        break;
+    
     // Routes des vues front office 
     case '/':
     case '':
@@ -111,6 +123,12 @@ switch($requestUrl) {
         $logementController->getLogementById($data['id']);
         break;
 
+    case '/api/getLogementsByProprietaireId':
+    case '/api/getLogementsByProprietaireId/':
+        // $data = $_POST;
+        $data['id'] = 8 ; 
+        $logementController->getLogementsByProprietaireId($data['id']);
+        break;
 
     // Routes des API
     case '/Deconnexion':
