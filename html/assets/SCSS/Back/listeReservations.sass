@@ -1,28 +1,28 @@
 @use '../general' as general
 
 #ongletFiltres
-    position: absolute
+  position: absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  background-color: white
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  z-index: 1000
+  padding-top: 20px
+  overflow: scroll
+  display: none
+    
+  div
     width: 100%
     height: 100%
-    top: 0
-    left: 0
-    background-color: white
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
-    z-index: 1000
-    padding-top: 20px
-    overflow: scroll
-    display: none
-    
-    div
-      width: 100%
-      height: 100%
-      display: flex
-      flex-direction: column
-      justify-content: center
-      align-items: center
 
 #barreFiltresProprio
   display: inline-block
@@ -32,11 +32,11 @@
   border-radius: 2px
 
 
-
 body
   color: general.$couleur-back-bleu-zodiac
   font-family: general.$police-texte
   align-items: center
+  margin-top: 120px
 
   h1
     font-family: general.$police-titre
@@ -48,7 +48,12 @@ body
 
 
 #msgBienvenue
-  margin: 2.5vw 3.5vw
+  margin: 2vw 3.5vw
+
+#noReservations
+  display: flex
+  justify-content: center
+  margin: 3vw 2vw
 
 
 #etatResa
@@ -59,6 +64,7 @@ body
     margin-right: 10px
     width: 13vw
     height: 2.5vw
+    cursor: pointer
 
     @media screen and ( max-width: 960 )
       font-size: 1.4vw
@@ -112,11 +118,12 @@ body
   align-items: center
   font-family: general.$police-texte
 
-  margin: 5vw 10%
+  margin: 3vw 10%
 
   table
     text-align: center
     font-size: 1.5vw
+    width: 100%
 
     resize: none
     overflow: auto
@@ -126,6 +133,7 @@ body
     border-color: general.$couleur-back-bleu-zodiac 
 
     tr
+      cursor: pointer
       max-height: 88px
       background-color: #FFFFFF
       td 
@@ -135,7 +143,7 @@ body
       background-color: #FBE6BC
 
     thead
-      height: 2.5vh
+      height: 3vh
       tr
         background-color: general.$couleur-back-bleu-zodiac
         padding: 1vw 0vw
@@ -143,6 +151,7 @@ body
           width: 20%
           background-color: general.$couleur-back-bleu-zodiac
           color: #FFFFFF
+        
 
 
 // Utile pour plus tard pour afficher plus de réservations

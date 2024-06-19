@@ -7,9 +7,9 @@
 
     class Database {
         private $pdo;
-        private $dsn = 'pgsql:host=servbdd;dbname=pg_ymear;port=5432';
-        private $username = 'ymear';
-        private $password = 'YOHyohm2929.&';
+        private $dsn = 'pgsql:host=servbdd;dbname=pg_cgautieraudi;port=5432';
+        private $username = 'cgautieraudi';
+        private $password = 'Euchre2566';
 
         public function __construct() {
             try {

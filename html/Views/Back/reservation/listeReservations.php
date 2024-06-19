@@ -15,10 +15,10 @@
 
     <!-- Boutons pour trier les réservations affichées par état -->
     <section id="etatResa">
-        <button id="enCours">En cours</button>
-        <button id="aVenir">A venir</button>
-        <button id="passe">Passé</button>
-        <button id="tout" class="ongletSelect">Tout</button>
+        <button id="enCours">En cours (0)</button>
+        <button id="aVenir">A venir (0)</button>
+        <button id="passe">Passé (0)</button>
+        <button id="tout" class="ongletSelect">Tout (0)</button>
     </section>
     <span id="barreEtat"></span>
 
@@ -72,41 +72,6 @@
                 </thead>
 
                 <tbody id="tableContent">
-                    <tr>
-                        <td>Maisonette bord de plage</td>
-                        <td>12-09-2024</td>
-                        <td>25-13-2024</td>
-                        <td>563€</td>
-                        <td>J.Valjean</td>
-                    </tr>
-                    <tr>
-                        <td>Maisonette bord de plage</td>
-                        <td>12-09-2024</td>
-                        <td>25-13-2024</td>
-                        <td>563€</td>
-                        <td>J.Valjean</td>
-                    </tr>
-                    <tr>
-                        <td>Maisonette bord de plage</td>
-                        <td>12-09-2024</td>
-                        <td>25-13-2024</td>
-                        <td>563€</td>
-                        <td>J.Valjean</td>
-                    </tr>
-                    <tr>
-                        <td>Maisonette bord de plage</td>
-                        <td>12-09-2024</td>
-                        <td>25-13-2024</td>
-                        <td>563€</td>
-                        <td>J.Valjean</td>
-                    </tr>
-                    <tr>
-                        <td>Maisonette bord de plage</td>
-                        <td>12-09-2024</td>
-                        <td>25-13-2024</td>
-                        <td>563€</td>
-                        <td>J.Valjean</td>
-                    </tr>
                 </tbody>
             </table>
         </div>

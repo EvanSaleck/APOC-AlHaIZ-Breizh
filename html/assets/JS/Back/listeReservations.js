@@ -12,6 +12,24 @@ var bnAVenir = document.getElementById('aVenir');
 var bnPasse = document.getElementById('passe');
 var bnTout = document.getElementById('tout');
 
+var affichageAucuneRéservations = `<div id="listeReservations">
+<table>
+    <thead>
+        <tr>
+            <th>Logement</th>
+            <th>Date d'arrivée</th>
+            <th>Date de départ</th>
+            <th>Tarif global</th>
+            <th>Client</th>
+        </tr>
+    </thead>
+
+    <tbody id="tableContent">
+    </tbody>
+</table>
+<h1 id="noReservations">Aucune réservation trouvée</h1>
+</div>`
+
 
 // Initialise la liste des réservations liées aux compte propriétaire connecté
 function init() {
@@ -29,15 +47,8 @@ function init() {
         bnTout.addEventListener('click', function(){reloadReservations(4)});
 
         // Si aucune donnée n'est renvoyée par l'API, affiche qu'aucune réservation n'a été trouvée
-        if(data.length == 0) {
-            // Affiche le nombre de réservations par filtre
-            bnTout.innerHTML = 'Tout (' + ResasTout.length + ')';
-            bnPasse.innerHTML = 'Passé (' + nbPasse + ')';
-            bnEnCours.innerHTML = 'En cours (' + nbEnCours + ')';
-            bnAVenir.innerHTML = 'A venir (' + nbAVenir + ')';
-
-            contentReservations.innerHTML = '<h1>Aucune réservation trouvée</h1>';
-        }
+        let resVides = (data.length == 0);
+        if(resVides) { contentReservations.innerHTML = affichageAucuneRéservations; }
         else {
             ResasTout = data;
             console.log(ResasTout);
@@ -98,13 +109,13 @@ function init() {
 
             let tbody = document.getElementById('tableContent');
             tbody.innerHTML = content;
-
-            // Affiche le nombre de réservations par filtre
-            bnTout.innerHTML = 'Tout (' + ResasTout.length + ')';
-            bnPasse.innerHTML = 'Passé (' + nbPasse + ')';
-            bnEnCours.innerHTML = 'En cours (' + nbEnCours + ')';
-            bnAVenir.innerHTML = 'A venir (' + nbAVenir + ')';
         }
+
+        // Affiche le nombre de réservations par filtre
+        bnEnCours.innerHTML = 'En cours (' + (resVides ? '0' : nbEnCours) + ')';
+        bnAVenir.innerHTML = 'A venir (' + (resVides ? '0' : nbAVenir) + ')';
+        bnPasse.innerHTML = 'Passé (' + (resVides ? '0' : nbPasse) + ')';
+        bnTout.innerHTML = 'Tout (' + ResasTout.length + ')';
     }); 
 }
 
@@ -134,7 +145,7 @@ function handleButtonStyle(bnID) {
             break;
 
         default:
-            console.log("ERROR : Invalid button ID given");
+            console.log("ERREUR : ID de bouton invalide");
             break;
     }
 }
@@ -154,32 +165,32 @@ function reloadReservations(bnID) {
             for(var i = 0; i < enCours.length; i++){ enCours[i].removeAttribute("style"); }
             for(var i = 0; i < aVenir.length; i++){ aVenir[i].style.display = "none"; }
             for(var i = 0; i < passe.length; i++){ passe[i].style.display = "none"; }
-            if(nbEnCours == 0) { contentReservations.innerHTML = '<h1>Aucune réservation trouvée</h1>'; }
+            if(nbEnCours == 0) { contentReservations.innerHTML = affichageAucuneRéservations; }
             break;
 
         case 2:
             for(var i = 0; i < enCours.length; i++){ enCours[i].style.display = "none"; }
             for(var i = 0; i < aVenir.length; i++){ aVenir[i].removeAttribute("style"); }
             for(var i = 0; i < passe.length; i++){ passe[i].style.display = "none"; }
-            if(nbAVenir == 0) { contentReservations.innerHTML = '<h1>Aucune réservation trouvée</h1>'; }
+            if(nbAVenir == 0) { contentReservations.innerHTML = affichageAucuneRéservations; }
             break;
 
         case 3:
             for(var i = 0; i < enCours.length; i++){ enCours[i].style.display = "none"; }
             for(var i = 0; i < aVenir.length; i++){ aVenir[i].style.display = "none"; }
             for(var i = 0; i < passe.length; i++){ passe[i].removeAttribute("style"); }
-            if(nbPasse == 0) { contentReservations.innerHTML = '<h1>Aucune réservation trouvée</h1>'; }
+            if(nbPasse == 0) { contentReservations.innerHTML = affichageAucuneRéservations; }
             break;
 
         case 4:
             for(var i = 0; i < enCours.length; i++){ enCours[i].removeAttribute("style"); }
             for(var i = 0; i < aVenir.length; i++){ aVenir[i].removeAttribute("style"); }
             for(var i = 0; i < passe.length; i++){ passe[i].removeAttribute("style"); }
-            if(ResasTout.length == 0) { contentReservations.innerHTML = '<h1>Aucune réservation trouvée</h1>'; }
+            if(ResasTout.length == 0) { contentReservations.innerHTML = affichageAucuneRéservations; }
             break;
 
         default:
-            console.log("ERROR : Invalid button ID given");
+            console.log("ERREUR : ID de bouton invalide");
             break;
     }
 }

@@ -3,7 +3,7 @@
         <div class="Logo">
             <a href="./index.php">
                 <img src="/assets/imgs/logo.webp" id="logoAssoHeaderDesktop" alt="Logo">
-                <p id="titreHeader">AlHaIZ Breizh</p>
+                <p id="titreHeader">ALHaIZ Breizh</p>
             </a>
         </div>
         <div class="Menu">
@@ -16,6 +16,7 @@
             <div id="Compte"></div>
         </div>
     </div>
+    
     <div id="Bulle" class="d-none">
         <div id="Profil"></div>
         <div id="Connexion"></div>

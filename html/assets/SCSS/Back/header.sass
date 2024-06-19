@@ -1,8 +1,15 @@
 @use '../general' as general
 
 .HeaderConteneur
+
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    z-index: 9999
+
     /* Taille */
-    height: 75px
+    height: 80px
 
     /* Display */
     display: flex
@@ -81,18 +88,17 @@
     display: flex
     flex-direction: column
 
+    position: fixed
 
-    float: right
+    right: 0px
+    z-index: 99999
 
     border: 2px solid #D0CDC4
     border-radius: 10px
 
     background-color: #FDFBF5
 
-    margin-top: 5%
     margin-right: 0.5%
-
-    color: black
     hr 
         width: 75%
         margin: 0 auto
@@ -132,9 +138,11 @@
 .d-none 
     display: none !important
         
-
 @media screen and (max-width: 767px)
-    .headerConteneur
+    .HeaderConteneur
+        display: none
+
+    #Bulle
         display: none
 
 

@@ -1,9 +1,5 @@
 @use '../general' as general
 
-/* Différents styles pour le background du footer */
-#front
-    background-color: general.$couleur-front-bleu-verdatre
-
 #back
     background-color: general.$couleur-back-bleu-zodiac
 
@@ -13,8 +9,12 @@
     flex-direction: row
     justify-content: space-evenly
     align-items: center
-    bottom: 0
-    width:100%
+
+    /* Texte */
+    color: #FFFFFF
+    font-family: general.$police-texte
+    font-size: 1em 
+    
 
     /* Texte */
     color: #FFFFFF
