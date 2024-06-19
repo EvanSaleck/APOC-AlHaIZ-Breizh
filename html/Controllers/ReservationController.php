@@ -97,17 +97,4 @@ class ReservationController {
             exit;
         }
     }
-
-    public function exportIcal($token) {
-        // print_r($_POST);
-        // $form = [
-        //     'dateDebut' => $_POST['dateDebut'],
-        //     'dateFin' => $_POST['dateFin'],
-        //     'logements' => $_POST['logements']
-        // ];
-
-
-        
-        $this->icalService->exportIcalWithToken($token);
-    }
 }

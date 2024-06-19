@@ -27,7 +27,7 @@ switch($requestUrl) {
     case preg_match('/^\/reservations\/abonnement\/exportICal\?token=[a-f0-9]{64}$/', $requestUrl) ? true : false:
         $token = $_GET['token'];
         // echo 'Token : ' . $token;
-        $reservationController->exportIcal($token);
+        $abonnementICalController->exportIcal($token);
         break;
 
     case '/reservations/abonnements/iCal/new':

@@ -57,4 +57,11 @@ class AbonnementICalController {
         header('Content-Type: application/json');
         echo json_encode($abonnementFormat);
     }
+
+    public function exportIcal($token) {
+        $this->icalService->generateFileWithToken($token);
+        $url = $this->icalService->generateWebcalUrl($token);
+
+        header('Location: ' . $url);
+    }
 }

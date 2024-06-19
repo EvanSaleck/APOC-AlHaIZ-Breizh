@@ -21,50 +21,43 @@ class ICalService {
     }
 
     // export iCal with url and token
-    public function exportIcalWithToken($token) {
-        // Récupérer l'abonnement
+    public function generateFileWithToken($token) {
+        // $dateDebut = $form['dateDebut'];
+        // $dateFin = $form['dateFin'];
+        // $logements = $form['logements'];
+
+        // on récupère l'abonnement
         $abonnement = new AbonnementICal();
         $abonnement = $abonnement->getAbonnementByToken($token);
         
-        if (!$abonnement) {
-            // Gérer le cas où aucun abonnement correspondant au token n'est trouvé
-            // Par exemple, afficher un message d'erreur ou rediriger vers une page d'erreur.
-            return;
-        }
-        
-        // Récupérer les dates de début et fin de l'abonnement
         $dateDebut = $abonnement[0]['date_debut'];
         $dateFin = $abonnement[0]['date_fin'];
-        
-        // Récupérer les logements associés à l'abonnement
+
         $logements = $this->logementModel->getLogementsByAbonnement($abonnement[0]['id_abonnement']);
-        
-        // Extraire les IDs des logements
+
         $idsLogements = [];
-        foreach ($logements as $logement) {
+        foreach($logements as $logement) {
             $idsLogements[] = $logement['id_logement'];
         }
+       
         
-        // Récupérer les réservations pour les logements dans la période spécifiée
         $reservations = $this->reservationModel->getReservationsForExportICal($dateDebut, $dateFin, $idsLogements);
-        
-        // Générer le fichier iCal (.ics)
-        $icalContent = $this->getReservationsIcal($reservations);
-        
-        // Enregistrer le contenu iCal dans un fichier temporaire (optionnel) ou le rendre accessible via une URL
-        // Pour cet exemple, nous allons créer un fichier temporaire
-        $tempFile = tempnam(sys_get_temp_dir(), 'ical_');
-        file_put_contents($tempFile, $icalContent);
-        
-        // Construire l'URL webcal pour le fichier iCal
-        $icalUrl = 'webcal://' . $_SERVER['HTTP_HOST'] . '/ical/' . basename($tempFile);
 
+        $reservationICal =  $this->getReservationsIcal($reservations);
         
-        // Rediriger vers l'URL webcal
-        header('Location: ' . $icalUrl);
-        exit;
+        $file = fopen("icalfiles/$token.ics", "w");
+        fwrite($file, $reservationICal);
+        fclose($file);
+
+        return $reservationICal;
     }
-    
+
+    // generate webcal url
+    public function generateWebcalUrl($token) {
+        $server = $_SERVER['HTTP_HOST'];
+        $url = "webcal://$server/icalfiles/$token.ics";
+        return $url;
+    }
 
     public function getReservationsIcal($reservations) {
         // echo '<pre>';
