@@ -96,6 +96,13 @@ switch($requestUrl) {
     case '/logements/details/';
         include './Views/Back/logement/detailsLogement.php';
         break;
+
+    case '/logements/details/modifier':
+    case '/logements/details/modifier';
+        include './Views/Back/logement/modifierLogement.php';
+        break;
+
+
     case '/api/getLogementsDataForCards':
         header('Content-Type: application/json');
         echo $logementController->getLogementsDataForCards();
@@ -123,12 +130,13 @@ switch($requestUrl) {
         $data = $_POST;
         $logementController->getTypeOfLogementById($data);
         break;
-    
+    /*
     case 'api/getCategorieOfLogementById/':
     case 'api/getCategorieOfLogementById/':
         $data = $_POST;
         $logementController->getCategorieOfLogementById($data);
         break;
+        */
 
     case '/api/getProprioById':
     case 'api/getProprioById':
@@ -179,6 +187,14 @@ switch($requestUrl) {
         $data = $_POST;
         $utilisateurController->inscriptionProprio($data);
         break;
+        /*
+    case '/api/getCategorieOfLogementById':
+    case '/api/getCategorieOfLogementById/':
+        $data = $_POST;
+        $categorieLogement->getCategorieOfLogementById($data);
+        break;
+        */
+    
 
     case '/api/getLogements':
         header('Content-Type: application/json');
@@ -236,6 +252,20 @@ switch($requestUrl) {
         $logement_id = end($url_parts);
 
         echo $logementController->getAmenagementsOfLogementById($logement_id);
+        break;
+    
+    case preg_match('/^\/api\/getCategorieOfLogementById\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $logement_id = end($url_parts);
+
+        echo $logementController->getCategorieOfLogementById($logement_id);
+        break;
+    
+    case preg_match('/^\/api\/getTypeOfLogementById\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $logement_id = end($url_parts);
+
+        echo $logementController->getTypeOfLogementById($logement_id);
         break;
 
     default:

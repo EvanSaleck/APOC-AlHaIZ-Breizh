@@ -73,19 +73,19 @@ class LogementController {
     }
 
     public function getTypeOfLogementById($id) {
-        $type = $this->logement->getTypefLogementById($id);
+        $logements = $this->logement->getTypeOfLogementById($id);
 
         header('Content-Type: application/json');
 
-        echo json_encode($type);
+        echo json_encode($logements);
     }
 
     public function getCategorieOfLogementById($id) {
-        $categorie = $this->logement->getCategorieOfLogementById($id);
+        $logements = $this->logement->getCategorieOfLogementById($id);
 
         header('Content-Type: application/json');
 
-        echo json_encode($categorie);
+        echo json_encode($logements);
     }
 
 

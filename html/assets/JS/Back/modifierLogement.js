@@ -1,4 +1,4 @@
-var inputs = document.getElementsByTagName('input');
+/*var inputs = document.getElementsByTagName('input');
 for (var i = 0; i < inputs.length; i++) {
     if (inputs[i].id!== 'btnModifier') {
         inputs[i].disabled = true;
@@ -14,7 +14,7 @@ for (var i = 0; i < selects.length; i++) {
 var textArea = document.getElementsByTagName('textarea');
 for (var i = 0; i < textArea.length; i++) {
     textArea[i].disabled = true;
-}
+}*/
 
 console.log('detailsLogement.js');
 document.addEventListener('DOMContentLoaded', function() {
@@ -78,6 +78,17 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let image = document.getElementById("image-logement");
         image.style.backgroundImage = "url('" + data[0]['image_principale'] + "')";
+
+        
+        
+        
+        
+
+        
+
+            
+assets/JS/Back/detailsLogement.js
+        
 
         const boutonModifier = document.querySelectorAll('.btnModifier > input');
         

@@ -11,12 +11,12 @@
                 <div class="infosPrincipales">
                     <div class="ligneDeuxInputs">
                         <div class="input1">
-                            <label for="titre" class="souligne">Titre*</label>
+                            <label for="titre" class="souligne">Titre</label>
                             <input type="text" name="titre" id="titre">
                             <span class="messageError"></span>
                         </div>
                         <div class="input2">
-                            <label for="tarif" class="souligne">Tarif par nuit*</label>
+                            <label for="tarif" class="souligne">Tarif par nuit</label>
                             <div class="divTarif">
                                 <input type="text" name="tarif" id="tarif" ><span>€</span>
                             </div>
@@ -26,18 +26,18 @@
                     <label for="adresse" class="souligne">Adresse</label>
                     <div id="adresse">
                         <div>
-                            <label for="nom_rue">N° et Nom de rue*</label>
+                            <label for="nom_rue">N° et Nom de rue</label>
                             <input type="text" name="nom_rue" id="nom_rue" >
                         </div>
                         <span class="messageError"></span>
                         <div class="ligneDeuxInputs">
                             <div class="input1">
-                                <label for="ville">Ville*</label>
+                                <label for="ville">Ville</label>
                                 <input type="text" name="ville" id="ville" >
                                 <span class="messageError"></span>
                             </div>
                             <div class="input2">
-                                <label for="cp">Code postal*</label>
+                                <label for="cp">Code postal</label>
                                 <input type="text" name="cp" id="cp" >
                                 <span class="messageError"></span>  
                             </div>
@@ -139,22 +139,22 @@
                             </div>
                             <span class="messageError"></span>  
                             <div>
-                                <label for="nbPersMax">Nombre pers. max*</label>
+                                <label for="nbPersMax">Nombre pers. max</label>
                                 <input type="text" name="nbPersMax" id="nbPersMax">
                             </div>
                             <span class="messageError"></span>   
                             <div>
-                                <label for="nbChambres">Nombre de chambres*</label>
+                                <label for="nbChambres">Nombre de chambres</label>
                                 <input type="text" name="nbChambres" id="nbChambres"> 
                             </div>
                             <span class="messageError"></span>  
                             <div>
-                                <label for="nbLitsSimples">Nomre de lits simples*</label>
+                                <label for="nbLitsSimples">Nomre de lits simples</label>
                                 <input type="text" name="nbLitsSimples" id="nbLitsSimples"> 
                             </div>
                             <span class="messageError"></span>  
                             <div>
-                                <label for="nbLitsDoubles">Nombre de lits doubles*</label>
+                                <label for="nbLitsDoubles">Nombre de lits doubles</label>
                                 <input type="text" name="nbLitsDoubles" id="nbLitsDoubles"> 
                             </div>
                             <span class="messageError"></span>  

@@ -290,6 +290,8 @@ class Logement {
         return $logements;
     }
 
+    
+
     public function updateStatutLogement($id, $nouveauStatut) {
         // Correction de la syntaxe SQL pour l'insertion de variables
         $sql = 'UPDATE logement SET statut_propriete = ? WHERE id_logement =?';
