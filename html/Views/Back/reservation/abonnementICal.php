@@ -3,8 +3,8 @@
     include_once("Views/Back/composants/head.php");
 ?>
 <body>
-    <h1>S'abonner au format iCal</h1>
-    <!-- <form name="formICal" id="formICal" method="POST" action="/reservations/abonnement/new"> -->
+    <h1 id="titre">S'abonner au format iCal</h1>
+    <a href="/reservations/abonnements/liste">Liste des abonnements iCal</a>
     <form name="formICal" id="formICal" method="POST">
         <label for="dateDebut">Date de début</label>
         <input type="date" name="dateDebut" id="dateDebut">
@@ -18,6 +18,6 @@
         <span class="messageError" id="errorListeLogements"></span>
         <div id="listeLogements"></div>
 
-        <input type="submit" value="Récupérer l'url pour m'abonner">    
+        <input id="submit" type="submit" value="Récupérer l'url pour m'abonner">    
     </form>
 </body>

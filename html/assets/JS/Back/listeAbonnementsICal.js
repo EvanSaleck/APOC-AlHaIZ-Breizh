@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (storedPopup) {
         const { message, type } = JSON.parse(storedPopup);
         ThrowAlertPopup(message, type);
+        localStorage.removeItem('alertPopup');
     }
     
-    fetch('/api/getAllAbonnementsICal/', {
+    fetch('/api/getAbonnementsICalByProprietaire/', {
         method: 'GET',  
         headers: {
             'Content-Type': 'application/json'
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let tr = document.createElement('tr');
             let td = document.createElement('td');
             td.innerHTML = "Aucun abonnement iCal";
-            td.setAttribute('colspan', '4');
+            td.setAttribute('colspan', '6');
             td.setAttribute('style', 'text-align: center;');
             tr.appendChild(td);
             tbody.appendChild(tr);
@@ -37,14 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 dateFin.innerHTML = element.date_fin;
                 tr.appendChild(dateFin);
 
-                // le element.logements est un tableau de logements, on l'affichce sous forme de chaine de caractères
                 let logements = document.createElement('td');
                 let logementsString = "";
                 element.logements.forEach(logement => {
                     logementsString += logement.titre + ", ";
                 });
 
-                // on enlève la dernière virgule
                 logementsString = logementsString.slice(0, -2);
 
                 logements.innerHTML = logementsString;
@@ -67,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 td.appendChild(button);
                 tr.appendChild(td);
 
-                // on ajoute un bouton de modification avec comme icone le assets/imgs/basicIcons/penUpdate.svg
                 let update = document.createElement('td');
                 let updateBtn = document.createElement('button');
                 updateBtn.innerHTML = "<img src='/assets/imgs/basicIcons/penUpdate.svg' alt='Modifier'>";
@@ -75,8 +73,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     window.location.href = `/reservations/abonnements/iCal/edit/${element.id}`;
                 });
                 update.appendChild(updateBtn);
+                tr.appendChild(update);
 
-
+                let del = document.createElement('td');
+                let delBtn = document.createElement('button');
+                delBtn.innerHTML = "<img src='/assets/imgs/basicIcons/trashDelete.svg' alt='Supprimer'>";
+                delBtn.addEventListener('click', function() {
+                    fetch(`/api/reservations/abonnements/iCal/delete/${element.id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => response.json())
+                    .then(data => {
+                        if(data === true) {
+                            // on supprime la ligne
+                            tr.remove();
+                            let message  = "Abonnement supprimé";
+                            ThrowAlertPopup(message, 'success');
+                            // si le tableau est vide, on ajoute une ligne pour le signaler
+                            if(tbody.children.length == 0) {
+                                let tr = document.createElement('tr');
+                                let td = document.createElement('td');
+                                td.innerHTML = "Aucun abonnement iCal";
+                                td.setAttribute('colspan', '6');
+                                td.setAttribute('style', 'text-align: center;');
+                                tr.appendChild(td);
+                                tbody.appendChild(tr);
+                            }
+                        } else {
+                            ThrowAlertPopup('Erreur lors de la suppression de l\'abonnement, veuillez réessayer plus tard. <br> Si le problème persiste, merci de contacter un administrateur', 'error');
+                        }
+                    });
+                });
+                del.appendChild(delBtn);
+                tr.appendChild(del);
+                
                 tbody.appendChild(tr);
             });        
         }           

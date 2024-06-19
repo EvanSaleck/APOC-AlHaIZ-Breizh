@@ -93,8 +93,10 @@ class ICalService {
         $abonnements = $abonnement->getAbonnementsByProprietaire($id);
 
         $server = $_SERVER['HTTP_HOST'];
-        
+                
         foreach($abonnements as $key => $abonnement) {
+            $abonnementFormat[$key]['id'] = $abonnement['id_abonnement'];
+
             $abonnementFormat[$key]['date_debut'] = date('d/m/Y', strtotime($abonnement['date_debut']));
             $abonnementFormat[$key]['date_fin'] = date('d/m/Y', strtotime($abonnement['date_fin']));
             
@@ -104,6 +106,7 @@ class ICalService {
             $token = $abonnement['token'];
             $url = "http://$server/reservations/abonnement/exportICal?token=" . $token;
             $abonnementFormat[$key]['url'] = $url;
+            $abonnementFormat[$key]['dateCreation'] = date('d/m/Y', strtotime($abonnement['date_creation']));
         }
 
         return $abonnementFormat;

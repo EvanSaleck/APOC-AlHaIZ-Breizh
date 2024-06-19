@@ -28,7 +28,30 @@ class AbonnementICalController {
         echo json_encode($abonnement->newAbonnement());
     }
 
-    public function getAllAbonnementsICal($id) {
+    public function editAction($id) {
+        $dateDebut = $_POST['dateDebut'];
+        $dateFin = $_POST['dateFin'];
+        $listeLogements = $_POST['logements'];
+
+        $abonnement = new AbonnementICal($dateDebut, $dateFin, $listeLogements);
+
+        header('Content-Type: application/json');
+        echo json_encode($abonnement->editAbonnement($id));
+    }
+
+    public function deleteAction($id) {
+        header('Content-Type: application/json');
+        echo json_encode($this->abonnementICal->deleteAbonnement($id));
+    }
+
+    public function getDataICal($id) {
+        $abonnement = $this->abonnementICal->getAbonnementById($id);
+
+        header('Content-Type: application/json');
+        echo json_encode($abonnement);
+    }
+
+    public function getAbonnementsICalByProprietaire($id) {
         $abonnementFormat = $this->icalService->formatAbonnementTab($id);
         
         header('Content-Type: application/json');

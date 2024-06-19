@@ -6,5 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (storedPopup) {
         const { message, type } = JSON.parse(storedPopup);
         ThrowAlertPopup(message, type);
+        localStorage.removeItem('alertPopup');
     }
 });

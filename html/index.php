@@ -41,10 +41,10 @@ switch($requestUrl) {
         include_once './Views/Back/reservation/listeAbonnementsICal.php';
         break;
 
-    case '/api/getAllAbonnementsICal':
-    case '/api/getAllAbonnementsICal/':
+    case '/api/getAbonnementsICalByProprietaire':
+    case '/api/getAbonnementsICalByProprietaire/':
         $id = $_SESSION['proprio'];
-        $abonnementICalController->getAllAbonnementsICal(7);
+        $abonnementICalController->getAbonnementsICalByProprietaire(7);
         break;
     
     case '/api/reservations/abonnements/iCal/new':
@@ -52,6 +52,27 @@ switch($requestUrl) {
         $abonnementICalController->newAction();        
         break;
     
+    // on créé la route de suppression : /api/reservations/abonnements/iCal/delete/{id}
+    // ainsi que  : /api/reservations/abonnements/iCal/delete/{id}/
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/delete\/\d+$/', $requestUrl) ? true : false:   
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/delete\/\d+\/$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $id = end($url_parts);
+        $abonnementICalController->deleteAction($id);
+        break;
+    
+    case preg_match('/^\/reservations\/abonnements\/iCal\/edit\/\d+$/', $requestUrl) ? true : false:   
+    case preg_match('/^\/reservations\/abonnements\/iCal\/edit\/\d+\/$/', $requestUrl) ? true : false:
+        include_once './Views/Back/reservation/abonnementICal.php';
+        break;
+
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/getDataICal\/\d+$/', $requestUrl) ? true : false:
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/getDataICal\/\d+\/$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $id = end($url_parts);
+        $abonnementICalController->getDataICal($id);
+        break;
+
     // Routes des vues front office 
     case '/':
     case '':

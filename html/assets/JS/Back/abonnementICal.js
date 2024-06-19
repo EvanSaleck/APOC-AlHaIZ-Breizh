@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('/api/getLogementsByProprietaireId')
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         data.forEach(logement => {
             let div = document.createElement('div');
         
@@ -43,28 +42,28 @@ document.addEventListener('DOMContentLoaded', function() {
         
     });
 
-    // on vérifie qu'au moins un logement est sélectionné
     let form = document.getElementById('formICal');
     form.addEventListener('submit', function(e) {
-        console.log('submit');
         e.preventDefault();
-        var formData = new FormData(this);
+
+        var formData = new FormData(this); 
 
         if(validateFormData(form, e)) {
             fetch("/api/reservations/abonnements/iCal/new", {
                 method: "POST",
                 body: formData,
-              })
-                .then(response => response.json())
+              })  
+                .then((response) => {
+                    return response.json();
+                })
                 .then(data => {
-                    console.log(data);
-                    if (data === true) {
-                        let message  = "Abonnement créé";
+                    if (data === true ) {
+                        let message  = "Abonnement créé, l'URL est copié dans votre presse-papier";
                         ThrowAlertPopup(message, 'success');
                         localStorage.setItem('alertPopup', JSON.stringify({ message: message, type: 'success' }));
                         window.location.href = '/reservations/abonnements/liste';
                     } else {
-                        ThrowAlertPopup('Erreur lors de la prise en compte de votre demande, veuillez réessayer plus tard. <br> Si le problème persiste, merci de contacter un administrateur', 'error');
+                        ThrowAlertPopup('Erreur lors de la l\enregistrement de votre abonnement, veuillez réessayer plus tard. <br> Si le problème persiste, merci de contacter un administrateur', 'error');
                     }
                 });
         }
@@ -130,5 +129,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         return isValid; // Retourne l'état de validation
+    }
+
+
+    // si on est sur la page d'edition, on prérempli les champs et on modifie le titre et le bouton
+    if (window.location.pathname.match(/^\/reservations\/abonnements\/iCal\/edit\/\d+\/$/) || window.location.pathname.match(/^\/reservations\/abonnements\/iCal\/edit\/\d+$/)) {
+        let id = window.location.pathname.split('/')[5];
+        fetch('/api/reservations/abonnements/iCal/getDataICal/' + id)
+        .then(response => response.json())
+        .then(data => {
+            let dateDebut = document.getElementById('dateDebut');
+            dateDebut.value = data.date_debut;
+            let dateFin = document.getElementById('dateFin');
+            dateFin.value = data.date_fin;
+            
+            let logements = data.logements.split(',');
+            let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            console.log(logements,checkboxes);
+            checkboxes.forEach(checkbox => {
+                if (logements.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
+        });
+
+        let titre = document.getElementById('titre');
+        titre.innerText = 'Modifier l\'abonnement';
+
+        let submit = document.getElementById('submit');
+        submit.value = 'Modifier l\'abonnement';
     }
 });

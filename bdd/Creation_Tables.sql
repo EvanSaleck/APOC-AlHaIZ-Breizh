@@ -178,6 +178,7 @@ CREATE TABLE abonnements_reservations(
    date_debut date NOT NULL,
    date_fin date NOT NULL,
    token VARCHAR(100) NOT NULL UNIQUE,
+   date_creation TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,   
    AR_id_compte integer NOT NULL,
    CONSTRAINT abonnementsReservations_compte_fk 
       FOREIGN KEY (AR_id_compte) REFERENCES compte_proprietaire(id_compte)
