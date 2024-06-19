@@ -107,6 +107,10 @@ class AbonnementICal {
         try {
             $this->db->getPDO()->beginTransaction();
 
+            // on récupère le token
+            $query = "SELECT token FROM abonnements_reservations WHERE id_abonnement = :id_abonnement";
+            $token = $this->db->executeQuery($query, array(':id_abonnement' => $id))[0]['token'];
+
             $query = "DELETE FROM logement_abonnement WHERE LA_id_abonnement = :LA_id_abonnement";
             $this->db->executeQuery($query, array(':LA_id_abonnement' => $id));
 
@@ -115,14 +119,14 @@ class AbonnementICal {
 
             $this->db->getPDO()->commit();
 
+            unlink("icalfiles/$token.ics");
+
             return true;
 
         } catch (Exception $e) {
             $this->db->getPDO()->rollBack();
             throw new Exception('Erreur lors de la suppression de l\'abonnement : ' . $e->getMessage());
         }
-
-        return 'test';
     }
 
     public function getAbonnementsByProprietaire($id) {

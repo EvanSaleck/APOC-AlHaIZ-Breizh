@@ -52,8 +52,7 @@ class ICalService {
         return $reservationICal;
     }
 
-    // generate webcal url
-    public function generateWebcalUrl($token) {
+    public function urlFromToken($token) {
         $server = $_SERVER['HTTP_HOST'];
         $url = "webcal://$server/icalfiles/$token.ics";
         return $url;

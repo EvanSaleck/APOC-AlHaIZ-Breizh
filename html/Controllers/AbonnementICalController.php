@@ -60,8 +60,9 @@ class AbonnementICalController {
 
     public function exportIcal($token) {
         $this->icalService->generateFileWithToken($token);
-        $url = $this->icalService->generateWebcalUrl($token);
+        $url = $this->icalService->urlFromToken($token);
 
-        header('Location: ' . $url);
+        echo $url;
+        // header('Location: ' . $url);
     }
 }
