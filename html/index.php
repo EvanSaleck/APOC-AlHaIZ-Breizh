@@ -39,10 +39,6 @@ switch($requestUrl) {
     case '/connexion/':
         include_once './Views/Front/compte/connexionCompte.php';
         break;
-    case '/inscription':
-    case '/inscription/':
-        include_once './Views/Front/compte/creationCompte.php';
-        break;
     case '/reservation/devis':
     case '/reservation/devis/':
         if(!isset($_SESSION['client'])) {

@@ -71,39 +71,90 @@ function Connexion(){
 }
 
 function Inscription() {
+    // Création d'un objet FormData pour recueillir les données du formulaire
     let data = new FormData();
-    fetch('/api/InscriptionClient', {
+    //let data = new FormData(document.querySelector('.nomduformulaire'));
+
+    data.append('nom', "Dikapibara");
+    data.append('prenom', "Léonard");
+    data.append('civilite', "Mr");
+    data.append('nomUtilisateur', "LéoKapibara");
+    data.append('email', "leskapibaras@wanadoo.com");
+    data.append('motDePasse', "jaimelesKapibaradu(22)");
+    data.append('photoProfil', '/assets/imgs/Profils/jauni_daip.webp');
+    data.append('dateNaissance', '07/08/1999');
+
+    data.append('numero_rue', "12");
+    data.append('nom_rue', "rue de Blancbois");
+    data.append('code_postal', "22300");
+    data.append('nom_ville', "Lannion");
+    data.append('pays', "France");
+    // const c_id_adresse, const code_client, const cc_id_adresse à générer ou à trouver sur d'autres tables
+
+    // Appel API pour créer l'adresse et le compte utilisateur
+    console.log('Envoi des données:', data);
+    fetch('/api/inscriptionClient', {
         method: 'POST',
         body: data
     })
-    try {
-        // Ici, ajoutez la logique pour l'inscription
-        // Par exemple, récupérer les valeurs des champs de formulaire
-        const nom = document.getElementById('lastname').value;
-        const prenom = document.getElementById('firstname').value;
-        const civilite = document.getElementById('civility').value;
-        const nomUtilisateur = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
-        const motDePasse = document.getElementById('password').value;
-
-        console.log('Nom:', nom);
-        console.log('Prénom:', prenom);
-        console.log('Civilité:', civilite);
-        console.log('Nom d\'utilisateur:', nomUtilisateur);
-        console.log('Email:', email);
-        console.log('Mot de passe:', motDePasse);
-        // Vous pouvez ajouter d'autres champs nécessaires à l'inscription
-
-        // Ensuite, envoyez ces valeurs à votre serveur pour créer un nouveau compte utilisateur
-        // Cela peut être fait via une requête AJAX, fetch API, ou autre méthode selon votre backend
-
-        console.log('Inscription réussie pour', nomUtilisateur);
-        return true;
-    } catch (error) {
-        console.error('Erreur lors de l\'inscription:', error);
-        return false;
-    }
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if (data.success) {
+            ThrowAlertPopup('Inscription réussie!', 'succes');
+            setTimeout(() => {
+                window.location.href = '/accueil';  // Redirection après l'inscription
+            }, 1000);
+        } else {
+            ThrowAlertPopup('Erreur lors de l\'inscription: ' + data.error, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Erreur lors de l\'envoi:', error);
+        ThrowAlertPopup('Erreur technique, veuillez réessayer plus tard.', 'error');
+    });
 }
+
+
+// function Inscription() {
+//     let data = new FormData();
+//     fetch('/api/InscriptionClient', {
+//         method: 'POST',
+//         body: data
+//     })
+//     try {
+//         // Ici, ajoutez la logique pour l'inscription
+//         // Par exemple, récupérer les valeurs des champs de formulaire
+
+//         // --------------------------- code en dur des valeurs pour l'instant ---------------------------
+//         // const nom = document.getElementById('lastname').value;
+//         // const prenom = document.getElementById('firstname').value;
+//         // const civilite = document.getElementById('civility').value;
+//         // const nomUtilisateur = document.getElementById('username').value;
+//         // const email = document.getElementById('email').value;
+//         // const motDePasse = document.getElementById('password').value;
+
+
+
+//         // --------------------------- code en dur des valeurs pour l'instant ---------------------------
+//         console.log('Nom:', nom);
+//         console.log('Prénom:', prenom);
+//         console.log('Civilité:', civilite);
+//         console.log('Nom d\'utilisateur:', nomUtilisateur);
+//         console.log('Email:', email);
+//         console.log('Mot de passe:', motDePasse);
+//         // Vous pouvez ajouter d'autres champs nécessaires à l'inscription
+
+//         // Ensuite, envoyez ces valeurs à votre serveur pour créer un nouveau compte utilisateur
+//         // Cela peut être fait via une requête AJAX, fetch API, ou autre méthode selon votre backend
+
+//         console.log('Inscription réussie pour', nomUtilisateur);
+//         return true;
+//     } catch (error) {
+//         console.error('Erreur lors de l\'inscription:', error);
+//         return false;
+//     }
+// }
 
 
 function ThrowAlertPopup(message,type) {
@@ -257,7 +308,7 @@ function CreateInscriptionModal() {
                 <button type="submit" class="registerButton">S'inscrire</button>
             </form>
             <button class="hasAccountButton">Déjà un compte ? Connectez-vous</button>
-            <p class="hasAccountButton desktop">Déjà un compte ? <span id="inscription" onclick="">Connectez-vous</span></p>
+            <p class="hasAccountButton desktop">Déjà un compte ? <span id="inscription" onclick="Inscription()">Connectez-vous</span></p>
         </div>
     </div>
 

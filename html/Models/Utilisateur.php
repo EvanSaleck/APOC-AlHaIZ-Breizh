@@ -4,6 +4,7 @@ namespace Models;
 include_once 'Service/Database.php';
 
 use Service\Database;
+use \Exception;
 
 class Utilisateur {
     private $db;
@@ -49,13 +50,72 @@ class Utilisateur {
         }
     }
 
-    public function inscriptionClient($data) {
-        $query = "INSERT INTO sae3.compte_client (civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client) VALUES (?, ?, ?)";
-        $statement = $this->pdo->prepare($query);
-        $statement->execute([$data['pseudo'], $data['email'], password_hash($data['password'], PASSWORD_DEFAULT)]);
+    // public function inscriptionClient($data) {
+    //     $query = "INSERT INTO sae3.compte_client (civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client) VALUES (?, ?, ?)";
+    //     $statement = $this->pdo->prepare($query);
+    //     $statement->execute([$data['pseudo'], $data['email'], password_hash($data['password'], PASSWORD_DEFAULT)]);
 
-        return 'Inscription réussie';
+    //     return 'Inscription réussie';
+    // }
+    
+    public function inscriptionClient($data) {
+        try {
+            $this->db->getPDO()->beginTransaction();
+
+            // Insertion de l'adresse
+            $colonnesAdresse = ['numero_rue', 'nom_rue', 'code_postal', 'nom_ville', 'pays', 'complement', 'etat'];
+            $valeursAdresse = [
+                $data['numero_rue'],
+                $data['nom_rue'],
+                $data['code_postal'],
+                $data['nom_ville'],
+                $data['pays'],
+                $data['complement'] ?? null,
+                $data['etat'] ?? null
+            ];
+            $this->db->insert('adresse', $colonnesAdresse, $valeursAdresse);
+            $idAdresse = $this->db->getPDO()->lastInsertId();
+
+            // Insertion du compte
+            $colonnesCompte = ['civilite', 'nom', 'prenom', 'e_mail', 'mdp', 'pseudo', 'photo_profil', 'ddn', 'C_id_adresse'];
+            $valeursCompte = [
+                $data['civilite'],
+                $data['nom'],
+                $data['prenom'],
+                $data['email'],
+                $data['motDePasse'], // Assurez-vous que le mot de passe soit hashé avant insertion
+                $data['nomUtilisateur'],
+                $data['photoProfil'],
+                $data['dateNaissance'],
+                $idAdresse
+            ];
+            $this->db->insert('compte', $colonnesCompte, $valeursCompte);
+            $idCompte = $this->db->getPDO()->lastInsertId();
+
+            // Génération du code client
+            $codeClient = strtoupper(substr($data['prenom'], 0, 3) . $data['nom'] . $idCompte);
+
+            // Insertion du compte client
+            $colonnesCompteClient = ['id_compte', 'code_client', 'CC_id_adresse'];
+            $valeursCompteClient = [
+                $idCompte,
+                $codeClient,
+                $idAdresse
+            ];
+            $this->db->insert('compte_client', $colonnesCompteClient, $valeursCompteClient);
+
+            $this->db->getPDO()->commit();
+            return true;
+        } catch (Exception $e) {
+            $this->db->getPDO()->rollBack();
+            error_log('Erreur lors de l\'inscription : ' . $e->getMessage());
+            return false;
+        }
     }
+    
+    
+    
+
 
     public function connexionProprio($data) {
         if(str_contains($data['pseudo'], '@')) {
