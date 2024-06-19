@@ -1,7 +1,8 @@
-
 var inputs = document.getElementsByTagName('input');
 for (var i = 0; i < inputs.length; i++) {
-    inputs[i].disabled = true;
+    if (inputs[i].id!== 'btnModifier') {
+        inputs[i].disabled = true;
+    }
 }
 
 var selects = document.getElementsByTagName('select');
@@ -10,66 +11,9 @@ for (var i = 0; i < selects.length; i++) {
 }
 
 
-function calculDevis(prixNuitTTC) {
-    let dateDebut = document.getElementById("dateDebut");
-    let dateFin = document.getElementById("dateFin");
-    let sctNbOccupants = document.getElementById("sctNbOccupants");
-
-    let tempsDateArrivee = new Date(dateDebut.value).getTime()
-    let tempsDateDepart = new Date(dateFin.value).getTime()
-    let nbNuits = (tempsDateDepart - tempsDateArrivee)/ (1000 * 3600 * 24)
-    let prixSejourTTC = prixNuitTTC * nbNuits
-    let fraisServices = prixSejourTTC * 0.01
-    let taxeSejour = sctNbOccupants.value * nbNuits
-    let totalDevis = prixSejourTTC + fraisServices + taxeSejour
-    return totalDevis
-}
-
-function envoiDevis(prixNuitTTC,data) {
-    let dateDebut = document.getElementById("dateDebut");
-    let dateFin = document.getElementById("dateFin");
-    let sctNbOccupants = document.getElementById("sctNbOccupants");
-    
-    let tempsDateArrivee = new Date(dateDebut.value).getTime();
-    let tempsDateDepart = new Date(dateFin.value).getTime();
-    let nbNuits = (tempsDateDepart - tempsDateArrivee) / (1000 * 3600 * 24);
-    let prixSejourTTC = prixNuitTTC * nbNuits;
-    let fraisServices = prixSejourTTC * 0.01;
-    let taxeSejour = sctNbOccupants.value * nbNuits;
-    let totalDevis = prixSejourTTC + fraisServices + taxeSejour;
-    
-    let logementJSON = {
-        "dateDebut": dateDebut.value,
-        "dateFin": dateFin.value,
-        "sctNbOccupants": sctNbOccupants.value,
-        "prixparnuit": prixNuitTTC,
-        "tarifnuit": prixSejourTTC,
-        "nbNuits": nbNuits,
-        "fraisServices": fraisServices,
-        "taxeSejour": taxeSejour,
-        "totalDevis": totalDevis,
-        "titrelogement": data[0].titre,
-        "image": data[0].image_principale
-        
-    };
-    
-    console.log(JSON.stringify(logementJSON));
-    sessionStorage.setItem("Logement", JSON.stringify(logementJSON));
-    
-    
-}
-
-function afficheRecap(valide) {
-    let btnRes = document.getElementById("btnRes");
-    let recapitulatifDevis = document.getElementById("recap");
-    
-    if (valide) {
-        btnRes.disabled = false;
-        recapitulatifDevis.style.display = "flex"
-    } else {
-        btnRes.disabled = true;
-        recapitulatifDevis.style.display = "none"
-    }
+var textArea = document.getElementsByTagName('textarea');
+for (var i = 0; i < textArea.length; i++) {
+    textArea[i].disabled = true;
 }
 
 console.log('detailsLogement.js');
@@ -78,40 +22,89 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('/api/getLogementDataById/' + sessionStorage.getItem('idLogement'))
     .then(response => response.json())
     .then(data => {
-        afficheRecap(false)
         console.log(data)
 
-        let titreLogement = document.getElementById("titreLog");
-        titreLogement.innerHTML = data[0]['titre'];
+        let titreLogement = document.getElementById("titre");
+        titreLogement.value = data[0]['titre'];
 
-        let villeLogement = document.getElementById("villeLog");
-        villeLogement.innerHTML = data[0]['nom_ville'];
+        let villeLogement = document.getElementById("ville");
+        villeLogement.value = data[0]['nom_ville'];
 
-        let prixLogement = document.getElementById("prix");
-        prixLogement.innerHTML = parseFloat(data[0]['prix_nuit_ttc']);
+        let prixLogement = document.getElementById("tarif");
+        prixLogement.value = parseFloat(data[0]['prix_nuit_ttc']);
 
-        let nbPersonnesMax = document.getElementById("nbPersonnesMax");
-        nbPersonnesMax.innerHTML = data[0]['personnes_max'];
+        let nom_rue = document.getElementById("nom_rue");
+        nom_rue.value = data[0]['nom_rue'];
 
-        let nbChambres = document.getElementById("nbChambres");
-        nbChambres.innerHTML = data[0]['nb_chambres'];
+        let ville = document.getElementById("ville");
+        ville.value = data[0]['nom_ville'];
 
-        let nbLitsDoubles = document.getElementById("nbLitsDoubles");
-        nbLitsDoubles.innerHTML = data[0]['nb_lits_doubles'];
+        let cp = document.getElementById("cp");
+        cp.value = data[0]['code_postal'];
 
-        let nbLitsSimples = document.getElementById("nbLitsSimples");
-        nbLitsSimples.innerHTML = data[0]['nb_lits_simples'];
+        let complement = document.getElementById("complement_adresse");
+        complement.value = data[0]['complement'];
 
-        let descDet = document.getElementById("descDet");
-        descDet.innerHTML = data[0]['description'];
+        let accroche = document.getElementById("accroche");
+        accroche.textContent = data[0]['accroche'];
 
-        let listeAmenagements = document.getElementById("listeAmenagements");
+        let descDet = document.getElementById("description");
+        descDet.textContent = data[0]['description'];
+        
+        let surface_hab = document.getElementById("surface");
+        surface_hab.value = data[0]['surface_hab'];
+
+        let personnes_max = document.getElementById("nbPersMax");
+        personnes_max.value = data[0]['personnes_max'];
+
+
+        let nombreChambres = document.getElementById("nbChambres");
+        nombreChambres.value = data[0]['nb_chambres'];
+
+        let nombreLitsSimples = document.getElementById("nbLitsSimples");
+        nombreLitsSimples.value = data[0]['nb_lits_simples'];
+
+        let nombreLitsDoubles = document.getElementById("nbLitsDoubles");
+        nombreLitsDoubles.value = data[0]['nb_lits_doubles'];
+
+        let delaiResaArrivee = document.getElementById("delaiResaArrivee");
+        delaiResaArrivee.value = data[0]['avance_resa_min'];
+
+        let dureeMinLocation = document.getElementById("dureeMinLoc");
+        dureeMinLocation.value = data[0]['duree_min_location'];
+
+        let delaiAnnulMax = document.getElementById("delaiAnnulMax");
+        delaiAnnulMax.value = data[0]['delai_annul_max'];
+        
+        let image = document.getElementById("image-logement");
+        image.style.backgroundImage = "url('" + data[0]['image_principale'] + "')";
+
+        /*
+        fetch('/api/getTypeOfLogementById/' + sessionStorage.getItem('idLogement'))
+        .then(response => response.json())
+        .then(dataType => {
+            // console.log(dataType)
+        })
+        */
+    
+
+        fetch('/api/getCategorieOfLogementById/' + sessionStorage.getItem('idLogement'))
+        .then(response => response.json())
+        .then(
+            
+        )
+        
+
+            
+        /* let listeAmenagements = document.getElementById("listeAmenagements");
         let htmlAmenagement = ""
         fetch('/api/getAmenagementsOfLogementById/' + sessionStorage.getItem('idLogement'))
         .then(response => response.json())
         .then(dataAm => {
+            console.log(dataAm)
             let imgAmenagement
             dataAm.forEach(amenagement => {
+                console.log(dataAm)
                 switch (amenagement['id_amenagement']) {
                     case 1:
                         imgAmenagement = "/assets/imgs/iconsAmenagements/jardin.svg"
@@ -141,59 +134,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             listeAmenagements.innerHTML = htmlAmenagement
         });
+        console.log(htmlAmenagement) */
+        
 
-        let sctNbOccupants = document.getElementById("sctNbOccupants");
-        let htmlSelectNbPersonnes = ""
-        for (let i = 1; i <= data[0]['personnes_max']; i++) {
-            htmlSelectNbPersonnes = htmlSelectNbPersonnes + "<option value='" + i + "'>" + i + " Pers.</option>"
-        }
-        sctNbOccupants.innerHTML = htmlSelectNbPersonnes;
-
-        let btnDate = document.getElementById("btnDate");
-        btnDate.addEventListener("click", () => {
-            let popupDate = document.getElementById("popupDate");
-            if (popupDate.style.display == "block") {
-                popupDate.style.display = "none"
-            } else {
-                popupDate.style.display = "block"
-            }
-        });
-
-        let totalTtc = document.getElementById("totalTtc");
-        let dateDebut = document.getElementById("dateDebut");
-        let dateArrivee = document.getElementById("dateArrivee");
-        let dateFin = document.getElementById("dateFin");
-        let dateDepart = document.getElementById("dateDepart");
-
-        console.log(dateDebut.value)
-        dateArrivee.innerHTML = dateDebut.value
-        dateDepart.innerHTML = dateFin.value
-
-        dateDebut.setAttribute("max",dateFin.value);
-        dateFin.setAttribute("min",dateDebut.value);
-
-        dateDebut.addEventListener("input", () => {
-            dateFin.setAttribute("min",dateDebut.value)
-            dateArrivee.innerHTML = dateDebut.value
-            totalTtc.innerHTML = calculDevis(data[0]['prix_nuit_ttc'])
-            afficheRecap(new Date(dateDebut.value).getTime() - new Date(dateFin.value).getTime() <= 0 )
-        });
-        dateFin.addEventListener("input", () => {
-            dateDebut.setAttribute("max",dateFin.value)
-            dateDepart.innerHTML = dateFin.value
-            totalTtc.innerHTML = calculDevis(data[0]['prix_nuit_ttc'])
-            afficheRecap(new Date(dateDebut.value).getTime() - new Date(dateFin.value).getTime() <= 0 )
-        });
-        totalTtc.innerHTML = calculDevis(data[0]['prix_nuit_ttc'])
-    
-        let btnRes = document.getElementById("btnRes");
-        btnRes.addEventListener('click', function() {
-            envoiDevis(data[0]['prix_nuit_ttc'],data)
-            window.location.href = `/reservation/devis`;
-        });
-        btnRes.disabled = true;
-
-        let imagePrinc = document.getElementById("imageLogement");
-        imagePrinc.setAttribute("src",data[0]['image_principale']);
+        const boutonModifier = document.querySelectorAll('.btnModifier > input');
+        
+            boutonModifier.forEach(element => {
+                element.addEventListener('click', function(e) {
+                    e.preventDefault();
+                
+                    sessionStorage.setItem('idLogement', this.parentElement.getAttribute('data-id'));
+                
+                    // Redirige en utilisant window.location
+                    window.location = "/logements/details/modifier";
+                });
+                
+            });
     });
 });

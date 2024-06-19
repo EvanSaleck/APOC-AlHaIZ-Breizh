@@ -3,6 +3,7 @@ import { ThrowAlertPopup } from '../utils.js';
 document.addEventListener('DOMContentLoaded', function() {
     const storedPopup = localStorage.getItem('alertPopup');
     let message, type;
+    
 
     try {
         if (storedPopup) {
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           data.forEach(logement => {
               let tr = document.createElement('tr');
+              tr.setAttribute('data-id', logement.id_logement)
               
               if (!logement.statut_propriete) {
                   tr.classList.add('offline');
@@ -75,13 +77,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
               listeLogements.appendChild(tr);
 
-            // Sélectionnez tous les éléments cibles
-            const elementsCibles = document.querySelectorAll('tr');
+            const elementsCibles = document.querySelectorAll('td:not(:nth-child(4))');
 
             elementsCibles.forEach(element => {
-                element.addEventListener('click', function() {
+                element.addEventListener('click', function(e) {
         
-                    sessionStorage.setItem('idLogement', this.dataset.id); 
+                    sessionStorage.setItem('idLogement', element.parentElement.getAttribute('data-id')); 
 
                     window.location.href = `/logements/details`;
                 });

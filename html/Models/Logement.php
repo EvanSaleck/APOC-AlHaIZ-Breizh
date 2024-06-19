@@ -268,6 +268,28 @@ class Logement {
         return $logements;
     }
 
+    public function getTypeOfLogementById($id) {
+        $logements = $this->db->executeQuery('
+        SELECT id_type, nom_type
+        FROM logement 
+        JOIN type_logement ON L_id_type = id_type
+        
+        WHERE id_logement = ' . $id);
+        
+        return $logements;
+    }
+
+    public function getCategorieOfLogementById($id) {
+        $logements = $this->db->executeQuery('
+        SELECT id_categorie, nom_categorie
+        FROM logement 
+        JOIN categorie_logement ON L_id_categorie = id_categorie
+        
+        WHERE id_logement = ' . $id);
+        
+        return $logements;
+    }
+
     public function updateStatutLogement($id, $nouveauStatut) {
         // Correction de la syntaxe SQL pour l'insertion de variables
         $sql = 'UPDATE logement SET statut_propriete = ? WHERE id_logement =?';

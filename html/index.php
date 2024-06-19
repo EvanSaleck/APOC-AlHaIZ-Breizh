@@ -117,6 +117,19 @@ switch($requestUrl) {
         $data = $_POST;
         $reservationController->getReservationById($data);
         break;
+        
+    case 'api/getTypeOfLogementById/':
+    case 'api/getTypeOfLogementById/':
+        $data = $_POST;
+        $logementController->getTypeOfLogementById($data);
+        break;
+    
+    case 'api/getCategorieOfLogementById/':
+    case 'api/getCategorieOfLogementById/':
+        $data = $_POST;
+        $logementController->getCategorieOfLogementById($data);
+        break;
+
     case '/api/getProprioById':
     case 'api/getProprioById':
         $data = $_POST;
