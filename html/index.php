@@ -78,9 +78,17 @@ switch($requestUrl) {
     case '/api/getReservations':
     case 'api/getReservations':
         //$reservationController->getAllReservation();
-        $idProp = 7;
-        $reservationController->getReservationByOwnerId(7);
+        $idProp = 12;
+        $reservationController->getReservationByOwnerId(12);
         break;
+    // Juste besoin pour tester, à enlever pour merge avec getProprioById
+    case '/api/getOwnerById':
+    case 'api/getOwnerById':
+        $data = $_POST;
+        $reservationController->getOwnerById(12);
+        break;
+
+
     case '/api/getReservationById':
     case 'api/getReservationById':
         $data = $_POST;

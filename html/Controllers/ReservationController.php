@@ -31,6 +31,14 @@ class ReservationController {
         echo json_encode($reservations);
     }
 
+    public function getOwnerById($id) {
+        $owner = $this->reservation->getOwnerById($id);
+                    
+        header('Content-Type: application/json');
+            
+        echo json_encode($owner);
+    }
+
     public function reservationExists($id) {
         $reservations = $this->reservation->reservationExists($id);
                     

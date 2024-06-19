@@ -39,6 +39,11 @@
             return $reservations;
         }
 
+        public function getOwnerById($id) {            
+            $owner = $this->db->executeQuery("SELECT * FROM compte_proprietaire WHERE id_compte = " . $id);
+            return $owner;
+        }
+
         public function reservationExists($id) {
             $reservation = $this->db->executeQuery("SELECT * FROM reservation WHERE id_reservation = " . $id);
             return count($reservation) > 0;

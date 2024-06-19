@@ -18,8 +18,26 @@ function init() {
     // Récupération des données de la BDD
     fetch('/api/getReservations').then(response => response.json()).then(data => {
 
+        fetch('/api/getOwnerById').then(resp => resp.json()).then(owner => {
+            document.getElementById('bonjour').innerHTML = "Bonjour " + owner[0].prenom + ",";
+        });
+
+        // Assigne la fonction de rechargement du contenu de la table aux boutons
+        bnEnCours.addEventListener('click', function(){reloadReservations(1)});
+        bnAVenir.addEventListener('click', function(){reloadReservations(2)});
+        bnPasse.addEventListener('click', function(){reloadReservations(3)});
+        bnTout.addEventListener('click', function(){reloadReservations(4)});
+
         // Si aucune donnée n'est renvoyée par l'API, affiche qu'aucune réservation n'a été trouvée
-        if(data.length == 0) { contentReservations.innerHTML = '<h1>Aucune réservation trouvée</h1>'; }
+        if(data.length == 0) {
+            // Affiche le nombre de réservations par filtre
+            bnTout.innerHTML = 'Tout (' + ResasTout.length + ')';
+            bnPasse.innerHTML = 'Passé (' + nbPasse + ')';
+            bnEnCours.innerHTML = 'En cours (' + nbEnCours + ')';
+            bnAVenir.innerHTML = 'A venir (' + nbAVenir + ')';
+
+            contentReservations.innerHTML = '<h1>Aucune réservation trouvée</h1>';
+        }
         else {
             ResasTout = data;
             console.log(ResasTout);
@@ -27,7 +45,6 @@ function init() {
             let content = "";
             let max = (ResasTout.length < 7) ? ResasTout.length : 6; // Nombre de réservations affichées sur la page par défaut
 
-            
             let today = new Date(); // La date actuelle
 
             // Maj du contenu du tableau avec des valeurs de la BDD
@@ -74,7 +91,7 @@ function init() {
                 <td>${res.pseudo}</td>
                 </tr>`;
             }
-
+            
             // Indicateur du nombre de réservations en cours
             let nbReservationsEnCours = document.getElementById('nbReservationsEnCours');
             nbReservationsEnCours.innerHTML = "vous avez " + nbEnCours + " réservations en cours";
@@ -89,12 +106,6 @@ function init() {
             bnAVenir.innerHTML = 'A venir (' + nbAVenir + ')';
         }
     }); 
-
-    // Assigne la fonction de rechargement du contenu de la table aux boutons
-    bnEnCours.addEventListener('click', function(){reloadReservations(1)});
-    bnAVenir.addEventListener('click', function(){reloadReservations(2)});
-    bnPasse.addEventListener('click', function(){reloadReservations(3)});
-    bnTout.addEventListener('click', function(){reloadReservations(4)});
 }
 
 

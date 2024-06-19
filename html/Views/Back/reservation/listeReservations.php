@@ -9,7 +9,7 @@
 
 <body>
     <section id="msgBienvenue">
-        <h1>Bonjour Jean,</h1>
+        <h1 id="bonjour">Bonjour,</h1>
         <h2 id="nbReservationsEnCours">vous avez 0 réservations en cours</h2>
     </section>
 
