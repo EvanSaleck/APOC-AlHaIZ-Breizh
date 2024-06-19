@@ -112,7 +112,7 @@ class ICalService {
             $abonnementFormat[$key]['logements'] = $logements; 
 
             $token = $abonnement['token'];
-            $url = "http://$server/reservations/abonnement/exportICal?token=" . $token;
+            $url = "http://$server/reservations/abonnement?token=" . $token;
             $abonnementFormat[$key]['url'] = $url;
             $abonnementFormat[$key]['dateCreation'] = date('d/m/Y', strtotime($abonnement['date_creation']));
         }
