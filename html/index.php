@@ -63,6 +63,15 @@ switch($requestUrl) {
         }
         else { include_once('Views/Back/reservation/listeReservations.php'); }
         break;
+    case '/Back/reservations/details':
+    case '/Back/reservations/details/':
+        include_once('Views/Back/reservation/detailsReservations.php');
+        if(!isset($_SESSION['proprio'])) {
+            include_once('Views/Back/reservation/detailsReservations.php');
+            // header('Location: /');
+        }
+        else { include_once('Views/Back/reservation/detailsReservations.php'); }
+        break;
 
     // routes du back
     case '/logement/new':
@@ -93,18 +102,25 @@ switch($requestUrl) {
         $logementController->processFormNewLogement();
         break;
     
+
+
+        
+
     case '/api/getReservations':
     case 'api/getReservations':
         //$reservationController->getAllReservation();
         $idProp = 12;
-        $reservationController->getReservationByOwnerId(12);
+        $reservationController->getReservationByOwnerId(7);
         break;
     // Juste besoin pour tester, à enlever pour merge avec getProprioById
     case '/api/getOwnerById':
     case 'api/getOwnerById':
         $data = $_POST;
-        $reservationController->getOwnerById(12);
+        $reservationController->getOwnerById(7);
         break;
+
+
+
 
 
     case '/api/getReservationById':

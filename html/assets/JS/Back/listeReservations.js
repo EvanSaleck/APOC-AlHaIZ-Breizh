@@ -33,12 +33,13 @@ var affichageAucuneRéservations = `<div id="listeReservations">
 
 // Initialise la liste des réservations liées aux compte propriétaire connecté
 function init() {
+    // Récupère les informations du propriétaire
+    fetch('/api/getOwnerById').then(resp => resp.json()).then(data => {
+        document.getElementById('bonjour').innerHTML = "Bonjour " + data[0].prenom + ",";
+    });
+
     // Récupération des données de la BDD
     fetch('/api/getReservations').then(response => response.json()).then(data => {
-
-        fetch('/api/getOwnerById').then(resp => resp.json()).then(owner => {
-            document.getElementById('bonjour').innerHTML = "Bonjour " + owner[0].prenom + ",";
-        });
 
         // Assigne la fonction de rechargement du contenu de la table aux boutons
         bnEnCours.addEventListener('click', function(){reloadReservations(1)});
@@ -53,13 +54,17 @@ function init() {
             ResasTout = data;
             console.log(ResasTout);
             
-            let content = "";
+            //let content = "";
             let max = (ResasTout.length < 7) ? ResasTout.length : 6; // Nombre de réservations affichées sur la page par défaut
 
             let today = new Date(); // La date actuelle
 
+
+            let tbody = document.getElementById('tableContent');
+            tbody.innerHTML = "";
+
             // Maj du contenu du tableau avec des valeurs de la BDD
-            for (let i = 0; i<max; i++) {
+            for(let i = 0; i<max; i++) {
                 let res = ResasTout[i];
 
                 // Créé des objets dates pour savoir si une réservation est passée, en cours ou à venir
@@ -67,23 +72,23 @@ function init() {
                 let dateDep = new Date(res.date_depart);
                 
 
-                let etatClass = "class=\""; // Classe à attribuer à la réservation pour l'affichage
+                //let etatClass = "class=\""; // Classe à attribuer à la réservation pour l'affichage
 
                 // Si la date d'aujourd'hui est supérieure à la date de départ,
                 // considéré comme une réservation avec état "Passé"
                 if(today > dateDep) {
-                    etatClass += "passe\"";
+                    etatClass = "passe";
                     nbPasse++;
                 }
                 // Si la date d'aujourd'hui est inférieure à la date d'arrivée,
                 // considéré comme une réservation avec état "A venir"
                 else if (today < dateArr) {
-                    etatClass += "aVenir\"";
+                    etatClass = "aVenir";
                     nbAVenir++;
                 }
                 // Sinon, considéré comme une réservation avec état "En cours"
                 else {
-                    etatClass += "enCours\"";
+                    etatClass = "enCours";
                     nbEnCours++;
                 }
 
@@ -94,21 +99,54 @@ function init() {
                 let dateArrFormatee = valArr[2] + "-" + valArr[1] + "-" + valArr[0];
                 let dateDepFormatee = valDep[2] + "-" + valDep[1] + "-" + valDep[0];
 
-                content += `<tr ${etatClass}>
+
+                // Création de l'élément de réservation
+                let tr = document.createElement('tr');
+
+                let tdLogement = document.createElement('td');
+                tdLogement.textContent = res.titre;
+                let tdDateArr = document.createElement('td');
+                tdDateArr.textContent = dateArrFormatee;
+                let tdDateDep = document.createElement('td');
+                tdDateDep.textContent = dateDepFormatee;
+                let tdTarif = document.createElement('td');
+                tdTarif.textContent = res.tarif_total;
+                let tdClient = document.createElement('td');
+                tdClient.textContent = res.pseudo;
+
+                tr.appendChild(tdLogement);
+                tr.appendChild(tdDateArr);
+                tr.appendChild(tdDateDep);
+                tr.appendChild(tdTarif);
+                tr.appendChild(tdClient);
+
+                tr.class = etatClass;
+
+                tbody.appendChild(tr);
+
+
+                /*content += `<tr ${etatClass}>
                 <td>${res.titre}</td>
                 <td>${dateArrFormatee}</td>
                 <td>${dateDepFormatee}</td>
                 <td>${res.tarif_total}€</td>
                 <td>${res.pseudo}</td>
-                </tr>`;
+                </tr>`;*/
             }
+
+            // Attribution d'un href pour rediriger vers la page de détail qui affiche la réservation associée
+            let reservations = document.querySelectorAll('tbody > tr');
+            let i = 0;
+            reservations.forEach(resa => { resa.addEventListener('click', function(e){
+                    sessionStorage.setItem('idResa', ResasTout[i].id_reservation); 
+                    window.location.href = `Back/reservations/details`;
+                    i++;
+                });
+            });
             
             // Indicateur du nombre de réservations en cours
             let nbReservationsEnCours = document.getElementById('nbReservationsEnCours');
             nbReservationsEnCours.innerHTML = "vous avez " + nbEnCours + " réservations en cours";
-
-            let tbody = document.getElementById('tableContent');
-            tbody.innerHTML = content;
         }
 
         // Affiche le nombre de réservations par filtre
