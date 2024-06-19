@@ -4,34 +4,52 @@ session_start();
 include_once './Controllers/LogementController.php';
 include_once './Controllers/ReservationController.php';
 include_once './Controllers/UtilisateurController.php';
+include_once './Controllers/AbonnementICalController.php';
 
 
 // Use des controllers
 use Controllers\LogementController;
 use Controllers\ReservationController;
 use Controllers\UtilisateurController;
-
+use Controllers\AbonnementICalController;
 
 // Initialisation des controllers
 $logementController = new LogementController();
 $reservationController = new ReservationController();
 $utilisateurController = new UtilisateurController();
+$abonnementICalController = new AbonnementICalController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
 // $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
-    // routes gildas
-    case '/export/ical':
-    case '/export/ical/':
-        // $reservationController->exportIcal();
-        include_once './Views/Back/reservation/exportICal.php';
+    case preg_match('/^\/reservations\/abonnement\/exportICal\?token=[a-f0-9]{64}$/', $requestUrl) ? true : false:
+        $token = $_GET['token'];
+        // echo 'Token : ' . $token;
+        $reservationController->exportIcal($token);
+        break;
+
+    case '/reservations/abonnements/iCal/new':
+    case '/reservations/abonnements/iCal/new/':
+        $_SESSION['proprio'] = 7;
+        include_once './Views/Back/reservation/abonnementICal.php';
         break;
     
-    case '/service/exportICal':
-    case '/service/exportICal/':
-        $reservationController->exportIcal();
+    case '/reservations/abonnements/liste':
+    case '/reservations/abonnements/liste/':
+        include_once './Views/Back/reservation/listeAbonnementsICal.php';
+        break;
+
+    case '/api/getAllAbonnementsICal':
+    case '/api/getAllAbonnementsICal/':
+        $id = $_SESSION['proprio'];
+        $abonnementICalController->getAllAbonnementsICal(7);
+        break;
+    
+    case '/api/reservations/abonnements/iCal/new':
+    case '/api/reservations/abonnement/iCal/new/':
+        $abonnementICalController->newAction();        
         break;
     
     // Routes des vues front office 
@@ -120,7 +138,7 @@ switch($requestUrl) {
         break;
 
     // Routes des API
-    case '/Deconnexion':
+    case '/-+':
     case 'Deconnexion':
         $_SESSION = array();
         session_destroy();
@@ -130,6 +148,7 @@ switch($requestUrl) {
     case '/api/ConnexionClient':
     case 'api/ConnexionClient':
         $data = $_POST;
+
         $utilisateurController->connexionClient($data);
         break;
 

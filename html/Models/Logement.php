@@ -1,5 +1,4 @@
 <?php
-    namespace Models;
 
 namespace Models;
 
@@ -53,6 +52,17 @@ class Logement {
         ');
 
         return $dataLogements;
+    }
+
+    public function getLogementsByAbonnement($id){
+        $logements = $this->db->executeQuery('
+        SELECT * 
+        FROM logement 
+        JOIN logement_abonnement ON id_logement = LA_id_logement
+        JOIN abonnements_reservations ON LA_id_abonnement = id_abonnement
+        WHERE id_abonnement = ' . $id);
+        
+        return $logements;
     }
 
     public function logementExists($id) {

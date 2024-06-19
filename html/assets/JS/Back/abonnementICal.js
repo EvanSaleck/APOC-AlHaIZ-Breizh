@@ -1,7 +1,6 @@
-import { resetErrors } from '../utils.js';
+import { ThrowAlertPopup, resetErrors } from '../utils.js';
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('carre');
     var listeLogements = document.getElementById('listeLogements');
 
     // au changement d'un input date, on grise les dates antérieures
@@ -47,7 +46,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // on vérifie qu'au moins un logement est sélectionné
     let form = document.getElementById('formICal');
     form.addEventListener('submit', function(e) {
+        console.log('submit');
+        e.preventDefault();
+        var formData = new FormData(this);
+
+        if(validateFormData(form, e)) {
+            fetch("/api/reservations/abonnements/iCal/new", {
+                method: "POST",
+                body: formData,
+              })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data === true) {
+                        let message  = "Abonnement créé";
+                        ThrowAlertPopup(message, 'success');
+                        localStorage.setItem('alertPopup', JSON.stringify({ message: message, type: 'success' }));
+                        window.location.href = '/reservations/abonnements/liste';
+                    } else {
+                        ThrowAlertPopup('Erreur lors de la prise en compte de votre demande, veuillez réessayer plus tard. <br> Si le problème persiste, merci de contacter un administrateur', 'error');
+                    }
+                });
+        }
+    });
+
+    function validateFormData(data, e) {
         resetErrors();
+        let isValid = true;
+    
         let checkboxes = document.querySelectorAll('input[type="checkbox"]');
         let checked = false;
         checkboxes.forEach(checkbox => {
@@ -59,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             let spanError = document.getElementById('errorListeLogements');
             spanError.innerText = 'Veuillez sélectionner au moins un logement';
+            isValid = false;  
         } else {
             let checkedBoxes = [];
             checkboxes.forEach(checkbox => {
@@ -67,35 +94,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-
+    
         // on vérifie que la date de début est entrée
         let dateDebut = document.getElementById('dateDebut');
         if (dateDebut.value === '') {
             e.preventDefault();
             let spanError = document.getElementById('errorDateDebut');
             spanError.innerText = 'Veuillez entrer une date de début';
+            isValid = false;
         }
-
+    
         // on vérifie que la date de fin est entrée
         let dateFin = document.getElementById('dateFin');
         if (dateFin.value === '') {
             e.preventDefault();
             let spanError = document.getElementById('errorDateFin');
             spanError.innerText = 'Veuillez entrer une date de fin';
+            isValid = false;  
         }
-
-        // on verifie que la date de debut est antérieure à la date de fin
+    
+        // on vérifie que la date de début est antérieure à la date de fin
         if (dateDebut.value > dateFin.value) {
             e.preventDefault();
             let spanError = document.getElementById('errorDateFin');
             spanError.innerText = 'La date de fin doit être postérieure à la date de début';
+            isValid = false; 
         }
-
-        // on verifie que la date de fin est postérieure à la date de début
+    
+        // on vérifie que la date de fin est postérieure à la date de début
         if (dateFin.value < dateDebut.value) {
             e.preventDefault();
             let spanError = document.getElementById('errorDateFin');
             spanError.innerText = 'La date de fin doit être postérieure à la date de début';
+            isValid = false;
         }
-    });
+    
+        return isValid; // Retourne l'état de validation
+    }
 });

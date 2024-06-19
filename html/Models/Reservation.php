@@ -20,17 +20,9 @@
         }
 
         public function getReservationsForExportICal($dateDeb, $dateFin, $listeLogements) {
-            $placeholders = implode(',', array_fill(0, count($listeLogements), '?'));
-        
-            $query = "SELECT * FROM reservation WHERE date_arrivee >= ? AND date_depart <= ? AND R_id_logement IN ($placeholders)";
-            
-            $params = array_merge([$dateDeb, $dateFin], $listeLogements);
-            
-            $reservations = $this->db->executeQuery($query, $params);
-        
+            $reservations = $this->db->executeQuery("SELECT * FROM reservation WHERE date_arrivee >= '" . $dateDeb . "' AND date_depart <= '" . $dateFin . "' AND R_id_logement IN (" . implode(',', $listeLogements) . ")");
             return $reservations;
         }
-        
 
         public function getReservationById($id) {
 

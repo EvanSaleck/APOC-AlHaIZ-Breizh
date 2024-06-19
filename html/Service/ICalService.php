@@ -3,24 +3,45 @@
 namespace Service;
 
 include_once 'Models/Reservation.php';
+include_once 'Models/AbonnementICal.php';
+include_once 'Models/Logement.php';
 
 use Models\Reservation;
+use Models\AbonnementICal;
+use Models\Logement;
 
 class ICalService {
 
     private $reservationModel;
+    private $logementModel;
 
     public function __construct() {
         $this->reservationModel = new Reservation();
+        $this->logementModel = new Logement();
     }
 
     // export iCal with url and token
-    public function exportIcal($form) {
-        $dateDebut = $form['dateDebut'];
-        $dateFin = $form['dateFin'];
-        $logements = $form['logements'];
+    public function exportIcalWithToken($token) {
+        // $dateDebut = $form['dateDebut'];
+        // $dateFin = $form['dateFin'];
+        // $logements = $form['logements'];
+
+        // on récupère l'abonnement
+        $abonnement = new AbonnementICal();
+        $abonnement = $abonnement->getAbonnementByToken($token);
         
-        $reservations = $this->reservationModel->getReservationsForExportICal($dateDebut, $dateFin, $logements);
+        $dateDebut = $abonnement[0]['date_debut'];
+        $dateFin = $abonnement[0]['date_fin'];
+
+        $logements = $this->logementModel->getLogementsByAbonnement($abonnement[0]['id_abonnement']);
+
+        $idsLogements = [];
+        foreach($logements as $logement) {
+            $idsLogements[] = $logement['id_logement'];
+        }
+       
+        
+        $reservations = $this->reservationModel->getReservationsForExportICal($dateDebut, $dateFin, $idsLogements);
 
         $reservationICal =  $this->getReservationsIcal($reservations);
 
@@ -62,5 +83,29 @@ class ICalService {
         // die();
 
         return $ical;
+    }
+
+    public function formatAbonnementTab($id) {
+        $abonnementFormat = [];
+
+        $abonnement = new AbonnementICal();
+
+        $abonnements = $abonnement->getAbonnementsByProprietaire($id);
+
+        $server = $_SERVER['HTTP_HOST'];
+        
+        foreach($abonnements as $key => $abonnement) {
+            $abonnementFormat[$key]['date_debut'] = date('d/m/Y', strtotime($abonnement['date_debut']));
+            $abonnementFormat[$key]['date_fin'] = date('d/m/Y', strtotime($abonnement['date_fin']));
+            
+            $logements = $this->logementModel->getLogementsByAbonnement($abonnement['id_abonnement']);
+            $abonnementFormat[$key]['logements'] = $logements; 
+
+            $token = $abonnement['token'];
+            $url = "http://$server/reservations/abonnement/exportICal?token=" . $token;
+            $abonnementFormat[$key]['url'] = $url;
+        }
+
+        return $abonnementFormat;
     }
 }

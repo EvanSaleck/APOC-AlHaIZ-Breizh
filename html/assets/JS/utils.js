@@ -27,14 +27,19 @@ export async function fileExists(path) {
     }
 }
 
-export function Connexion(){
+export function Connexion(typeConnexion){
+    console.log(typeConnexion);
+    
     let pseudo = document.getElementById('pseudo').value;
     let password = document.getElementById('password').value;
+
     let data = new FormData();
     data.append('pseudo', pseudo);
     data.append('password', password);
 
-    fetch('/api/ConnexionClient', {
+    let url = typeConnexion === 'proprio' ? '/api/ConnexionProprio' : '/api/ConnexionClient';
+
+    fetch(url, {
         method: 'POST',
         body: data
     })
@@ -42,7 +47,7 @@ export function Connexion(){
     .then(data => {
         console.log(data);
         if(data === 'Connexion réussie'){
-            ThrowAlertPopup(data,'succes');
+            ThrowAlertPopup(data,'success');
             setTimeout(() => {
                 let url = window.location.href;
                 window.location.href = url;
@@ -94,8 +99,7 @@ export function ThrowAlertPopup(message,type) {
 }
 
 
-
-export function CreateConnexionModal() {
+export function CreateConnexionModal(typeConnexion) {
     // Remove existing modals if they exist
     if (document.getElementById('connexionModal') != null) {
         document.getElementById('connexionModal').remove();
@@ -114,11 +118,19 @@ export function CreateConnexionModal() {
         <div id="connexionForm">
             <input type="email" id="pseudo" name="pseudo" placeholder="JEANDUJAR01 ou Jean.Dujardin@gmail.com" required>
             <input type="password" id="password" name="password" placeholder="*********" required>
-            <button id="Connexion" onclick="Connexion()">Se connecter</button>
+            <button id="Connexion">Se connecter</button>
         </div>
         <p>Vous n'avez pas de compte ? <span id="inscription" onclick="">Inscrivez-vous</span></p>
     </div>
     `;
+
+    let connexion = modal.querySelector('#Connexion');
+    connexion.addEventListener('click', () => {
+        console.log('click');
+        Connexion(typeConnexion);
+    });
+
+
     document.body.appendChild(modal);
 
     // Apply blur to all elements except the modal
