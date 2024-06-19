@@ -21,12 +21,10 @@ $abonnementICalController = new AbonnementICalController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
-// $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
-    case preg_match('/^\/reservations\/abonnement\/exportICal\?token=[a-f0-9]{64}$/', $requestUrl) ? true : false:
+    case preg_match('/^\/reservations\/abonnement\?token=[a-f0-9]{64}$/', $requestUrl) ? true : false:
         $token = $_GET['token'];
-        // echo 'Token : ' . $token;
         $abonnementICalController->exportIcal($token);
         break;
 

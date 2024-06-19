@@ -62,7 +62,7 @@ class AbonnementICalController {
         $this->icalService->generateFileWithToken($token);
         $url = $this->icalService->urlFromToken($token);
 
-        echo $url;
-        // header('Location: ' . $url);
+        // echo $url;
+        header('Location: ' . $url);
     }
 }
