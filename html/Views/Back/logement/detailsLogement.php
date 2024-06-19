@@ -9,7 +9,7 @@
             // print_r(get_included_files());
         ?>
     </pre>
-    <h1>Ajouter un logement</h1>
+    <h1>Votre logement</h1>
 
     <form name="formNewLogement" id="formNewLogement" method="POST">
         <div class="containerPrincipal">
@@ -60,12 +60,7 @@
                         <label for="photo-input" class="souligne" id="labelDropPhoto">Photo du logement*</label>
                         <input type="file" id="photo-input" style="display: none;">
                     </div>
-                    <div class="drop-photo" id="drop-photo">
-                        <img src="/assets/imgs/logoDragImg.svg" alt="Logo d'image">
-                        Déposez votre photo ici
-                        <button id="photo-button" type="button">Ou sélectionnez un fichier</button>
-                        <span id="photo-nom-image"></span>
-                        <span class="messageError"></span>  
+                    <div class="imageLogement" id="image-logement">
                     </div>
                 </div>
             </div>

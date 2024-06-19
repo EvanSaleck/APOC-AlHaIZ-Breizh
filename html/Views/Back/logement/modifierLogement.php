@@ -9,7 +9,7 @@
             // print_r(get_included_files());
         ?>
     </pre>
-    <h1>Ajouter un logement</h1>
+    <h1>Modifier un logement</h1>
 
     <form name="formNewLogement" id="formNewLogement" method="POST">
         <div class="containerPrincipal">

@@ -22,11 +22,24 @@ $requestUrl = $_SERVER['REQUEST_URI'];
 // $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
+    // routes gildas
+    case '/export/ical':
+    case '/export/ical/':
+        // $reservationController->exportIcal();
+        include_once './Views/Back/reservation/exportICal.php';
+        break;
+    
+    case '/service/exportICal':
+    case '/service/exportICal/':
+        $reservationController->exportIcal();
+        break;
+    
     // Routes des vues front office 
     case '/':
     case '':
         include_once './Views/Front/logement/indexLogement.php';
         break;
+        
     case '/logement':
     case '/logement/':
         include_once './Views/Front/logement/detailsLogement.php';
@@ -40,9 +53,10 @@ switch($requestUrl) {
         else { include_once './Views/Front/reservation/devis.php'; }
 
         break;
-
+        
     case '/Back/reservations':
     case '/Back/reservations/':
+        include_once('Views/Back/reservation/listeReservations.php');
         if(!isset($_SESSION['proprio'])) {
             include_once('Views/Back/reservation/listeReservations.php');
             // header('Location: /');
@@ -53,17 +67,21 @@ switch($requestUrl) {
     // routes du back
     case '/logement/new':
     case '/logement/new/':
-        // if(!isset($_SESSION['proprio'])) {
-        //     header('Location: /');
-        // }else {
+         if(!isset($_SESSION['proprio'])) {
             include './Views/Back/logement/newLogement.php';
-        // }
+        }else {
+            header('Location: /');
+        }
         break;
     
     // routes back office
-    case '/logements':
-    case '/logements/':
+    case '/logement':
+    case '/logement/':
         include './Views/Back/logement/listeLogements.php';
+        break;
+    case '/logements/details':
+    case '/logements/details/';
+        include './Views/Back/logement/detailsLogement.php';
         break;
     case '/api/getLogementsDataForCards':
         header('Content-Type: application/json');
@@ -105,6 +123,12 @@ switch($requestUrl) {
         $logementController->getLogementById($data['id']);
         break;
 
+    case '/api/getLogementsByProprietaireId':
+    case '/api/getLogementsByProprietaireId/':
+        // $data = $_POST;
+        $data['id'] = 8 ; 
+        $logementController->getLogementsByProprietaireId($data['id']);
+        break;
 
     // Routes des API
     case '/Deconnexion':
@@ -170,6 +194,16 @@ switch($requestUrl) {
             include './Views/Front/reservation/DetailReservation.php';
         }
         break;
+
+    case '/api/updateLogementStatus':
+    case '/api/updateLogementStatus/':
+        $id = $_POST['logementId'];
+        $status = $_POST['status'];
+        // var_dump($data);
+        // die();
+        $logementController->updateStatus($id, $status);
+        break;
+            
 
     
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
