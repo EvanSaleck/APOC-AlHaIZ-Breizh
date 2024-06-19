@@ -32,7 +32,16 @@ switch($requestUrl) {
         include_once './Views/Front/logement/detailsLogement.php';
         break;
     case '/compte':
+    case '/compte/':
         include_once './Views/Front/compte/detailsCompte.php';
+        break;
+    case '/connexion':
+    case '/connexion/':
+        include_once './Views/Front/compte/connexionCompte.php';
+        break;
+    case '/inscription':
+    case '/inscription/':
+        include_once './Views/Front/compte/creationCompte.php';
         break;
     case '/reservation/devis':
     case '/reservation/devis/':
