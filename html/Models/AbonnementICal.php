@@ -119,7 +119,9 @@ class AbonnementICal {
 
             $this->db->getPDO()->commit();
 
-            unlink("icalfiles/$token.ics");
+            if(file_exists("icalfiles/$token.ics")) {
+                unlink("icalfiles/$token.ics");
+            }
 
             return true;
 

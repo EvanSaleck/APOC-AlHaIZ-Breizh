@@ -75,8 +75,8 @@ class ICalService {
 
         foreach($reservations as $reservation) {
             $ical .= "BEGIN:VEVENT\n";
-            $ical .= "DTSTART:" . $reservation['date_arrivee'] . "\n";
-            $ical .= "DTEND:" . $reservation['date_depart'] . "\n";
+            $ical .= "DTSTART:" . date('Ymd', strtotime($reservation['date_arrivee'])) . "\n";
+            $ical .= "DTEND:" . date('Ymd', strtotime($reservation['date_depart'])) . "\n";
             $ical .= "SUMMARY:Reservation\n";
             $ical .= "DESCRIPTION:Reservation\n";
             $ical .= "STATUS:reservation_confirmee\n";
