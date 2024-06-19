@@ -141,4 +141,22 @@ fetch('/api/getTypeOfLogementById/' + sessionStorage.getItem('idLogement'))
         }
     });
 
+let boutonsAmenagements = document.getElementById("amenagementsBoutons");
+
+    fetch('/api/getAmenagementsOfLogementById/' + sessionStorage.getItem('idLogement'))
+    .then(response => response.json())
+    .then(dataAm => {
+        console.log(dataAm);
+        let idsAmenagementsActifs = dataAm.map(amenagement => amenagement.id_amenagement);
+
+        for (let bouton of boutonsAmenagements.getElementsByTagName('button')) {
+            if (idsAmenagementsActifs.includes(parseInt(bouton.id))) {
+                bouton.classList.add('active');
+            } else {
+                bouton.classList.remove('active');
+            }
+        }
+    })
+    .catch(error => console.error('Erreur lors de la récupération des données:', error));
+
 });
