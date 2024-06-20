@@ -6,13 +6,20 @@
     <h1 id="titre">S'abonner au format iCal</h1>
     <a href="/reservations/abonnements/liste">Liste des abonnements iCal</a>
     <form name="formICal" id="formICal" method="POST">
-        <label for="dateDebut">Date de début</label>
-        <input type="date" name="dateDebut" id="dateDebut">
-        <span class="messageError" id="errorDateDebut"></span>
-
-        <label for="dateFin">Date de fin</label>
-        <input type="date" name="dateFin" id="dateFin">
-        <span class="messageError" id="errorDateFin"></span>
+        <div id="datesAbonnement">
+            <div>
+                <label for="dateDebut">Date de début</label>
+                <br>
+                <input type="date" name="dateDebut" id="dateDebut">
+                <span class="messageError" id="errorDateDebut"></span>
+            </div>
+            <div>
+                <label for="dateFin">Date de fin</label>
+                <br>
+                <input type="date" name="dateFin" id="dateFin">
+                <span class="messageError" id="errorDateFin"></span>
+            </div>
+        </div>
 
         <label for="listeLogements" id="listeLogementsLabel">Liste des logements</label>
         <span class="messageError" id="errorListeLogements"></span>

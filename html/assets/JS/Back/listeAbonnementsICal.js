@@ -52,10 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // on ajoute un bouton permettant de copier l'adresse
                 let td = document.createElement('td');
-                let button = document.createElement('button');
-                button.innerHTML = "Copier l'url";
+                let copyBtn = document.createElement('button');
+                // button.innerHTML = "Copier l'url";
+                copyBtn.id = 'copyIconButton';
+                copyBtn.innerHTML = "<img src='/assets/imgs/basicIcons/copy.svg' alt='Copier l'url'>";
 
-                button.addEventListener('click', function() {
+                copyBtn.addEventListener('click', function() {
                     let text = element.url;
                     navigator.clipboard.writeText(text).then(function() {
                         ThrowAlertPopup('URL copiée !', 'success')
@@ -63,11 +65,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         console.error('Erreur lors de la copie de l\'url : ', 'error');
                     });
                 });
-                td.appendChild(button);
+                td.appendChild(copyBtn);
                 tr.appendChild(td);
 
                 let update = document.createElement('td');
                 let updateBtn = document.createElement('button');
+                updateBtn.id = 'penIconButton';
                 updateBtn.innerHTML = "<img src='/assets/imgs/basicIcons/penUpdate.svg' alt='Modifier'>";
                 updateBtn.addEventListener('click', function() {
                     window.location.href = `/reservations/abonnements/iCal/edit/${element.id}`;
@@ -77,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 let del = document.createElement('td');
                 let delBtn = document.createElement('button');
+                delBtn.id = 'trashIconButton';
                 delBtn.innerHTML = "<img src='/assets/imgs/basicIcons/trashDelete.svg' alt='Supprimer'>";
                 delBtn.addEventListener('click', function() {
                     fetch(`/api/reservations/abonnements/iCal/delete/${element.id}`, {

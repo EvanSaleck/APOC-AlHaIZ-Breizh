@@ -49,23 +49,12 @@ document.addEventListener('DOMContentLoaded', function() {
         var formData = new FormData(this); 
 
         if(validateFormData(form, e)) {
-            fetch("/api/reservations/abonnements/iCal/new", {
-                method: "POST",
-                body: formData,
-              })  
-                .then((response) => {
-                    return response.json();
-                })
-                .then(data => {
-                    if (data === true ) {
-                        let message  = "Abonnement créé, l'URL est copié dans votre presse-papier";
-                        ThrowAlertPopup(message, 'success');
-                        localStorage.setItem('alertPopup', JSON.stringify({ message: message, type: 'success' }));
-                        window.location.href = '/reservations/abonnements/liste';
-                    } else {
-                        ThrowAlertPopup('Erreur lors de la l\enregistrement de votre abonnement, veuillez réessayer plus tard. <br> Si le problème persiste, merci de contacter un administrateur', 'error');
-                    }
-                });
+            if (window.location.pathname.match(/^\/reservations\/abonnements\/iCal\/edit\/\d+\/$/) || window.location.pathname.match(/^\/reservations\/abonnements\/iCal\/edit\/\d+$/)) {
+                let id = window.location.pathname.split('/')[5];
+                updateAbonnement(id, formData);
+            } else {
+                createAbonnement(formData);
+            }
         }
     });
 
@@ -128,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
     
-        return isValid; // Retourne l'état de validation
+        return isValid;n
     }
 
 
@@ -158,5 +147,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let submit = document.getElementById('submit');
         submit.value = 'Modifier l\'abonnement';
+    }
+
+    function createAbonnement(formData) {
+        fetch("/api/reservations/abonnements/iCal/new", {
+            method: "POST",
+            body: formData,
+          })  
+            .then((response) => {
+                return response.json();
+            })
+            .then(data => {
+                if (data === true ) {
+                    let message  = "Abonnement créé";
+                    ThrowAlertPopup(message, 'success');
+                    localStorage.setItem('alertPopup', JSON.stringify({ message: message, type: 'success' }));
+                    window.location.href = '/reservations/abonnements/liste';
+                } else {
+                    ThrowAlertPopup('Erreur lors de la l\enregistrement de votre abonnement, veuillez réessayer plus tard. <br> Si le problème persiste, merci de contacter un administrateur', 'error');
+                }
+            });
+    }
+
+    // update 
+    function updateAbonnement(id, formData) {
+        fetch("/api/reservations/abonnements/iCal/edit/" + id, {
+            method: "POST",
+            body: formData,
+          })  
+            .then((response) => {
+                return response.json();
+            })
+            .then(data => {
+                if (data === true ) {
+                    let message  = "Abonnement modifié";
+                    ThrowAlertPopup(message, 'success');
+                    localStorage.setItem('alertPopup', JSON.stringify({ message: message, type: 'success' }));
+                    window.location.href = '/reservations/abonnements/liste';
+                } else {
+                    ThrowAlertPopup('Erreur lors de la l\enregistrement de votre abonnement, veuillez réessayer plus tard. <br> Si le problème persiste, merci de contacter un administrateur', 'error');
+                }
+            });
     }
 });

@@ -49,6 +49,15 @@ switch($requestUrl) {
     case '/api/reservations/abonnement/iCal/new/':
         $abonnementICalController->newAction();        
         break;
+
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/edit\/\d+$/', $requestUrl) ? true : false:   
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/edit\/\d+\/$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $id = end($url_parts);
+        
+        $abonnementICalController->editAction($id);
+        break;
+
     
     // on créé la route de suppression : /api/reservations/abonnements/iCal/delete/{id}
     // ainsi que  : /api/reservations/abonnements/iCal/delete/{id}/

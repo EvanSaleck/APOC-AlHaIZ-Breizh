@@ -4,19 +4,23 @@
 ?>
 <body>
     <h1>Liste des abonnements iCal</h1>
-    <a href="/reservations/abonnements/iCal/new" class="btn btn-primary">Nouvel abonnement iCal</a>
-    <table id="tableListeLogements">
-        <thead>
-            <tr>
-                <th>Date de début</th>
-                <th>Date de fin</th>
-                <th>Logements</th>
-                <th>Url</th>
-                <th>Modifier</th>
-                <th>Supprimer</th>
-            </tr>
-        </thead>
-        <tbody id="tbodyListeLogements">
-        </tbody>
-    </table>
+    <div id="bodyContent">
+        <div id="divButton">
+            <a href="/reservations/abonnements/iCal/new" id="lienNewAbo">Créer un nouvel abonnement iCal</a>
+        </div>
+        <table id="tableListeLogements">
+            <thead>
+                <tr>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
+                    <th>Logements</th>
+                    <th>Copier l'url</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyListeLogements">
+            </tbody>
+        </table>
+    </div>
 </body>
