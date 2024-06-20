@@ -68,7 +68,7 @@ class ICalService {
             $ical .= "DTEND:" . date('Ymd', strtotime($reservation['date_depart'])) . "\n";
             $ical .= "SUMMARY:Reservation\n";
             $ical .= "DESCRIPTION:Reservation\n";
-            $ical .= "STATUS:reservation_confirmee\n";
+            $ical .= "STATUS:CONFIRMED\n";
             $ical .= "END:VEVENT\n";
         }
 
