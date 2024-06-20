@@ -11,11 +11,16 @@ class AbonnementICal {
 
     private $db;
 
+    private $titre;
     private $dateDebut;
     private $dateFin;
     private $listeLogements;
 
-    public function __construct($dateDebut = null, $dateFin = null, $listeLogements = null) {
+    public function __construct($titre = null, $dateDebut = null, $dateFin = null, $listeLogements = null) {
+        if ($titre !== null) {
+            $this->titre = $titre;
+        }
+
         if ($dateDebut !== null) {
             $this->dateDebut = $dateDebut;
         }
@@ -38,10 +43,10 @@ class AbonnementICal {
         
             $token = bin2hex(random_bytes(32));
 
-
-            $query = "INSERT INTO abonnements_reservations(date_debut, date_fin, token, AR_id_compte) VALUES(:date_debut, :date_fin, :token, :AR_id_compte)";
+            $query = "INSERT INTO abonnements_reservations(titre, date_debut, date_fin, token, AR_id_compte) VALUES(:titre,:date_debut, :date_fin, :token, :AR_id_compte)";
 
             $this->db->executeQuery($query, array(
+                ':titre' => $this->titre,
                 ':date_debut' => $this->dateDebut,
                 ':date_fin' => $this->dateFin,
                 ':token' => $token,
@@ -73,9 +78,10 @@ class AbonnementICal {
         try {
             $this->db->getPDO()->beginTransaction();
 
-            $query = "UPDATE abonnements_reservations SET date_debut = :date_debut, date_fin = :date_fin WHERE id_abonnement = :id_abonnement";
+            $query = "UPDATE abonnements_reservations SET titre = :titre, date_debut = :date_debut, date_fin = :date_fin, nb_modifications = nb_modifications + 1 WHERE id_abonnement = :id_abonnement";
 
             $this->db->executeQuery($query, array(
+                ':titre' => $this->titre,
                 ':date_debut' => $this->dateDebut,
                 ':date_fin' => $this->dateFin,
                 ':id_abonnement' => $id

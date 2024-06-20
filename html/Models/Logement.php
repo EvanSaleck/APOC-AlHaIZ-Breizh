@@ -55,13 +55,14 @@ class Logement {
     }
 
     public function getLogementsByAbonnement($id){
+        // on selectionne seulement le contenu de la table logement
         $logements = $this->db->executeQuery('
-        SELECT * 
-        FROM logement 
+        SELECT l.*
+        FROM logement l
         JOIN logement_abonnement ON id_logement = LA_id_logement
         JOIN abonnements_reservations ON LA_id_abonnement = id_abonnement
         WHERE id_abonnement = ' . $id);
-        
+                
         return $logements;
     }
 

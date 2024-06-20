@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
             let tbody = document.getElementById('tbodyListeLogements');
             data.forEach(element => {
                 let tr = document.createElement('tr');
+                console.log(element);
+                let titre = document.createElement('td');
+                titre.innerHTML = element.titre_abo;
+                tr.appendChild(titre);
 
                 let dateDeb = document.createElement('td');
                 dateDeb.innerHTML = element.date_debut;

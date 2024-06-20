@@ -66,8 +66,10 @@ class ICalService {
             $ical .= "BEGIN:VEVENT\n";
             $ical .= "DTSTART:" . date('Ymd', strtotime($reservation['date_arrivee'])) . "\n";
             $ical .= "DTEND:" . date('Ymd', strtotime($reservation['date_depart'])) . "\n";
-            $ical .= "SUMMARY:Reservation\n";
-            $ical .= "DESCRIPTION:Reservation\n";
+            // summary = nom du logement
+            $ical .= "SUMMARY:" . $reservation['titre'] . "\n";
+            $ical .= "DESCRIPTION:Nom du client: " . $reservation['pseudo'] . "\\nEmail: " . $reservation['email'] . "\\nTarif total: " . $reservation['tarif_total'] . "\n";
+            $ical .= "LOCATION:" . $reservation['adresse'] . ", " . $reservation['code_postal'] . " " . $reservation['ville'] . "\n";
             $ical .= "STATUS:CONFIRMED\n";
             $ical .= "END:VEVENT\n";
         }
@@ -88,6 +90,8 @@ class ICalService {
                 
         foreach($abonnements as $key => $abonnement) {
             $abonnementFormat[$key]['id'] = $abonnement['id_abonnement'];
+
+            $abonnementFormat[$key]['titre_abo'] = $abonnement['titre'];
 
             $abonnementFormat[$key]['date_debut'] = date('d/m/Y', strtotime($abonnement['date_debut']));
             $abonnementFormat[$key]['date_fin'] = date('d/m/Y', strtotime($abonnement['date_fin']));

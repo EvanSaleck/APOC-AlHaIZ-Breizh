@@ -11,6 +11,7 @@
         <table id="tableListeLogements">
             <thead>
                 <tr>
+                    <th>Titre</th>
                     <th>Date de début</th>
                     <th>Date de fin</th>
                     <th>Logements</th>

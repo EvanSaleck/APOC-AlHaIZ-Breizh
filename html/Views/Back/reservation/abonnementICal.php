@@ -9,6 +9,12 @@
             <a href="/reservations/abonnements/liste" id="lienListeAbo">Liste des abonnements iCal</a>
         </div>
         <form name="formICal" id="formICal" method="POST">
+            <div id="titre">
+                <label for="titreAbo">Titre de l'abonnement</label>
+                <br>
+                <input type="text" name="titreAbo" id="titreAbo">
+                <span class="messageError" id="errorTitreAbo"></span>
+            </div>
             <div id="datesAbonnement">
                 <div>
                     <label for="dateDebut">Date de début</label>
@@ -32,3 +38,6 @@
         </form>
     </div>
 </body>
+<?php
+    include_once("Views/Back/composants/footer.php");
+?>

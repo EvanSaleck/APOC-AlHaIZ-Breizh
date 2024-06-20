@@ -18,22 +18,24 @@ class AbonnementICalController {
     }
 
     public function newAction() {
+        $titre = $_POST['titreAbo'];
         $dateDebut = $_POST['dateDebut'];
         $dateFin = $_POST['dateFin'];
         $listeLogements = $_POST['logements'];
 
-        $abonnement = new AbonnementICal($dateDebut, $dateFin, $listeLogements);
+        $abonnement = new AbonnementICal($titre, $dateDebut, $dateFin, $listeLogements);
 
         header('Content-Type: application/json');
         echo json_encode($abonnement->newAbonnement());
     }
 
     public function editAction($id) {
+        $titre = $_POST['titreAbo'];
         $dateDebut = $_POST['dateDebut'];
         $dateFin = $_POST['dateFin'];
         $listeLogements = $_POST['logements'];
 
-        $abonnement = new AbonnementICal($dateDebut, $dateFin, $listeLogements);
+        $abonnement = new AbonnementICal($titre, $dateDebut, $dateFin, $listeLogements);
 
         header('Content-Type: application/json');
         echo json_encode($abonnement->editAbonnement($id));

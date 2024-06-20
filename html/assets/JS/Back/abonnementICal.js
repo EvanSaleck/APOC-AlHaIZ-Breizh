@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var formData = new FormData(this); 
 
-        if(validateFormData(form, e)) {
+        if(validateFormData(e)) {
             if (window.location.pathname.match(/^\/reservations\/abonnements\/iCal\/edit\/\d+\/$/) || window.location.pathname.match(/^\/reservations\/abonnements\/iCal\/edit\/\d+$/)) {
                 let id = window.location.pathname.split('/')[5];
                 updateAbonnement(id, formData);
@@ -58,9 +58,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    function validateFormData(data, e) {
+    function validateFormData(e) {
         resetErrors();
         let isValid = true;
+
+        let titre = document.getElementById('titreAbo');
+        if (titre.value.length > 50) {
+            e.preventDefault();
+            let spanError = document.getElementById('errorTitreAbo');
+            spanError.innerText = 'Le titre ne doit pas dépasser 50 caractères';
+            isValid = false;
+        }
+
+        if (titre.value === '') {
+            e.preventDefault();
+            let spanError = document.getElementById('errorTitreAbo');
+            spanError.innerText = 'Veuillez entrer un titre';
+            isValid = false;
+        }
+
     
         let checkboxes = document.querySelectorAll('input[type="checkbox"]');
         let checked = false;
@@ -117,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
     
-        return isValid;n
+        return isValid;
     }
 
 
@@ -127,6 +143,8 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('/api/reservations/abonnements/iCal/getDataICal/' + id)
         .then(response => response.json())
         .then(data => {
+            let titre = document.getElementById('titreAbo');
+            titre.value = data.titre;
             let dateDebut = document.getElementById('dateDebut');
             dateDebut.value = data.date_debut;
             let dateFin = document.getElementById('dateFin');
@@ -134,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let logements = data.logements.split(',');
             let checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            console.log(logements,checkboxes);
             checkboxes.forEach(checkbox => {
                 if (logements.includes(checkbox.value)) {
                     checkbox.checked = true;
@@ -150,6 +167,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function createAbonnement(formData) {
+        // formData.entries().forEach(element => {
+        //     console.log(element);
+        // });
+
         fetch("/api/reservations/abonnements/iCal/new", {
             method: "POST",
             body: formData,

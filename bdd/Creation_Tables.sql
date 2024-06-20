@@ -175,10 +175,12 @@ CREATE TABLE avis (
 
 CREATE TABLE abonnements_reservations(
    id_abonnement serial PRIMARY KEY,
+   titre varchar(50) NOT NULL,
    date_debut date NOT NULL,
    date_fin date NOT NULL,
    token VARCHAR(100) NOT NULL UNIQUE,
    date_creation TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,   
+   nb_modifications integer NOT NULL DEFAULT 0,
    AR_id_compte integer NOT NULL,
    CONSTRAINT abonnementsReservations_compte_fk 
       FOREIGN KEY (AR_id_compte) REFERENCES compte_proprietaire(id_compte)
