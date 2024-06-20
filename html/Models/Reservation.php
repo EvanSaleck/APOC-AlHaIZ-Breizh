@@ -21,7 +21,7 @@
 
         public function getReservationsForExportICal($dateDeb, $dateFin, $listeLogements) {
             // on prend aussi nom, prenom et email du client, ainsi que l'adresse du logement loué 
-            $reservations = $this->db->executeQuery("SELECT r.id_reservation, r.date_arrivee, r.date_depart, r.tarif_total, c.pseudo, c.e_mail, l.titre, a.numero_rue, a.code_postal, a.nom_ville 
+            $reservations = $this->db->executeQuery("SELECT r.id_reservation, r.date_arrivee, r.date_depart, r.tarif_total, c.pseudo, c.e_mail, l.titre, a.numero_rue, a.nom_rue, a.code_postal, a.nom_ville 
                 FROM reservation AS r 
                     INNER JOIN logement AS l ON r.R_id_logement = l.id_logement 
                     INNER JOIN compte_client AS c ON r.R_id_compte = c.id_compte 
