@@ -50,66 +50,79 @@ class Utilisateur {
         }
     }
 
-    // public function inscriptionClient($data) {
-    //     $query = "INSERT INTO sae3.compte_client (civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client) VALUES (?, ?, ?)";
-    //     $statement = $this->pdo->prepare($query);
-    //     $statement->execute([$data['pseudo'], $data['email'], password_hash($data['password'], PASSWORD_DEFAULT)]);
-
-    //     return 'Inscription réussie';
-    // }
     
     public function inscriptionClient($data) {
         try {
             $this->db->getPDO()->beginTransaction();
+            // on commence par regarder si un utilisateur n'existe pas deja avec le meme email
 
-            // Insertion de l'adresse
-            $colonnesAdresse = ['numero_rue', 'nom_rue', 'code_postal', 'nom_ville', 'pays', 'complement', 'etat'];
-            $valeursAdresse = [
+            $query = "SELECT * FROM sae3.compte_client WHERE e_mail = ?";
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$data['email']]);
+            $utilisateur = $statement->fetch(\PDO::FETCH_ASSOC);
+
+            if ($utilisateur) {
+                throw new Exception('Un utilisateur existe déjà avec cet email');
+            }
+
+            $query = "INSERT INTO sae3.adresse (numero_rue, nom_rue, code_postal, nom_ville, pays, complement, etat) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([
                 $data['numero_rue'],
                 $data['nom_rue'],
                 $data['code_postal'],
                 $data['nom_ville'],
                 $data['pays'],
-                $data['complement'] ?? null,
-                $data['etat'] ?? null
-            ];
-            $this->db->insert('adresse', $colonnesAdresse, $valeursAdresse);
+                $data['complement'],
+                $data['etat']
+            ]);
+            
+
             $idAdresse = $this->db->getPDO()->lastInsertId();
 
-            // Insertion du compte
-            $colonnesCompte = ['civilite', 'nom', 'prenom', 'e_mail', 'mdp', 'pseudo', 'photo_profil', 'ddn', 'C_id_adresse'];
-            $valeursCompte = [
+            
+            // puis creation compte a laquelle rajouter l'id de l'adresse
+            $query = "INSERT INTO sae3.compte_client (code_client, civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, C_id_adresse, CC_id_adresse) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            $statement = $this->pdo->prepare($query);
+            $date = date('Y-m-d', strtotime($data['ddn']));
+
+            $codeClient = strtoupper(substr($data['prenom'], 0, 3) . $data['nom']);
+
+            $statement->execute([
+                $codeClient,
                 $data['civilite'],
                 $data['nom'],
                 $data['prenom'],
                 $data['email'],
-                $data['motDePasse'], // Assurez-vous que le mot de passe soit hashé avant insertion
-                $data['nomUtilisateur'],
-                $data['photoProfil'],
-                $data['dateNaissance'],
-                $idAdresse
-            ];
-            $this->db->insert('compte', $colonnesCompte, $valeursCompte);
+                password_hash($data['password'], PASSWORD_DEFAULT),
+                $data['pseudo'],
+                $data['photo_profil'],
+                $date,
+                $idAdresse,
+                $idAdresse,
+            ]);
+
             $idCompte = $this->db->getPDO()->lastInsertId();
 
-            // Génération du code client
-            $codeClient = strtoupper(substr($data['prenom'], 0, 3) . $data['nom'] . $idCompte);
+            // puis on update le compte client pour ajouter l'id du compte a la suite du code client
 
-            // Insertion du compte client
-            $colonnesCompteClient = ['id_compte', 'code_client', 'CC_id_adresse'];
-            $valeursCompteClient = [
-                $idCompte,
-                $codeClient,
-                $idAdresse
-            ];
-            $this->db->insert('compte_client', $colonnesCompteClient, $valeursCompteClient);
-
+            $query = "UPDATE sae3.compte_client SET code_client = ? WHERE id_compte = ?";
+            $statement = $this->pdo->prepare($query);
+            $codeClient = strtoupper(substr($data['prenom'], 0, 3) . $data['nom'] . $idCompte );
+            $statement->execute([$codeClient, $idCompte]);
+            
             $this->db->getPDO()->commit();
-            return true;
+
+            $query = "SELECT * FROM sae3.compte_client WHERE code_client = ?";
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$codeClient]);
+            $utilisateur = $statement->fetch(\PDO::FETCH_ASSOC);
+            
+            return $utilisateur;
         } catch (Exception $e) {
             $this->db->getPDO()->rollBack();
-            error_log('Erreur lors de l\'inscription : ' . $e->getMessage());
-            return false;
+            throw new Exception('Erreur lors de l\'inscription : ' . $e->getMessage());
         }
     }
     

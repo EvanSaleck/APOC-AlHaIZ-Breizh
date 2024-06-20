@@ -1,4 +1,3 @@
-
 var starFull = '<img class="noteEtoile" src="/assets/imgs/notes/star_full.svg" alt="">';
 var starEmpty = '<img class="noteEtoile" src="/assets/imgs/notes/star_empty.svg" alt="">';
 var starHalf = '<img class="noteEtoile" src="/assets/imgs/notes/star_half.svg" alt="">';
@@ -75,32 +74,65 @@ function Inscription() {
     let data = new FormData();
     //let data = new FormData(document.querySelector('.nomduformulaire'));
 
-    data.append('nom', "Dikapibara");
-    data.append('prenom', "Léonard");
-    data.append('civilite', "Mr");
-    data.append('nomUtilisateur', "LéoKapibara");
-    data.append('email', "leskapibaras@wanadoo.com");
-    data.append('motDePasse', "jaimelesKapibaradu(22)");
-    data.append('photoProfil', '/assets/imgs/Profils/jauni_daip.webp');
-    data.append('dateNaissance', '07/08/1999');
+    // Récupération des valeurs des champs du formulaire
 
-    data.append('numero_rue', "12");
-    data.append('nom_rue', "rue de Blancbois");
-    data.append('code_postal', "22300");
-    data.append('nom_ville', "Lannion");
-    data.append('pays', "France");
+    const nom = document.getElementById('lastname').value;
+    const prenom = document.getElementById('firstname').value;
+    const civilite = document.getElementById('civility').value;
+    const pseudo = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const motDePasse = document.getElementById('password').value;
+    const ddn = document.getElementById('ddn').value;
+    const numero_rue = document.getElementById('numero_rue').value;
+    const nom_rue = document.getElementById('nom_rue').value;
+    const code_postal = document.getElementById('code_postal').value;
+    const nom_ville = document.getElementById('nom_ville').value;
+    const pays = document.getElementById('pays').value;
+    const complement = document.getElementById('complement').value;
+    const etat = document.getElementById('etat').value;
+
+    data.append('nom', nom);
+    data.append('prenom', prenom);
+    data.append('civilite', civilite);
+    data.append('pseudo', pseudo);
+    data.append('email', email);
+    data.append('password', motDePasse);
+    data.append('photo_profil', '/assets/imgs/Profils/jauni_daip.webp');
+    data.append('ddn', '1999-12-31');
+    data.append('numero_rue', numero_rue);
+    data.append('nom_rue', nom_rue);
+    data.append('code_postal', code_postal);
+    data.append('nom_ville', nom_ville);
+    data.append('pays', pays);
+    data.append('complement', complement);
+    data.append('etat', etat);
+
+
+    // data.append('numero_rue', "12");
+    // data.append('nom_rue', "rue de Blancbois");
+    // data.append('code_postal', "22300");
+    // data.append('nom_ville', "Lannion");
+    // data.append('pays', "France");
+
     // const c_id_adresse, const code_client, const cc_id_adresse à générer ou à trouver sur d'autres tables
 
     // Appel API pour créer l'adresse et le compte utilisateur
-    console.log('Envoi des données:', data);
-    fetch('/api/inscriptionClient', {
+    for(var pair of data.entries()) {
+        console.log(pair[0]+', '+pair[1]);
+      }
+
+    fetch('/api/InscriptionClient', {
         method: 'POST',
         body: data
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('response:', response);
+
+        return response.json();
+    })
     .then(data => {
         console.log(data);
-        if (data.success) {
+        if (data !== undefined && data.success) {
             ThrowAlertPopup('Inscription réussie!', 'succes');
             setTimeout(() => {
                 window.location.href = '/accueil';  // Redirection après l'inscription
@@ -114,48 +146,6 @@ function Inscription() {
         ThrowAlertPopup('Erreur technique, veuillez réessayer plus tard.', 'error');
     });
 }
-
-
-// function Inscription() {
-//     let data = new FormData();
-//     fetch('/api/InscriptionClient', {
-//         method: 'POST',
-//         body: data
-//     })
-//     try {
-//         // Ici, ajoutez la logique pour l'inscription
-//         // Par exemple, récupérer les valeurs des champs de formulaire
-
-//         // --------------------------- code en dur des valeurs pour l'instant ---------------------------
-//         // const nom = document.getElementById('lastname').value;
-//         // const prenom = document.getElementById('firstname').value;
-//         // const civilite = document.getElementById('civility').value;
-//         // const nomUtilisateur = document.getElementById('username').value;
-//         // const email = document.getElementById('email').value;
-//         // const motDePasse = document.getElementById('password').value;
-
-
-
-//         // --------------------------- code en dur des valeurs pour l'instant ---------------------------
-//         console.log('Nom:', nom);
-//         console.log('Prénom:', prenom);
-//         console.log('Civilité:', civilite);
-//         console.log('Nom d\'utilisateur:', nomUtilisateur);
-//         console.log('Email:', email);
-//         console.log('Mot de passe:', motDePasse);
-//         // Vous pouvez ajouter d'autres champs nécessaires à l'inscription
-
-//         // Ensuite, envoyez ces valeurs à votre serveur pour créer un nouveau compte utilisateur
-//         // Cela peut être fait via une requête AJAX, fetch API, ou autre méthode selon votre backend
-
-//         console.log('Inscription réussie pour', nomUtilisateur);
-//         return true;
-//     } catch (error) {
-//         console.error('Erreur lors de l\'inscription:', error);
-//         return false;
-//     }
-// }
-
 
 function ThrowAlertPopup(message,type) {
     if (document.getElementsByClassName('alert-popup').length > 0) {
@@ -257,16 +247,16 @@ function CreateInscriptionModal() {
                 <div class="scroll">
                     <div id="lastname-form" class="form">
                         <label for="lastname">Nom :</label>
-                        <input type="text" id="lastname" name="lastname" required>
+                        <input value="testNico12!@" type="text" id="lastname" name="lastname" required>
                     </div>
                     <div id="name-form" class="form">
                         <label for="firstname">Prénom :</label>
-                        <input type="text" id="firstname" name="firstname" required>
+                        <input value="testNico12!@" type="text" id="firstname" name="firstname" required>
                     </div>
 
                     <div id="civility-form" class="form">
                         <label for="civility">Civilité</label>
-                        <select id="civility" name="civility">
+                        <select value="male" id="civility" name="civility">
                             <option value="unspecified">Non spécifié</option>
                             <option value="male">Monsieur</option>
                             <option value="female">Madame</option>
@@ -274,33 +264,75 @@ function CreateInscriptionModal() {
                     </div>
                     <div id="username-form" class="form">
                         <label for="username">Pseudonyme :</label>
-                        <input type="text" id="username" name="username" required>
+                        <input value="test123" type="text" id="username" name="username" required>
                     </div>
                     <div id="email-form" class="form">
                         <label for="email">Adresse mail :</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" value="testNico12@nmds.dr" id="email" name="email" required>
                     </div>
 
                     <div id="password-form" class="form">
                         <label for="password">Mot de passe :</label>
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" value="testNico12!@" id="password" name="password" required>
                         <div id="password_error"></div>
                     </div>
 
                     <div id="confirm_password-form" class="form">
                         <label for="confirm_password">Confirmer mot de passe :</label>
-                        <input type="password" id="confirm_password" name="confirm_password" required>
+                        <input type="password" value="testNico12!@" id="confirm_password" name="confirm_password" required>
                         <div id="confirm_password_error"></div>
                     </div>
+                    
+                    <!-- --------------------------------------------------------------- -->
+                    <div id="ddn-form" class="form">
+                        <label for="ddn">Date de naissance :</label>
+                        <input type="date" value="2018-07-22" id="ddn" name="ddn" required>
+                    </div>
+
+                    <div id="numero_rue-form" class="form">
+                        <label for="numero_rue">Numéro de rue :</label>
+                        <input type="text" value="12" id="numero_rue" name="numero_rue" required>
+                    </div>
+
+                    <div id="nom_rue-form" class="form">
+                        <label for="nom_rue">Nom de rue :</label>
+                        <input type="text" value="rue des lilas" id="nom_rue" name="nom_rue" required>
+                    </div>
+
+                    <div id="complement-form" class="form">
+                        <label for="complement">Complément d'adresse :</label>
+                        <input type="text" id="complement" name="complement">
+                    </div>
+
+                    <div id="code_postal-form" class="form">
+                        <label for="code_postal">Code postal :</label>
+                        <input type="text" value="22300" id="code_postal" name="code_postal" required>
+                    </div>
+                    
+                    <div id="nom_ville-form" class="form">
+                        <label for="nom_ville">Ville :</label>
+                        <input type="text" value="Lannion" id="nom_ville" name="nom_ville" required>
+                    </div>
+
+                    <div id="pays-form" class="form">
+                        <label for="pays">Pays :</label>
+                        <input type="text" value="France" id="pays" name="pays" required>
+                    </div>
+
+                    <div id="etat-form" class="form">
+                        <label for="etat">État :</label>
+                        <input type="text" id="etat" name="etat">
+                    </div>
+                    <!-- --------------------------------------------------------------- -->
 
                     <div id="agreement-form" class="form">
                         <div class="CGU-form">
-                            <input type="checkbox" id="terms_conditions" name="terms_conditions" required>
+                            <input value="true" type="checkbox" id="terms_conditions" name="terms_conditions" required>
                             <label for="terms_conditions">En cochant cette case, je confirme avoir lu et accepté les <a href="/terms-conditions">Conditions Générales d'Utilisation</a> d'ALHalIZ Breizh.</label>
                         </div>
 
                         <div class="CGV-form">
-                            <input type="checkbox" id="sales_conditions" name="sales_conditions" required>
+                            <input value="true" type="checkbox" id="sales_conditions" name="sales_conditions" required>
                             <label for="sales_conditions">En cochant cette case, je reconnais avoir lu et accepté les <a href="/sales-conditions">Conditions Générales de Vente</a> d'ALHalIZ Breizh.</label>
                         </div>
                     </div>
