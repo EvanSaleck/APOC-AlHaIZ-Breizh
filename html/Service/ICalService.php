@@ -20,13 +20,7 @@ class ICalService {
         $this->logementModel = new Logement();
     }
 
-    // export iCal with url and token
     public function generateFileWithToken($token) {
-        // $dateDebut = $form['dateDebut'];
-        // $dateFin = $form['dateFin'];
-        // $logements = $form['logements'];
-
-        // on récupère l'abonnement
         $abonnement = new AbonnementICal();
         $abonnement = $abonnement->getAbonnementByToken($token);
         
@@ -59,11 +53,6 @@ class ICalService {
     }
 
     public function getReservationsIcal($reservations) {
-        // echo '<pre>';
-        // print_r($reservations);
-        // echo '</pre>';
-        // die();
-        
         $ical = "BEGIN:VCALENDAR\n";
         $ical .= "VERSION:2.0\n";
         $ical .= "PRODID:-//hacksw/handcal//NONSGML v1.0//EN\n";     
@@ -84,11 +73,6 @@ class ICalService {
         }
 
         $ical .= "END:VCALENDAR";
-
-        // echo '<pre>';
-        // var_dump($ical);
-        // echo '</pre>';
-        // die();
 
         return $ical;
     }
