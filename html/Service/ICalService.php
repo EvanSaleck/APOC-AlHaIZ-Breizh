@@ -26,6 +26,7 @@ class ICalService {
         
         $dateDebut = $abonnement[0]['date_debut'];
         $dateFin = $abonnement[0]['date_fin'];
+        $sequence = $abonnement[0]['nb_modifications'];
 
         $logements = $this->logementModel->getLogementsByAbonnement($abonnement[0]['id_abonnement']);
 
@@ -37,7 +38,7 @@ class ICalService {
         
         $reservations = $this->reservationModel->getReservationsForExportICal($dateDebut, $dateFin, $idsLogements);
 
-        $reservationICal =  $this->getReservationsIcal($reservations);
+        $reservationICal =  $this->getReservationsIcal($reservations,$sequence);
         
         $file = fopen("icalfiles/$token.ics", "w");
         fwrite($file, $reservationICal);
@@ -52,7 +53,7 @@ class ICalService {
         return $url;
     }
 
-    public function getReservationsIcal($reservations) {
+    public function getReservationsIcal($reservations, $sequence) {
         $ical = "BEGIN:VCALENDAR\n";
         $ical .= "VERSION:2.0\n";
         $ical .= "PRODID:-//hacksw/handcal//NONSGML v1.0//EN\n";     
@@ -74,6 +75,7 @@ class ICalService {
             $ical .= "END:VEVENT\n";
         }
 
+        $ical .= "SEQUENCE:" . $sequence . "\n";
         $ical .= "END:VCALENDAR";
 
         return $ical;
