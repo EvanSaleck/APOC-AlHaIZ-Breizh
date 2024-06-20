@@ -68,8 +68,8 @@ class ICalService {
             $ical .= "DTEND:" . date('Ymd', strtotime($reservation['date_depart'])) . "\n";
             // summary = nom du logement
             $ical .= "SUMMARY:" . $reservation['titre'] . "\n";
-            $ical .= "DESCRIPTION:Nom du client: " . $reservation['pseudo'] . "\\nEmail: " . $reservation['email'] . "\\nTarif total: " . $reservation['tarif_total'] . "\n";
-            $ical .= "LOCATION:" . $reservation['adresse'] . ", " . $reservation['code_postal'] . " " . $reservation['ville'] . "\n";
+            $ical .= "DESCRIPTION:Nom du client: " . $reservation['pseudo'] . "\\nEmail: " . $reservation['e_mail'] . "\\nTarif total: " . $reservation['tarif_total'] . "\n";
+            $ical .= "LOCATION:" . $reservation['numero_rue'] . ", " . $reservation['nom_rue'] . ", " . $reservation['nom_ville'] . $reservation['code_postal'] . " " . $reservation['nom_ville'] . "\n";
             $ical .= "STATUS:CONFIRMED\n";
             $ical .= "END:VEVENT\n";
         }
