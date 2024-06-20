@@ -48,7 +48,7 @@ class ICalService {
 
     public function urlFromToken($token) {
         $server = $_SERVER['HTTP_HOST'];
-        $url = "http://$server/icalfiles/$token.ics";
+        $url = "webcal://$server/icalfiles/$token.ics";
         return $url;
     }
 
