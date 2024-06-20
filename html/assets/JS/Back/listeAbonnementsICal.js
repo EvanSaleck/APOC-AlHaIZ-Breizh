@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let tr = document.createElement('tr');
             let td = document.createElement('td');
             td.innerHTML = "Aucun abonnement iCal";
-            td.setAttribute('colspan', '7');
+            td.setAttribute('colspan', '8');
             td.setAttribute('style', 'text-align: center;');
             tr.appendChild(td);
             tbody.appendChild(tr);
