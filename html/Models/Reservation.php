@@ -25,7 +25,7 @@
                 FROM reservation AS r 
                     INNER JOIN logement AS l ON r.R_id_logement = l.id_logement 
                     INNER JOIN compte_client AS c ON r.R_id_compte = c.id_compte 
-                    INNER JOIN adresse AS a ON l.id_adresse = a.id_adresse
+                    INNER JOIN adresse AS a ON l.l_id_adresse = a.id_adresse
                 WHERE r.date_arrivee >= '" . $dateDeb . "' AND r.date_depart <= '" . $dateFin . "' AND r.R_id_logement IN (" . implode(',', $listeLogements) . ")");
             // $reservations = $this->db->executeQuery("SELECT * FROM reservation WHERE date_arrivee >= '" . $dateDeb . "' AND date_depart <= '" . $dateFin . "' AND R_id_logement IN (" . implode(',', $listeLogements) . ")");
             return $reservations;
