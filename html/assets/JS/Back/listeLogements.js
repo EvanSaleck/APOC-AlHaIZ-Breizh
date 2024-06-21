@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
               checkbox.checked = logement.statut_propriete;
               checkbox.addEventListener('change', function() {
                   tr.classList.toggle('offline',!this.checked); 
-                  updateLogementStatus(toggleId, this.checked); // MAJ du statut
+                  updateLogementStatus(toggleId, this.checked); 
                   console.log(this.checked); 
               });
               
@@ -77,18 +77,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
               listeLogements.appendChild(tr);
 
-            const elementsCibles = document.querySelectorAll('td:not(:nth-child(4))');
+            const redirectionDetails = document.querySelectorAll('td:not(:nth-child(4):not(:nth-child(5)))');
 
-            elementsCibles.forEach(element => {
+            const redirectionModifs = document.querySelectorAll('td:nth-child(5)');
+
+            redirectionDetails.forEach(element => {
                 element.addEventListener('click', function(e) {
         
                     sessionStorage.setItem('idLogement', element.parentElement.getAttribute('data-id')); 
 
-                    window.location.href = `/logements/details`;
+                    window.location.href = `/logements/details/`;
                 });
             });
+            redirectionModifs.forEach(element => {
+                element.addEventListener('click', function(e) {
+        
+                    sessionStorage.setItem('idLogement', element.parentElement.getAttribute('data-id')); 
 
-
+                    window.location.href = `/logements/details/modifier`;
+                });
+            });
           });
     })
    .catch(error => {

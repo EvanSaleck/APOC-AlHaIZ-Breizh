@@ -16,129 +16,198 @@ for (var i = 0; i < textArea.length; i++) {
     textArea[i].disabled = true;
 }
 
+function envoyerInfos() {
+    var formData = {};
+    // Traitement des champs input
+    for (var i = 0; i < inputs.length; i++) {
+        formData[inputs[i].name] = inputs[i].value;
+    }
+
+    // Traitement des champs select
+    for (var i = 0; i < selects.length; i++) {
+        formData[selects[i].name] = selects[i].value;
+    }
+
+    // Traitement des zones de texte
+    for (var i = 0; i < textArea.length; i++) {
+        formData[textArea[i].name] = textArea[i].value;
+    }
+
+    // Inclusion de l'image du logement
+    var imageElement = document.querySelector('#image-logement');
+    if (imageElement) {
+        formData['image'] = imageElement.src; 
+    }
+
+    // Traitement des boutons spécifiques pour récupérer leurs informations
+    var boutons = document.querySelectorAll('#amenagementsBoutons button');
+    var selectedAmenagements = [];
+    for (var i = 0; i < boutons.length; i++) {
+        // Utilisez l'id du bouton comme indice pour savoir s'il est sélectionné
+        if (selectedAmenagements.indexOf(boutons[i].id) === -1) { // Si l'id n'est pas déjà dans le tableau, il est considéré comme sélectionné
+            console.log(selectedAmenagements)
+            selectedAmenagements.push(boutons[i].id); // Ajoutez l'id au tableau des aménagements sélectionnés
+            boutons[i].classList.add('active'); // Marquez le bouton comme actif
+        } else {
+            boutons[i].classList.remove('active'); // Désactivez le bouton si son id est déjà dans le tableau
+        }
+    }
+
+    // Convertissez le tableau des aménagements sélectionnés en chaîne pour l'inclure dans formData
+    formData['amenagements'] = selectedAmenagements.join(',');
+
+    console.log(formData);
+    sessionStorage.setItem('formData', JSON.stringify(formData));
+}
+
+
+
+
+
+
 console.log('detailsLogement.js');
 document.addEventListener('DOMContentLoaded', function() {
     console.log(sessionStorage.getItem('idLogement'));
     fetch('/api/getLogementDataById/' + sessionStorage.getItem('idLogement'))
     .then(response => response.json())
     .then(data => {
-        console.log(data) 
+        data.forEach(logement => {
+            console.log(data) 
 
-        let titreLogement = document.getElementById("titre");
-        titreLogement.value = data[0]['titre'];
+            let titreLogement = document.getElementById("titre");
+            titreLogement.value = data[0]['titre'];
 
-        let villeLogement = document.getElementById("ville");
-        villeLogement.value = data[0]['nom_ville'];
+            let villeLogement = document.getElementById("ville");
+            villeLogement.value = data[0]['nom_ville'];
 
-        let prixLogement = document.getElementById("tarif");
-        prixLogement.value = parseFloat(data[0]['prix_nuit_ttc']);
+            let prixLogement = document.getElementById("tarif");
+            prixLogement.value = parseFloat(data[0]['prix_nuit_ttc']);
 
-        let nom_rue = document.getElementById("nom_rue");
-        nom_rue.value = data[0]['nom_rue'];
+            let nom_rue = document.getElementById("nom_rue");
+            nom_rue.value = data[0]['nom_rue'];
 
-        let ville = document.getElementById("ville");
-        ville.value = data[0]['nom_ville'];
+            let ville = document.getElementById("ville");
+            ville.value = data[0]['nom_ville'];
 
-        let cp = document.getElementById("cp");
-        cp.value = data[0]['code_postal'];
+            let cp = document.getElementById("cp");
+            cp.value = data[0]['code_postal'];
 
-        let complement = document.getElementById("complement_adresse");
-        complement.value = data[0]['complement'];
+            let complement = document.getElementById("complement_adresse");
+            complement.value = data[0]['complement'];
 
-        let accroche = document.getElementById("accroche");
-        accroche.textContent = data[0]['accroche'];
+            let accroche = document.getElementById("accroche");
+            accroche.textContent = data[0]['accroche'];
 
-        let descDet = document.getElementById("description");
-        descDet.textContent = data[0]['description'];
-        
-        let surface_hab = document.getElementById("surface");
-        surface_hab.value = data[0]['surface_hab'];
+            let descDet = document.getElementById("description");
+            descDet.textContent = data[0]['description'];
+            
+            let surface_hab = document.getElementById("surface");
+            surface_hab.value = data[0]['surface_hab'];
 
-        let personnes_max = document.getElementById("nbPersMax");
-        personnes_max.value = data[0]['personnes_max'];
+            let personnes_max = document.getElementById("nbPersMax");
+            personnes_max.value = data[0]['personnes_max'];
 
 
-        let nombreChambres = document.getElementById("nbChambres");
-        nombreChambres.value = data[0]['nb_chambres'];
+            let nombreChambres = document.getElementById("nbChambres");
+            nombreChambres.value = data[0]['nb_chambres'];
 
-        let nombreLitsSimples = document.getElementById("nbLitsSimples");
-        nombreLitsSimples.value = data[0]['nb_lits_simples'];
+            let nombreLitsSimples = document.getElementById("nbLitsSimples");
+            nombreLitsSimples.value = data[0]['nb_lits_simples'];
 
-        let nombreLitsDoubles = document.getElementById("nbLitsDoubles");
-        nombreLitsDoubles.value = data[0]['nb_lits_doubles'];
+            let nombreLitsDoubles = document.getElementById("nbLitsDoubles");
+            nombreLitsDoubles.value = data[0]['nb_lits_doubles'];
 
-        let delaiResaArrivee = document.getElementById("delaiResaArrivee");
-        delaiResaArrivee.value = data[0]['avance_resa_min'];
+            let delaiResaArrivee = document.getElementById("delaiResaArrivee");
+            delaiResaArrivee.value = data[0]['avance_resa_min'];
 
-        let dureeMinLocation = document.getElementById("dureeMinLoc");
-        dureeMinLocation.value = data[0]['duree_min_location'];
+            let dureeMinLocation = document.getElementById("dureeMinLoc");
+            dureeMinLocation.value = data[0]['duree_min_location'];
 
-        let delaiAnnulMax = document.getElementById("delaiAnnulMax");
-        delaiAnnulMax.value = data[0]['delai_annul_max'];
-        
-        let image = document.getElementById("image-logement");
-        image.style.backgroundImage = "url('" + data[0]['image_principale'] + "')";
+            let delaiAnnulMax = document.getElementById("delaiAnnulMax");
+            delaiAnnulMax.value = data[0]['delai_annul_max'];
+            
+            let image = document.getElementById("image-logement");
+            image.style.backgroundImage = "url('" + data[0]['image_principale'] + "')";
+            console.log(data[0]['id_logement'])
 
-        const boutonModifier = document.querySelectorAll('.btnModifier > input');
-        
-            boutonModifier.forEach(element => {
+
+            const redirectionModifs = document.querySelectorAll('.btnModifier'); // Correction ici
+            redirectionModifs.forEach(element => {
                 element.addEventListener('click', function(e) {
                     e.preventDefault();
-                
-                    sessionStorage.setItem('idLogement', this.parentElement.getAttribute('data-id'));
-                
-                    // Redirige en utilisant window.location
-                    window.location = "/logements/details/modifier";
+                    sessionStorage.setItem(envoyerInfos(), "valeur"); // Ajout d'un second argument pour sessionItem
+                    
+                    window.location.href = '/logements/details/modifier';
                 });
-                
             });
-    });
-    fetch('/api/getCategorieOfLogementById/' + sessionStorage.getItem('idLogement'))
-   .then(response => response.json())
-   .then(dataCategorie => {
-        console.log(dataCategorie);
-        let categorie = document.getElementById("categorie");
-        console.log(categorie)
-        
-        // Trouver l'index de l'option correspondant à la catégorie reçue
-        let selectedIndex = -1;
-        for(let i = 0; i < categorie.options.length; i++) {
-            if(categorie.options[i].text === dataCategorie[0]['nom_categorie']) {
-                selectedIndex = i;
-                break;
-            }
-        }
 
-        // Vérifier si l'index a été trouvé
-        if(selectedIndex!== -1) {
-            categorie.selectedIndex = selectedIndex;
-        } else {
-            console.warn('Option pour la catégorie reçue non trouvée.');
-        }
-    });
+        fetch('/api/getCategorieOfLogementById/' + sessionStorage.getItem('idLogement'))
+        .then(response => response.json())
+        .then(dataCategorie => {
+                console.log(dataCategorie);
+                console.log(dataCategorie[0])
+                console.log(dataCategorie[0]['nom_categorie'])
+                let categorie = document.getElementById("categorie");
 
-fetch('/api/getTypeOfLogementById/' + sessionStorage.getItem('idLogement'))
-   .then(response => response.json())
-   .then(dataType => {
-        console.log(dataType);
-        let type = document.getElementById("type");
-        console.log(type)
-        
-        // Trouver l'index de l'option correspondant au type reçu
-        let selectedIndex = -1;
-        for(let i = 0; i < type.options.length; i++) {
-            if(type.options[i].text === dataType[0]['nom_type']) {
-                selectedIndex = i;
-                break;
-            }
-        }
 
-        // Vérifier si l'index a été trouvé
-        if(selectedIndex!== -1) {
-            type.selectedIndex = selectedIndex;
-        } else {
-            console.warn('Option pour le type reçu non trouvée.');
-        }
-    });
+                let selectedIndex = -1;
+                for(let i = 0; i < categorie.options.length; i++) {
 
-});
+                    if(categorie.options[i].text === dataCategorie[0]['nom_categorie'].charAt(0).toUpperCase() + dataCategorie[0]['nom_categorie'].slice(1)) {
+                        selectedIndex = i;
+                        break;
+                    }
+                }
+                
+
+                if(selectedIndex!== -1) {
+                    categorie.selectedIndex = selectedIndex;
+                } else {
+                    console.warn('Option pour la catégorie reçue non trouvée.');
+                }
+            });
+
+            fetch('/api/getTypeOfLogementById/' + sessionStorage.getItem('idLogement'))
+            .then(response => response.json())
+            .then(dataType => {
+                    console.log(dataType);
+                    let type = document.getElementById("type");
+                    console.log(type)
+                    
+                    let selectedIndex = -1;
+                    for(let i = 0; i < type.options.length; i++) {
+                        if(type.options[i].text === dataType[0]['nom_type']) {
+                            selectedIndex = i;
+                            break;
+                        }
+                    }
+
+                    // Vérifier si l'index a été trouvé
+                    if(selectedIndex!== -1) {
+                        type.selectedIndex = selectedIndex;
+                    } else {
+                        console.warn('Option pour le type reçu non trouvée.');
+                    }
+                });
+
+
+                let boutonsAmenagements = document.getElementById("amenagementsBoutons");
+
+                fetch('/api/getAmenagementsOfLogementById/' + sessionStorage.getItem('idLogement'))
+                .then(response => response.json())
+                .then(dataAm => {
+                    console.log(dataAm);
+                    let idsAmenagementsActifs = dataAm.map(amenagement => amenagement.id_amenagement);
+
+                    for (let bouton of boutonsAmenagements.getElementsByTagName('button')) {
+                        if (idsAmenagementsActifs.includes(parseInt(bouton.id))) {
+                            bouton.classList.add('active');
+                        } else {
+                            bouton.classList.remove('active');
+                        }
+                    }
+                })
+                .catch(error => console.error('Erreur lors de la récupération des données:', error));
+            });
+            
+})});
