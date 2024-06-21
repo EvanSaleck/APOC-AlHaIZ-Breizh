@@ -27,6 +27,7 @@ class ICalService {
         $dateDebut = $abonnement[0]['date_debut'];
         $dateFin = $abonnement[0]['date_fin'];
         $sequence = $abonnement[0]['nb_modifications'];
+        $nomAbonnment = $abonnement[0]['titre'];
 
         $logements = $this->logementModel->getLogementsByAbonnement($abonnement[0]['id_abonnement']);
 
@@ -34,11 +35,17 @@ class ICalService {
         foreach($logements as $logement) {
             $idsLogements[] = $logement['id_logement'];
         }
-       
+
+
+        
         
         $reservations = $this->reservationModel->getReservationsForExportICal($dateDebut, $dateFin, $idsLogements);
-
-        $reservationICal =  $this->getReservationsIcal($reservations,$sequence);
+        
+        header('Content-Type: application/json');
+        echo json_encode($reservations);
+        die();
+        
+        $reservationICal =  $this->getReservationsIcal($reservations,$sequence, $nomAbonnment);
         
         $file = fopen("icalfiles/$token.ics", "w");
         fwrite($file, $reservationICal);
@@ -53,15 +60,15 @@ class ICalService {
         return $url;
     }
 
-    public function getReservationsIcal($reservations, $sequence) {
+    public function getReservationsIcal($reservations, $sequence, $nomAbonnment) {        
         $ical = "BEGIN:VCALENDAR\n";
         $ical .= "VERSION:2.0\n";
         $ical .= "PRODID:-//hacksw/handcal//NONSGML v1.0//EN\n";     
         $ical .= "CALSCALE:GREGORIAN\n";
         $ical .= "METHOD:PUBLISH\n";
-        $ical .= "X-WR-CALNAME:Reservations\n";
         $ical .= "X-WR-TIMEZONE:Europe/Paris\n";
-        $ical .= "X-WR-CALDESC:Reservations\n";
+        $ical .= "X-WR-CALNAME:" . $nomAbonnment . "\n"; 
+        $ical .= "X-WR-CALDESC:Calendrier des réservations de l'abonnement " . $nomAbonnment . "\n";
 
         foreach($reservations as $reservation) {
             $ical .= "BEGIN:VEVENT\n";
