@@ -37,15 +37,15 @@ VALUES ('logement insolite');
 
 
 INSERT INTO amenagement(nom_amenagement)
-VALUES ('jardin');
+VALUES ('Jardin');
 INSERT INTO amenagement(nom_amenagement)
-VALUES ('balcon');
+VALUES ('Balcon');
 INSERT INTO amenagement(nom_amenagement)
-VALUES ('terrasse');
+VALUES ('Terrasse');
 INSERT INTO amenagement(nom_amenagement)
-VALUES ('piscine');
+VALUES ('Piscine');
 INSERT INTO amenagement(nom_amenagement)
-VALUES ('jacuzzi');
+VALUES ('Jacuzzi');
 
 INSERT INTO activite(nom_activite)
 VALUES ('baignade');
@@ -134,18 +134,18 @@ VALUES ('Irlandais');
 
 
 
-INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mr', 'Neymar', 'Jean', 'Jean.Neymar@gmail.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'Jejean','/assets/imgs/Profils/jean_neymar.webp', '10/08/1992', '1', 'NEYJEAN01', 1);
-INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mme', 'Waxson', 'Emmi', 'emmmi.waxson@outlook.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'Wemimi', '/assets/imgs/Profils/emmi_waxson.webp', '15/04/1990', '2', 'WAXEMMI02', 2);
-INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mr', 'Daip', 'Jauni', 'Daip.Jauni@wanadoo.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'JauniPaid','/assets/imgs/Profils/jauni_daip.webp', '09/06/1963', '3', 'DAIJAUNI03', 3);
-INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Non spécifié', 'Magi', 'Renou', 'magi.renou@gmail.eu', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'MagiRenou','/assets/imgs/Profils/renou_magi.webp', '23/02/2000','6', 'MAGRENOU06', 6);
-INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mr', 'Renault', 'Guillaume', 'guillaume.renault@gmail.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'guiguirenault','/assets/imgs/Profils/guillaume_renault.webp', '25/04/1992','1', 'RENGUILLAUME07', 1);
-INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mme', 'Mir', 'Ador', 'mir.ador@gmail.us', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'mimir78','/assets/imgs/Profils/mir_ador.webp', '21/09/1999','14', 'MIRADOR09', 4);
+INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client)
+VALUES ('Mr', 'Neymar', 'Jean', 'Jean.Neymar@gmail.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'Jejean','/assets/imgs/Profils/jean_neymar.webp', '10/08/1992', '1', 'NEYJEAN01');
+INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client)
+VALUES ('Mme', 'Waxson', 'Emmi', 'emmmi.waxson@outlook.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'Wemimi', '/assets/imgs/Profils/emmi_waxson.webp', '15/04/1990', '2', 'WAXEMMI02');
+INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client)
+VALUES ('Mr', 'Daip', 'Jauni', 'Daip.Jauni@wanadoo.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'JauniPaid','/assets/imgs/Profils/jauni_daip.webp', '09/06/1963', '3', 'DAIJAUNI03');
+INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client)
+VALUES ('Non spécifié', 'Magi', 'Renou', 'magi.renou@gmail.eu', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'MagiRenou','/assets/imgs/Profils/renou_magi.webp', '23/02/2000','6', 'MAGRENOU06');
+INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client)
+VALUES ('Mr', 'Renault', 'Guillaume', 'guillaume.renault@gmail.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'guiguirenault','/assets/imgs/Profils/guillaume_renault.webp', '25/04/1992','1', 'RENGUILLAUME07');
+INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client)
+VALUES ('Mme', 'Mir', 'Ador', 'mir.ador@gmail.us', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'mimir78','/assets/imgs/Profils/mir_ador.webp', '21/09/1999','14', 'MIRADOR09');
 
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
 VALUES ('Mme', 'Kniglait', 'Keira', 'Keira.Kniglait@gmail.fr', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'KeiraSwann','/assets/imgs/Profils/keira_kniglait.webp', '26/05/1985', '4', '/assets/imgs/cni/identite_01','21/12/2025', true );
@@ -338,15 +338,15 @@ VALUES ('2025550143','+1', 6);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
 VALUES ('2125550198','+1', 6);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
-VALUES ('0612345678','+33', 7);
+VALUES ('0712345678','+33', 7);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
-VALUES ('0623456789','+33', 8);
+VALUES ('0723456789','+33', 8);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
-VALUES ('0634567890','+33', 9);
+VALUES ('0734567890','+33', 9);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
-VALUES ('0645678901','+33', 10);
+VALUES ('0745678901','+33', 10);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
-VALUES ('0656789012','+33', 11);
+VALUES ('0756789012','+33', 11);
 
 
 
@@ -444,5 +444,15 @@ VALUES (8,5);
 INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
 VALUES (11,5);
 
-
-
+INSERT INTO facture (f_id_reservation,date_facture,nom_client,prenom_client,email_client,nom_proprietaire,prenom_proprietaire,email_proprietaire,numero_rue_client,nom_rue_client,complement_client,code_postal_client,nom_ville_client,etat_client,pays_client,numero_rue_pro,nom_rue_pro,complement_pro,code_postal_pro,nom_ville_pro,etat_pro,pays_pro,nom_logement,prix_nuit_ht) 
+VALUES
+  (1,'11/06/2024','Neymar','Jean','Jean.Neymar@gmail.com','Kniglait','Keira','Keira.Kniglait@gmail.fr',12,'rue de Blancbois',NULL,'22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Cabanon dans la forêt',80.00),
+  (2,'12/06/2024','Waxson','Emmi','emmmi.waxson@outlook.com','Toman','Ks','toman.ks@apple.us',17,'rue du Pont',NULL,'22300','Lannion',NULL,'France',1,'rue Victor Hugo','bis','29200','Brest',NULL,'France','Maisonnette en plein air',60.00),
+  (3,'14/06/2024','Daip','Jauni','Daip.Jauni@wanadoo.com','Kniglait','Keira','Keira.Kniglait@gmail.fr',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Maisonnette',120.00),
+  (4,'21/06/2024','Magi','Renou','magi.renou@gmail.eu','Cam','Ailaion','Ailaion.cam@gmail.fr',5,'rue des tournesols',NULL,'29200','Brest',NULL,'France',17,'rue du Pont',NULL,'22300','Lannion',NULL,'France','Maison moderne',90.00),
+  (5,'01/06/2024','Daip','Jauni','Daip.Jauni@wanadoo.com','Dupont','Paul','paul.dupont@example.com',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France','Maison familiale',120.00),
+  (6,'07/06/2024','Waxson','Emmi','emmmi.waxson@outlook.com','Kniglait','Keira','Keira.Kniglait@gmail.fr',17,'rue du Pont',NULL,'22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Cabanon dans la forêt',80.00),
+  (7,'09/06/2024','Neymar','Jean','Jean.Neymar@gmail.com','Kniglait','Keira','Keira.Kniglait@gmail.fr',12,'rue de Blancbois',NULL,'22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Maisonnette',120.00),
+  (8,'12/06/2024','Magi','Renou','magi.renou@gmail.eu','Dupont','Paul','paul.dupont@example.com',5,'rue des tournesols',NULL,'29200','Brest',NULL,'France',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France','Maison familiale',120.00),
+  (9,'15/06/2024','Daip','Jauni','Daip.Jauni@wanadoo.com','Kniglait','Keira','Keira.Kniglait@gmail.fr',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Cabanon dans la forêt',80.00),
+  (10,'27/06/2024','Mir','Ador','mir.ador@gmail.us','Toman','Ks','toman.ks@apple.us',5,'Columbia Street',NULL,'20001','Washington DC','Columbia','USA',1,'rue Victor Hugo','bis','29200','Brest',NULL,'France','Maisonnette en plein air',60.00);

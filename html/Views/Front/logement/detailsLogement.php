@@ -15,6 +15,7 @@
                 <h1 id=villeLog></h1>
             </div>
             <article id=artPrixNote>
+                <!--
                 <div id=note>
                     <p>Note</p>
                     <img id=etoileNotation1 src="/assets/imgs/notes/star_full.svg" alt="Etoile">
@@ -23,11 +24,9 @@
                     <img id=etoileNotation4 src="/assets/imgs/notes/star_full.svg" alt="Etoile">
                     <img id=etoileNotation5 src="/assets/imgs/notes/star_empty.svg" alt="Etoile">
                 </div>
+                -->
                 <div id="divPrix">
-                    <p labelTarifDesktop>Tarif:</p>
-                    <span id="prix"></span>
-                    <p>€</p>
-                    <p>par nuit</p>
+                    <p labelTarifDesktop>Tarif: <span id="prix"></span>€ par nuit</p>
                 </div>
             </article>
             <article id=carateristiques>

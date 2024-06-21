@@ -52,8 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             divCard.addEventListener('click', function() {
                                 sessionStorage.setItem('idLogement', logement.id_logement);
                                 window.location.href = `/logement/`;
-                                sessionStorage.setItem('idLogement', logement.id_logement);
-                                window.location.href = `/logement/`;
                             });
                         } else {
                             divCard.querySelector('.description').textContent = "Erreur lors du chargement des données du logement";

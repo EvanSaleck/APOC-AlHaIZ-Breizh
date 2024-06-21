@@ -4,18 +4,21 @@ session_start();
 include_once './Controllers/LogementController.php';
 include_once './Controllers/ReservationController.php';
 include_once './Controllers/UtilisateurController.php';
+include_once './Controllers/FactureController.php';
 
 
 // Use des controllers
 use Controllers\LogementController;
 use Controllers\ReservationController;
 use Controllers\UtilisateurController;
+use Controllers\FactureController;
 
 
 // Initialisation des controllers
 $logementController = new LogementController();
 $reservationController = new ReservationController();
 $utilisateurController = new UtilisateurController();
+$factureController = new FactureController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
@@ -36,14 +39,27 @@ switch($requestUrl) {
         break;
     case '/reservation/devis':
     case '/reservation/devis/':
-        if(!isset($_SESSION['client'])) {
+        if (!isset($_SESSION['client'])) {
             header('Location: /');
-        }else {
+        } else {
             include_once './Views/Front/reservation/devis.php';
         }
 
         break;
 
+    
+    case preg_match('/^\/facture\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+
+        include_once './Views/facture.php';
+        
+        break;
+
+    case '/test':
+        echo '<script>window.open("/facture/1", "_blank")</script>';
+        break;
+
+    
     case '/Back/reservations':
     case '/Back/reservations/':
         if(!isset($_SESSION['proprio'])) {
@@ -180,6 +196,21 @@ switch($requestUrl) {
 
         echo $logementController->getAmenagementsOfLogementById($logement_id);
         break;
+
+    case preg_match('/^\/api\/getFactureByResId\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $idResa = end($url_parts);
+
+        echo $factureController->getFactureByResId($idResa);
+        break;
+
+    /*
+    case preg_match('/^\/api\/getDataReservationById\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $idResa = end($url_parts);
+        echo $reservationController->getDataReservationById($idResa);
+        break;
+    */
 
     default:
         http_response_code(404);

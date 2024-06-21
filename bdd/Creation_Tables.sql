@@ -38,10 +38,7 @@ CREATE TABLE compte_proprietaire (
 
 CREATE TABLE compte_client (
    id_compte integer PRIMARY KEY,
-   code_client varchar(50) NOT NULL,
-   CC_id_adresse integer NOT NULL,
-   CONSTRAINT compte_client_adresse_fk 
-      FOREIGN KEY (CC_id_adresse) REFERENCES adresse(id_adresse)
+   code_client varchar(50) NOT NULL
 ) INHERITS (compte);
 
 CREATE TABLE numero_telephone (
@@ -171,4 +168,38 @@ CREATE TABLE avis (
    AV_id_reservation integer NOT NULL,
    CONSTRAINT avis_reservation_fk 
       FOREIGN KEY (AV_id_reservation) REFERENCES reservation(id_reservation)
+);
+
+CREATE TABLE facture (
+    id_facture serial PRIMARY KEY,
+    date_facture date NOT NULL,
+    
+    nom_logement varchar(50) NOT NULL,
+    prix_nuit_ht decimal(10, 2) NOT NULL,
+
+    numero_rue_pro integer,
+    nom_rue_pro varchar(80) NOT NULL,
+    code_postal_pro varchar(10) NOT NULL,
+    nom_ville_pro varchar(60) NOT NULL,
+    pays_pro varchar(60) NOT NULL,
+    complement_pro varchar(60),
+    etat_pro varchar(60),
+    
+    numero_rue_client integer,
+    nom_rue_client varchar(80) NOT NULL,
+    code_postal_client varchar(10) NOT NULL,
+    nom_ville_client varchar(60) NOT NULL,
+    pays_client varchar(60) NOT NULL,
+    complement_client varchar(60),
+    etat_client varchar(60),
+    
+    nom_proprietaire varchar(70) NOT NULL,
+    prenom_proprietaire varchar(70) NOT NULL,
+    email_proprietaire varchar(120) NOT NULL,
+    nom_client varchar(70) NOT NULL,
+    prenom_client varchar(70) NOT NULL,
+    email_client varchar(120) NOT NULL,
+    F_id_reservation integer NOT NULL,
+    CONSTRAINT facture_fk 
+      FOREIGN KEY (F_id_reservation) REFERENCES reservation(id_reservation)
 );
