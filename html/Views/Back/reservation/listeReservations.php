@@ -74,6 +74,7 @@
                 <tbody id="tableContent">
                 </tbody>
             </table>
+            <h1 id="noReservations" class="d-none">Aucune réservation trouvée</h1>
         </div>
 
         <!-- <h1 id="voirPlus">Voir plus</h1> -->

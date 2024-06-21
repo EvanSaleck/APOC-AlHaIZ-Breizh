@@ -84,8 +84,8 @@ switch($requestUrl) {
         break;
     
     // routes back office
-    case '/logement':
-    case '/logement/':
+    case '/logements':
+    case '/logements/':
         include './Views/Back/logement/listeLogements.php';
         break;
     case '/logements/details':

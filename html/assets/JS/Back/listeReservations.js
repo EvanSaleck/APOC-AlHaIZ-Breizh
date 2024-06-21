@@ -17,23 +17,7 @@ bnAVenir.addEventListener('click', function(){reloadReservations(2)});
 bnPasse.addEventListener('click', function(){reloadReservations(3)});
 bnTout.addEventListener('click', function(){reloadReservations(4)});
 
-var affichageAucuneRéservations = `<div id="listeReservations">
-<table>
-    <thead>
-        <tr>
-            <th>Logement</th>
-            <th>Date d'arrivée</th>
-            <th>Date de départ</th>
-            <th>Tarif global</th>
-            <th>Client</th>
-        </tr>
-    </thead>
-
-    <tbody id="tableContent">
-    </tbody>
-</table>
-<h1 id="noReservations">Aucune réservation trouvée</h1>
-</div>`
+var enCours, aVenir, passe;
 
 
 // Initialise la liste des réservations liées aux compte propriétaire connecté
@@ -51,14 +35,13 @@ function init() {
         if(resVides) { contentReservations.innerHTML = affichageAucuneRéservations; }
         else {
             ResasTout = data;
-            console.log("Réservations trouvées :\n" + ResasTout);
+            console.log(ResasTout);
             
-            let max = (ResasTout.length < 7) ? ResasTout.length : 6; // Nombre maximum de réservations affichées sur la page par défaut
+            let max = (ResasTout.length < 7) ? ResasTout.length : 6; // Nombre de réservations affichées sur la page par défaut
 
             let today = new Date(); // La date actuelle
 
-
-            let tbody = document.getElementById('tableContent'); // Corps de la table pour insérer les objets de réservation
+            let tbody = document.getElementById('tableContent'); // Corps du tableau pour afficher les objets de réservations
             tbody.innerHTML = "";
 
             // Maj du contenu du tableau avec des valeurs de la BDD
@@ -94,7 +77,7 @@ function init() {
                 let valArr = res.date_arrivee.split('-');
                 let valDep = res.date_depart.split('-');
                 let dateArrFormatee = valArr[2] + "-" + valArr[1] + "-" + valArr[0];
-                let dateDepFormatee = valDep[2] + "-" + valDep[1] + "-" + valDep[0];
+                let dateDepFormatee = valDep[2] + "-" + valDep[1] + "" + valDep[0];
 
 
                 // Création de l'objet de réservation
@@ -117,7 +100,7 @@ function init() {
                 tr.appendChild(tdTarif);
                 tr.appendChild(tdClient);
 
-                tr.class = etatClass;
+                tr.setAttribute('class', etatClass);
 
                 tbody.appendChild(tr);
             }
@@ -138,11 +121,19 @@ function init() {
             nbReservationsEnCours.innerHTML = "vous avez " + nbEnCours + " réservations en cours";
         }
 
+        enCours = document.getElementsByClassName("enCours");
+        aVenir = document.getElementsByClassName("aVenir");
+        passe = document.getElementsByClassName("passe");
+
         // Affiche le nombre de réservations par filtre
         bnEnCours.innerHTML = 'En cours (' + (resVides ? '0' : nbEnCours) + ')';
         bnAVenir.innerHTML = 'A venir (' + (resVides ? '0' : nbAVenir) + ')';
         bnPasse.innerHTML = 'Passé (' + (resVides ? '0' : nbPasse) + ')';
         bnTout.innerHTML = 'Tout (' + ResasTout.length + ')';
+
+        // Utilise le choix de tri le plus pertinent en fonction des réservations
+        if(nbEnCours > 0) { bnEnCours.click(); }
+        else if(nbAVenir > 0) { bnAVenir.click(); }
     }); 
 }
 
@@ -182,38 +173,41 @@ function handleButtonStyle(bnID) {
 function reloadReservations(bnID) {
     handleButtonStyle(bnID);
 
-    let enCours = document.getElementsByClassName("enCours");
-    let aVenir = document.getElementsByClassName("aVenir");
-    let passe = document.getElementsByClassName("passe");
+    console.log(aVenir)
+    let displayAucuneReservations = document.getElementById("noReservations");
 
     // Affiche / cache les réservations associées au filtre choisi
     switch (bnID) {
         case 1:
-            for(var i = 0; i < enCours.length; i++){ enCours[i].removeAttribute("style"); }
-            for(var i = 0; i < aVenir.length; i++){ aVenir[i].style.display = "none"; }
-            for(var i = 0; i < passe.length; i++){ passe[i].style.display = "none"; }
-            if(nbEnCours == 0) { contentReservations.innerHTML = affichageAucuneRéservations; }
+            for(var i = 0; i < enCours.length; i++){ enCours[i].classList.remove("d-none"); }
+            for(var i = 0; i < aVenir.length; i++){ aVenir[i].classList.add("d-none"); }
+            for(var i = 0; i < passe.length; i++){ passe[i].classList.add("d-none"); }
+            if(nbEnCours == 0) { displayAucuneReservations.classList.remove("d-none");}
+            else { displayAucuneReservations.classList.add("d-none");}
             break;
 
         case 2:
-            for(var i = 0; i < enCours.length; i++){ enCours[i].style.display = "none"; }
-            for(var i = 0; i < aVenir.length; i++){ aVenir[i].removeAttribute("style"); }
-            for(var i = 0; i < passe.length; i++){ passe[i].style.display = "none"; }
-            if(nbAVenir == 0) { contentReservations.innerHTML = affichageAucuneRéservations; }
+            for(var i = 0; i < enCours.length; i++){ enCours[i].classList.add("d-none"); }
+            for(var i = 0; i < aVenir.length; i++){ aVenir[i].classList.remove("d-none"); }
+            for(var i = 0; i < passe.length; i++){ passe[i].classList.add("d-none"); }
+            if(nbAVenir == 0) { displayAucuneReservations.classList.remove("d-none");}
+            else { displayAucuneReservations.classList.add("d-none");}
             break;
 
         case 3:
-            for(var i = 0; i < enCours.length; i++){ enCours[i].style.display = "none"; }
-            for(var i = 0; i < aVenir.length; i++){ aVenir[i].style.display = "none"; }
-            for(var i = 0; i < passe.length; i++){ passe[i].removeAttribute("style"); }
-            if(nbPasse == 0) { contentReservations.innerHTML = affichageAucuneRéservations; }
+            for(var i = 0; i < enCours.length; i++){ enCours[i].classList.add("d-none"); }
+            for(var i = 0; i < aVenir.length; i++){ aVenir[i].classList.add("d-none"); }
+            for(var i = 0; i < passe.length; i++){ passe[i].classList.remove("d-none"); }
+            if(nbPasse == 0) { displayAucuneReservations.classList.remove("d-none");}
+            else { displayAucuneReservations.classList.add("d-none");}
             break;
 
         case 4:
-            for(var i = 0; i < enCours.length; i++){ enCours[i].removeAttribute("style"); }
-            for(var i = 0; i < aVenir.length; i++){ aVenir[i].removeAttribute("style"); }
-            for(var i = 0; i < passe.length; i++){ passe[i].removeAttribute("style"); }
-            if(ResasTout.length == 0) { contentReservations.innerHTML = affichageAucuneRéservations; }
+            for(var i = 0; i < enCours.length; i++){ enCours[i].classList.remove("d-none"); }
+            for(var i = 0; i < aVenir.length; i++){ aVenir[i].classList.remove("d-none"); }
+            for(var i = 0; i < passe.length; i++){ passe[i].classList.remove("d-none"); }
+            if(ResasTout.length == 0) { displayAucuneReservations.classList.remove("d-none");}
+            else { displayAucuneReservations.classList.add("d-none");}
             break;
 
         default:
