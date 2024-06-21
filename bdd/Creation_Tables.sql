@@ -172,3 +172,10 @@ CREATE TABLE avis (
    CONSTRAINT avis_reservation_fk 
       FOREIGN KEY (AV_id_reservation) REFERENCES reservation(id_reservation)
 );
+
+CREATE TABLE cle_api (
+   cle VARCHAR(64) NOT NULL PRIMARY KEY,
+   c_id_proprio integer NOT NULL,
+CONSTRAINT api_comptes_fk 
+      FOREIGN KEY (c_id_proprio) REFERENCES compte_proprietaire(id_compte)
+);

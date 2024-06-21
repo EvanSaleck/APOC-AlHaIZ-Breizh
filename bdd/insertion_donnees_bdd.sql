@@ -444,5 +444,9 @@ VALUES (8,5);
 INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
 VALUES (11,5);
 
+INSERT INTO cle_api(cle, c_id_proprio)
+VALUES ('1', 7);
+VALUES ('2', 8);
+VALUES ('3', 9);
 
 
