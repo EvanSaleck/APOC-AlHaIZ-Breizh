@@ -17,28 +17,29 @@ addEventListener("DOMContentLoaded", () => {
     
             id = new FormData();
             id.append("id", data.r_id_logement);
+
+            console.log('Num compte client : ' + data.r_id_compte);
+            let idclient = data.r_id_compte;
             
             fetch("/api/getLogementById", { method: "POST", body: id })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                console.log("Données du logement : " + data);
                 document.getElementById("titrelogement").textContent = data[0].titre;
-                // let img = (document.getElementById("photologresa").src = data[0].image_principale);
                 document.getElementById("photologresa").src = data[0].image_principale;
 
-                let idclient = data[0].l_id_compte;
-                let client = new FormData();
-                client.append("id", idclient);
+                id = new FormData();
+                id.append("id", idclient);
 
-                fetch("/api/getCompteClientDetails", { method: "POST", body: idclient })
+                fetch("/api/getCompteClientDetailsBack", { method: "POST", body: id })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
-                    document.getElementById("photoclient").src = data.photo_profil;
-                    document.getElementById("nomclient").textContent = data.pseudo;
-                    document.getElementById("mailclient").textContent = data.e_mail;
+                    console.log("Données du compte client : " + data);
+                    //document.getElementById("photoClient").src = data[0].photo_profil;
+                    document.getElementById("nomClient").textContent = data[0].pseudo;
+                    document.getElementById("mailClient").textContent = data[0].e_mail;
                 });
             });
         
     });
-});  
+});

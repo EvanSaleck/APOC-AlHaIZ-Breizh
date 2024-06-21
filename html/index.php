@@ -65,12 +65,12 @@ switch($requestUrl) {
         break;
     case '/Back/reservations/details':
     case '/Back/reservations/details/':
-        include_once('Views/Back/reservation/detailsReservations.php');
+        include_once('Views/Back/reservation/detailsReservation.php');
         if(!isset($_SESSION['proprio'])) {
-            include_once('Views/Back/reservation/detailsReservations.php');
+            include_once('Views/Back/reservation/detailsReservation.php');
             // header('Location: /');
         }
-        else { include_once('Views/Back/reservation/detailsReservations.php'); }
+        else { include_once('Views/Back/reservation/detailsReservation.php'); }
         break;
 
     // routes du back
@@ -110,13 +110,13 @@ switch($requestUrl) {
     case 'api/getReservations':
         //$reservationController->getAllReservation();
         $idProp = 12;
-        $reservationController->getReservationByOwnerId(7);
+        $reservationController->getReservationByOwnerId(11);
         break;
     // Juste besoin pour tester, à enlever pour merge avec getProprioById
     case '/api/getOwnerById':
     case 'api/getOwnerById':
         $data = $_POST;
-        $reservationController->getOwnerById(7);
+        $reservationController->getOwnerById(11);
         break;
 
 
@@ -188,6 +188,11 @@ switch($requestUrl) {
         $client = json_decode($_SESSION['client']);
         $idCompte = $client->id_compte;
         $utilisateurController->getCompteClientDetails($idCompte);
+        break;
+
+    case '/api/getCompteClientDetailsBack':
+        $data = $_POST;
+        $utilisateurController->getCompteClientDetails($data['id']);
         break;
 
     case '/api/getReservations/all':

@@ -11,6 +11,11 @@ var bnEnCours = document.getElementById('enCours');
 var bnAVenir = document.getElementById('aVenir');
 var bnPasse = document.getElementById('passe');
 var bnTout = document.getElementById('tout');
+// Assigne la fonction de rechargement du contenu de la table aux boutons
+bnEnCours.addEventListener('click', function(){reloadReservations(1)});
+bnAVenir.addEventListener('click', function(){reloadReservations(2)});
+bnPasse.addEventListener('click', function(){reloadReservations(3)});
+bnTout.addEventListener('click', function(){reloadReservations(4)});
 
 var affichageAucuneRéservations = `<div id="listeReservations">
 <table>
@@ -41,26 +46,19 @@ function init() {
     // Récupération des données de la BDD
     fetch('/api/getReservations').then(response => response.json()).then(data => {
 
-        // Assigne la fonction de rechargement du contenu de la table aux boutons
-        bnEnCours.addEventListener('click', function(){reloadReservations(1)});
-        bnAVenir.addEventListener('click', function(){reloadReservations(2)});
-        bnPasse.addEventListener('click', function(){reloadReservations(3)});
-        bnTout.addEventListener('click', function(){reloadReservations(4)});
-
         // Si aucune donnée n'est renvoyée par l'API, affiche qu'aucune réservation n'a été trouvée
         let resVides = (data.length == 0);
         if(resVides) { contentReservations.innerHTML = affichageAucuneRéservations; }
         else {
             ResasTout = data;
-            console.log(ResasTout);
+            console.log("Réservations trouvées :\n" + ResasTout);
             
-            //let content = "";
-            let max = (ResasTout.length < 7) ? ResasTout.length : 6; // Nombre de réservations affichées sur la page par défaut
+            let max = (ResasTout.length < 7) ? ResasTout.length : 6; // Nombre maximum de réservations affichées sur la page par défaut
 
             let today = new Date(); // La date actuelle
 
 
-            let tbody = document.getElementById('tableContent');
+            let tbody = document.getElementById('tableContent'); // Corps de la table pour insérer les objets de réservation
             tbody.innerHTML = "";
 
             // Maj du contenu du tableau avec des valeurs de la BDD
@@ -71,8 +69,7 @@ function init() {
                 let dateArr = new Date(res.date_arrivee);
                 let dateDep = new Date(res.date_depart);
                 
-
-                //let etatClass = "class=\""; // Classe à attribuer à la réservation pour l'affichage
+                let etatClass; // Classe à attribuer à la réservation pour l'affichage
 
                 // Si la date d'aujourd'hui est supérieure à la date de départ,
                 // considéré comme une réservation avec état "Passé"
@@ -100,7 +97,7 @@ function init() {
                 let dateDepFormatee = valDep[2] + "-" + valDep[1] + "-" + valDep[0];
 
 
-                // Création de l'élément de réservation
+                // Création de l'objet de réservation
                 let tr = document.createElement('tr');
 
                 let tdLogement = document.createElement('td');
@@ -110,7 +107,7 @@ function init() {
                 let tdDateDep = document.createElement('td');
                 tdDateDep.textContent = dateDepFormatee;
                 let tdTarif = document.createElement('td');
-                tdTarif.textContent = res.tarif_total;
+                tdTarif.textContent = res.tarif_total + '€';
                 let tdClient = document.createElement('td');
                 tdClient.textContent = res.pseudo;
 
@@ -123,23 +120,15 @@ function init() {
                 tr.class = etatClass;
 
                 tbody.appendChild(tr);
-
-
-                /*content += `<tr ${etatClass}>
-                <td>${res.titre}</td>
-                <td>${dateArrFormatee}</td>
-                <td>${dateDepFormatee}</td>
-                <td>${res.tarif_total}€</td>
-                <td>${res.pseudo}</td>
-                </tr>`;*/
             }
 
             // Attribution d'un href pour rediriger vers la page de détail qui affiche la réservation associée
             let reservations = document.querySelectorAll('tbody > tr');
             let i = 0;
             reservations.forEach(resa => { resa.addEventListener('click', function(e){
-                    sessionStorage.setItem('idResa', ResasTout[i].id_reservation); 
-                    window.location.href = `Back/reservations/details`;
+                    sessionStorage.setItem('idResa', ResasTout[i].id_reservation);
+                    console.log(ResasTout[i].id_reservation);
+                    window.location.href = `reservations/details`;
                     i++;
                 });
             });

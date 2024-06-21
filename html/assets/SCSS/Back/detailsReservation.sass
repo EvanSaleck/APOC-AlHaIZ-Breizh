@@ -1,0 +1,227 @@
+@charset "UTF-8"
+@use '../general.sass' as general
+
+
+.detailResa
+  margin: 0% 3%
+  font-family: "Reem Kufi", sans-serif
+
+.detailResa 
+  .retour
+    border: 0
+    padding: 0
+    margin: 0 16%
+    background-color: white
+
+.titreRecapDevis
+  text-align: center
+  font-size: 4vw
+
+.titreLogDevis
+  font-size: 4vw
+
+.infosLogement
+  display: flex
+  height: fit-content
+  flex-direction: row
+  align-items: center
+  border: 0.2vw solid #8CB9BD
+
+  >
+    .logementResa, figure
+      flex: 1
+
+.infosLogementResa
+  display: flex
+  height: fit-content
+  flex-direction: column !important
+  align-items: center
+
+
+.photoLogResa
+  width: 100%
+  border-radius: 2vw
+
+.infosDetailsResa
+  height: fit-content
+  padding: 3vw 0
+
+  > h3
+    text-align: center
+
+    /* Je veux que ce h3 ait une sorte de barre bleue en dessous (comme un soulignement)
+    font-size: 3vw
+    margin-bottom: 5vw
+    position: relative
+
+  h3::after
+    content: ""
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    bottom: -0.5vw
+    width: 50%
+    height: 0.2vw
+    background-color: #8CB9BD
+
+  > div:not(.deuxiemeBarre)
+    padding-bottom: 2vw
+    display: flex
+    justify-content: space-between
+
+.info-label
+  flex: 1
+  text-align: left
+
+figure
+  margin: 0 2.5vh
+
+input
+  &::-moz-placeholder, &::placeholder
+    font-weight: bold
+    opacity: 0.5
+
+.premiereBarre
+  width: 100%
+  height: 0.7vw
+  background-color: #8CB9BD
+  margin: 10px auto
+  border-radius: 1vw
+
+.deuxiemeBarre
+  width: 40%
+  height: 0.7vw
+  background-color: #8CB9BD
+  margin: 10px auto
+  border-radius: 1vw
+
+.condAnnul
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  margin-top: 5vw
+
+  > p
+    font-size: 2vw
+
+  h3
+    position: relative
+    margin-bottom: 1.7vw
+    font-size: 3vw
+
+    &::after
+      content: ""
+      position: absolute
+      bottom: -0.6vw
+      left: 0
+      width: 17ch
+      height: 0.3vw
+      background-color: #8CB9BD
+
+.boutonPrecedent
+  font-family: "Reem Kufi", sans-serif
+  padding: 2vw 3vw
+  background-color: #F0AA1F
+  border: none
+  border-radius: 1vw
+  cursor: pointer
+  font-size: 2.5vw
+  width: 30vw
+  margin: 5vw 0 3vw 5vw
+
+
+img#photoProprio
+  border-radius: 1vw
+
+.proprio
+  width: fit-content
+  padding:2vw 5vw
+  text-align: center
+  margin:4vw
+  
+  #photoProprio
+    width: 10vw
+    height: 9.5vw
+    border-radius: 50%
+    border: 0.2vw solid general.$couleur-front-bleu-marine
+    margin: 0 auto 2vw auto
+
+    
+#Bulle 
+    margin-top: 5%
+
+/* Ajustements de style pour les petits écrans
+@media (max-width: 768px)
+  .HeaderConteneur
+    display: none !important
+
+  input, h3, .boutonPrecedent, .boutonPaypal
+    display: none
+
+@media (min-width: 768px)
+  .headerPaiementValide >
+    h2
+      font-size: 3vw
+
+    img
+      width: 3vw
+
+  .deuxiemeBarre, .premiereBarre, .headerDevis
+    display: none
+
+  .infosDetailsResa
+    border: solid 0.2vw #8CB9BD
+    padding: 0vw
+    display: flex
+    padding: 2vw
+    flex-direction: column
+    flex: 1
+    border-radius: 1vw
+
+  .infosLogementsTOTAL
+    display: flex
+
+  .infosLogementResa
+    display: flex
+    flex-direction: row
+    width: 100%
+    flex: 2
+
+  .note
+    display: flex
+    width: 10vw
+
+  .devis p
+    font-size: 2vw
+
+  .noteResa
+    display: flex
+    align-items: center
+    margin-top: 2vw
+    font-size: 2vw
+
+  .titreLogDevis
+    font-size: 2.7vw
+
+  .detailResa .infosLogement
+    margin-right: 5vw
+    display: flex
+    align-items: center
+    justify-content: center
+    flex: 1
+    padding: 1vw
+    border-radius: 1vw
+
+  .condAnnul > p
+    font-size: 1.3vw
+
+  .boutonPrecedent, .boutonPaypal
+    padding: 1vw 1.5vw
+    border-radius: 0.7vw
+    font-size: 1.8vw
+
+  .boutonPrecedent
+    width: 20vw
+
+/*# sourceMappingURL=DetailReservation.css.map
