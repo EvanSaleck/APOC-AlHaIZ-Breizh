@@ -180,13 +180,30 @@ function CreateConnexionModal() {
     modal.innerHTML = `
     <div class="modal-content">
         <span class="fermer">&times;</span>   
-        <h2>Connexion</h2>
-        <div id="connexionForm">
-            <input type="email" id="pseudo" name="pseudo" placeholder="JEANDUJAR01 ou Jean.Dujardin@gmail.com" required>
-            <input type="password" id="password" name="password" placeholder="*********" required>
-            <button id="Connexion" onclick="Connexion()">Se connecter</button>
+        <h2 class="desktop">Connexion</h2>
+        
+        <!-- -------------------------------- Mobile -------------------------------------- -->
+        
+        <div class="logoTitre mobile">
+            <img src="assets/imgs/logo.webp" alt="Logo ALHaIZ Breizh">
+            <h1>ALHaIZ Breizh</h1>
         </div>
-        <p>Vous n'avez pas de compte ? <span id="inscription" onclick="">Inscrivez-vous</span></p>
+
+        <!-- ------------------------------------------------------------------------------ -->
+        <div class="container-connexion-compte">
+            <div id="email-form" class="form">
+                <label for="email">Adresse mail :</label>
+                <input type="email" id="pseudo" name="pseudo" placeholder="JEANDUJAR01 ou Jean.Dujardin@gmail.com" required>
+            </div>
+
+            <div id="password-form" class="form">
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" placeholder="*********" required>
+                <div id="password_error"></div>
+            </div>
+            <button class="loginButton" id="Connexion" onclick="Connexion()">Se connecter</button>
+            <button class="needAccountButton" id="Inscription" onclick="CreateInscriptionModal()">Vous n'avez pas de compte ? Inscrivez-vous</button>
+        </div>
     </div>
     `;
     document.body.appendChild(modal);
@@ -227,7 +244,7 @@ function CreateInscriptionModal() {
         <h2 class="desktop">Inscription</h2>
         
         <!-- -------------------------------- Mobile -------------------------------------- -->
-
+        
         <div class="logoTitre mobile">
             <img src="assets/imgs/logo.webp" alt="Logo ALHaIZ Breizh">
             <h1>ALHaIZ Breizh</h1>
@@ -261,7 +278,7 @@ function CreateInscriptionModal() {
                     </div>
                     <div id="email-form" class="form">
                         <label for="email">Adresse mail :</label>
-                        <input type="email" .dr" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required>
                     </div>
 
                     <div id="password-form" class="form">
@@ -279,7 +296,7 @@ function CreateInscriptionModal() {
                     <!-- --------------------------------------------------------------- -->
                     <div id="ddn-form" class="form">
                         <label for="ddn">Date de naissance :</label>
-                        <input type="date" -22" id="ddn" name="ddn" required>
+                        <input type="date" id="ddn" name="ddn" required>
                     </div>
 
                     <div id="numero_rue-form" class="form">
@@ -332,8 +349,7 @@ function CreateInscriptionModal() {
                 </div>
                 <button type="submit" class="registerButton">S'inscrire</button>
             </form>
-            <button class="hasAccountButton">Déjà un compte ? Connectez-vous</button>
-            <p class="hasAccountButton desktop">Déjà un compte ? <span id="inscription" onclick="Inscription()">Connectez-vous</span></p>
+            <button class="hasAccountButton" onclick="CreateConnexionModal()">Déjà un compte ? Connectez-vous</button>
         </div>
     </div>
 

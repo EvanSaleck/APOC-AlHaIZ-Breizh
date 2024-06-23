@@ -68,7 +68,7 @@
 @media screen and (max-width: general.$max-width-telephone)
     .modal-register-content
         position: fixed
-        overflow: hidden
+        overflow-y: hidden
         top: 0
         left: 0
         transform: none
@@ -78,6 +78,10 @@
         height: 100vh
         font-family: general.$police-texte
         .fermer
+            position: absolute 
+            top: 15%
+            left: 10%
+            font-size: 2.5em
             cursor: pointer
         .desktop
             display: none
@@ -149,85 +153,83 @@
                 align-items: center
                 > *:not(:last-child)
                     margin-right: 10px
-
-// --------------------------------- Style de la page de de connexion mobile ---------------------------------
+    // --------------------------------- Style de la page de de connexion mobile ---------------------------------
     .modal-content
-            position: fixed
-            overflow: hidden
-            top: 0
-            left: 0
-            transform: none
-            z-index: 1050
-            background-color: white
-            width: 100vw
-            height: 100vh
-            font-family: general.$police-texte
-            .desktop
-                display: none
-            .logoTitre
-                height: 30vh
+        position: fixed
+        overflow-y: hidden
+        top: 0
+        left: 0
+        transform: none
+        z-index: 1050
+        background-color: white
+        width: 100vw
+        height: 100vh
+        font-family: general.$police-texte
+        .fermer
+            position: absolute 
+            top: 15%
+            left: 10%
+            font-size: 2.5em
+            cursor: pointer
+        .desktop
+            display: none
+        .logoTitre
+            height: 30vh
+            display: flex
+            flex-direction: column
+            align-items: center
+            justify-content: flex-end
+        img
+            height: 30%
+            margin-bottom: 15px
+        h1
+            height: fit-content
+            font-family: general.$police-titre
+
+        .container-connexion-compte
+            display: flex
+            margin: 10% auto 0 auto
+            flex-direction: column
+            width: 90vw
+            height: 70vh
+            font-size: general.$taille-police-texte-mobile
+            .form
                 display: flex
                 flex-direction: column
-                align-items: center
-                justify-content: flex-end
-            img
-                height: 30%
                 margin-bottom: 15px
-            h1
-                height: fit-content
-                font-family: general.$police-titre
+                #password_error, #confirm_password_error
+                    color: red
 
-            .container-creation-compte
-                display: flex
-                margin: 0 auto 0 auto
-                flex-direction: column
-                width: 90vw
-                height: 70vh
-                font-size: general.$taille-police-texte-mobile
-                .formulaire-creation-compte
-                    margin-bottom: 15px
-                .scroll
-                    overflow-y: auto
-                    height: 50vh
-                    margin-bottom: 15px
-                .form
-                    display: flex
-                    flex-direction: column
-                    margin-bottom: 15px
-                    #password_error, #confirm_password_error
-                        color: red
+            input, select
+                height: 40px
+                border-radius: 5px
+                border: 1px solid general.$couleur-front-bleu-nuageux
+            input
+                padding: 0px 10px
+            select
+                padding: 0px 5px
+            select
+                width: 30%
+            button
+                padding: 12px 20px
+                border-radius: 5px
+                border: 1px solid rgb(0, 0, 0, 0)
+                cursor: pointer
+                transition: background-color 0.3s ease
+                width: 100%
+            .loginButton
+                background-color: general.$couleur-front-bleu-verdatre
+                color: white
+                margin: 20% auto 0 auto
+                &:hover
+                    background-color: lighten(general.$couleur-front-bleu-verdatre, 10%)
+            .needAccountButton
+                background-color: white
+                color: general.$couleur-front-bleu-verdatre
+                margin: 15px auto 0 auto
+                &:hover
+                    background-color: darken(white, 10%)
 
-                    input, select
-                        height: 40px
-                        border-radius: 5px
-                        border: 1px solid general.$couleur-front-bleu-nuageux
-                    select
-                        width: 30%
-                button
-                    padding: 12px 20px
-
-                    border-radius: 5px
-                    border: 1px solid rgb(0, 0, 0, 0)
-                    cursor: pointer
-                    transition: background-color 0.3s ease
-                    width: 100%
-                .registerButton
-                    background-color: general.$couleur-front-bleu-verdatre
-                    color: white
-                    &:hover
-                        background-color: lighten(general.$couleur-front-bleu-verdatre, 10%)
-                .hasAccountButton
-                    background-color: white
-                    color: general.$couleur-front-bleu-verdatre
-                    &:hover
-                        background-color: darken(white, 10%)
-                .CGU-form
-                    margin-bottom: 15px
-                .CGU-form, .CGV-form
-                    display: flex
-                    align-items: center
-                    > *:not(:last-child)
-                        margin-right: 10px
-
+    
 // // style de la page de détail du compte desktop
 // @media screen and (min-width: general.$max-width-telephone)
