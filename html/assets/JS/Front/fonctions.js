@@ -69,6 +69,31 @@ function Connexion(){
     });
 }
 
+function ThrowAlertPopup(message,type) {
+    if (document.getElementsByClassName('alert-popup').length > 0) {
+        document.getElementsByClassName('alert-popup')[0].remove();
+    }
+    let alertPopup = document.createElement('div');
+    alertPopup.className = 'alert-popup';
+    let imgSrc = null;
+    if (type === 'error') {
+        imgSrc = 'error.jpeg';
+    } else if (type === 'success') {
+        imgSrc = 'success.jpeg';
+    }
+    alertPopup.innerHTML = `
+        <img src="/assets/imgs/alerts/${imgSrc}" alt=""> 
+        <p>${message}</p>
+    </div>
+    `;
+    document.body.appendChild(alertPopup);
+
+    alertPopup.onclick = function() {
+        alertPopup.remove();
+    };
+}
+
+// ----------------------------------- Ajouts à garder -----------------------------------
 function Inscription() {
     // Création d'un objet FormData pour recueillir les données du formulaire
     let data = new FormData();
@@ -107,15 +132,6 @@ function Inscription() {
     data.append('complement', complement);
     data.append('etat', etat);
 
-
-    // data.append('numero_rue', "12");
-    // data.append('nom_rue', "rue de Blancbois");
-    // data.append('code_postal', "22300");
-    // data.append('nom_ville', "Lannion");
-    // data.append('pays', "France");
-
-    // const c_id_adresse, const code_client, const cc_id_adresse à générer ou à trouver sur d'autres tables
-
     // Appel API pour créer l'adresse et le compte utilisateur
     for(var pair of data.entries()) {
         console.log(pair[0]+', '+pair[1]);
@@ -145,31 +161,6 @@ function Inscription() {
         console.error('Erreur lors de l\'envoi:', error);
         ThrowAlertPopup('Erreur technique, veuillez réessayer plus tard.', 'error');
     });
-}
-
-function ThrowAlertPopup(message,type) {
-    if (document.getElementsByClassName('alert-popup').length > 0) {
-        document.getElementsByClassName('alert-popup')[0].remove();
-    }
-    let alertPopup = document.createElement('div');
-    alertPopup.className = 'alert-popup';
-    val = null;
-    if (type === 'error') {
-        val = 'Erreur';
-    } else if (type === 'succes') {
-        val = 'Succès';
-    }
-    alertPopup.innerHTML = `
-    <div class="alert-popup-content ${type}">   
-        <span class="titre">${val}</span>
-        <p>${message}</p>
-    </div>
-    `;
-    document.body.appendChild(alertPopup);
-
-    setTimeout(() => {
-        alertPopup.remove();
-    }, 5000);
 }
 
 
@@ -224,6 +215,8 @@ function CreateInscriptionModal() {
     } else if (document.getElementById('connexionModal') != null) {
         document.getElementById('connexionModal').remove();
     }
+
+    document.body.classList.add('modal-open');
     // Create the modal
     let modal = document.createElement('div');
     modal.id = 'inscriptionModal';
@@ -247,16 +240,16 @@ function CreateInscriptionModal() {
                 <div class="scroll">
                     <div id="lastname-form" class="form">
                         <label for="lastname">Nom :</label>
-                        <input value="testNico12!@" type="text" id="lastname" name="lastname" required>
+                        <input  type="text" id="lastname" name="lastname" required>
                     </div>
                     <div id="name-form" class="form">
                         <label for="firstname">Prénom :</label>
-                        <input value="testNico12!@" type="text" id="firstname" name="firstname" required>
+                        <input  type="text" id="firstname" name="firstname" required>
                     </div>
 
                     <div id="civility-form" class="form">
                         <label for="civility">Civilité</label>
-                        <select value="male" id="civility" name="civility">
+                        <select  id="civility" name="civility">
                             <option value="unspecified">Non spécifié</option>
                             <option value="male">Monsieur</option>
                             <option value="female">Madame</option>
@@ -264,39 +257,39 @@ function CreateInscriptionModal() {
                     </div>
                     <div id="username-form" class="form">
                         <label for="username">Pseudonyme :</label>
-                        <input value="test123" type="text" id="username" name="username" required>
+                        <input  type="text" id="username" name="username" required>
                     </div>
                     <div id="email-form" class="form">
                         <label for="email">Adresse mail :</label>
-                        <input type="email" value="testNico12@nmds.dr" id="email" name="email" required>
+                        <input type="email" .dr" id="email" name="email" required>
                     </div>
 
                     <div id="password-form" class="form">
                         <label for="password">Mot de passe :</label>
-                        <input type="password" value="testNico12!@" id="password" name="password" required>
+                        <input type="password"  id="password" name="password" required>
                         <div id="password_error"></div>
                     </div>
 
                     <div id="confirm_password-form" class="form">
                         <label for="confirm_password">Confirmer mot de passe :</label>
-                        <input type="password" value="testNico12!@" id="confirm_password" name="confirm_password" required>
+                        <input type="password"  id="confirm_password" name="confirm_password" required>
                         <div id="confirm_password_error"></div>
                     </div>
                     
                     <!-- --------------------------------------------------------------- -->
                     <div id="ddn-form" class="form">
                         <label for="ddn">Date de naissance :</label>
-                        <input type="date" value="2018-07-22" id="ddn" name="ddn" required>
+                        <input type="date" -22" id="ddn" name="ddn" required>
                     </div>
 
                     <div id="numero_rue-form" class="form">
                         <label for="numero_rue">Numéro de rue :</label>
-                        <input type="text" value="12" id="numero_rue" name="numero_rue" required>
+                        <input type="text"  id="numero_rue" name="numero_rue" required>
                     </div>
 
                     <div id="nom_rue-form" class="form">
                         <label for="nom_rue">Nom de rue :</label>
-                        <input type="text" value="rue des lilas" id="nom_rue" name="nom_rue" required>
+                        <input type="text" id="nom_rue" name="nom_rue" required>
                     </div>
 
                     <div id="complement-form" class="form">
@@ -306,17 +299,17 @@ function CreateInscriptionModal() {
 
                     <div id="code_postal-form" class="form">
                         <label for="code_postal">Code postal :</label>
-                        <input type="text" value="22300" id="code_postal" name="code_postal" required>
+                        <input type="text"  id="code_postal" name="code_postal" required>
                     </div>
                     
                     <div id="nom_ville-form" class="form">
                         <label for="nom_ville">Ville :</label>
-                        <input type="text" value="Lannion" id="nom_ville" name="nom_ville" required>
+                        <input type="text"  id="nom_ville" name="nom_ville" required>
                     </div>
 
                     <div id="pays-form" class="form">
                         <label for="pays">Pays :</label>
-                        <input type="text" value="France" id="pays" name="pays" required>
+                        <input type="text"  id="pays" name="pays" required>
                     </div>
 
                     <div id="etat-form" class="form">
@@ -327,12 +320,12 @@ function CreateInscriptionModal() {
 
                     <div id="agreement-form" class="form">
                         <div class="CGU-form">
-                            <input value="true" type="checkbox" id="terms_conditions" name="terms_conditions" required>
+                            <input  type="checkbox" id="terms_conditions" name="terms_conditions" required>
                             <label for="terms_conditions">En cochant cette case, je confirme avoir lu et accepté les <a href="/terms-conditions">Conditions Générales d'Utilisation</a> d'ALHalIZ Breizh.</label>
                         </div>
 
                         <div class="CGV-form">
-                            <input value="true" type="checkbox" id="sales_conditions" name="sales_conditions" required>
+                            <input  type="checkbox" id="sales_conditions" name="sales_conditions" required>
                             <label for="sales_conditions">En cochant cette case, je reconnais avoir lu et accepté les <a href="/sales-conditions">Conditions Générales de Vente</a> d'ALHalIZ Breizh.</label>
                         </div>
                     </div>
@@ -367,19 +360,20 @@ function CreateInscriptionModal() {
     form.addEventListener('submit', handleFormSubmit);
 
     // Apply blur to all elements except the modal
-    Array.from(document.body.children).forEach(child => {
-        if (child !== modal) {
-            child.classList.add('blur');
-        }
-    });
+    // Array.from(document.body.children).forEach(child => {
+    //     if (child !== modal) {
+    //         child.classList.add('blur');
+    //     }
+    // });
 
     // Remove the modal when the close button is clicked
     let span = document.getElementsByClassName('fermer')[0];
     span.onclick = function() {
         modal.remove();
-        Array.from(document.body.children).forEach(child => {
-            child.classList.remove('blur');
-        });
+        document.body.classList.remove('modal-open');
+        // Array.from(document.body.children).forEach(child => {
+        //     child.classList.remove('blur');
+        // });
     };
     // Verify if the password is correct and the same as the confirm password
     var passwordInput = document.getElementById('password');
@@ -419,7 +413,7 @@ function CreateInscriptionModal() {
     passwordInput.addEventListener('input', validatePassword);
     confirmPasswordInput.addEventListener('input', validatePassword);
 }
-
+// ----------------------------------- Ajouts à garder -----------------------------------
 
 function Deconnexion() {
     sessionStorage.removeItem('User');
