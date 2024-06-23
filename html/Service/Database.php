@@ -7,7 +7,7 @@
 
     class Database {
         private $pdo;
-        private $dsn = 'pgsql:host=servbdd;dbname=pg_ymear;port=5432';
+        private $dsn = 'pgsql:host=localhost;dbname=pg_ymear;port=5432';
         private $username = 'ymear';
         private $password = 'YOHyohm2929.&';
 

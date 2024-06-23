@@ -30,16 +30,16 @@ class Utilisateur {
     }
 
     public function connexionClient($data) {
-        if(str_contains($data['pseudo'], '@')) {
+        if (strpos($data['pseudo'], '@') !== false) {
             $query = "SELECT * FROM sae3.compte_client WHERE e_mail = ?";
         } else {
             $query = "SELECT * FROM sae3.compte_client WHERE pseudo = ?";
         }
         $statement = $this->pdo->prepare($query);
         $statement->execute([$data['pseudo']]);
-
+    
         $utilisateur = $statement->fetch(\PDO::FETCH_ASSOC);
-
+    
         if ($utilisateur && password_verify($data['password'], $utilisateur['mdp'])) {
             $_SESSION['client'] = json_encode($utilisateur);
             return 'Connexion réussie';
@@ -48,6 +48,7 @@ class Utilisateur {
             return 'Identifiants incorrects';
         }
     }
+    
 
     public function inscriptionClient($data) {
         $query = "INSERT INTO sae3.compte_client (civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client) VALUES (?, ?, ?)";
