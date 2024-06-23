@@ -41,7 +41,7 @@ function envoiDevis(prixNuitTTC,data) {
         
     };
     
-    console.log(JSON.stringify(logementJSON));
+    // console.log(JSON.stringify(logementJSON));
     sessionStorage.setItem("Logement", JSON.stringify(logementJSON));
     
     

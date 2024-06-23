@@ -72,6 +72,23 @@ class LogementController {
         echo json_encode($amenagements);
     }
 
+    public function getTypeOfLogementById($id) {
+        $logements = $this->logement->getTypeOfLogementById($id);
+
+        header('Content-Type: application/json');
+
+        echo json_encode($logements);
+    }
+
+    public function getCategorieOfLogementById($id) {
+        $logements = $this->logement->getCategorieOfLogementById($id);
+
+        header('Content-Type: application/json');
+
+        echo json_encode($logements);
+    }
+
+
     public function processFormNewLogement() { 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

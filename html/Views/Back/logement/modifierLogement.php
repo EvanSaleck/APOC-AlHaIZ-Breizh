@@ -3,13 +3,7 @@
     include_once("Views/Back/composants/head.php");
 ?>
 <body>
-    <pre>
-        <?php 
-            // print_r($_SERVER);
-            // print_r(get_included_files());
-        ?>
-    </pre>
-    <h1>Modifier un logement</h1>
+    <h1>Votre logement</h1>
 
     <form name="formNewLogement" id="formNewLogement" method="POST">
         <div class="containerPrincipal">
@@ -17,14 +11,14 @@
                 <div class="infosPrincipales">
                     <div class="ligneDeuxInputs">
                         <div class="input1">
-                            <label for="titre" class="souligne">Titre*</label>
-                            <input type="text" name="titre" id="titre" placeholder="ex : Maison de campagne">
+                            <label for="titre" class="souligne">Titre</label>
+                            <input type="text" name="titre" id="titre">
                             <span class="messageError"></span>
                         </div>
                         <div class="input2">
-                            <label for="tarif" class="souligne">Tarif par nuit*</label>
+                            <label for="tarif" class="souligne">Tarif par nuit</label>
                             <div class="divTarif">
-                                <input type="text" name="tarif" id="tarif" placeholder="ex : 50"><span>€</span>
+                                <input type="text" name="tarif" id="tarif" ><span>€</span>
                             </div>
                             <span class="messageError"></span>  
                         </div>
@@ -32,25 +26,25 @@
                     <label for="adresse" class="souligne">Adresse</label>
                     <div id="adresse">
                         <div>
-                            <label for="nom_rue">N° et Nom de rue*</label>
-                            <input type="text" name="nom_rue" id="nom_rue" placeholder="ex : 50 rue des Lilas" >
+                            <label for="nom_rue">N° et Nom de rue</label>
+                            <input type="text" name="nom_rue" id="nom_rue" >
                         </div>
                         <span class="messageError"></span>
                         <div class="ligneDeuxInputs">
                             <div class="input1">
-                                <label for="ville">Ville*</label>
-                                <input type="text" name="ville" id="ville" placeholder="ex : Lannion" >
+                                <label for="ville">Ville</label>
+                                <input type="text" name="ville" id="ville" >
                                 <span class="messageError"></span>
                             </div>
                             <div class="input2">
-                                <label for="cp">Code postal*</label>
-                                <input type="text" name="cp" id="cp" placeholder="ex : 22700" >
+                                <label for="cp">Code postal</label>
+                                <input type="text" name="cp" id="cp" >
                                 <span class="messageError"></span>  
                             </div>
                         </div>
                         <div>
                             <label for="complement_adresse">Complément d'adresse</label>
-                            <input type="text" name="complement_adresse" id="complement_adresse" placeholder="ex : 2ème étage">
+                            <input type="text" name="complement_adresse" id="complement_adresse">
                         </div>
                         <span class="messageError"></span>   
                     </div>
@@ -60,12 +54,7 @@
                         <label for="photo-input" class="souligne" id="labelDropPhoto">Photo du logement*</label>
                         <input type="file" id="photo-input" style="display: none;">
                     </div>
-                    <div class="drop-photo" id="drop-photo">
-                        <img src="/assets/imgs/logoDragImg.svg" alt="Logo d'image">
-                        Déposez votre photo ici
-                        <button id="photo-button" type="button">Ou sélectionnez un fichier</button>
-                        <span id="photo-nom-image"></span>
-                        <span class="messageError"></span>  
+                    <div class="imageLogement" id="image-logement">
                     </div>
                 </div>
             </div>
@@ -130,12 +119,12 @@
                     <div class="accrocheDescription">
                         <div>
                             <label for="accroche" class="souligne">Accroche</label>
-                            <textarea name="accroche" id="accroche" placeholder="ex : Maison à deux pas des arbres, idéales pour des balades !"></textarea>
+                            <textarea name="accroche" id="accroche"></textarea>
                         </div>
                         <span class="messageError"></span>  
                         <div>
                             <label for="description" class="souligne">Description</label>
-                            <textarea name="description" id="description" placeholder="ex : Une maison spacieuse pouvant accueillir jusquà six personnes, idéale pour les familles ou les groupes."></textarea>
+                            <textarea name="description" id="description"></textarea>
                         </div>
                         <span class="messageError"></span>  
                     </div>
@@ -146,27 +135,27 @@
                         <div id="caracteristique">
                             <div>
                                 <label for="surface">Surface habitable (en m²)*</label>
-                                <input type="text" name="surface" id="surface" placeholder="20">
+                                <input type="text" name="surface" id="surface" >
                             </div>
                             <span class="messageError"></span>  
                             <div>
-                                <label for="nbPersMax">Nombre pers. max*</label>
-                                <input type="text" name="nbPersMax" id="nbPersMax" placeholder="6" >
+                                <label for="nbPersMax">Nombre pers. max</label>
+                                <input type="text" name="nbPersMax" id="nbPersMax">
                             </div>
                             <span class="messageError"></span>   
                             <div>
-                                <label for="nbChambres">Nombre de chambres*</label>
-                                <input type="text" name="nbChambres" id="nbChambres" placeholder="3" > 
+                                <label for="nbChambres">Nombre de chambres</label>
+                                <input type="text" name="nbChambres" id="nbChambres"> 
                             </div>
                             <span class="messageError"></span>  
                             <div>
-                                <label for="nbLitsSimples">Nomre de lits simples*</label>
-                                <input type="text" name="nbLitsSimples" id="nbLitsSimples" placeholder="2" > 
+                                <label for="nbLitsSimples">Nomre de lits simples</label>
+                                <input type="text" name="nbLitsSimples" id="nbLitsSimples"> 
                             </div>
                             <span class="messageError"></span>  
                             <div>
-                                <label for="nbLitsDoubles">Nombre de lits doubles*</label>
-                                <input type="text" name="nbLitsDoubles" id="nbLitsDoubles" placeholder="2" > 
+                                <label for="nbLitsDoubles">Nombre de lits doubles</label>
+                                <input type="text" name="nbLitsDoubles" id="nbLitsDoubles"> 
                             </div>
                             <span class="messageError"></span>  
                         </div>
@@ -177,7 +166,7 @@
                             <div>
                                 <label for="delaiResaArrivee">Délai réservation/arrivée</label>
                                 <div class="selectJour">
-                                    <input type="text" name="delaiResaArrivee" id="delaiResaArrivee" placeholder="2">
+                                    <input type="text" name="delaiResaArrivee" id="delaiResaArrivee">
                                     <select name="uniteDelaiResaArrivee" id="uniteDelaiResaArrivee">
                                         <option value="jours">Jour(s)</option>
                                         <option value="semaines">Semaine(s)</option>
@@ -189,7 +178,7 @@
                             <div>
                                 <label for="dureeMinLoc">Durée minimale location</label>
                                 <div class="selectJour">
-                                    <input type="text" name="dureeMinLoc" id="dureeMinLoc" placeholder="4">
+                                    <input type="text" name="dureeMinLoc" id="dureeMinLoc">
                                     <select name="uniteDureeMinLoc" id="uniteDureeMinLoc">
                                         <option value="jours">Jour(s)</option>
                                         <option value="semaines">Semaine(s)</option>
@@ -200,7 +189,7 @@
                             <div>
                                 <label for="delaiAnnulMax">Délai d'annulation maximum</label>
                                 <div class="selectJour">
-                                    <input type="text" name="delaiAnnulMax" id="delaiAnnulMax" placeholder="2">
+                                    <input type="text" name="delaiAnnulMax" id="delaiAnnulMax">
                                     <select name="uniteDelaiAnnulMax" id="uniteDelaiAnnulMax">
                                         <option value="jours">Jour(s)</option>
                                         <option value="semaines">Semaine(s)</option>
@@ -213,8 +202,8 @@
                     </div>
                 </div>
             </div>
-            <div class="btnValider">
-                <input type="submit" value="Valider">
+            <div class="btnModifier">
+                <input type="submit" id="btnModifier" value="Modifier">
             </div>
         </div>
     </form>

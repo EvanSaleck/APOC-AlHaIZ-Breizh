@@ -1,5 +1,4 @@
 <?php
-    namespace Models;
 
 namespace Models;
 
@@ -54,6 +53,18 @@ class Logement {
         ');
 
         return $dataLogements;
+    }
+
+    public function getLogementsByAbonnement($id){
+        // on selectionne seulement le contenu de la table logement
+        $logements = $this->db->executeQuery('
+        SELECT l.*
+        FROM logement l
+        JOIN logement_abonnement ON id_logement = LA_id_logement
+        JOIN abonnements_reservations ON LA_id_abonnement = id_abonnement
+        WHERE id_abonnement = ' . $id);
+                
+        return $logements;
     }
 
     public function logementExists($id) {
@@ -267,6 +278,30 @@ class Logement {
         
         return $logements;
     }
+
+    public function getTypeOfLogementById($id) {
+        $logements = $this->db->executeQuery('
+        SELECT id_type, nom_type
+        FROM logement 
+        JOIN type_logement ON L_id_type = id_type
+        
+        WHERE id_logement = ' . $id);
+        
+        return $logements;
+    }
+
+    public function getCategorieOfLogementById($id) {
+        $logements = $this->db->executeQuery('
+        SELECT id_categorie, nom_categorie
+        FROM logement 
+        JOIN categorie_logement ON L_id_categorie = id_categorie
+        
+        WHERE id_logement = ' . $id);
+        
+        return $logements;
+    }
+
+    
 
     public function updateStatutLogement($id, $nouveauStatut) {
         // Correction de la syntaxe SQL pour l'insertion de variables

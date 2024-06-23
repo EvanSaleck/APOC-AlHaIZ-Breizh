@@ -129,6 +129,10 @@ h1, h2, h3, h4, h5, h6 {
 .alert-popup img {
   width: 20%;
 }
+.alert-popup p {
+  width: 70%;
+  text-align: center;
+}
 @keyframes arrivee {
   from {
     top: -100%;
