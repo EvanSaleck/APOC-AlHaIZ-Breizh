@@ -1,20 +1,25 @@
 @use '../general' as general
 
-.FooterContainer
+/* Différents styles pour le background du footer */
+#front
+    background-color: general.$couleur-front-bleu-verdatre
+
+#back
     background-color: general.$couleur-back-bleu-zodiac
+
+.FooterContainer
     /* Taille */
-    height: 20vh
-    min-width: 80%
-    width: 100%
-    max-width: 100%
+    display: flex
+    flex-direction: row
+    justify-content: space-evenly
+    align-items: center
+    bottom: 0
+    width:100%
 
     /* Texte */
     color: #FFFFFF
     font-family: general.$police-texte
-    font-size: 1em 
-
-    @media screen and ( max-width: 960px )
-        font-size: 0.8em
+    font-size: 1em  
 
     a
         &:link
@@ -22,12 +27,11 @@
 
     h2
         font-family: general.$police-titre
-        font-size: 1.4em
+        font-size: 1.6em
 
     .FooterElements
-        display: flex
-        justify-content: center
-        align-items: center
+        display: grid
+        grid-template-columns: minmax(100px, 1fr) minmax(200px, auto) minmax(100px, 1fr)
 
         margin-bottom: 10px
 
@@ -37,8 +41,11 @@
             height: 7vh
 
         div
-            margin: 1vw 3vw
+            margin: 10px 30px
+            flex-direction: column
             align-items: center
+
+            margin-bottom: 10px
             
             ul
                 list-style: none
@@ -46,18 +53,49 @@
                 li
                     margin-top: 10px
 
+                /* Différents styles pour les liens */
+                .Front
                     a
                         &:hover
-                            color: #F0AA1F
+                            color: #F1D950
+
+                        &:visited
+                            color: #F1D950
+
+                .Back
+                    a
+                        &:hover
+                                color: #F0AA1F
                 
                         &:visited
                             color: #F0AA1F
 
-.DivCopyright
-    display: flex
-    justify-content: center
-    align-items: center
-    text-align: center
+        .DivAssistance
+            grid-column: 1
+            grid-row: 1
 
-    font-family: general.$police-titre
-    margin-top: 10px
+        .DivLogo
+            grid-column: 2
+            grid-row: 1
+            margin-top: 5px
+            text-align: center
+
+        .DivContact
+            float: right
+            grid-column: 3
+            grid-row: 1
+
+        .DivCopyright
+            font-family: general.$police-titre
+            grid-column: 1 / 4
+            grid-row: 2
+            text-align: center
+            align-items: center
+            margin-top: 10px
+
+            p
+                margin-top: 10px
+
+@media screen and (max-width: general.$max-width-telephone)
+    .FooterContainer
+        display: none
