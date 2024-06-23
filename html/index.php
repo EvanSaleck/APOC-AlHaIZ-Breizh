@@ -203,8 +203,8 @@ switch($requestUrl) {
         break;
 
     // Routes des API
-    case '/-+':
-    case 'Deconnexion':
+    case '/Deconnexion':
+    case '/Deconnexion/':
         $_SESSION = array();
         session_destroy();
         header('Location: /');
