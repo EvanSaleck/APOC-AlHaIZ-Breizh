@@ -144,15 +144,14 @@ body
     border: 2px solid #102C57
 
     tr
-      height: 20vw
+      height: 5vw
       background-color: #FFFFFF
 
     thead tr
       height: 10vw
 
-    tr
-      td
-        padding: 2vw
+    tr td
+      padding: 1vw
 
     thead
       height: 3vh
@@ -169,14 +168,16 @@ body
 
     tbody tr td
       border-bottom: 0.2vw solid
+
       &:first-child
-        width: 40%
+        width: 30%
 
       &:not(:first-child)
         width: 15%
 
     #listeLogements td img
-      max-width: 90%
+      max-width: 60%
+      max-height: 100%
 
 /* Styles pour les logements hors ligne
 
@@ -199,20 +200,15 @@ label
   cursor: pointer
   text-indent: -9999px
   width: 6.6vw
-
-  /* 66px
   height: 3.3vw
-
-  /* 33px
   background: grey
   display: block
   border-radius: 3.3vw
-
-  /* 33px
   position: relative
+  margin-left: 2.5vw
 
   &:after
-    content: ''
+    content: ""
     position: absolute
     top: 0.2vw
 
@@ -247,8 +243,8 @@ label:active:after
   /* 43px
 
 /* *#listeLogements table tr:first-child {
- * * *  height: 10vw;
- * * *}
+ * * * * *  height: 10vw;
+ * * * * *}
 /* Spécifie la largeur des colonnes pour le corps du tableau
 
 section
@@ -261,3 +257,11 @@ section
   #voirPlus
     font-family: "Reem Kufi", sans-serif
     text-align: center
+
+  &#sectionLogements
+    display: flex
+    align-items: center
+    align-content: center
+    justify-content: center
+
+/*# sourceMappingURL=listeLogements.css.map

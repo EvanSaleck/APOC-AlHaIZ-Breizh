@@ -204,6 +204,11 @@
             return $this->etat;
         }
 
+        public function getStatutPropriete() {
+            return $this->statut_propriete;
+        }
+    
+
         public function setTitre($titre) {
             $this->titre = $titre;
 
