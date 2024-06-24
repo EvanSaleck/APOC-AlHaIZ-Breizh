@@ -121,10 +121,10 @@ switch($requestUrl) {
 
     case '/logements':
     case '/logements/':
-        if(!isset($_SESSION['proprio'])) {
+        if(isset($_SESSION['proprio'])) {
             include_once('Views/Back/logement/listeLogements.php');
         }else {
-            header('Location: /');
+            header('Location: /connexionProprietaire');
         }
         break;
 
