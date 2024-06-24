@@ -4,6 +4,7 @@ namespace Models;
 include_once 'Service/Database.php';
 
 use Service\Database;
+use \Exception;
 
 class Utilisateur {
     private $db;
@@ -63,13 +64,95 @@ class Utilisateur {
         }
     }
 
+    
     public function inscriptionClient($data) {
-        $query = "INSERT INTO sae3.compte_client (civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client) VALUES (?, ?, ?)";
-        $statement = $this->pdo->prepare($query);
-        $statement->execute([$data['pseudo'], $data['email'], password_hash($data['password'], PASSWORD_DEFAULT)]);
+        try {
+            $this->db->getPDO()->beginTransaction();
+            // on commence par regarder si un utilisateur n'existe pas deja avec le meme email
 
-        return 'Inscription réussie';
+            $query = "SELECT * FROM sae3.compte_client WHERE e_mail = ?";
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$data['email']]);
+            $utilisateur = $statement->fetch(\PDO::FETCH_ASSOC);
+
+            if ($utilisateur) {
+                throw new Exception('Un utilisateur existe déjà avec cet email');
+            }
+
+            // ensuite si un utilisateur n'existe pas deja avec le meme pseudo
+            $query = "SELECT * FROM sae3.compte_client WHERE pseudo = ?";
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$data['pseudo']]);
+            $utilisateur = $statement->fetch(\PDO::FETCH_ASSOC);
+
+            if ($utilisateur) {
+                throw new Exception('Un utilisateur existe déjà avec ce pseudo');
+            }
+
+            $query = "INSERT INTO sae3.adresse (numero_rue, nom_rue, code_postal, nom_ville, pays, complement, etat) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([
+                $data['numero_rue'],
+                $data['nom_rue'],
+                $data['code_postal'],
+                $data['nom_ville'],
+                $data['pays'],
+                $data['complement'],
+                $data['etat']
+            ]);
+            
+
+            $idAdresse = $this->db->getPDO()->lastInsertId();
+
+            
+            // puis creation compte a laquelle rajouter l'id de l'adresse
+            $query = "INSERT INTO sae3.compte_client (code_client, civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, C_id_adresse, CC_id_adresse) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            $statement = $this->pdo->prepare($query);
+            $date = date('Y-m-d', strtotime($data['ddn']));
+
+            $codeClient = strtoupper(substr($data['prenom'], 0, 3) . $data['nom']);
+
+            $statement->execute([
+                $codeClient,
+                $data['civilite'],
+                $data['nom'],
+                $data['prenom'],
+                $data['email'],
+                password_hash($data['password'], PASSWORD_DEFAULT),
+                $data['pseudo'],
+                $data['photo_profil'],
+                $date,
+                $idAdresse,
+                $idAdresse,
+            ]);
+
+            $idCompte = $this->db->getPDO()->lastInsertId();
+
+            // puis on update le compte client pour ajouter l'id du compte a la suite du code client
+
+            $query = "UPDATE sae3.compte_client SET code_client = ? WHERE id_compte = ?";
+            $statement = $this->pdo->prepare($query);
+            $codeClient = strtoupper(substr($data['prenom'], 0, 3) . $data['nom'] . $idCompte );
+            $statement->execute([$codeClient, $idCompte]);
+            
+            $this->db->getPDO()->commit();
+
+            $query = "SELECT * FROM sae3.compte_client WHERE code_client = ?";
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$codeClient]);
+            $utilisateur = $statement->fetch(\PDO::FETCH_ASSOC);
+            
+            return 'Inscription réussie';
+        } catch (Exception $e) {
+            $this->db->getPDO()->rollBack();
+            throw new Exception('Erreur lors de l\'inscription : ' . $e->getMessage());
+        }
     }
+    
+    
+    
+
 
     public function connexionProprio($data) {
         if(str_contains($data['pseudo'], '@')) {
@@ -111,4 +194,5 @@ class Utilisateur {
     }   
 
 }
+
 

@@ -45,7 +45,12 @@ switch($requestUrl) {
         include_once './Views/Front/logement/detailsLogement.php';
         break;
     case '/compte':
+    case '/compte/':
         include_once './Views/Front/compte/detailsCompte.php';
+        break;
+    case '/connexion':
+    case '/connexion/':
+        include_once './Views/Front/compte/connexionCompte.php';
         break;
     case '/reservation/devis':
     case '/reservation/devis/':
@@ -92,17 +97,11 @@ switch($requestUrl) {
     case '/logement/':
         include './Views/Back/logement/listeLogements.php';
         break;
-    case '/logements/details':
-    case '/logements/details/';
-        include './Views/Back/logement/detailsLogement.php';
+
+    case '/connexionProprietaire':
+    case '/connexionProprietaire/':
+        include './Views/Back/connexionProprietaire.php';
         break;
-
-    case '/logements/details/modifier':
-    case '/logements/details/modifier';
-        include './Views/Back/logement/modifierLogement.php';
-        break;
-
-
     case '/api/getLogementsDataForCards':
         header('Content-Type: application/json');
         echo $logementController->getLogementsDataForCards();

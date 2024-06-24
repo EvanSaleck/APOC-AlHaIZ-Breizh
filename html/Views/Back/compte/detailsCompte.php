@@ -63,10 +63,8 @@ include_once 'Views/Back/composants/head.php';
 
       <button class="update">Modifier le profil</button>
 
-      <a href="/gestionTokens">
       <button class="token">Vos Tokens</button>
-    </a>
     </div>
   </div>
 </body>
-<?php include_once 'Views/Back/composants/footer.php' ?>
+<?php include_once 'Views/Front/composants/footer.php' ?>
