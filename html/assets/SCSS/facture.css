@@ -29,6 +29,11 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid #D8000C !important;
 }
 
+.messageError {
+  color: #D8000C;
+  font-size: 0.8rem;
+}
+
 #facture {
   display: block;
   padding: 75px 50px;

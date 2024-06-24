@@ -18,23 +18,20 @@
 
 @media screen and (min-width: general.$max-width-telephone)
     #descLogement
-        display: grid
-        grid-template-columns: repeat(2, 1fr)
-        grid-gap: 10px
-        grid-template-columns: 60vw 40vw
-
+        display: block
         font-family: 'DM Sans'
         font-size: 1.2em
 
         #sectionDesc
             grid-column: 1
             grid-row: 1
-
+            width: (100% - 500px)
             padding: 0 5vw
 
             #imageLogement
                 height: 50vh
                 width: 50vw
+                object-fit: cover
 
             #divTitre
                 order: -1
@@ -105,7 +102,7 @@
                         margin: 0 0.5vw 0 0
                         font-weight: 600
 
-                #literie
+                #literie5
                     display: flex
                     flex-flow: row nowrap
 
@@ -151,46 +148,44 @@
 
         #popupDate
             @include flexCol
-            width: 33vw
-            padding: 2vw
+            width: 400px
             background-color: white
             box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, .2)
             position: fixed
-            left: 60vw
-            top: 10vh
+            right: 30px
+            top: 200px
 
             h3
-                margin: 1vh 0
+                padding: 10px
             
             .ligneSaisiePopup
                 @include flexRow
-                margin: 1vh 0
+                padding: 10px 0
 
                 .labelPopup
                     display: block
-                    width: 12vw
+                    width: 175px
                     font-size: 1.2em
 
                 .champSaisiePopup
-                    height: 4vh
-                    width: 20vw
+                    height: 40px
+                    width: 200px
                     font-size: 1.5em
                     text-align: center
 
         #reservation
             @include flexRow
             position: fixed
-            top: 42vh
-            left: 60vw
-            height: 8vh
-            width: 37vw
+            top: 100px
+            right: 30px
+            height: 75px
+            width: 400px
             background-color: white
             box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, .2)
 
             .btn
                 @include flexRow
-                width: 12vw
-                height: 5.5vh
+                height: 45px
                 border: none
                 border-radius: 5px
                 font-size: 1.2em
@@ -198,13 +193,15 @@
 
             #btnRes
                 background-color: general.$couleur-front-jaune-pabo
+                padding: 5px
 
             #btnDate
                 display: none
+                padding: 5px
 
             #sctNbOccupants
-                width: 20vw
-                padding: 1vh 2vw
+                width: 200px
+                padding: 2px
 
     .navbar
         display: none

@@ -83,7 +83,7 @@
             </article>
         </section>
         <div id=popupDate>
-            <h3>Renseignez les date de début et de fin de votre séjour:</h2>
+            <h3>Renseignez les dates de début et de fin de votre séjour:</h2>
             <div class=barre></div>
             <div class=ligneSaisiePopup>
                 <label class=labelPopup for="dateDebut">Date d'arivée:</label>
