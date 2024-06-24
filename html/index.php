@@ -4,6 +4,7 @@ session_start();
 include_once './Controllers/LogementController.php';
 include_once './Controllers/ReservationController.php';
 include_once './Controllers/UtilisateurController.php';
+include_once './Controllers/AbonnementICalController.php';
 include_once './Controllers/FactureController.php';
 
 
@@ -11,6 +12,7 @@ include_once './Controllers/FactureController.php';
 use Controllers\LogementController;
 use Controllers\ReservationController;
 use Controllers\UtilisateurController;
+use Controllers\AbonnementICalController;
 use Controllers\FactureController;
 
 
@@ -18,18 +20,76 @@ use Controllers\FactureController;
 $logementController = new LogementController();
 $reservationController = new ReservationController();
 $utilisateurController = new UtilisateurController();
+$abonnementICalController = new AbonnementICalController();
 $factureController = new FactureController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
-// $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
+    case preg_match('/^\/reservations\/abonnement\?token=[a-f0-9]{64}$/', $requestUrl) ? true : false:
+        $token = $_GET['token'];
+        $abonnementICalController->exportIcal($token);
+        break;
+
+    case '/reservations/abonnements/iCal/new':
+    case '/reservations/abonnements/iCal/new/':
+        $_SESSION['proprio'] = 7;
+        include_once './Views/Back/reservation/abonnementICal.php';
+        break;
+    
+    case '/reservations/abonnements/liste':
+    case '/reservations/abonnements/liste/':
+        include_once './Views/Back/reservation/listeAbonnementsICal.php';
+        break;
+
+    case '/api/getAbonnementsICalByProprietaire':
+    case '/api/getAbonnementsICalByProprietaire/':
+        $id = $_SESSION['proprio'];
+        $abonnementICalController->getAbonnementsICalByProprietaire(7);
+        break;
+    
+    case '/api/reservations/abonnements/iCal/new':
+    case '/api/reservations/abonnement/iCal/new/':
+        $abonnementICalController->newAction();        
+        break;
+
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/edit\/\d+$/', $requestUrl) ? true : false:   
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/edit\/\d+\/$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $id = end($url_parts);
+        
+        $abonnementICalController->editAction($id);
+        break;
+
+    
+    // on créé la route de suppression : /api/reservations/abonnements/iCal/delete/{id}
+    // ainsi que  : /api/reservations/abonnements/iCal/delete/{id}/
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/delete\/\d+$/', $requestUrl) ? true : false:   
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/delete\/\d+\/$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $id = end($url_parts);
+        $abonnementICalController->deleteAction($id);
+        break;
+    
+    case preg_match('/^\/reservations\/abonnements\/iCal\/edit\/\d+$/', $requestUrl) ? true : false:   
+    case preg_match('/^\/reservations\/abonnements\/iCal\/edit\/\d+\/$/', $requestUrl) ? true : false:
+        include_once './Views/Back/reservation/abonnementICal.php';
+        break;
+
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/getDataICal\/\d+$/', $requestUrl) ? true : false:
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/getDataICal\/\d+\/$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $id = end($url_parts);
+        $abonnementICalController->getDataICal($id);
+        break;
+
     // Routes des vues front office 
     case '/':
     case '':
         include_once './Views/Front/logement/indexLogement.php';
         break;
+        
     case '/logement':
     case '/logement/':
         include_once './Views/Front/logement/detailsLogement.php';
@@ -62,28 +122,50 @@ switch($requestUrl) {
     
     case '/Back/reservations':
     case '/Back/reservations/':
+        include_once('Views/Back/reservation/listeReservations.php');
         if(!isset($_SESSION['proprio'])) {
-            header('Location: /');
-        }else {
             include_once('Views/Back/reservation/listeReservations.php');
+            
+        }else {
+            header('Location: /');
+        }
+        break;
+
+    case '/logements':
+    case '/logements/':
+        if(!isset($_SESSION['proprio'])) {
+            include_once('Views/Back/logement/listeLogements.php');
+        }else {
+            header('Location: /');
         }
         break;
 
     // routes du back
     case '/logement/new':
     case '/logement/new/':
-        // if(!isset($_SESSION['proprio'])) {
-        //     header('Location: /');
-        // }else {
+         if(!isset($_SESSION['proprio'])) {
             include './Views/Back/logement/newLogement.php';
-        // }
+        }else {
+            header('Location: /');
+        }
         break;
     
     // routes back office
-    case '/logements':
-    case '/logements/':
+    case '/logement':
+    case '/logement/':
         include './Views/Back/logement/listeLogements.php';
         break;
+    case '/logements/details':
+    case '/logements/details/';
+        include './Views/Back/logement/detailsLogement.php';
+        break;
+
+    case '/logements/details/modifier':
+    case '/logements/details/modifier';
+        include './Views/Back/logement/modifierLogement.php';
+        break;
+
+
     case '/api/getLogementsDataForCards':
         header('Content-Type: application/json');
         echo $logementController->getLogementsDataForCards();
@@ -105,6 +187,20 @@ switch($requestUrl) {
         $data = $_POST;
         $reservationController->getReservationById($data);
         break;
+        
+    case 'api/getTypeOfLogementById/':
+    case 'api/getTypeOfLogementById/':
+        $data = $_POST;
+        $logementController->getTypeOfLogementById($data);
+        break;
+    /*
+    case 'api/getCategorieOfLogementById/':
+    case 'api/getCategorieOfLogementById/':
+        $data = $_POST;
+        $logementController->getCategorieOfLogementById($data);
+        break;
+        */
+
     case '/api/getProprioById':
     case 'api/getProprioById':
         $data = $_POST;
@@ -116,10 +212,16 @@ switch($requestUrl) {
         $logementController->getLogementById($data['id']);
         break;
 
+    case '/api/getLogementsByProprietaireId':
+    case '/api/getLogementsByProprietaireId/':
+        // $data = $_POST;
+        $data['id'] = 8 ; 
+        $logementController->getLogementsByProprietaireId($data['id']);
+        break;
 
     // Routes des API
     case '/Deconnexion':
-    case 'Deconnexion':
+    case '/Deconnexion/':
         $_SESSION = array();
         session_destroy();
         header('Location: /');
@@ -128,6 +230,7 @@ switch($requestUrl) {
     case '/api/ConnexionClient':
     case 'api/ConnexionClient':
         $data = $_POST;
+
         $utilisateurController->connexionClient($data);
         break;
 
@@ -148,6 +251,14 @@ switch($requestUrl) {
         $data = $_POST;
         $utilisateurController->inscriptionProprio($data);
         break;
+        /*
+    case '/api/getCategorieOfLogementById':
+    case '/api/getCategorieOfLogementById/':
+        $data = $_POST;
+        $categorieLogement->getCategorieOfLogementById($data);
+        break;
+        */
+    
 
     case '/api/getLogements':
         header('Content-Type: application/json');
@@ -182,6 +293,16 @@ switch($requestUrl) {
         }
         break;
 
+    case '/api/updateLogementStatus':
+    case '/api/updateLogementStatus/':
+        $id = $_POST['logementId'];
+        $status = $_POST['status'];
+        // var_dump($data);
+        // die();
+        $logementController->updateStatus($id, $status);
+        break;
+            
+
     
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
@@ -196,6 +317,35 @@ switch($requestUrl) {
 
         echo $logementController->getAmenagementsOfLogementById($logement_id);
         break;
+    
+    case preg_match('/^\/api\/getCategorieOfLogementById\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $logement_id = end($url_parts);
+
+        echo $logementController->getCategorieOfLogementById($logement_id);
+        break;
+    
+    case preg_match('/^\/api\/getTypeOfLogementById\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $logement_id = end($url_parts);
+
+        echo $logementController->getTypeOfLogementById($logement_id);
+        break;
+
+    case preg_match('/^\/api\/getFactureByResId\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $idResa = end($url_parts);
+
+        echo $factureController->getFactureByResId($idResa);
+        break;
+
+    /*
+    case preg_match('/^\/api\/getDataReservationById\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $idResa = end($url_parts);
+        echo $reservationController->getDataReservationById($idResa);
+        break;
+    */
 
     case preg_match('/^\/api\/getFactureByResId\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);

@@ -1,5 +1,4 @@
 <?php
-    namespace Models;
 
 namespace Models;
 
@@ -13,15 +12,22 @@ use \Exception;
 class Logement {
     // constante du montant pour passer du ht au ttc
     const TAUX_TVA = 0.1; 
-
     private $db;
+    private $pdo;
 
     public function __construct() {
         $this->db = new Database();
+        $this->pdo = $this->db->getPDO(); 
     }
 
     public function getAllLogements() {
         $logements = $this->db->executeQuery('SELECT * FROM logement');
+
+        return $logements;
+    }
+
+    public function getLogementsByProprietaireId($id) {
+        $logements = $this->db->executeQuery('SELECT * FROM logement WHERE L_id_compte = ' . $id);
 
         return $logements;
     }
@@ -35,7 +41,15 @@ class Logement {
 
     public function getLogementsDataForCards() {
         $dataLogements = $this->db->executeQuery('
-        select l.id_logement,l.titre,l.description,l.image_principale,l.prix_nuit_ttc,ad.nom_ville,avg(av.note_avis) as moyenne_logement, count(av.id_avis) as nb_avis
+        select  l.id_logement,
+                l.titre,
+                l.description,
+                l.image_principale,
+                l.prix_nuit_ttc,
+                ad.nom_ville,
+                ad.code_postal,
+                avg(av.note_avis) as moyenne_logement, 
+                count(av.id_avis) as nb_avis
             from logement l 
                 inner join adresse ad
                     on l.l_id_adresse  = ad.id_adresse 
@@ -47,6 +61,18 @@ class Logement {
         ');
 
         return $dataLogements;
+    }
+
+    public function getLogementsByAbonnement($id){
+        // on selectionne seulement le contenu de la table logement
+        $logements = $this->db->executeQuery('
+        SELECT l.*
+        FROM logement l
+        JOIN logement_abonnement ON id_logement = LA_id_logement
+        JOIN abonnements_reservations ON LA_id_abonnement = id_abonnement
+        WHERE id_abonnement = ' . $id);
+                
+        return $logements;
     }
 
     public function logementExists($id) {
@@ -260,4 +286,47 @@ class Logement {
         
         return $logements;
     }
+
+    public function getTypeOfLogementById($id) {
+        $logements = $this->db->executeQuery('
+        SELECT id_type, nom_type
+        FROM logement 
+        JOIN type_logement ON L_id_type = id_type
+        
+        WHERE id_logement = ' . $id);
+        
+        return $logements;
+    }
+
+    public function getCategorieOfLogementById($id) {
+        $logements = $this->db->executeQuery('
+        SELECT id_categorie, nom_categorie
+        FROM logement 
+        JOIN categorie_logement ON L_id_categorie = id_categorie
+        
+        WHERE id_logement = ' . $id);
+        
+        return $logements;
+    }
+
+    
+
+    public function updateStatutLogement($id, $nouveauStatut) {
+        // Correction de la syntaxe SQL pour l'insertion de variables
+        $sql = 'UPDATE logement SET statut_propriete = ? WHERE id_logement =?';
+        
+        // Préparation et exécution de la requête
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([$nouveauStatut, $id]);
+
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+        
+        // Retourner le nombre de lignes affectées
+        return $result;
+    }
+    
+    
+
+    
+    
 }

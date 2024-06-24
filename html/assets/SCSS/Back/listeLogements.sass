@@ -1,0 +1,263 @@
+@charset "UTF-8"
+
+/* Définition des couleurs du Front par défaut
+/* Définition des couleurs du Back par défaut
+/* Définition des tailles d'écran par défaut
+/* Import des polices Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap")
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap")
+
+/* Import de la police dyslexique Lexend
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap")
+
+/* Définition des polices par défaut
+/* Définition tailles de police desktop
+/* Définition tailles de police mobile
+/* Reset CSS
+
+*
+  margin: 0
+  padding: 0
+
+/* Appliquer les polices
+
+body
+  font-family: "DM Sans", sans-serif
+
+h1, h2, h3, h4, h5, h6
+  font-family: "Reem Kufi", sans-serif
+
+.error
+  border: 1px solid #D8000C !important
+
+#ongletFiltres
+  position: absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  background-color: white
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  z-index: 1000
+  padding-top: 20px
+  overflow: scroll
+  display: none
+
+  div
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+#barreFiltresProprio
+  display: inline-block
+  width: 100px
+  height: 5px
+  background-color: #072241
+  border-radius: 2px
+
+body
+  color: #102C57
+  font-family: "DM Sans", sans-serif
+  align-items: center
+
+  h1
+    font-family: "Reem Kufi", sans-serif
+    font-size: 2.5vw
+
+  h2
+    font-family: "Reem Kufi", sans-serif
+    font-size: 2vw
+
+#msgBienvenue
+  margin: 2.5vw 3.5vw
+
+#etatResa
+  display: flex
+  justify-content: center
+
+  button
+    margin-right: 10px
+    width: 13vw
+    height: 2.5vw
+    background-color: #F0AA1F
+    border-width: 0px
+    border-radius: 5px 5px 0px 0px
+    font-size: 1.2vw
+
+  .ongletSelect
+    height: 2.5vw
+    background-color: #FFFFFF
+    border: 2px solid #102C57
+    border-bottom-color: #FFFFFF
+
+@media screen and (max-width: 960)
+  #etatResa button
+    font-size: 1.4vw
+
+#barreEtat
+  display: inline-block
+  width: 100%
+  height: 2px
+  background-color: #072241
+
+#croissantDecroissant
+  width: 30%
+  border-radius: 5px
+  border: 0.3vw solid #102C57
+  margin: 2vw 3vw
+  background: url("../../../assests/imgs/mobile/Chevron2.svg") no-repeat left center
+  padding: 0.8vw 0.8vw
+  display: flex
+  flex-direction: row
+  flex-basis: content
+
+  button
+    background-color: #FFFFFF
+    margin-left: 1vw
+    border: none
+    font-size: 1.2vw
+
+/* Styles existants
+
+#listeLogements
+  height: 55%
+  overflow-x: auto
+  justify-content: center
+  align-items: center
+  font-family: "DM Sans", sans-serif
+  margin: 5vw 10%
+
+  table
+    text-align: center
+    font-size: 1.5vw
+    resize: none
+    overflow: auto
+    border-collapse: separate
+    border-spacing: 0
+    border: 2px solid #102C57
+
+    tr
+      height: 20vw
+      background-color: #FFFFFF
+
+    thead tr
+      height: 10vw
+
+    tr
+      td
+        padding: 2vw
+
+    thead
+      height: 3vh
+
+      tr
+        background-color: #102C57
+        padding: 1vw 0vw
+        border-bottom: #102C57 solid
+
+        th
+          width: 15%
+          background-color: #102C57
+          color: #FFFFFF
+
+    tbody tr td
+      border-bottom: 0.2vw solid
+      &:first-child
+        width: 40%
+
+      &:not(:first-child)
+        width: 15%
+
+    #listeLogements td img
+      max-width: 90%
+
+/* Styles pour les logements hors ligne
+
+.offline
+  background-color: #d3d3d3
+
+  /* Grisé
+
+  img
+    filter: grayscale(100%)
+
+/* Styles pour le toggle switch
+
+input[type=checkbox]
+  height: 0
+  width: 0
+  visibility: hidden
+
+label
+  cursor: pointer
+  text-indent: -9999px
+  width: 6.6vw
+
+  /* 66px
+  height: 3.3vw
+
+  /* 33px
+  background: grey
+  display: block
+  border-radius: 3.3vw
+
+  /* 33px
+  position: relative
+
+  &:after
+    content: ''
+    position: absolute
+    top: 0.2vw
+
+    /* 2px
+    left: 0.2vw
+
+    /* 2px
+    width: 3vw
+
+    /* 30px
+    height: 3vw
+
+    /* 30px
+    background: #fff
+    border-radius: 3vw
+
+    /* 30px
+    transition: 0.3s
+
+input:checked + label
+  background: #072241
+
+  &:after
+    left: calc(100% - 0.2vw)
+
+    /* 2px
+    transform: translateX(-100%)
+
+label:active:after
+  width: 4.3vw
+
+  /* 43px
+
+/* *#listeLogements table tr:first-child {
+ * * *  height: 10vw;
+ * * *}
+/* Spécifie la largeur des colonnes pour le corps du tableau
+
+section
+  #notFound
+    display: flex
+    justify-content: center
+    align-items: center
+    text-align: center
+
+  #voirPlus
+    font-family: "Reem Kufi", sans-serif
+    text-align: center

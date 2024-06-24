@@ -129,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
             fileInput.files[0] = file;
         }
     });
-
 });
 
 function validateFormData(formData) {
@@ -206,7 +205,7 @@ function validateFormData(formData) {
   ]);
 
   validateField(formData, 'dureeMinLoc', [
-    { check: value => value >= 0, errorMessage: 'La durée minimale de location doit être supérieur ou égal à 0' },
+    { check: value => value >= 2, errorMessage: 'La durée minimale de location doit être supérieur ou égal à 2' },
     { check: value => !isNaN(value), errorMessage: 'La durée minimale de location doit être une valeur numérique' }
   ]);
 
@@ -301,18 +300,6 @@ function getNextErrorSpan(id) {
 
   // Chercher parmi les ancêtres et leurs prochains frères et sœurs
   return findInAncestors(initialElement);
-}
-
-
-function resetErrors(){
-  // reinitialiser les divs erreurs
-  document.querySelectorAll('.error').forEach((el) => {
-    el.classList.remove('error');
-  });
-  // reinitialiser les messages d'erreur
-  document.querySelectorAll('.messageError').forEach((el) => {
-    el.textContent = '';
-  });
 }
 
 

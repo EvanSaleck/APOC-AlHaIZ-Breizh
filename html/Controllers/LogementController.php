@@ -23,6 +23,14 @@ class LogementController {
             
         echo json_encode($logements);
     }
+
+    public function getLogementsByProprietaireId($id) {
+        $logements = $this->logement->getLogementsByProprietaireId($id);
+
+        header('Content-Type: application/json');
+
+        echo json_encode($logements);
+    }
         
     public function getLogementById($id) {
             
@@ -31,8 +39,15 @@ class LogementController {
         header('Content-Type: application/json');
             
         echo json_encode($logement);
-    }    
+    }  
+    
+    public function updateStatus($id, $status){
+        $logement = $this->logement->updateStatutLogement($id, $status);
 
+        header('Content-Type: application/json');
+            
+        echo json_encode($logement);
+    }
     public function getLogementsDataForCards() {
         $dataLogements = $this->logement->getLogementsDataForCards();
 
@@ -56,6 +71,23 @@ class LogementController {
 
         echo json_encode($amenagements);
     }
+
+    public function getTypeOfLogementById($id) {
+        $logements = $this->logement->getTypeOfLogementById($id);
+
+        header('Content-Type: application/json');
+
+        echo json_encode($logements);
+    }
+
+    public function getCategorieOfLogementById($id) {
+        $logements = $this->logement->getCategorieOfLogementById($id);
+
+        header('Content-Type: application/json');
+
+        echo json_encode($logements);
+    }
+
 
     public function processFormNewLogement() { 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -114,5 +146,7 @@ class LogementController {
         } else {
             echo json_encode(['error' => 'uniquement accessible avec la methode POST']);
         }
-    }    
+    }
+    
+        
 }

@@ -3,16 +3,20 @@
 namespace Controllers;
 
 include_once 'Models/Reservation.php';
+include_once 'Service/ICalService.php';
 
 use Models\Reservation;
+use Service\ICalService;
 use \Exception;
 
 class ReservationController {
 
     private $reservation;
+    private $icalService;
 
     public function __construct() {
         $this->reservation = new Reservation();
+        $this->icalService = new ICalService();
     }
         
     public function getAllReservations(){
@@ -67,10 +71,10 @@ class ReservationController {
             $date_arrivee = $data['date_arrivee'];
             $date_depart = $data['date_depart'];
 
-            $return = $this->reservation->getLastReservationfromDateDebutAndDateFin($date_arrivee, $date_depart);
+            // $return = $this->reservation->getLastReservationfromDateDebutAndDateFin($date_arrivee, $date_depart);
 
             header('Content-Type: application/json');
-            echo json_encode($return);
+            // echo json_encode($return);
         }
         catch (Exception $e) {
             http_response_code(500);
