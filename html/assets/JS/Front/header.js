@@ -89,7 +89,7 @@ function ShowModalProfile() {
   </svg>`
 
   connexion.addEventListener("click", () => {
-    utils.Deconnexion();
+    utils.Deconnexion('user');
   });
 
   modal.classList.remove("d-none");

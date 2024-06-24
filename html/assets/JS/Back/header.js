@@ -1,3 +1,4 @@
+import * as utils from "../utils.js";
 let currentUser = null;
 
 addEventListener("DOMContentLoaded", () => {
@@ -76,7 +77,7 @@ function ShowModalProfile() {
   </svg>`
 
   connexion.addEventListener("click", () => {
-    utils.Deconnexion();
+    utils.Deconnexion('proprio');
   });
 
   modal.classList.remove("d-none");

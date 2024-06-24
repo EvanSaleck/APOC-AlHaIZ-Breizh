@@ -453,9 +453,15 @@ export function CreateInscriptionModal() {
 }
 // ----------------------------------- Ajouts à garder -----------------------------------
 
-export function Deconnexion() {
-    sessionStorage.removeItem('User');
-    window.location.href = '/Deconnexion';
+export function Deconnexion(type) {
+    if(type === 'proprio'){
+        sessionStorage.removeItem('Proprio');
+        window.location.href = '/DeconnexionProprio/';
+    } else {
+        sessionStorage.removeItem('User');
+        window.location.href = '/Deconnexion';
+    }
+
 }
 
 
