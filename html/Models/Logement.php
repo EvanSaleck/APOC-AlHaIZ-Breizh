@@ -41,7 +41,15 @@ class Logement {
 
     public function getLogementsDataForCards() {
         $dataLogements = $this->db->executeQuery('
-        select l.id_logement,l.titre,l.description,l.image_principale,l.prix_nuit_ttc,ad.nom_ville,avg(av.note_avis) as moyenne_logement, count(av.id_avis) as nb_avis
+        select  l.id_logement,
+                l.titre,
+                l.description,
+                l.image_principale,
+                l.prix_nuit_ttc,
+                ad.nom_ville,
+                ad.code_postal,
+                avg(av.note_avis) as moyenne_logement, 
+                count(av.id_avis) as nb_avis
             from logement l 
                 inner join adresse ad
                     on l.l_id_adresse  = ad.id_adresse 
