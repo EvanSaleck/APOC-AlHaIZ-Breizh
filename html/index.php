@@ -131,12 +131,22 @@ switch($requestUrl) {
     // routes du back
     case '/logement/new':
     case '/logement/new/':
-         if(!isset($_SESSION['proprio'])) {
+         if(isset($_SESSION['proprio'])) {
             include './Views/Back/logement/newLogement.php';
         }else {
-            header('Location: /');
+            header('Location: /connexionProprietaire');
         }
         break;
+
+    case '/logements/details':
+        case '/logements/details/';
+            include './Views/Back/logement/detailsLogement.php';
+            break;
+        
+    case '/logements/details/modifier':
+        case '/logements/details/modifier';
+            include './Views/Back/logement/modifierLogement.php';
+            break;
     
     // routes back office
     case '/logement':
