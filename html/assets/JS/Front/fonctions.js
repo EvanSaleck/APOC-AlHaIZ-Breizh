@@ -145,21 +145,17 @@ function Inscription() {
         return response.json();
     })
     .then(data => {
-        console.log(data);
-        console.log("on est ici")
+        console.log("Voici : ", data);
         if (data === 'Inscription réussie') {
-            console.log('Inscription réussie!');
             ThrowAlertPopup(data, 'succes');
             console.log('Redirection vers la page d\'accueil...');
             setTimeout(() => {
-                console.log('pendant le time out');
                 Connexion()  // Redirection après l'inscription
-            }, 3000);
-            console.log('après le time out');
+            }, 1000);
         } else {
-            console.error(data , data.error);
-            ThrowAlertPopup(data + data.error, 'error');
-            console.log("après l'erreur");
+            var div = document.getElementById('register_error');
+            div.innerHTML = data['Erreur : '];
+            ThrowAlertPopup(data, 'error');
         }
     })
     .catch(error => {
@@ -262,11 +258,11 @@ function CreateInscriptionModal() {
                 <div class="scroll">
                     <div id="lastname-form" class="form">
                         <label for="lastname">Nom :</label>
-                        <input  type="text" id="lastname" name="lastname" required>
+                        <input type="text" id="lastname" name="lastname" required>
                     </div>
                     <div id="name-form" class="form">
                         <label for="firstname">Prénom :</label>
-                        <input  type="text" id="firstname" name="firstname" required>
+                        <input type="text" id="firstname" name="firstname" required>
                     </div>
 
                     <div id="civility-form" class="form">
@@ -279,7 +275,7 @@ function CreateInscriptionModal() {
                     </div>
                     <div id="username-form" class="form">
                         <label for="username">Pseudonyme :</label>
-                        <input  type="text" id="pseudo" name="username" required>
+                        <input type="text" id="pseudo" name="username" required>
                     </div>
                     <div id="email-form" class="form">
                         <label for="email">Adresse mail :</label>

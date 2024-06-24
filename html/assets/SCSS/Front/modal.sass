@@ -1,20 +1,20 @@
 @use '../general' as general
 
-
-// .modal-register-content
-//   position: fixed
-//   top: 50%
-//   left: 50%
-//   transform: translate(-50%, -50%)
-//   z-index: 1050
-//   width: 80%
-//   max-width: 500px
-//   background: white
-//   padding: 20px
-//   border-radius: 5px
-//   box-shadow: 0 5px 15px rgba(0, 0, 0, .5)
-//   .mobile
-//     display: none
+@media screen and (min-width: general.$max-width-telephone)
+    .modal-content
+        position: fixed
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        z-index: 1050
+        width: 80%
+        max-width: 500px
+        background: white
+        padding: 20px
+        border-radius: 5px
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .5)
+        .mobile
+            display: none
 
 // body.modal-open
 //   overflow: hidden
@@ -130,7 +130,6 @@
                     width: 30%
             button
                 padding: 12px 20px
-
                 border-radius: 5px
                 border: 1px solid rgb(0, 0, 0, 0)
                 cursor: pointer
@@ -141,6 +140,8 @@
                 color: white
                 &:hover
                     background-color: lighten(general.$couleur-front-bleu-verdatre, 10%)
+            #register_error
+                color: red
             .hasAccountButton
                 background-color: white
                 color: general.$couleur-front-bleu-verdatre
