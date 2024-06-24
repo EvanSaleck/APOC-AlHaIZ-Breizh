@@ -457,7 +457,7 @@ export function Deconnexion(type) {
     if(type === 'proprio'){
         sessionStorage.removeItem('Proprio');
         window.location.href = '/DeconnexionProprio/';
-    } else {
+    } else if(type === 'user'){
         sessionStorage.removeItem('User');
         window.location.href = '/Deconnexion';
     }
