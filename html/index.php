@@ -347,21 +347,6 @@ switch($requestUrl) {
         break;
     */
 
-    case preg_match('/^\/api\/getFactureByResId\/\d+$/', $requestUrl) ? true : false:
-        $url_parts = explode('/', $requestUrl);
-        $idResa = end($url_parts);
-
-        echo $factureController->getFactureByResId($idResa);
-        break;
-
-    /*
-    case preg_match('/^\/api\/getDataReservationById\/\d+$/', $requestUrl) ? true : false:
-        $url_parts = explode('/', $requestUrl);
-        $idResa = end($url_parts);
-        echo $reservationController->getDataReservationById($idResa);
-        break;
-    */
-
     default:
         http_response_code(404);
         echo "Erreur 404 - Page non trouvée";
