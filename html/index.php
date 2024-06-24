@@ -163,6 +163,22 @@ switch($requestUrl) {
         session_destroy();
         header('Location: /');
         break;
+    
+    case '/DeconnexionProprio':
+        case '/DeconnexionProprio/':
+            $_SESSION = array();
+            session_destroy();
+            header('Location: /connexionProprietaire');
+            break;
+
+    case '/back/detailsCompte':
+        case '/back/detailsCompte/':
+            include './Views/Back/compte/detailsCompte.php';
+            break;
+    case '/gestionTokens':
+        case '/gestionTokens/':
+            include './Views/Back/compte/gestionTokens.php';
+            break;
 
     case '/api/ConnexionClient':
     case 'api/ConnexionClient':
@@ -207,6 +223,13 @@ switch($requestUrl) {
         $idCompte = $client->id_compte;
         $utilisateurController->getCompteClientDetails($idCompte);
         break;
+    
+    case '/api/getCompteProprioDetails':
+        case '/api/getCompteProprioDetails/':
+        $proprio = json_decode($_SESSION['proprio']);
+        $idCompte = $proprio->id_compte;
+        $utilisateurController->getCompteProprioDetails($idCompte);
+        break;
 
     case '/api/getReservations/all':
     case 'api/getReservations/all/':
@@ -229,17 +252,13 @@ switch($requestUrl) {
         }
         break;
 
-    case '/api/updateLogementStatus':
-    case '/api/updateLogementStatus/':
-        $id = $_POST['logementId'];
-        $status = $_POST['status'];
-        // var_dump($data);
-        // die();
-        $logementController->updateStatus($id, $status);
+    case '/api/getAllTokentById':
+    case '/api/getAllTokentById/':
+        $client = json_decode($_SESSION['client']);
+        $idcpt = $client->id_compte;
+        $utilisateurController->getAllTokentById($idcpt);
         break;
-            
 
-    
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);

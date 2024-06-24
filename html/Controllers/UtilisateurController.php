@@ -36,9 +36,36 @@
             }
         }
 
+        public function connexionProprietaire($data) {
+            try {
+                $return = $this->user->connexionProprietaire($data);
+
+                header('Content-Type: application/json');
+                echo json_encode($return);
+            }
+            catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode($e->getMessage());
+                exit;
+            }
+        }
+
         public function inscriptionClient($data) {
             try {
                 $return = $this->user->inscriptionClient($data);
+
+                header('Content-Type: application/json');
+                echo json_encode($return);
+            }
+            catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode(['Erreur : ' => $e->getMessage()]);
+                exit;
+            }
+        }
+        public function inscriptionProprietaire($data) {
+            try {
+                $return = $this->user->inscriptionProprietaire($data);
 
                 header('Content-Type: application/json');
                 echo json_encode($return);
@@ -85,6 +112,20 @@
 
                 header('Content-Type: application/json');
                 echo json_encode($return);
+            }
+            catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode($e->getMessage());
+                exit;
+            }
+        }
+
+        public function getCompteProprioDetails($id){
+            try {
+                $dataCompteProprio = $this->user->getCompteProprietaireDetails($id);
+        
+                header('Content-Type: application/json');
+                echo json_encode($dataCompteProprio);
             }
             catch (Exception $e) {
                 http_response_code(500);

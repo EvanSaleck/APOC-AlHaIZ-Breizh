@@ -29,6 +29,20 @@ class Utilisateur {
         return $dataCompteClient;
     }
 
+    public function getCompteProprietaireDetails($idCompte) {
+        $sql = "
+            SELECT 
+                p.id_compte, p.civilite, p.nom, p.prenom, p.e_mail, p.pseudo, p.photo_profil, p.ddn, cp.date_cni_fin_valid,
+                a.numero_rue, a.nom_rue, a.code_postal, a.nom_ville, a.pays, a.complement, a.etat 
+            FROM sae3.compte_proprietaire cp
+            INNER JOIN compte p ON cp.id_compte = p.id_compte
+            INNER JOIN adresse a ON cp.c_id_adresse = a.id_adresse
+            WHERE p.id_compte = " . $idCompte;
+        $dataCompteClient = $this->db->executeQuery($sql);
+    
+        return $dataCompteClient;
+    }
+
     public function connexionClient($data) {
         if(str_contains($data['pseudo'], '@')) {
             $query = "SELECT * FROM sae3.compte_client WHERE e_mail = ?";
@@ -95,4 +109,6 @@ class Utilisateur {
 
         return $proprio;
     }   
+
 }
+
