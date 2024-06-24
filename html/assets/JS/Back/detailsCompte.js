@@ -47,4 +47,5 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Erreur lors de la récupération des données du compte:', error);
             compteContainer.innerHTML = '<h2 class="error">Erreur lors du chargement des détails du compte.</h2>';
         });
+
 });

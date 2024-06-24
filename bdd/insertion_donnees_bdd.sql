@@ -445,8 +445,8 @@ INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
 VALUES (11,5);
 
 INSERT INTO cle_api(cle, c_id_proprio)
-VALUES ('1', 7);
-VALUES ('2', 8);
-VALUES ('3', 9);
+VALUES ('769a4ba84b6b8d63d9364242ddc3f4b1f0e755580090b6015c56729a7dfe4c7f', 7);
+VALUES ('0df3bf12328fbd6511b21db218c2f2cb708fda6d2a1571fa56484681f9a7e98a', 8);
+VALUES ('59e4c3ba79fa4af1549347fd9a471d36e96e5a67f99e83acdfdd64618ff50fcd', 9);
 
 

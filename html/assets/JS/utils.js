@@ -49,8 +49,12 @@ export function Connexion(typeConnexion){
         if(data === 'Connexion réussie'){
             ThrowAlertPopup(data,'success');
             setTimeout(() => {
-                let url = window.location.href;
-                window.location.href = url;
+                if (typeConnexion === 'proprio') {
+                    window.location.href = "/Back/reservations/";
+                } else {
+                    let url = window.location.href;
+                    window.location.href = url;
+                }
             }, 1000);
         }else{
             let inputs = document.querySelectorAll('#connexionModal .modal-content #connexionForm input');

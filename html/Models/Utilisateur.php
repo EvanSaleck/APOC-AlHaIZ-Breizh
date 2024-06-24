@@ -193,6 +193,34 @@ class Utilisateur {
         return $proprio;
     }   
 
+    public function getAllTokenById($id){
+        $query = "SELECT * FROM sae3.cle_api WHERE c_id_proprio = ?";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute([$id]);
+
+        $tokens = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $tokens;
+    }
+
+    public function deleteToken($cle, $idproprio){
+        $query = "DELETE FROM sae3.cle_api WHERE cle = ? AND c_id_proprio = ?";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute([$cle, $idproprio]);
+
+        return 'Token supprime';
+    }
+
+    public function generateToken($id){
+        $token = bin2hex(random_bytes(32));
+        $query = "INSERT INTO sae3.cle_api (cle, c_id_proprio) VALUES (?, ?)";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute([$token, $id]);
+
+
+        return 'Token genere';
+    }
+
 }
 
 

@@ -34,67 +34,6 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.8rem;
 }
 
-.modal-content {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  color: #020E1C;
-  background-color: #FFFFFF !important;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  width: 30%;
-  height: -moz-fit-content;
-  height: fit-content;
-  margin: auto;
-  margin-top: 10%;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  text-align: center;
-}
-.modal-content h2 {
-  vertical-align: middle;
-  text-align: center;
-}
-.modal-content .fermer {
-  font-size: 1.5em;
-  font-weight: bold;
-  cursor: pointer;
-  margin-right: auto;
-  margin-left: 0.5em;
-}
-.modal-content #connexionForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.modal-content #connexionForm input {
-  margin: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #020E1C;
-  outline-color: #377E81;
-}
-.modal-content #connexionForm button {
-  margin: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #020E1C;
-  background-color: #377E81;
-  color: white;
-}
-.modal-content #inscription {
-  margin-top: 10px;
-  text-decoration: underline;
-  text-align: center;
-  cursor: pointer;
-}
-
 .blur {
   filter: blur(5px);
   pointer-events: none;
@@ -159,41 +98,191 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5em;
   }
   .modal-content .fermer {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    font-size: 2.5em;
+    cursor: pointer;
+  }
+  .modal-content .desktop {
+    display: none;
+  }
+  .modal-content .logoTitre {
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .modal-content img {
+    height: 30%;
+    margin-bottom: 15px;
+  }
+  .modal-content h1 {
+    height: -moz-fit-content;
+    height: fit-content;
+    font-family: "Reem Kufi", sans-serif;
+  }
+  .modal-content .container-creation-compte {
+    display: flex;
+    margin: 0 auto 0 auto;
+    flex-direction: column;
+    width: 90vw;
+    height: 70vh;
     font-size: 1em;
   }
-  .modal-content #connexionForm input {
-    width: 80%;
-    font-size: 1em;
+  .modal-content .container-creation-compte .formulaire-creation-compte {
+    margin-bottom: 15px;
   }
-  .modal-content #connexionForm button {
-    width: 80%;
-    font-size: 1em;
+  .modal-content .container-creation-compte .scroll {
+    overflow-y: auto;
+    height: 50vh;
+    margin-bottom: 15px;
   }
-  .modal-content #inscription {
-    font-size: 1em;
+  .modal-content .container-creation-compte .form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
   }
-}
-@media screen and (max-width: 560px) {
-  .modal-content {
+  .modal-content .container-creation-compte .form #password_error, .modal-content .container-creation-compte .form #confirm_password_error {
+    color: red;
+  }
+  .modal-content .container-creation-compte .form input, .modal-content .container-creation-compte .form select {
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ADC6E3;
+  }
+  .modal-content .container-creation-compte .form input {
+    padding: 0px 10px;
+  }
+  .modal-content .container-creation-compte .form select {
+    padding: 0px 5px;
+  }
+  .modal-content .container-creation-compte .form select {
+    width: 30%;
+  }
+  .modal-content .container-creation-compte button {
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
     width: 100%;
-    margin-top: 5% !important;
-    margin-left: 10% !important;
   }
-  .modal-content h2 {
-    font-size: 1.5em;
+  .modal-content .container-creation-compte .registerButton {
+    background-color: #377E81;
+    color: white;
+  }
+  .modal-content .container-creation-compte .registerButton:hover {
+    background-color: #46a1a5;
+  }
+  .modal-content .container-creation-compte .hasAccountButton {
+    background-color: white;
+    color: #377E81;
+  }
+  .modal-content .container-creation-compte .hasAccountButton:hover {
+    background-color: #e6e6e6;
+  }
+  .modal-content .container-creation-compte .CGU-form {
+    margin-bottom: 15px;
+  }
+  .modal-content .container-creation-compte .CGU-form, .modal-content .container-creation-compte .CGV-form {
+    display: flex;
+    align-items: center;
+  }
+  .modal-content .container-creation-compte .CGU-form > *:not(:last-child), .modal-content .container-creation-compte .CGV-form > *:not(:last-child) {
+    margin-right: 10px;
+  }
+  .modal-content {
+    position: fixed;
+    overflow-y: hidden;
+    top: 0;
+    left: 0;
+    transform: none;
+    z-index: 1050;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    font-family: "DM Sans", sans-serif;
   }
   .modal-content .fermer {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    font-size: 2.5em;
+    cursor: pointer;
+  }
+  .modal-content .desktop {
+    display: none;
+  }
+  .modal-content .logoTitre {
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .modal-content img {
+    height: 30%;
+    margin-bottom: 15px;
+  }
+  .modal-content h1 {
+    height: -moz-fit-content;
+    height: fit-content;
+    font-family: "Reem Kufi", sans-serif;
+  }
+  .modal-content .container-connexion-compte {
+    display: flex;
+    margin: 10% auto 0 auto;
+    flex-direction: column;
+    width: 90vw;
+    height: 70vh;
     font-size: 1em;
   }
-  .modal-content #connexionForm input {
-    width: 80%;
-    font-size: 1em;
+  .modal-content .container-connexion-compte .form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
   }
-  .modal-content #connexionForm button {
-    width: 80%;
-    font-size: 1em;
+  .modal-content .container-connexion-compte .form #password_error, .modal-content .container-connexion-compte .form #confirm_password_error {
+    color: red;
   }
-  .modal-content #inscription {
-    font-size: 1em;
+  .modal-content .container-connexion-compte input, .modal-content .container-connexion-compte select {
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ADC6E3;
+  }
+  .modal-content .container-connexion-compte input {
+    padding: 0px 10px;
+  }
+  .modal-content .container-connexion-compte select {
+    padding: 0px 5px;
+  }
+  .modal-content .container-connexion-compte select {
+    width: 30%;
+  }
+  .modal-content .container-connexion-compte button {
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  .modal-content .container-connexion-compte .loginButton {
+    background-color: #377E81;
+    color: white;
+    margin: 20% auto 0 auto;
+  }
+  .modal-content .container-connexion-compte .loginButton:hover {
+    background-color: #46a1a5;
+  }
+  .modal-content .container-connexion-compte .needAccountButton {
+    background-color: white;
+    color: #377E81;
+    margin: 15px auto 0 auto;
+  }
+  .modal-content .container-connexion-compte .needAccountButton:hover {
+    background-color: #e6e6e6;
   }
 }/*# sourceMappingURL=modal.css.map */

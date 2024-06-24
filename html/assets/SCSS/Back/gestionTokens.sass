@@ -8,7 +8,7 @@ section
     div
         display: flex
         flex-direction: column
-                justify-content: center
+        justify-content: center
         align-items: center
 
         margin-top: 5%
@@ -26,3 +26,33 @@ section
             background-color: general.$couleur-front-bleu-verdatre
             border: 4px solid general.$couleur-front-bleu-verdatre
             width: 100%
+        
+        #zonetoken
+            width: 100%
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            
+
+            gap: 5%
+
+            div 
+                display: flex
+                flex-direction: row
+                justify-content: space-between
+                align-items: center
+
+            .btn
+                border-radius: 5px
+                padding: 10px
+                background-color: general.$couleur-front-bleu-verdatre
+                border: 4px solid general.$couleur-front-bleu-verdatre
+                width: 30%
+                cursor: pointer
+
+        #generateToken
+            margin-bottom: 5%
+
+.mask 
+    filter: blur(5px)

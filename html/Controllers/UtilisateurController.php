@@ -133,4 +133,47 @@
                 exit;
             }
         }
+
+        public function getAllTokenById($id){
+            try {
+                $return = $this->user->getAllTokenById($id);
+
+                header('Content-Type: application/json');
+                echo json_encode($return);
+            }
+            catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode($e->getMessage());
+                exit;
+            }
+        }
+
+        public function deleteToken($values){
+            try {
+                $cle = $values['id_cle'];
+                $idproprio = $values['id_proprio'];
+                $return = $this->user->deleteToken($cle, $idproprio);
+
+                header('Content-Type: application/json');
+                echo json_encode($return);
+            }
+            catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode($e->getMessage());
+                exit;
+            }
+        }
+        
+        public function generateToken($values){
+            try {
+                $return = $this->user->generateToken($values['id_proprio']);
+
+                header('Content-Type: application/json');
+                echo json_encode($return);
+            }
+            catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode($e->getMessage());
+            }
+        }
     }

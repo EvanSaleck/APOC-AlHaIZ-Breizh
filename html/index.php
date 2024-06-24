@@ -298,11 +298,23 @@ switch($requestUrl) {
         }
         break;
 
-    case '/api/getAllTokentById':
-    case '/api/getAllTokentById/':
-        $client = json_decode($_SESSION['client']);
-        $idcpt = $client->id_compte;
-        $utilisateurController->getAllTokentById($idcpt);
+    case '/api/getAllTokenById':
+    case '/api/getAllTokenById/':
+        $proprio = json_decode($_SESSION['proprio']);
+        $id = $proprio->id_compte;
+        $utilisateurController->getAllTokenById($id);
+        break;
+
+    case '/api/deleteToken/':
+        case '/api/deleteToken':
+        $data = $_POST;
+        $utilisateurController->deleteToken($data);
+        break;
+
+    case '/api/generateToken':
+    case '/api/generateToken/':
+        $data = $_POST;
+        $utilisateurController->generateToken($data);
         break;
 
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:

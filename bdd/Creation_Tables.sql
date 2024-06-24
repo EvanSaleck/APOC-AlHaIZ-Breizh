@@ -178,6 +178,7 @@ CREATE TABLE cle_api (
    c_id_proprio integer NOT NULL,
 CONSTRAINT api_comptes_fk 
       FOREIGN KEY (c_id_proprio) REFERENCES compte_proprietaire(id_compte)
+);
 
 CREATE TABLE abonnements_reservations(
    id_abonnement serial PRIMARY KEY,
