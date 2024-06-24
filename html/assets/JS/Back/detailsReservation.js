@@ -1,6 +1,6 @@
 addEventListener("DOMContentLoaded", () => {
-    // idResa récupéré après la boucle de création d'objets <tr> du init() de listeReservations.js
-    let idResa = sessionStorage.getItem("idResa");
+    // idresa récupéré après la boucle de création d'objets <tr> du init() de listeReservations.js
+    let idResa = sessionStorage.getItem("idresa");
     let id = new FormData();
     id.append("id", idResa);
 

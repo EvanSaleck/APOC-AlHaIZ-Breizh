@@ -28,14 +28,13 @@ function init() {
     });
 
     // Récupération des données de la BDD
-    fetch('/api/getReservations').then(response => response.json()).then(data => {
+    fetch('/api/getReservationsProprietaire').then(response => response.json()).then(data => {
 
         // Si aucune donnée n'est renvoyée par l'API, affiche qu'aucune réservation n'a été trouvée
         let resVides = (data.length == 0);
         if(resVides) { contentReservations.innerHTML = affichageAucuneRéservations; }
         else {
-            ResasTout = data;
-            console.log(ResasTout);
+            ResasTout = data; console.log(ResasTout);
             
             let max = (ResasTout.length < 7) ? ResasTout.length : 6; // Nombre de réservations affichées sur la page par défaut
 
@@ -105,11 +104,11 @@ function init() {
                 tbody.appendChild(tr);
             }
 
-            // Attribution d'un href pour rediriger vers la page de détail qui affiche la réservation associée
+            // Ajour de lien href vers la page de détail de la réservation associée
             let reservations = document.querySelectorAll('tbody > tr');
             let i = 0;
             reservations.forEach(resa => { resa.addEventListener('click', function(e){
-                    sessionStorage.setItem('idResa', ResasTout[i].id_reservation);
+                    sessionStorage.setItem('idresa', ResasTout[i].id_reservation);
                     console.log(ResasTout[i].id_reservation);
                     window.location.href = `/Back/reservations/details`;
                     i++;
@@ -173,7 +172,6 @@ function handleButtonStyle(bnID) {
 function reloadReservations(bnID) {
     handleButtonStyle(bnID);
 
-    console.log(aVenir)
     let displayAucuneReservations = document.getElementById("noReservations");
 
     // Affiche / cache les réservations associées au filtre choisi

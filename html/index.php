@@ -47,16 +47,39 @@ switch($requestUrl) {
     case '/compte':
         include_once './Views/Front/compte/detailsCompte.php';
         break;
+
+    case '/reservation':
+    case '/reservation/':
+        if(!isset($_SESSION['client'])) {
+            include_once('Views/Front/reservation/listeReservations.php');
+            // header('Location: /');
+        }
+        else { include_once('Views/Front/reservation/listeReservations.php'); }
+        break;
+    
+    case '/detailReservation':
+    case '/detailReservation/':
+        if(!isset($_SESSION['client'])) {
+            include './Views/Front/reservation/DetailReservation.php';
+            //header('Location: /');
+        }else {
+            include './Views/Front/reservation/DetailReservation.php';
+        }
+        break;
+
     case '/reservation/devis':
     case '/reservation/devis/':
-        if(!isset($_SESSION['client'])) { header('Location: /'); }
+        if(!isset($_SESSION['client'])) { 
+            include_once './Views/Front/reservation/devis.php';
+            //header('Location: /'); 
+        }
         else { include_once './Views/Front/reservation/devis.php'; }
-
         break;
+
+
         
     case '/Back/reservations':
     case '/Back/reservations/':
-        include_once('Views/Back/reservation/listeReservations.php');
         if(!isset($_SESSION['proprio'])) {
             include_once('Views/Back/reservation/listeReservations.php');
             // header('Location: /');
@@ -65,7 +88,6 @@ switch($requestUrl) {
         break;
     case '/Back/reservations/details':
     case '/Back/reservations/details/':
-        include_once('Views/Back/reservation/detailsReservation.php');
         if(!isset($_SESSION['proprio'])) {
             include_once('Views/Back/reservation/detailsReservation.php');
             // header('Location: /');
@@ -76,7 +98,7 @@ switch($requestUrl) {
     // routes du back
     case '/logement/new':
     case '/logement/new/':
-         if(!isset($_SESSION['proprio'])) {
+        if(!isset($_SESSION['proprio'])) {
             include './Views/Back/logement/newLogement.php';
         }else {
             header('Location: /');
@@ -106,17 +128,34 @@ switch($requestUrl) {
 
         
 
-    case '/api/getReservations':
-    case 'api/getReservations':
+    
+    
+
+    case '/api/getReservationsProprietaire':
+    case 'api/getReservationsProprietaire':
         //$reservationController->getAllReservation();
-        $idProp = 12;
         $reservationController->getReservationByOwnerId(11);
         break;
-    // Juste besoin pour tester, à enlever pour merge avec getProprioById
+
+    case '/api/getReservationsClient':
+    case 'api/getReservationsClient':
+        $reservationController->getReservationByClientId(4);
+        break;
+
+    case '/api/getProprioById':
+    case 'api/getProprioById':
+        $data = $_POST;
+        $utilisateurController->getProprioById($data['id']);
+        break;
+
     case '/api/getOwnerById':
     case 'api/getOwnerById':
         $data = $_POST;
         $reservationController->getOwnerById(11);
+        break;
+
+    case '/api/getClientById':
+        $utilisateurController->getCompteClientDetails(4);
         break;
 
 
@@ -128,11 +167,7 @@ switch($requestUrl) {
         $data = $_POST;
         $reservationController->getReservationById($data);
         break;
-    case '/api/getProprioById':
-    case 'api/getProprioById':
-        $data = $_POST;
-        $utilisateurController->getProprioById($data['id']);
-        break;
+    
     case '/api/getLogementById':
     case 'api/getLogementById':
         $data = $_POST;
@@ -207,14 +242,7 @@ switch($requestUrl) {
         $reservationController->saveReservation($data, $idcpt);
         break;
 
-    case '/detailReservation':
-    case '/detailReservation/':
-        if(!isset($_SESSION['client'])) {
-            header('Location: /');
-        }else {
-            include './Views/Front/reservation/DetailReservation.php';
-        }
-        break;
+    
 
     case '/api/updateLogementStatus':
     case '/api/updateLogementStatus/':
