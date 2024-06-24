@@ -57,7 +57,8 @@ function Connexion(){
             if (inputs.length > 1) {
                 inputs[1].classList.add('error');
             }
-
+            var div = document.getElementById('login_error');
+            div.innerHTML = data
             ThrowAlertPopup(data,'error');
 
             setTimeout(() => {
@@ -203,6 +204,7 @@ function CreateConnexionModal() {
                 <div id="password_error"></div>
             </div>
             <button class="loginButton" id="Connexion" onclick="Connexion()">Se connecter</button>
+            <div id="login_error"></div>
             <button class="needAccountButton" id="Inscription" onclick="CreateInscriptionModal()">Vous n'avez pas de compte ? Inscrivez-vous</button>
         </div>
     </div>
