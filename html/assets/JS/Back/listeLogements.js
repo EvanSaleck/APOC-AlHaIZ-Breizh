@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (storedPopup) {
             ({ message, type } = JSON.parse(storedPopup));
             ThrowAlertPopup(message, type);
+            localStorage.removeItem('alertPopup');
         }
     } catch (error) {
         console.error('Données de popup stockées invalides:', error);

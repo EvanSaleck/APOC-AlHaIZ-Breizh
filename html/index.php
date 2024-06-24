@@ -4,36 +4,82 @@ session_start();
 include_once './Controllers/LogementController.php';
 include_once './Controllers/ReservationController.php';
 include_once './Controllers/UtilisateurController.php';
+include_once './Controllers/AbonnementICalController.php';
 
 
 // Use des controllers
 use Controllers\LogementController;
 use Controllers\ReservationController;
 use Controllers\UtilisateurController;
-
+use Controllers\AbonnementICalController;
 
 // Initialisation des controllers
 $logementController = new LogementController();
 $reservationController = new ReservationController();
 $utilisateurController = new UtilisateurController();
+$abonnementICalController = new AbonnementICalController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
-// $requestUrl = substr($requestUrl, 5);
 
 switch($requestUrl) {
-    // routes gildas
-    case '/export/ical':
-    case '/export/ical/':
-        // $reservationController->exportIcal();
-        include_once './Views/Back/reservation/exportICal.php';
+    case preg_match('/^\/reservations\/abonnement\?token=[a-f0-9]{64}$/', $requestUrl) ? true : false:
+        $token = $_GET['token'];
+        $abonnementICalController->exportIcal($token);
+        break;
+
+    case '/reservations/abonnements/iCal/new':
+    case '/reservations/abonnements/iCal/new/':
+        $_SESSION['proprio'] = 7;
+        include_once './Views/Back/reservation/abonnementICal.php';
         break;
     
-    case '/service/exportICal':
-    case '/service/exportICal/':
-        $reservationController->exportIcal();
+    case '/reservations/abonnements/liste':
+    case '/reservations/abonnements/liste/':
+        include_once './Views/Back/reservation/listeAbonnementsICal.php';
+        break;
+
+    case '/api/getAbonnementsICalByProprietaire':
+    case '/api/getAbonnementsICalByProprietaire/':
+        $id = $_SESSION['proprio'];
+        $abonnementICalController->getAbonnementsICalByProprietaire(7);
         break;
     
+    case '/api/reservations/abonnements/iCal/new':
+    case '/api/reservations/abonnement/iCal/new/':
+        $abonnementICalController->newAction();        
+        break;
+
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/edit\/\d+$/', $requestUrl) ? true : false:   
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/edit\/\d+\/$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $id = end($url_parts);
+        
+        $abonnementICalController->editAction($id);
+        break;
+
+    
+    // on créé la route de suppression : /api/reservations/abonnements/iCal/delete/{id}
+    // ainsi que  : /api/reservations/abonnements/iCal/delete/{id}/
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/delete\/\d+$/', $requestUrl) ? true : false:   
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/delete\/\d+\/$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $id = end($url_parts);
+        $abonnementICalController->deleteAction($id);
+        break;
+    
+    case preg_match('/^\/reservations\/abonnements\/iCal\/edit\/\d+$/', $requestUrl) ? true : false:   
+    case preg_match('/^\/reservations\/abonnements\/iCal\/edit\/\d+\/$/', $requestUrl) ? true : false:
+        include_once './Views/Back/reservation/abonnementICal.php';
+        break;
+
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/getDataICal\/\d+$/', $requestUrl) ? true : false:
+    case preg_match('/^\/api\/reservations\/abonnements\/iCal\/getDataICal\/\d+\/$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $id = end($url_parts);
+        $abonnementICalController->getDataICal($id);
+        break;
+
     // Routes des vues front office 
     case '/':
     case '':
@@ -157,7 +203,7 @@ switch($requestUrl) {
 
     // Routes des API
     case '/Deconnexion':
-    case 'Deconnexion':
+    case '/Deconnexion/':
         $_SESSION = array();
         session_destroy();
         header('Location: /');
@@ -182,6 +228,7 @@ switch($requestUrl) {
     case '/api/ConnexionClient':
     case 'api/ConnexionClient':
         $data = $_POST;
+
         $utilisateurController->connexionClient($data);
         break;
 
