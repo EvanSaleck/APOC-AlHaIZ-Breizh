@@ -1,11 +1,9 @@
+import * as utils from '../utils.js';
+
 document.addEventListener('DOMContentLoaded', function() {
-
-
   const hiddenInput = document.getElementById('amenagements');
   let selectedAmenagements = [];
-  let amenagementsBtns = document.querySelectorAll(
-    "#amenagementsBoutons button"
-  );
+  let amenagementsBtns = document.querySelectorAll("#amenagementsBoutons button");
 
   amenagementsBtns.forEach((btn) => {
     btn.addEventListener("click", function (e) {
@@ -13,121 +11,135 @@ document.addEventListener('DOMContentLoaded', function() {
       const id = this.id;
       const index = selectedAmenagements.indexOf(id);
 
-      // Ajouter ou supprimer l'ID dans selectedAmenagements
       if (index > -1) {
-        // ID déjà présent, le retirer
         selectedAmenagements.splice(index, 1);
-        this.classList.remove("selected"); // Ajouter une classe pour indiquer la sélection
+        this.classList.remove("selected");
       } else {
-        // ID non présent, l'ajouter
         selectedAmenagements.push(id);
-        this.classList.add("selected"); // Ajouter une classe pour indiquer la sélection
+        this.classList.add("selected");
       }
 
-      // Mettre à jour le champ caché
       hiddenInput.value = JSON.stringify(selectedAmenagements);
+
+      
     });
   });
-  
-    function updateLogementInfo() {
-        let conteneur = document.querySelector('.infosReservationDev');
-    
-        let data = JSON.parse(sessionStorage.getItem('formData'));
-        console.log(data);
 
-        const titreLogement = data.titre;
-        const tarif = data.tarif;
-        const nom_rue = data.nom_rue;
-        const ville = data.ville;
-        const cp = data.cp;
-        const description = data.description;
-        const nbChambres = data.nbChambres;
-        const nbLitsSimples = data.nbLitsSimples;
-        const nbLitsDoubles = data.nbLitsDoubles;
-        const nbPersMax = data.nbPersMax;
-        const surface = data.surface;
-        const categorie = data.categorie;
-        const type = data.type;
-        const delaiAnnulMax = data.delaiAnnulMax;
-        const delaiResaArrivee = data.delaiResaArrivee;
-        const dureeMinLoc = data.dureeMinLoc;
-        const accroche = data.accroche;
-        const amenagements = data.amenagements;
-    
-         let titreLogementElement = document.getElementById('titre');
-        let tarifElement = document.getElementById('tarif');
-        let nomRueElement = document.getElementById('nom_rue');
-        let villeElement = document.getElementById('ville');
-        let cpElement = document.getElementById('cp'); 
-        let descriptionElement = document.getElementById('description');
-        let nbChambresElement = document.getElementById('nbChambres');
-        let nbLitsSimplesElement = document.getElementById('nbLitsSimples');
-        let nbLitsDoublesElement = document.getElementById('nbLitsDoubles');
-        let nbPersMaxElement = document.getElementById('nbPersMax');
-        let surfaceElement = document.getElementById('surface');
-        let categorieElement = document.getElementById('categorie');
-        let typeElement = document.getElementById('type');
-        let delaiAnnulMaxElement = document.getElementById('delaiAnnulMax');
-        let delaiResaArriveeElement = document.getElementById('delaiResaArrivee');
-        let dureeMinLocElement = document.getElementById('dureeMinLoc');
-        let accrocheElement = document.getElementById('accroche');
-        let amenagementsElement = document.getElementById('amenagements');
-        
-    
-        titreLogementElement.value = titreLogement;
-        tarifElement.value = tarif;
-        nomRueElement.value = nom_rue;
-        villeElement.value = ville;
-        cpElement.value = cp; 
-        descriptionElement.textContent = description;
-        nbChambresElement.value = nbChambres;
-        nbLitsSimplesElement.value = nbLitsSimples;
-        nbLitsDoublesElement.value = nbLitsDoubles;
-        nbPersMaxElement.value = nbPersMax;
-        surfaceElement.value = surface;
-        dureeMinLocElement.value = dureeMinLoc;
-        delaiAnnulMaxElement.value = delaiAnnulMax;
-        delaiResaArriveeElement.value = delaiResaArrivee;
-        accrocheElement.textContent = accroche; 
+  function updateLogementInfo() {
+    let conteneur = document.querySelector('.infosReservationDev');
+    let data = JSON.parse(sessionStorage.getItem('formData'));
 
-        if (data.type) {
-            let select = document.getElementById('type');
-            let options = select.options;
+    const elements = {
+      titre: data.titre,
+      tarif: data.tarif,
+      nom_rue: data.nom_rue,
+      ville: data.ville,
+      cp: data.cp,
+      description: data.description,
+      nbChambres: data.nbChambres,
+      nbLitsSimples: data.nbLitsSimples,
+      nbLitsDoubles: data.nbLitsDoubles,
+      nbPersMax: data.nbPersMax,
+      surface: data.surface,
+      categorie: data.categorie,
+      type: data.type,
+      delaiAnnulMax: data.delaiAnnulMax,
+      delaiResaArrivee: data.delaiResaArrivee,
+      dureeMinLoc: data.dureeMinLoc,
+      accroche: data.accroche,
+      amenagements: data.amenagements
+    };
 
-            for (let i = 0; i < options.length; i++) {
-                if (options[i].value === data.type) {
-                    select.selectedIndex = i;
-                    break;
-                }
-            }
-        } 
-        if (data.categorie) {
-            let select = document.getElementById('categorie');
-            let options = select.options;
-
-            for (let i = 0; i < options.length; i++) {
-                if (options[i].value === data.categorie) {
-                    select.selectedIndex = i;
-                    break;
-                }
-            }
+    for (let key in elements) {
+      let element = document.getElementById(key);
+      if (element) {
+        if (key === 'description' || key === 'accroche') {
+          element.textContent = elements[key];
+        } else {
+          element.value = elements[key];
         }
-        if (data.amenagements) {
-            let select = document.getElementById('amenagements');
-            let options = select.options;
-
-            for (let i = 0; i < options.length; i++) {
-                if (options[i].value === data.amenagements) {
-                    select.selectedIndex = i;
-                    break;
-                }
-            }
-        }
-        delaiAnnulMaxElement.value = delaiAnnulMax;
-        delaiResaArriveeElement.value = delaiResaArrivee;
-        dureeMinLocElement.value = dureeMinLoc;
+      }
     }
-    
-    updateLogementInfo();
-    
+
+    if (data.type) {
+      let select = document.getElementById('type');
+      let options = select.options;
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].value === data.type) {
+          select.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    if (data.categorie) {
+      let select = document.getElementById('categorie');
+      let options = select.options;
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].value === data.categorie) {
+          select.selectedIndex = i;
+          break;
+        }
+      }
+    }
+  }
+
+  updateLogementInfo();
+
+  document.getElementById('formNewLogement').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    window.scroll({
+        top: 0,
+        behavior: 'smooth'
+    });
+
+    const formData = new FormData(this);
+    formData.append('pays', 'France');
+    formData.append('etat', '');
+
+    // Utilisation de encodeURIComponent pour les valeurs de texte
+    formData.forEach((value, key) => {
+        if (typeof value === 'string') {
+            formData.set(key, encodeURIComponent(value));
+        }
+    });
+
+    const fileInput = document.getElementById('photo-input');
+    if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        formData.append('photo', file);
+    }
+
+    function updateLogement(logementId) {
+        formData.append('id_logement', logementId);
+
+        fetch('/api/processFormUpdateLogement', {
+            method: 'POST',
+            body: formData,
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.error) {
+                utils.ThrowAlertPopup(data.error, 'error');
+            } else {
+                let message = 'Le logement a bien été mis à jour !';
+                utils.ThrowAlertPopup(message, 'success');
+                localStorage.setItem('alertPopup', JSON.stringify({ message: message, type: 'success' }));
+                window.location.href = '/logements';
+            }
+        })
+        .catch((error) => {
+            utils.ThrowAlertPopup('Erreur: ' + error, 'error');
+        });
+    }
+
+    const logementId = sessionStorage.getItem('logementId');
+    if (logementId) {
+        updateLogement(logementId);
+    } else {
+        utils.ThrowAlertPopup('Erreur: ID du logement manquant.', 'error');
+    }
+});
+
 });

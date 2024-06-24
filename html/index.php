@@ -158,6 +158,11 @@ switch($requestUrl) {
     case '/api/processFormNewLogement':
         $logementController->processFormNewLogement();
         break;
+
+    case '/api/processFormUpdateLogement/':
+    case '/api/processFormUpdateLogement':
+        $logementController->processFormUpdateLogement();
+        break;
     
     case '/api/getReservations':
     case 'api/getReservations':
