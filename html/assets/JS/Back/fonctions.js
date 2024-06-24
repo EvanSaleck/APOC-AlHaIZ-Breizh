@@ -45,50 +45,7 @@ function Connexion(){
         if(data === 'Connexion réussie'){
             ThrowAlertPopup(data,'succes');
             setTimeout(() => {
-                let url = window.location.href;
-                window.location.href = url;
-            }, 1000);
-        }else{
-            let inputs = document.querySelectorAll('#connexionModal .modal-content #connexionForm input');
-            console.log(inputs);
-
-            if (inputs.length > 0) {
-                inputs[0].classList.add('error');
-            }
-            if (inputs.length > 1) {
-                inputs[1].classList.add('error');
-            }
-
-            ThrowAlertPopup(data,'error');
-
-            setTimeout(() => {
-                inputs[0].classList.remove('error');
-                inputs[1].classList.remove('error');
-            }
-            , 2000);
-        }
-    });
-}
-
-function Connexion(){
-    let pseudo = document.getElementById('pseudo').value;
-    let password = document.getElementById('password').value;
-    let data = new FormData();
-    data.append('pseudo', pseudo);
-    data.append('password', password);
-
-    fetch('/api/ConnexionProprio', {
-        method: 'POST',
-        body: data
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        if(data === 'Connexion réussie'){
-            ThrowAlertPopup(data,'succes');
-            setTimeout(() => {
-                let url = window.location.href;
-                window.location.href = url;
+                window.location.href = "/Back/reservations/";
             }, 1000);
         }else{
             let inputs = document.querySelectorAll('#connexionModal .modal-content #connexionForm input');
@@ -197,9 +154,9 @@ function CreateInscriptionModal() {
 }
 
 
-function Deconnexion() {
+function DeconnexionProprio() {
     sessionStorage.removeItem('Proprio');
-    window.location.href = '/Deconnexion';
+    window.location.href = '/DeconnexionProprio';
 }
 
 function ThrowAlertPopup(message, type) {

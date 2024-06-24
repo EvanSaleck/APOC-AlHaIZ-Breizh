@@ -73,6 +73,11 @@ switch($requestUrl) {
     case '/logements/':
         include './Views/Back/logement/listeLogements.php';
         break;
+
+    case '/connexionProprietaire':
+    case '/connexionProprietaire/':
+        include './Views/Back/connexionProprietaire.php';
+        break;
     case '/api/getLogementsDataForCards':
         header('Content-Type: application/json');
         echo $logementController->getLogementsDataForCards();
@@ -113,6 +118,18 @@ switch($requestUrl) {
         session_destroy();
         header('Location: /');
         break;
+    
+    case '/DeconnexionProprio':
+        case '/DeconnexionProprio/':
+            $_SESSION = array();
+            session_destroy();
+            header('Location: /connexionProprietaire');
+            break;
+
+    case '/back/detailsCompte':
+        case '/back/detailsCompte/':
+            include './Views/Back/compte/detailsCompte.php';
+            break;
 
     case '/api/ConnexionClient':
     case 'api/ConnexionClient':
