@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         window.location.href = `/logement/`;
                                     });
                                     divCard.setAttribute('data-dept', logement.code_postal.substring(0, 2));
+                                    divCard.setAttribute('data-tarif', logement.prix_nuit_ttc);
                                 } else {
                                     divCard.querySelector('.description').textContent = "Erreur lors du chargement des données du logement";
                                 }
@@ -83,6 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             // on met a jour le prix min et max
                             document.querySelector('#prixFiltresContainer #prixMin').textContent = prixMin;
                             document.querySelector('#prixFiltresContainer #prixMax').textContent = prixMax;
+                            // on ajoute des attributs min et max au bouton de prix
+                            document.getElementById('btnPrix').setAttribute('data-min', prixMin);
+                            document.getElementById('btnPrix').setAttribute('data-max', prixMax);
 
                             // on met a jour le prix min et max de la modale
                             document.querySelector('.price-input input.input-min').value = prixMin;
@@ -227,7 +231,10 @@ document.addEventListener('DOMContentLoaded', function() {
         for (var i = 0; i < cards.length; i++) {
             var card = cards[i];
             var dept = card.getAttribute('data-dept');
-            if (filters['depts'].length > 0 && !filters['depts'].includes(dept)) {
+            if (filters['depts'].length > 0 && !filters['depts'].includes(dept)
+                || parseFloat(card.getAttribute('data-tarif')) < parseFloat(document.getElementById('btnPrix').getAttribute('data-min'))
+                || parseFloat(card.getAttribute('data-tarif')) > parseFloat(document.getElementById('btnPrix').getAttribute('data-max'))
+            ) {
                 card.classList.add('d-none');                
             } else {
                 card.classList.remove('d-none');
@@ -262,55 +269,98 @@ document.addEventListener('DOMContentLoaded', function() {
         wrapper.style.display = (wrapper.style.display === 'none' || wrapper.style.display === '') ? 'block' : 'none';
     });
     
-    priceInput.forEach(input =>{
-        input.addEventListener("input", e =>{
-            let minPrice = parseInt(priceInput[0].value),
-            maxPrice = parseInt(priceInput[1].value);
-            
-            if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
-                if(e.target.className === "input-min"){
-                    rangeInput[0].value = minPrice;
-                    range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
-                } else{
-                    rangeInput[1].value = maxPrice;
-                    range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+    // Écouteurs pour les inputs de prix
+    priceInput.forEach(input => {
+        input.addEventListener("input", e => {
+            let minPrice = parseFloat(priceInput[0].value),
+                maxPrice = parseFloat(priceInput[1].value);
+
+            if (isNaN(minPrice) || isNaN(maxPrice)) {
+                if (isNaN(minPrice)) {
+                    minPrice = parseFloat(rangeInput[0].min);
+                }
+
+                if (isNaN(maxPrice)) {
+                    maxPrice = parseFloat(rangeInput[1].max);
+                }
+            } else {
+                // Assurer que minPrice est toujours inférieur ou égal à maxPrice
+                if (minPrice > maxPrice) {
+                    if (e.target.className === "input-min") {
+                        minPrice = maxPrice - priceGap;
+                    } else {
+                        maxPrice = minPrice + priceGap;
+                    }
+                }
+
+                if ((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max) {
+                    if (e.target.className === "input-min") {
+                        rangeInput[0].value = minPrice;
+                        range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+                    } else {
+                        rangeInput[1].value = maxPrice;
+                        range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                    }
+                }
+
+                if (maxPrice > rangeInput[1].max) {
+                    maxPrice = rangeInput[1].max;
+                    range.style.right = "0%";
+                } else if (minPrice < rangeInput[0].min) {
+                    minPrice = rangeInput[0].min;
+                    range.style.left = "0%";
                 }
             }
+
+            document.getElementById('btnPrix').textContent = `Prix : ${minPrice}€ - ${maxPrice}€`;
+            document.getElementById('btnPrix').setAttribute('data-min', minPrice);
+            document.getElementById('btnPrix').setAttribute('data-max', maxPrice);
+            applyFilters();
         });
     });
-       
+
+    // Écouteurs pour les inputs de range
     rangeInput.forEach(input => {
         input.addEventListener("input", e => {
             let minVal = parseFloat(rangeInput[0].value);
             let maxVal = parseFloat(rangeInput[1].value);
-    
 
-            
-            if ((maxVal - minVal) < priceGap) {
+            if(maxVal + priceGap > rangeInput[1].max) {
+                maxVal = rangeInput[1].max;
+            }
+
+            // Assurer que minVal est toujours inférieur ou égal à maxVal
+            if (minVal > maxVal - priceGap) {
                 if (e.target.className === "range-min") {
-                    rangeInput[0].value = maxVal - priceGap;
-                    minVal = parseFloat(rangeInput[0].value);
+                    minVal = maxVal - priceGap;
+                    rangeInput[0].value = minVal;
                 } else {
-                    rangeInput[1].value = minVal + priceGap;
-                    maxVal = parseFloat(rangeInput[1].value); 
+                    maxVal = minVal + priceGap;
+                    rangeInput[1].value = maxVal;
                 }
             }
-    
+
             priceInput[0].value = minVal;
             priceInput[1].value = maxVal;
-    
+
             let leftPercent = (minVal / rangeInput[0].max) * 100;
             let rightPercent = 100 - (maxVal / rangeInput[1].max) * 100;
 
-            if(rightPercent < 0){
+            if (rightPercent < 0) {
                 rightPercent = 0;
             }
-    
+
             range.style.left = leftPercent + "%";
             range.style.right = rightPercent + "%";
+
+            // Mettre à jour le texte du bouton
+            document.getElementById('btnPrix').textContent = `Prix : ${minVal}€ - ${maxVal}€`;
+            document.getElementById('btnPrix').setAttribute('data-min', minVal);
+            document.getElementById('btnPrix').setAttribute('data-max', maxVal);
+            applyFilters();
         });
     });
-    
+
 });
 
 function adjustMarginTop() {

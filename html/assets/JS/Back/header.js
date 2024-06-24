@@ -1,3 +1,5 @@
+import * as utils from "../utils.js";
+
 let currentUser = null;
 
 addEventListener("DOMContentLoaded", () => {

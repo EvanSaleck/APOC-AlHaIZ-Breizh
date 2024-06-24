@@ -21,6 +21,7 @@ $abonnementICalController = new AbonnementICalController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
+$prop = 11;
 
 switch($requestUrl) {
     case preg_match('/^\/reservations\/abonnement\?token=[a-f0-9]{64}$/', $requestUrl) ? true : false:
@@ -30,19 +31,20 @@ switch($requestUrl) {
 
     case '/reservations/abonnements/iCal/new':
     case '/reservations/abonnements/iCal/new/':
-        $_SESSION['proprio'] = 7;
+        $_SESSION['proprio'] = $prop;
         include_once './Views/Back/reservation/abonnementICal.php';
         break;
     
     case '/reservations/abonnements/liste':
     case '/reservations/abonnements/liste/':
+        $_SESSION['proprio'] = $prop;
         include_once './Views/Back/reservation/listeAbonnementsICal.php';
         break;
 
     case '/api/getAbonnementsICalByProprietaire':
     case '/api/getAbonnementsICalByProprietaire/':
         $id = $_SESSION['proprio'];
-        $abonnementICalController->getAbonnementsICalByProprietaire(7);
+        $abonnementICalController->getAbonnementsICalByProprietaire($prop);
         break;
     
     case '/api/reservations/abonnements/iCal/new':
@@ -163,7 +165,7 @@ switch($requestUrl) {
     case 'api/getReservations':
         //$reservationController->getAllReservation();
         $idProp = 7;
-        $reservationController->getReservationByOwnerId(7);
+        $reservationController->getReservationByOwnerId($prop);
         break;
     case '/api/getReservationById':
     case 'api/getReservationById':
@@ -198,8 +200,7 @@ switch($requestUrl) {
     case '/api/getLogementsByProprietaireId':
     case '/api/getLogementsByProprietaireId/':
         // $data = $_POST;
-        $data['id'] = 8 ; 
-        $logementController->getLogementsByProprietaireId($data['id']);
+        $logementController->getLogementsByProprietaireId($prop);
         break;
 
     // Routes des API

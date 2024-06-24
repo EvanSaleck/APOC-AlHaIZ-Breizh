@@ -7,6 +7,7 @@ include_once 'Service/ICalService.php';
 
 use Models\AbonnementICal;
 use Service\ICalService;
+use \Exception;
 
 class AbonnementICalController {
     private $abonnementICal;
@@ -22,6 +23,11 @@ class AbonnementICalController {
         $dateDebut = $_POST['dateDebut'];
         $dateFin = $_POST['dateFin'];
         $listeLogements = $_POST['logements'];
+
+        // on renvoie une exception si la liste des logements est vide
+        if (empty($listeLogements)) {
+            throw new Exception('Il faut choisir au moins un logement');
+        }
 
         $abonnement = new AbonnementICal($titre, $dateDebut, $dateFin, $listeLogements);
 

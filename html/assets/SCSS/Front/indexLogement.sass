@@ -185,13 +185,14 @@
     background: #ddd
     border-radius: 5px
 
-    .progress
-      height: 100%
-      left: 25%
-      right: 25%
-      position: absolute
-      border-radius: 5px
-      background: #17A2B8
+  .progress
+    height: 100%
+    left: 0
+    right: 0
+    position: absolute
+    border-radius: 5px
+    background: #17A2B8
+
 
   .range-input
     position: relative
@@ -205,26 +206,29 @@
       pointer-events: none
       -webkit-appearance: none
       -moz-appearance: none
+      
+      &:nth-child(2), &:last-child
+        right: -5px
 
-  input[type="range"]
-    &::-webkit-slider-thumb
-      height: 17px
-      width: 17px
-      border-radius: 50%
-      background: #17A2B8
-      pointer-events: auto
-      -webkit-appearance: none
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.05)
+    input[type="range"]
+      &::-webkit-slider-thumb
+        height: 17px
+        width: 17px
+        border-radius: 50%
+        background: #17A2B8
+        pointer-events: auto
+        -webkit-appearance: none
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.05)
 
-    &::-moz-range-thumb
-      height: 17px
-      width: 17px
-      border: none
-      border-radius: 50%
-      background: #17A2B8
-      pointer-events: auto
-      -moz-appearance: none
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.05)
+      &::-moz-range-thumb
+        height: 17px
+        width: 17px
+        border: none
+        border-radius: 50%
+        background: #17A2B8
+        pointer-events: auto
+        -moz-appearance: none
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.05)
 
 
     // #ongletFiltres
