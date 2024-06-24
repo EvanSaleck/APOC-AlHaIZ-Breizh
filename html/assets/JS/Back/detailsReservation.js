@@ -1,8 +1,8 @@
 addEventListener("DOMContentLoaded", () => {
     // idresa récupéré après la boucle de création d'objets <tr> du init() de listeReservations.js
-    let idResa = sessionStorage.getItem("idresa");
+    let idresa = sessionStorage.getItem("idresa");
     let id = new FormData();
-    id.append("id", idResa);
+    id.append("id", idresa);
 
     fetch("/api/getReservationById", { method: "POST", body: id })
         .then((response) => response.json())
@@ -22,8 +22,8 @@ addEventListener("DOMContentLoaded", () => {
             let idclient = data.r_id_compte;
             
             fetch("/api/getLogementById", { method: "POST", body: id })
-            .then((response) => response.json())
-            .then((data) => {
+                .then((response) => response.json()).then((data) => {
+
                 console.log("Données du logement : " + data);
                 document.getElementById("titrelogement").textContent = data[0].titre;
                 document.getElementById("photologresa").src = data[0].image_principale;
@@ -31,9 +31,9 @@ addEventListener("DOMContentLoaded", () => {
                 id = new FormData();
                 id.append("id", idclient);
 
-                fetch("/api/getCompteClientDetailsBack", { method: "POST", body: id })
-                .then((response) => response.json())
-                .then((data) => {
+                fetch("/api/getCompteClientDetailsById", { method: "POST", body: id })
+                    .then((response) => response.json()).then((data) => {
+
                     console.log("Données du compte client : " + data);
                     //document.getElementById("photoClient").src = data[0].photo_profil;
                     document.getElementById("nomClient").textContent = data[0].pseudo;

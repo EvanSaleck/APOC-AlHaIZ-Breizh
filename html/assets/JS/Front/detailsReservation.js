@@ -5,7 +5,7 @@ addEventListener("DOMContentLoaded", () => {
   fetch("/api/getReservationById", { method: "POST", body: id })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      console.log("Details front : " + data);
       document.getElementById("dateArrivee").textContent = data.date_arrivee;
       document.getElementById("dateFin").textContent = data.date_depart;
       document.getElementById(

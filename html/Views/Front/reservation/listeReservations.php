@@ -33,7 +33,7 @@
                         <th>Date d'arrivée</th>
                         <th>Date de départ</th>
                         <th>Tarif global</th>
-                        <th>Client</th>
+                        <th>Propriétaire</th>
                     </tr>
                 </thead>
 

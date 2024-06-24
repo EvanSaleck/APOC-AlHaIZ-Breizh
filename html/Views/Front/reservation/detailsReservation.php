@@ -1,17 +1,19 @@
-<?php
-    include_once 'Views/Back/composants/header.php';
-    include_once 'Views/Back/composants/head.php';
+<?php 
+    include_once 'Views/Front/composants/navbar.php';
+    include_once 'Views/Front/composants/card.php';
+    include_once 'Views/Front/composants/header.php';
+    include_once 'Views/Front/composants/head.php';
 ?>
 <div class="detailResa">
-    <a href="/Back/reservations/"><button class="boutonPrecedent">Précédent</button></a>
+    <a href="/reservation"><button class="boutonPrecedent">Précédent</button></a>
 
     <div class="headerDevis">
         <button class="retour">
-            <a onclick="history.back()"> <img src="/assets/imgs/mobile/Chevron2.svg" alt="retourPagePrecedente"/> </a>
+            <a onclick="history.back()"><img src="/assets/imgs/mobile/Chevron2.svg" alt="retourPagePrecedente" /></a>
         </button>
-        <h1 class="titreRecapDevis">Réservation détaillée</h1>
+        <h1 class="titreRecapDevis"> Réservation détaillée </h1>
     </div>
-
+    
     <div class="infosLogementsTOTAL">
         <div class="infosLogementResa">
             <div class="infosLogement">
@@ -20,11 +22,12 @@
                     <figure><img class="photoLogResa" id="photologresa"></figure>
                 </div>
 
-                <div class="Client">
-                    <h2>Client</h2>
-                    <img id="photoClient">
-                    <p id="nomClient"></p>
-                    <p id="mailClient"></p>
+                <div class="Proprio">
+                    <h2>Propriétaire</h2>
+                    <img id="photoproprio">
+                    <p id="nomproprio"></p>
+                    <p id="mailproprio"></p>
+                    <p id="telproprio"></p>
                 </div>
             </div>
         </div>
@@ -32,7 +35,7 @@
         <div class="premiereBarre"></div>
 
         <div class="infosDetailsResa">
-            <h3>Détails de réservation</h3>
+            <h3> Votre réservation </h3>
             <div>
                 <p class="info-label">Date d'arrivée :</p>
                 <p id="dateArrivee"></p>
@@ -68,11 +71,9 @@
     </div>
 
     <div class="condAnnul">
-        <h3>Conditions d'annulation</h3>
-        <p>
-            Annulation gratuite avant le <span id="date">30 mai</span>. Après cette date, des frais de 20% du montant total de la réservation (soit <span id="prixfrais">250</span> euros ) seront appliqués.
-        </p>
+        <h3> Conditions d'annulation </h3>
+            <p>
+                Annulation gratuite avant le <span id="date">30 mai</span>. Après cette date, des frais de 20% du montant total de la réservation (soit <span id="prixfrais">250</span> euros ) seront appliqués.
+            </p>
     </div>
 </div>
-
-<?php include_once 'Views/Back/composants/footer.php'; ?>

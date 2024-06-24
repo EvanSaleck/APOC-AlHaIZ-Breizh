@@ -60,10 +60,10 @@ switch($requestUrl) {
     case '/detailReservation':
     case '/detailReservation/':
         if(!isset($_SESSION['client'])) {
-            include './Views/Front/reservation/DetailReservation.php';
+            include './Views/Front/reservation/detailsReservation.php';
             //header('Location: /');
         }else {
-            include './Views/Front/reservation/DetailReservation.php';
+            include './Views/Front/reservation/detailsReservation.php';
         }
         break;
 
@@ -129,17 +129,22 @@ switch($requestUrl) {
         
 
     
-    
+    case '/api/getReservationsClient':
+    case 'api/getReservationsClient':
+        $data = $_POST;
+        $reservationController->getReservationByClientId($data['id']);
+        break;
 
     case '/api/getReservationsProprietaire':
     case 'api/getReservationsProprietaire':
-        //$reservationController->getAllReservation();
-        $reservationController->getReservationByOwnerId(11);
+        $data = $_POST;
+        $reservationController->getReservationByOwnerId($data['id']);
         break;
 
-    case '/api/getReservationsClient':
-    case 'api/getReservationsClient':
-        $reservationController->getReservationByClientId(4);
+    case '/api/getClientById':
+    case 'api/getClientById':
+        $data = $_POST;
+        $utilisateurController->getCompteClientDetails($data['id']);
         break;
 
     case '/api/getProprioById':
@@ -147,17 +152,6 @@ switch($requestUrl) {
         $data = $_POST;
         $utilisateurController->getProprioById($data['id']);
         break;
-
-    case '/api/getOwnerById':
-    case 'api/getOwnerById':
-        $data = $_POST;
-        $reservationController->getOwnerById(11);
-        break;
-
-    case '/api/getClientById':
-        $utilisateurController->getCompteClientDetails(4);
-        break;
-
 
 
 
@@ -223,11 +217,6 @@ switch($requestUrl) {
         $client = json_decode($_SESSION['client']);
         $idCompte = $client->id_compte;
         $utilisateurController->getCompteClientDetails($idCompte);
-        break;
-
-    case '/api/getCompteClientDetailsBack':
-        $data = $_POST;
-        $utilisateurController->getCompteClientDetails($data['id']);
         break;
 
     case '/api/getReservations/all':

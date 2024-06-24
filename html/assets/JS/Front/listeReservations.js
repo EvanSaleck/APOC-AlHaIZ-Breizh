@@ -22,22 +22,27 @@ var enCours, aVenir, passe;
 
 // Initialise la liste des réservations liées aux compte propriétaire connecté
 function init() {
+    let idClient = new FormData();
+    // TODO à changer quand on pourra récupérer le client du sessionStorage
+    //idClient.append("id", sessionStorage.getItem("idClient"));
+    idClient.append("id", 4);
+
     // Récupère les informations du client
-    fetch('/api/getClientById').then(resp => resp.json()).then(client => {
-        //let client = sessionStorage.getItem("client")
+    fetch('/api/getClientById', { method: "POST", body: idClient }).then(resp => resp.json()).then(client => {
         document.getElementById('bonjour').innerHTML = "Bonjour " + client[0].prenom + ",";
 
         // Récupération des données de la BDD
-        fetch("/api/getReservationsClient", { method: "POST", body: client[0].id_compte })
+        fetch("/api/getReservationsClient", { method: "POST", body: idClient })
             .then(response => response.json()).then(data => {
 
             // Si aucune donnée n'est renvoyée par l'API, affiche qu'aucune réservation n'a été trouvée
             let resVides = (data.length == 0);
-            if(resVides) { contentReservations.innerHTML = affichageAucuneRéservations; }
+            if(resVides) {
+                let displayAucuneReservations = document.getElementById("noReservations");
+                displayAucuneReservations.classList.remove("d-none");
+            }
             else {
                 ResasTout = data; console.log(ResasTout);
-                
-                let max = (ResasTout.length < 7) ? ResasTout.length : 6; // Nombre de réservations affichées sur la page par défaut
 
                 let today = new Date(); // La date actuelle
 
@@ -45,7 +50,7 @@ function init() {
                 tbody.innerHTML = "";
 
                 // Maj du contenu du tableau avec des valeurs de la BDD
-                for(let i = 0; i<max; i++) {
+                for(let i = 0; i<ResasTout.length; i++) {
                     let res = ResasTout[i];
 
                     // Créé des objets dates pour savoir si une réservation est passée, en cours ou à venir
