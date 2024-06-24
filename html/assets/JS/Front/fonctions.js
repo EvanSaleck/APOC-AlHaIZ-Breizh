@@ -97,14 +97,12 @@ function ThrowAlertPopup(message,type) {
 function Inscription() {
     // Création d'un objet FormData pour recueillir les données du formulaire
     let data = new FormData();
-    //let data = new FormData(document.querySelector('.nomduformulaire'));
-
     // Récupération des valeurs des champs du formulaire
 
     const nom = document.getElementById('lastname').value;
     const prenom = document.getElementById('firstname').value;
     const civilite = document.getElementById('civility').value;
-    const pseudo = document.getElementById('username').value;
+    const pseudo = document.getElementById('pseudo').value;
     const email = document.getElementById('email').value;
     const motDePasse = document.getElementById('password').value;
     const ddn = document.getElementById('ddn').value;
@@ -148,13 +146,20 @@ function Inscription() {
     })
     .then(data => {
         console.log(data);
-        if (data !== undefined && data.success) {
-            ThrowAlertPopup('Inscription réussie!', 'succes');
+        console.log("on est ici")
+        if (data === 'Inscription réussie') {
+            console.log('Inscription réussie!');
+            ThrowAlertPopup(data, 'succes');
+            console.log('Redirection vers la page d\'accueil...');
             setTimeout(() => {
-                window.location.href = '/accueil';  // Redirection après l'inscription
-            }, 1000);
+                console.log('pendant le time out');
+                Connexion()  // Redirection après l'inscription
+            }, 3000);
+            console.log('après le time out');
         } else {
-            ThrowAlertPopup('Erreur lors de l\'inscription: ' + data.error, 'error');
+            console.error(data , data.error);
+            ThrowAlertPopup(data + data.error, 'error');
+            console.log("après l'erreur");
         }
     })
     .catch(error => {
@@ -274,7 +279,7 @@ function CreateInscriptionModal() {
                     </div>
                     <div id="username-form" class="form">
                         <label for="username">Pseudonyme :</label>
-                        <input  type="text" id="username" name="username" required>
+                        <input  type="text" id="pseudo" name="username" required>
                     </div>
                     <div id="email-form" class="form">
                         <label for="email">Adresse mail :</label>
@@ -348,6 +353,7 @@ function CreateInscriptionModal() {
                     </div>
                 </div>
                 <button type="submit" class="registerButton">S'inscrire</button>
+                <div id="register_error"></div>
             </form>
             <button class="hasAccountButton" onclick="CreateConnexionModal()">Déjà un compte ? Connectez-vous</button>
         </div>

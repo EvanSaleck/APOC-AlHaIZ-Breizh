@@ -65,6 +65,16 @@ class Utilisateur {
                 throw new Exception('Un utilisateur existe déjà avec cet email');
             }
 
+            // ensuite si un utilisateur n'existe pas deja avec le meme pseudo
+            $query = "SELECT * FROM sae3.compte_client WHERE pseudo = ?";
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$data['pseudo']]);
+            $utilisateur = $statement->fetch(\PDO::FETCH_ASSOC);
+
+            if ($utilisateur) {
+                throw new Exception('Un utilisateur existe déjà avec ce pseudo');
+            }
+
             $query = "INSERT INTO sae3.adresse (numero_rue, nom_rue, code_postal, nom_ville, pays, complement, etat) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $statement = $this->pdo->prepare($query);
             $statement->execute([
@@ -119,7 +129,7 @@ class Utilisateur {
             $statement->execute([$codeClient]);
             $utilisateur = $statement->fetch(\PDO::FETCH_ASSOC);
             
-            return $utilisateur;
+            return 'Inscription réussie';
         } catch (Exception $e) {
             $this->db->getPDO()->rollBack();
             throw new Exception('Erreur lors de l\'inscription : ' . $e->getMessage());
