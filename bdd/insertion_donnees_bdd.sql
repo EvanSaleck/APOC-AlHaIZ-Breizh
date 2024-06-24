@@ -456,3 +456,10 @@ VALUES
   (8,'12/06/2024','Magi','Renou','magi.renou@gmail.eu','Dupont','Paul','paul.dupont@example.com',5,'rue des tournesols',NULL,'29200','Brest',NULL,'France',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France','Maison familiale',120.00),
   (9,'15/06/2024','Daip','Jauni','Daip.Jauni@wanadoo.com','Kniglait','Keira','Keira.Kniglait@gmail.fr',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Cabanon dans la forêt',80.00),
   (10,'27/06/2024','Mir','Ador','mir.ador@gmail.us','Toman','Ks','toman.ks@apple.us',5,'Columbia Street',NULL,'20001','Washington DC','Columbia','USA',1,'rue Victor Hugo','bis','29200','Brest',NULL,'France','Maisonnette en plein air',60.00);
+
+INSERT INTO cle_api(cle, c_id_proprio)
+VALUES ('1', 7);
+INSERT INTO cle_api(cle, c_id_proprio)
+VALUES ('2', 8);
+INSERT INTO cle_api(cle, c_id_proprio)
+VALUES ('3', 9);
