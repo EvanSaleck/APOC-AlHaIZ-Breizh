@@ -55,9 +55,7 @@
                         <input type="file" id="photo-input" style="display: none;">
                     </div>
                     <div class="drop-photo" id="drop-photo">
-                        <img src="/assets/imgs/logoDragImg.svg" alt="Logo d'image">
-                        Déposez votre photo ici
-                        <button id="photo-button" type="button">Ou sélectionnez un fichier</button>
+                        <button id="photo-button" type="button">Modifier la photo</button>
                         <span id="photo-nom-image"></span>
                         <span class="messageError"></span>  
                     </div>
