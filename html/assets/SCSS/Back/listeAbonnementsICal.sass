@@ -1,0 +1,61 @@
+@use '../general' as general
+
+h1 
+    text-align: center
+
+#lienNewAbo
+    margin: 2.5vw 3.5vw
+    text-align: center
+    background-color: general.$couleur-back-bleu-zodiac 
+    color: white
+    padding: 1vw 2vw
+    border-radius: 5px
+    text-decoration: none
+
+#bodyContent 
+    width: 80%
+    margin: 0 auto
+
+#divButton
+    display: flex
+    justify-content: start
+    padding: 0
+    margin: 0
+
+    a 
+        margin: 1vw 0
+        padding: 1vw
+
+#tableListeLogements 
+    border-collapse: collapse
+
+    th, td
+        border: 1px solid black
+        padding: 5px
+    
+    #penIconButton, #trashIconButton, #copyIconButton
+        background-color: transparent
+        border: none
+        color: general.$couleur-back-bleu-zodiac
+        cursor: pointer
+        font-size: 1.5vw
+        margin: 0 0.5vw
+        
+        img
+            width: 2vw
+            height: 2vw
+
+    text-align: center
+
+    border: 2px solid
+    border-color: general.$couleur-back-bleu-zodiac 
+
+    thead
+      height: 2.5vh
+      tr
+        background-color: general.$couleur-back-bleu-zodiac
+        padding: 1vw 0vw
+        th
+          width: 20%
+          background-color: general.$couleur-back-bleu-zodiac
+          color: #FFFFFF

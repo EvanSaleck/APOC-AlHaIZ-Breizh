@@ -1,3 +1,4 @@
+SET SCHEMA 'sae3';
 INSERT INTO type_logement(nom_type) 
 VALUES ('Studio');
 INSERT INTO type_logement(nom_type) 
@@ -89,6 +90,20 @@ VALUES
 INSERT INTO adresse (numero_rue, nom_rue, code_postal, nom_ville, pays) 
 VALUES 
  (17, 'rue de la marne', 50170, 'Mont Saint Michel', 'France');
+INSERT INTO adresse (numero_rue, nom_rue, code_postal, nom_ville, pays) 
+VALUES 
+ (13, 'rue du kernic', 29430, 'Plouescat', 'France');
+INSERT INTO adresse (numero_rue, nom_rue, code_postal, nom_ville, pays) 
+VALUES 
+ (8, 'rue claire dreaunau', 56100, 'Lorient', 'France');
+INSERT INTO adresse (numero_rue, nom_rue, code_postal, nom_ville, pays) 
+VALUES 
+ (13, 'Hent an aod', 29910 , 'Trégunc', 'France');
+INSERT INTO adresse (numero_rue, nom_rue, code_postal, nom_ville, pays) 
+VALUES 
+ (13, 'Hent an aod', 29910 , 'Trégunc', 'France');
+
+/* Adresses clients étrangers */
 INSERT INTO adresse (numero_rue, nom_rue, code_postal, nom_ville, pays, etat) 
 VALUES 
  (05, 'Columbia Street', 20001, 'Washington DC', 'USA', 'Columbia');
@@ -114,35 +129,44 @@ INSERT INTO langue(nom_langue)
 VALUES ('Espagnol');
 INSERT INTO langue(nom_langue)
 VALUES ('Allemand');
+INSERT INTO langue(nom_langue)
+VALUES ('Anglais');
+INSERT INTO langue(nom_langue)
+VALUES ('Italien');
+INSERT INTO langue(nom_langue)
+VALUES ('Ecossais');
+INSERT INTO langue(nom_langue)
+VALUES ('Irlandais');
 
 
+
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mr', 'Neymar', 'Jean', 'Jean.Neymar@gmail.com', 'jeje92NEY', 'Jejean','/assets/imgs/Profils/jean_neymar.png', '10/08/1992', '1', 'NEYJEAN01', 1);
+VALUES ('Mr', 'Neymar', 'Jean', 'Jean.Neymar@gmail.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'Jejean','/assets/imgs/Profils/jean_neymar.webp', '10/08/1992', '1', 'NEYJEAN01', 1);
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mme', 'Waxson', 'Emmi', 'emmmi.waxson@outlook.com', 'Wemmimi19', 'Wemimi', '/assets/imgs/Profils/emmi_waxson.png', '15/04/1990', '2', 'WAXEMMI02', 2);
+VALUES ('Mme', 'Waxson', 'Emmi', 'emmmi.waxson@outlook.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'Wemimi', '/assets/imgs/Profils/emmi_waxson.webp', '15/04/1990', '2', 'WAXEMMI02', 2);
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mr', 'Daip', 'Jauni', 'Daip.Jauni@wanadoo.com', 'jaujau12', 'JauniPaid','/assets/imgs/Profils/jauni_daip.png', '09/06/1963', '3', 'DAIJAUNI03', 3);
+VALUES ('Mr', 'Daip', 'Jauni', 'Daip.Jauni@wanadoo.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'JauniPaid','/assets/imgs/Profils/jauni_daip.webp', '09/06/1963', '3', 'DAIJAUNI03', 3);
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Non spécifié', 'Magi', 'Renou', 'magi.renou@gmail.eu', 'magi1234', 'MagiRenou','/assets/imgs/Profils/renou_magi.png', '23/02/2000','6', 'MAGRENOU06', 6);
+VALUES ('Non spécifié', 'Magi', 'Renou', 'magi.renou@gmail.eu', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'MagiRenou','/assets/imgs/Profils/renou_magi.webp', '23/02/2000','6', 'MAGRENOU06', 6);
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mr', 'Renault', 'Guillaume', 'guillaume.renault@gmail.com', 'guigui14', 'guiguirenault','/assets/imgs/Profils/guillaume_renault.png', '25/04/1992','1', 'RENGUILLAUME07', 1);
+VALUES ('Mr', 'Renault', 'Guillaume', 'guillaume.renault@gmail.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'guiguirenault','/assets/imgs/Profils/guillaume_renault.webp', '25/04/1992','1', 'RENGUILLAUME07', 1);
 INSERT INTO compte_client(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client, cc_id_adresse)
-VALUES ('Mme', 'Mir', 'Ador', 'mir.ador@gmail.fr', '1234567', 'mimir78','/assets/imgs/Profils/mir_ador.png', '21/09/1999','4', 'MIRADOR09', 4);
+VALUES ('Mme', 'Mir', 'Ador', 'mir.ador@gmail.us', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'mimir78','/assets/imgs/Profils/mir_ador.webp', '21/09/1999','14', 'MIRADOR09', 4);
 
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Mme', 'Kniglait', 'Keira', 'Keira.Kniglait@gmail.fr', 'keirakni89', 'KeiraSwann','/assets/imgs/Profils/keira_kniglait.png', '26/05/1985', '4', '/assets/imgs/cni/identite_01','21/12/2025', true );
+VALUES ('Mme', 'Kniglait', 'Keira', 'Keira.Kniglait@gmail.fr', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'KeiraSwann','/assets/imgs/Profils/keira_kniglait.webp', '26/05/1985', '4', '/assets/imgs/cni/identite_01','21/12/2025', true );
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Mr', 'Toman', 'Ks', 'toman.ks@apple.us', 'totom11111', 'TomanWar','/assets/imgs/Profils/Toman_ks.png', '09/07/1956','5', '/assets/imgs/cni/identite_02', '27/05/2027', true );
+VALUES ('Mr', 'Toman', 'Ks', 'toman.ks@apple.us', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'TomanWar','/assets/imgs/Profils/toman_ks.webp', '09/07/1956','5', '/assets/imgs/cni/identite_02', '27/05/2027', true );
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Non spécifié', 'Cam', 'Ailaion', 'Ailaion.cam@gmail.fr', 'camAil21', 'AilCamXX','/assets/imgs/Profils/ailaion_cam.png', '31/12/1956','2', './assets/imgs/cni/identite_03', '21/05/2020', false );
+VALUES ('Non spécifié', 'Cam', 'Ailaion', 'Ailaion.cam@gmail.fr', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'AilCamXX','/assets/imgs/Profils/ailaion_cam.webp', '31/12/1956','2', './assets/imgs/cni/identite_03', '21/05/2020', false );
 
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Mr', 'Le Goff', 'Yannick', 'yannick.le_goff@exemple.com', 'yg123456', 'YannickBreton', '/assets/imgs/Profils/yannick_le_goff.png', '20/05/1975', 2, '/assets/imgs/cni/identite_04', '20/05/2029', true);
+VALUES ('Mr', 'Le Goff', 'Yannick', 'yannick.le_goff@exemple.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'YannickBreton', '/assets/imgs/Profils/yannick_le_goff.webp', '20/05/1975', 2, '/assets/imgs/cni/identite_04', '20/05/2029', true);
 
 INSERT INTO compte_proprietaire(civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, identite, date_cni_fin_valid, est_valide)
-VALUES ('Mr','Dupont', 'Paul', 'paul.dupont@example.com', 'paul123456', 'PaulDupont', '/assets/imgs/Profils/paul_dupont.png', '01/01/1980', 3, '/assets/imgs/cni/identite_05', '07/05/2020', false);
+VALUES ('Mr','Dupont', 'Paul', 'paul.dupont@example.com', '$2y$10$K9Pqj5NAb9LHPaf/WDVNIurPpd5pdhO7.JDdFsSdlNXaHkTdiIDuK', 'PaulDupont', '/assets/imgs/Profils/paul_dupont.webp', '01/01/1980', 3, '/assets/imgs/cni/identite_05', '07/05/2020', false);
 
-/* Insertion donnees avec accroches et description */
+/* Ensemble des logements */ 
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
 VALUES ('Cabanon dans la forêt', 2, '/assets/imgs/logements/image_1.svg', 48.0275, -2.2163, 15, 1, 0, 1, 80, false, 2, 7, 7, 1, 7, 4, 4, 'Petit refuge rustique', 'Un cabanon rustique parfait pour une escapade en pleine nature, idéal pour deux personnes.', 88);
@@ -241,6 +265,8 @@ INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_r
 INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
 (5, '15/07/2024', '20/07/2024', 7, '15/06/2024', FALSE, 2, 6, 5775, 57.75, 35, 5867.75);
 
+INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, date_reservation, en_annulation, R_id_logement, R_id_compte, total_tarif_ttc, frais_service, taxe_sejour, tarif_total) VALUES
+(5, '15/07/2024', '20/07/2024', 7, '15/06/2024', FALSE, 2, 6, 5775, 57.75, 35, 5867.75);
 
 INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
 VALUES ('4', 'Très bel appartement', 1);
@@ -251,66 +277,182 @@ VALUES ('5', 'Un palace digne des plus grands ! Le roi Louis XIV aurait rêvé d
 INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
 VALUES ('3', 'Peut mieux faire.', 4);
 INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
-VALUES ('1', 'Des cafards partout ! Cet appartement est misérable !', 2);
+VALUES ('1', 'Des cafards partout ! Ce logement est misérable !', 2);
+INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
+VALUES ('5', 'Le séjour a été fantastique, le logement était impeccable et bien situé. Je recommande vivement !', 7);
+INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
+VALUES ('3', 'Le logement était correct, mais il y avait quelques problèmes de propreté... Les vacances familiales furent difficiles !', 8);
+INSERT INTO avis (note_avis, commentaire, AV_id_reservation)
+VALUES ('1', 'Le logement était sale et mal entretenu, une expérience très décevante.', 6);
 
 
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (3, 1, 'Moins de 10 km');
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (4, 1, '20km et plus');
 
 INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
 VALUES (1, 2, 'Sur place');
 INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
-VALUES (1, 5, 'Moins de 5 km');
+VALUES (11, 2, 'Moins de 20 km');
 INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
-VALUES (3, 1, 'Moins de 10 km');
+VALUES (15, 2, 'Moins de 5 km');
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (19, 2, 'Moins de 15 km');
+
 INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
 VALUES (2, 4, 'Moins de 15 km');
 INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
 VALUES (4, 4, 'Moins de 20 km');
 INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
-VALUES (4, 1, '20km et plus');
+VALUES (14, 4, '20km et plus');
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (9, 4, 'Moins de 5 km');
+
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (10, 5, 'Moins de 15km');
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (11, 5, 'Sur place');
+
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (6, 6, '20 km et plus');
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (16, 6, 'Moins de 5 km');
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (12, 6, 'Moins de 10 km');
+
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (7, 7, 'Sur place');
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (8, 7, 'Moins de 5 km');
+INSERT INTO activite_dispo(AD_id_logement, AD_id_activite, eloignement)
+VALUES (19, 7, 'Moins de 15 km');
+
 
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
-VALUES ('658964722','+33', 1);
+VALUES ('0612345678','+33', 1);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
-VALUES ('658964562','+33', 2);
+VALUES ('0623456789','+33', 2);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
-VALUES ('351212587','+1', 2);
+VALUES ('0634567890','+33', 3);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
-VALUES ('202121256','+1', 4);
+VALUES ('0645678901','+33', 3);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
-VALUES ('75689542','+66', 5);
+VALUES ('0656789012','+33', 4);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
-VALUES ('858662562','+33', 3);
+VALUES ('0667890123','+33', 5);
+INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
+VALUES ('0678901234','+33', 5);
+INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
+VALUES ('2025550143','+1', 6);
+INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
+VALUES ('2125550198','+1', 6);
+INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
+VALUES ('0612345678','+33', 7);
+INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
+VALUES ('0623456789','+33', 8);
+INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
+VALUES ('0634567890','+33', 9);
+INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
+VALUES ('0645678901','+33', 10);
+INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
+VALUES ('0656789012','+33', 11);
 
 
+
+
+
+
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (7,1);
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (8,1);
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (9,1);
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (10,1);
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (11,1);
 
 INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
 VALUES (7,2);
 INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (9,2);
+
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (7,3);
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
 VALUES (8,3);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
-VALUES (9,4);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
-VALUES (10,5);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
-VALUES (11,1);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
-VALUES (7,1);
 INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
 VALUES (9,3);
 
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (9,4);
+
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (10,5);
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (11,5);
+
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (9,6);
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (10,6);
+
+
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (8,7);
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (11,7);
+
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (8,8);
+
+INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
+VALUES (10,9);
+
 INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
-VALUES (5,3);
+VALUES (1,1);
 INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
 VALUES (2,1);
 INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
-VALUES (3,4);
+VALUES (10,1);
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (5,1);
+
 INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
 VALUES (3,2);
 INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
-VALUES (1,4);
+VALUES (4,2);
 INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
-VALUES (5,1);
+VALUES (12,2);
+
 INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
 VALUES (2,3);
 INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
-VALUES (4,2);
+VALUES (5,3);
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (14,3);
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (17,3);
+
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (1,4);
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (3,4);
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (4,4);
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (13,4);
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (18,4);
+
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (7,5);
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (8,5);
+INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
+VALUES (11,5);
+
+
+

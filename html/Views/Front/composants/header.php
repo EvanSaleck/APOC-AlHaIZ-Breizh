@@ -1,21 +1,21 @@
 <header>
     <div class="HeaderConteneur">
         <div class="Logo">
-            <a href="./index.php">
-                <img src="/assets/imgs/logo.png" alt="Logo">
+            <a href="/">
+                <img src="/assets/imgs/logo.webp" alt="Logo">
                 <p id="titre">AlHaIZ Breizh</p>
             </a>
         </div>
         <div class="Menu">
             <ul>
-                <li><a href="/Views/Front/about.php">A propos</a></li>
-                <li><a href="/Views/Front/index.php">Accueil</a></li>
+                <li><a href="/">A propos</a></li>
+                <li><a href="/">Accueil</a></li>
             </ul>
             <div id="Compte"></div>
         </div>
     </div>
     <div id="Bulle" class="d-none">
         <div id="Profil"></div>
-        <div id="Connexion"></div>
+        <div id="btnConnexion"></div>
     </div>
 </header>

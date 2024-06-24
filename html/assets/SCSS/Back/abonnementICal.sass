@@ -1,0 +1,103 @@
+@use '../general' as general
+
+h1 
+    text-align: center
+
+#lienListeAbo
+    margin: 2.5vw 3.5vw
+    text-align: center
+    background-color: general.$couleur-back-bleu-zodiac 
+    color: white
+    padding: 1vw 2vw
+    border-radius: 5px
+    text-decoration: none
+
+
+#bodyContent 
+    width: 80%
+    margin: 0 auto 2.5vw auto
+
+
+    #divButton
+        display: flex
+        justify-content: start
+        padding: 0
+        margin: 0
+
+        a 
+            margin: 1vw 0
+            padding: 1vw
+
+
+
+form
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    // margin: 0 auto
+    // width: 50%
+    padding: 1em
+    border-radius: 5px
+    border: 1px solid general.$couleur-back-bleu-zodiac
+
+    label
+        font-weight: bold    
+
+    input
+        margin: 0.5em 0
+
+    #titre
+        text-align: start
+        width: 40%
+        margin-bottom: 1vw
+
+        input[type="text"]
+            padding: 0.5em
+            border-radius: 5px
+            border: 1px solid general.$couleur-back-bleu-zodiac
+            width: 100%
+
+
+    #datesAbonnement
+        display: flex
+        justify-content: space-between
+        gap: 1em
+        width: 40%
+
+        // on modernise les inputs de date
+        input[type="date"]
+            padding: 0.5em
+            border-radius: 5px
+            border: 1px solid general.$couleur-back-bleu-zodiac
+
+    #listeLogementsLabel
+        margin-top: 2.5vw
+
+    #listeLogements
+        display: flex
+        flex-direction: column
+        margin-bottom: 2.5vw
+        margin-top: 1vw
+        gap: 1em
+
+        label
+            display: flex
+            align-items: center
+            gap: 1em
+            font-weight: normal
+
+        input[type="radio"]
+            margin: 0
+
+    #submit
+        text-align: center
+        background-color: general.$couleur-back-bleu-zodiac 
+        color: white
+        padding: 1vw 2vw
+        border-radius: 5px
+        text-decoration: none
+        cursor: pointer
+
+    
+            

@@ -1,0 +1,164 @@
+@use './general' as general
+
+.modal-content
+    position: absolute
+    top: 0
+    bottom: 0
+    left:0
+    right: 0
+    z-index: 9999
+    color: general.$couleur-front-bleu-charbon
+    background-color: #FFFFFF !important
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25)
+
+    width: 30%
+    height: fit-content
+    margin: auto
+    margin-top: 10%
+
+    border-radius: 10px
+
+    display: flex
+    flex-direction: column
+
+    user-select: none
+    text-align: center
+    h2
+       vertical-align: middle
+       text-align: center
+
+    .fermer
+        font-size: 1.5em
+        font-weight: bold
+        cursor: pointer
+        margin-right: auto
+        margin-left: 0.5em
+
+
+    #connexionForm
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        input 
+            margin: 10px
+            padding: 10px
+            border-radius: 5px
+            border: 1px solid general.$couleur-front-bleu-charbon
+            outline-color: general.$couleur-front-bleu-verdatre
+
+
+        button 
+            margin: 10px
+            padding: 10px
+            border-radius: 5px
+            border: 1px solid general.$couleur-front-bleu-charbon
+            background-color: general.$couleur-front-bleu-verdatre
+            color: white
+        
+    #inscription
+        margin-top: 10px
+        text-decoration: underline
+        text-align: center
+        cursor: pointer
+
+
+
+.blur 
+    filter: blur(5px)
+    pointer-events: none
+
+/* Ensure the modal is not blurred */
+.exception 
+    filter: none
+    pointer-events: auto
+
+
+.alert-popup
+    position: fixed
+    top: 0   
+    left: 50%
+    transform: translate(-50%)
+    font-size: 1em
+    cursor: pointer
+
+    // on affiche l'image a gauche et le texte a droite
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 1em
+    width: 40%
+    // on fait en sorte que le texte puisse etre sur plusieurs lignes
+    word-wrap: break-word
+
+    border-radius: 0 0 10px 10px
+
+    
+    z-index:999999
+
+    background-color: #fff 
+    color: #000000
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.75)
+
+    img
+        width: 20%
+    
+    p 
+        width: 70%
+        text-align: center
+    
+    animation: arrivee 0.5s, depart 0.5s 5s forwards
+
+    @keyframes arrivee
+        from
+            top: -100%
+        to
+            top: 0
+
+    @keyframes depart
+        from
+            top: 0
+        to
+            top: -100%
+
+
+
+
+@media screen and (max-width: general.$max-width-tablette)
+    .modal-content
+        width: 50%
+        margin-top: 5%
+        h2
+            font-size: 1.5em
+        .fermer
+            font-size: 1em
+        #connexionForm
+            input
+                width: 80%
+                font-size: 1em
+            button
+                width: 80%
+                font-size: 1em
+        #inscription
+            font-size: 1em
+
+@media screen and (max-width: 560px)
+    .modal-content
+        width: 100%
+        margin-top: 5% !important
+        margin-left: 10% !important
+        h2
+            font-size: 1.5em
+        .fermer
+            font-size: 1em
+        #connexionForm
+            input
+                width: 80%
+                font-size: 1em
+            button
+                width: 80%
+                font-size: 1em
+        #inscription
+            font-size: 1em
+    

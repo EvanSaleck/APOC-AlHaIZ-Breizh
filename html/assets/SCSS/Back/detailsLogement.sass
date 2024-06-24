@@ -1,0 +1,256 @@
+@use '../general' as general
+
+h1
+    font_size: 2rem
+    color: general.$couleur-back-bleu-zodiac
+    text-align: center
+    margin: 1em
+
+// mettre tous les inputs en dessous des labels
+div
+    display: flex
+    flex-direction: column
+
+.paysEtat
+    display: none
+
+// input 
+//     border: 2px solid  #ADC6E3
+//     border-radius: 6px
+//     height: 2em
+//     font-size: 1rem
+//     padding-left: 0.5em
+//     margin-bottom: 1em
+
+input 
+    padding: 10px
+    border: none
+    background-color: #e9e9e9
+    outline: none
+    margin-bottom: 1em 
+    border-radius: 6px
+    color : #102C57
+
+input::placeholder, textarea::placeholder
+    color: #575757
+        
+
+select
+    border: 2px solid #ADC6E3
+    border-radius: 6px
+    height: 2.5em
+    padding: 0.5em
+    font-size: 1rem
+    color: general.$couleur-back-bleu-zodiac
+    background-color: #e9e9e9
+    cursor: pointer
+
+.btnModifier
+    display: flex
+    flex-direction: row
+    justify-content: end
+
+    input
+        background-color: general.$couleur-back-jaune-canteloup
+        color: general.$couleur-back-bleu-zodiac
+        margin: 
+            top: 2em
+            bottom: 2em
+        width: 7em
+        height: 3em
+        border: none
+        border-radius: 6px
+        padding: 0.5em 1em
+        cursor: pointer
+        font-size: 1rem  
+
+.ligneDeuxInputs
+    flex-direction: row
+
+    .input1
+        flex: 1
+        margin-right: 1em 
+    
+    .input2
+        flex: 0.5
+
+    .input3
+        flex: 1
+        margin-left: 1em
+
+#photo
+    border: none
+    border-radius: 0
+    height: auto
+
+textarea
+    // border: 2px solid  #ADC6E3
+    // border-radius: 6px
+    // padding: 0.5em
+    padding: 10px
+    border: none
+    background-color: #e9e9e9
+    outline: none
+    border-radius: 6px
+    color: #102C57
+    
+
+
+.containerPrincipal
+    color: general.$couleur-back-bleu-zodiac
+    font-size: 1rem
+    padding: 
+        left: 10%
+        right: 10%
+
+    .souligne
+        display: inline-block
+        position: relative
+        margin:
+            top: 1em
+            bottom: 0.5em
+
+    // .souligne::after
+    //     content: ''
+    //     position: absolute
+    //     left: 0
+    //     bottom: 0
+    //     width: 20%
+    //     height: 3px 
+    //     border-radius: 6px
+    //     background-color: general.$couleur-back-bleu-zodiac
+
+    .infosEtPhoto
+        display: flex
+        flex-direction: row
+        width: 100%
+
+        .infosPrincipales 
+            flex: 1
+            display: flex
+            flex-direction: column
+            padding-right: 7em
+        
+            .divTarif
+                display: flex
+                flex-direction: row
+                justify-content: space-between
+                gap: 1em
+                align-items: center
+
+                span
+                    font-size: 1.5rem
+
+        .photo
+            flex: 0.5
+
+            .imageLogement
+                height: 100%
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
+                text-align: center
+                color: general.$couleur-back-bleu-zodiac
+                font-size: 16px
+                position: relative
+                background-color: #e8f3ff
+                border-radius: 10px
+                background-size: cover 
+
+                img
+                    height: 20%
+                    object-fit: cover            
+
+.infosComplementaires
+    display: flex
+    flex-direction: row
+
+    .amenagementEtDescription
+        flex: 1
+        display: flex
+        padding-right: 7em 
+
+        .accrocheDescription
+            flex: 1
+            display: flex
+            gap: 10px 
+
+            > div
+                flex: 1 
+
+                textarea
+                    flex: 1
+
+        #amenagementsBoutons 
+            display: flex
+            flex-direction: row
+            flex-wrap: wrap
+            justify-content: space-around
+
+            button
+                background-color: #e9e9e9
+                color: general.$couleur-back-bleu-zodiac
+                border: 1px solid general.$couleur-back-bleu-zodiac
+                padding: 0.5em 1em
+                margin: 0.5em
+                cursor: pointer
+                font-size: 1rem
+                border-radius: 5px
+                display: flex
+                flex-direction: row
+                justify-content: space-between
+                align-items: center
+
+                img 
+                    margin-right: 0.5em
+            
+            button:hover
+                    border-color: white
+                    background-color: #E3E3E3
+                
+            .active, .active:hover
+                background-color: general.$couleur-back-bleu-zodiac
+                color: white
+                img
+                    filter: brightness(0) saturate(100%) invert(100%) contrast(100%)
+                
+    .caracterisitquesLogements
+        flex: 0.5
+
+        #caracteristique, #conditionsReservations
+            display: flex
+            flex-direction: column
+            gap: 1em
+
+
+            div
+                display: flex
+                flex-direction: row
+                justify-content: space-between
+                word-wrap: wrap
+
+                input
+                    width: 40%
+            
+            label
+                    word-wrap: nowrap
+            
+            .selectJour
+                display: flex
+                flex-direction: row
+                justify-content: end
+                width: 40%
+
+                input
+                    height: 95%
+                    min-width: 50px
+                
+                select 
+                    width: 100%
+                    height: 100%
+                    padding: 0.5em
+                    font-size: 1rem
+                    color: general.$couleur-back-bleu-zodiac
+                    background-color: white
+                    cursor: pointer   

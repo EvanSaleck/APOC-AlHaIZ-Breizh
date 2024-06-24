@@ -7,11 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Feuilles de style -->
-    <link rel="stylesheet" href="/assets/Front/SCSS/modal.css" type="text/css">
-    <script src="/assets/Front/JS/fonctions.js"></script>
+    <link rel="stylesheet" href="/assets/SCSS/modal.css" type="text/css">
+    <!-- <script src="/assets/JS/Front/fonctions.js"></script> -->
     
     <?php
-        session_start();
         
         $pageName = str_replace(".php", "", basename($_SERVER['PHP_SELF']));
         
@@ -20,15 +19,15 @@
         foreach ($pagesIncluses as $page) {
             $url = str_replace(".php", "", basename($page));
 
-            $cheminCSS = "/assets/Front/SCSS/" . $url . ".css";
-            $cheminJS = "/assets/Front/JS/" . $url . ".js";
+            $cheminCSS = "/assets/SCSS/Front/" . $url . ".css";
+            $cheminJS = "/assets/JS/Front/" . $url . ".js";
 
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cheminCSS)) {
                 echo '<link rel="stylesheet" href="' . $cheminCSS . '" type="text/css">' . PHP_EOL;
             }
 
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . $cheminJS)) {
-                echo '<script src="' . $cheminJS . '"></script>' . PHP_EOL;
+                echo '<script type="module" src="' . $cheminJS . '"></script>' . PHP_EOL;
             }
         }
     ?>
@@ -50,7 +49,7 @@
 
     <?php
     if (isset($_SESSION['client'])) {
-        $user = json_encode($_SESSION['client']);
+        $user = $_SESSION['client'];
         ?>
         <script>
             sessionStorage.setItem('User', JSON.stringify(<?php echo $user; ?>));

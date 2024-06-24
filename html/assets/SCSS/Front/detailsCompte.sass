@@ -1,0 +1,97 @@
+
+@use '../general' as general
+
+// style de la page de détail du compte mobile
+// @media screen and (max-width: general.$max-width-telephone)
+.compte
+  font-family: general.$police-texte
+  color: general.$couleur-front-bleu-charbon
+  width: 80vw
+  max-width: 500px
+  margin: 0 auto
+  overflow-y: auto
+  padding-bottom: 12vh
+
+  .infoCo, .infoPer
+    border-bottom: 1px solid general.$couleur-front-bleu-nuageux
+    padding: 10px
+    margin-bottom: 20px
+
+  h1, h2, h3
+    font-family: general.$police-titre
+    color: general.$couleur-front-bleu-verdatre
+
+  h1
+    font-size: general.$taille-police-titre-mobile
+    margin-bottom: 15px
+
+  h2
+    font-size: general.$taille-police-titre-mobile * 0.9
+    margin-bottom: 15px
+
+  h3
+    font-size: general.$taille-police-texte-mobile
+    margin-bottom: 5px
+
+  .détailEtPhoto
+    position: sticky
+    top: 0
+    background: white
+    z-index: 10
+    padding: 20px 0 0 0
+
+  .divPP
+    display: flex
+    justify-content: center
+    margin-bottom: 20px
+
+    .imgProfil
+      border-radius: 50%
+      width: 80px
+      height: 80px
+      object-fit: cover
+      border: 2px solid black
+      background-color: general.$couleur-back-bleu-zodiac
+
+  .divNom, .divPrenom, .divCivilite, .divAdresse, .divPseudo, .divEmail
+    margin-bottom: 10px
+
+    h3, p
+      margin: 5px 0
+
+    p
+      padding: 5px
+      color: general.$couleur-front-bleu-charbon
+
+  button
+    color: white
+    padding: 10px 20px
+    font-size: general.$taille-police-texte-mobile
+    border-radius: 5px
+    cursor: pointer
+    transition: background-color 0.3s ease
+    display: block
+    margin-left: auto
+    margin-right: auto
+    text-align: center
+
+  .mdp
+    background-color: general.$couleur-front-bleu-verdatre
+    border: 4px solid general.$couleur-front-bleu-verdatre
+    width: 80%
+    &:hover
+      border-color: lighten(general.$couleur-front-bleu-verdatre, 5%)
+    &:focus
+      border-color: lighten(general.$couleur-front-bleu-verdatre, 15%)
+
+  .update
+    background-color: #e20000
+    border: 4px solid #e20000
+    width: 100%
+    &:hover
+      border-color: lighten(#e20000, 5%)
+    &:focus
+      border-color: lighten(#e20000, 15%)
+
+// style de la page de détail du compte desktop
+// @media screen and (min-width: general.$max-width-telephone)

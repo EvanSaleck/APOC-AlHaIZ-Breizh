@@ -1,6 +1,6 @@
 <template class="card">
     <div class="imgbox">
-        <img class="imagePrincipale" src="" alt="">
+        <img class="imagePrincipale" src="" alt="Image du logement non trouvée">
     </div>
     <div class="content">
         <h3 class="nomVille"></h3>
