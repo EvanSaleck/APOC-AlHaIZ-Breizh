@@ -1,23 +1,107 @@
 <?php
-//  include_once 'Views/Front/composants/navbar.php';
-//  include_once 'Views/Front/composants/card.php';
- include_once 'Views/Back/composants/header.php';
-//  include_once 'Views/Front/composants/footer.php';
- include_once 'Views/Back/composants/head.php';
+
+ include_once 'Views/Front/composants/navbar.php';
+ include_once 'Views/Front/composants/card.php';
+ include_once 'Views/Front/composants/header.php';
+ include_once 'Views/Front/composants/head.php';
  ?>
+ 
 
 <body>
     <div id="headerAccueilMobile">
-        <img src="/assets/imgs/logo.png" id="logoAssoMobile" alt="Logo de l'association">
+        <img src="/assets/imgs/logo.webp" id="logoAssoMobile" alt="Logo de l'association">
         <button id="buttonfiltresMobile">
             <img src="/assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
     </div>
+    <div id="filtresDesktop">
+        <form id="formFiltresDesktop">
+            <div title="Commune">
+                <label for="commune">Commune</label>
+                <input type="text" name="commune" id="commune" placeholder="Ville">
+            </div>
 
+            <div title="Département">
+                <label for="departement">Département</label>
+                <input type="text" name="departement" id="departement" placeholder="Dépt.">
+            </div>
+
+            <div title="Date d'arrivée">
+                <label for="dateArrivee">Date d'arrivée</label>
+                <input type="date" name="dateArrivee" id="dateArrivee" placeholder="Arrivée">
+            </div>
+
+            <div title="Date de départ">
+                <label for="dateDepart">Date de départ</label>
+                <input type="date" name="dateDepart" id="dateDepart" placeholder="Départ">
+            </div>
+
+            <div title="Prix max">
+                <label for="prixMa">Prix max</label>
+                <input type="text" name="prixMa" id="prixMa" placeholder="Max (€)">
+            </div>
+
+            <div title="Prix min">
+                <label for="prixMin">Prix min</label>
+                <input type="text" name="prixMin" id="prixMin" placeholder="Min (€)">
+            </div>
+
+            <button type="submit" title="Trouver mon logement">Trouver mon logement</button>
+        </form>
+    </div>
+    <div id="filtres">
+        <div class="multiselect-container">
+            <label>Choisissez un département</label>
+            <div class="select-box" id="select-box">
+                <div class="selected-items" id="selected-items">Sélectionnez des options</div>
+                <div class="arrow">&#9660;</div>
+            </div>
+            <div class="dropdown" id="dropdown">
+                <input type="text" id="search" class="searchDept" placeholder="Rechercher...">
+                <ul id="options-list">
+                    <li data-value="22">Côtes d’Armor</li>
+                    <li data-value="29">Finistère</li>
+                    <li data-value="35">Ille-et-Vilaine</li>
+                    <li data-value="56">Morbihan</li>
+                </ul>
+            </div>
+        </div>
+        <!-- bouton permettant d'afficher la modale de selection de prix  -->
+        <div id="filtrePrixContainer">
+            <div id="prixFiltresContainer">
+                <label>Prix</label> 
+                <button id="btnPrix"><span id="prixMin"></span> - <span id="prixMax"></span> €/nuit</button>
+            </div>
+    
+            <!-- modale de selection de prix -->
+            <div id="wrapper">
+                <div class="price-input">
+                    <div class="field">
+                        <span>Min</span>
+                        <input type="number" class="input-min">
+                    </div>
+                    <div class="separator">-</div>
+                        <div class="field">
+                            <span>Max</span>
+                            <input type="number" class="input-max">
+                        </div>
+                    </div>
+                    <div class="slider">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="range-input">
+                        <input type="range" class="range-min" step="10">
+                        <input type="range" class="range-max" step="10">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="cardsContainer"></div>
 
     <div id="ongletFiltres">
-        <h1>Filtres</h1>
+        
+        <!-- <h1>Filtres</h1>
         <span id="barreFiltresMobiles"></span>
         <div>
             <label for="parCommune">Commune</label>
@@ -55,40 +139,10 @@
                     <input type="text" name="parPrixMax" id="parPrixMax">
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
-
-    <!-- <div class="modal-content">
-        <span class="fermer">&times;</span>   
-        <h2>Inscription</h2>
-        <div id="connexionForm">
-            <label for="nom">Nom :  
-            <input type="nom" id="nom" name="nom" placeholder="Valjean" required></label>
-            <label for="prenom">Prénom :
-            <input type="prenom" id="prenom" name="prenom" placeholder="Jean" required></label>
-            <label for="pseudo">Pseudonyme :
-            <input type="pseudo" id="pseudo" name="pseudo" placeholder="ValJean" required></label>
-            <label for="civilite">Civilité :
-            <select name="civilite" id="civilite" required>
-                <option value="Mr.">Monsieur</option>
-                <option value="Mme">Madame</option>
-                <option value="Non spécifié">Non spécifié</option>
-            </select></label>
-            <label for="email">E-mail :
-            <input type="email" id="email" name="email" placeholder="Jean.valjean@gmail.com" required></label>
-            <label for="password">Mot de passe
-            <input type="password" id="password" name="password" placeholder="********" required></label>
-            <label for="verifpassword">Confirmer le mot de passe
-            <input type="verifpassword" id="verifpassword" name="verifpassword" placeholder="********" required></label>
-
-            <label for="cgu">En cochant cette case, je confirme avoir lu et accepté les Conditions Générales d'Utilisation d'ALHaIZ Breizh. Je comprends que ces conditions régissent l'utilisation des services fournis et j'accepte de les respecter.
-            <input type="checkbox" id="cgu" name="cgu" required></label>
-
-            <label for="cgu">En cochant cette case, je reconnais avoir lu et accepté les Conditions Générales de Vente d'ALHaIZ Breizh. Je comprends que ces conditions définissent les modalités de vente entre ALHaIZ Breizh et moi-même et m'engage à les respecter.
-            <input type="checkbox" id="cgv" name="cgv" required></label>
-            <button id="Connexion" onclick="Inscription()">S'inscrire</button>
-        </div>
-        <p>Déjà un compte ?<span id="inscription" onclick="CreateConnexionModal()">Connectez vous</span></p>
-    </div> -->
 </body>
+<?php 
+    include_once 'Views/Front/composants/footer.php' 
+?>
 </html>

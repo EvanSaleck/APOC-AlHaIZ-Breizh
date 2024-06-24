@@ -1,0 +1,417 @@
+@charset "UTF-8"
+
+/* Définition des couleurs du Front par défaut
+/* Définition des couleurs du Back par défaut
+/* Définition des tailles d'écran par défaut
+/* Import des polices Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap")
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap")
+
+/* Import de la police dyslexique Lexend
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap")
+
+/* Définition des polices par défaut
+/* Définition tailles de police desktop
+/* Définition tailles de police mobile
+/* Reset CSS
+
+*
+  margin: 0
+  padding: 0
+
+/* Appliquer les polices
+
+body
+  font-family: "DM Sans", sans-serif
+
+h1, h2, h3, h4, h5, h6
+  font-family: "Reem Kufi", sans-serif
+
+.error
+  border: 1px solid #D8000C !important
+
+/* Appliquer les polices
+
+body
+  font-family: "DM Sans", sans-serif
+
+h1, h2, h3, h4, h5, h6
+  font-family: "Reem Kufi", sans-serif
+
+.error
+  border: 1px solid #D8000C !important
+
+.devis
+  margin: 0% 3%
+  font-family: "Reem Kufi", sans-serif
+
+  p
+    font-size: 3vw
+
+  h3
+    font-size: 2.2vw
+
+.headerDevis
+  display: flex
+  align-items: center
+  margin-bottom: 4vw
+
+.retour
+  border: 0
+  padding: 0
+  margin: 0 10%
+  background-color: white
+
+.titreRecapDevis
+  text-align: center
+  font-size: 4vw
+
+.titreLogDevis
+  font-size: 4vw
+
+.infosLogement
+  display: flex
+  flex-direction: row
+  align-items: center
+
+  >
+    .logementResa, figure
+      margin-bottom: 3vw
+
+.noteResa
+  display: flex
+  align-items: center
+  margin-top: 2vw
+  font-size: 4vw
+
+.noteEtoile
+  width: 4vw
+
+.note
+  padding-left: 1.7vw
+
+.photoLogResa
+  width: 100%
+  border-radius: 2vw
+
+.infosReservationDev
+  padding: 3vw 0
+
+  > h3
+    text-align: center
+
+    /* Je veux que ce h3 ait une sorte de barre bleue en dessous (comme un soulignement)
+    font-size: 3vw
+    margin-bottom: 2vw
+    position: relative
+
+  h3::after
+    content: ""
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    bottom: -0.5vw
+    width: 50%
+    height: 0.2vw
+    background-color: #8CB9BD
+
+  > div:not(.deuxiemeBarre)
+    padding-bottom: 3vw
+    display: flex
+    justify-content: space-between
+
+.info-label
+  flex: 1
+  text-align: left
+
+.info-value
+  flex: 1
+  text-align: right
+
+.PaiementResa
+  margin: 2vw 0
+  border: #8CB9BD solid 0.2vw
+  border-radius: 1vw
+  padding: 3% 0
+
+  > p
+    margin-left: 2vh
+
+figure
+  margin: 0 2.5vh
+
+.ChoixPaiement
+  display: flex
+  flex-direction: column
+
+.PaiementVisa
+  display: flex
+  align-items: center
+  margin-left: 15vw
+
+.coordonnesVisa
+  width: 90%
+
+.imageVisa, .imagePaypal
+  margin: 0 2vw 2vw 0
+  width: 13vw
+
+input
+  &::-moz-placeholder
+    font-weight: bold
+    opacity: 0.5
+    font-weight: bold
+    opacity: 0.5
+
+  &::placeholder
+    font-weight: bold
+    opacity: 0.5
+
+.styleInput
+  display: flex
+  justify-content: space-between
+  margin-bottom: 2vw
+
+  input
+    border: 1px solid #ccd1d9
+    border-radius: 5px
+    padding: 1rem
+    font-size: 1vw
+    flex: 1
+    margin-right: 1rem
+    box-sizing: border-box
+
+    &:last-child
+      margin-right: 0
+
+#carteCredit
+  flex: 2
+
+.premiereBarre
+  width: 100%
+  height: 0.7vw
+  background-color: #8CB9BD
+  margin: 10px auto
+  border-radius: 1vw
+
+.deuxiemeBarre
+  width: 40%
+  height: 0.7vw
+  background-color: #8CB9BD
+  margin: 10px auto
+  border-radius: 1vw
+
+.condAnnul
+  > p
+    font-size: 3vw
+
+  h3
+    position: relative
+    margin-bottom: 1.7vw
+
+    &::after
+      content: ""
+      position: absolute
+      bottom: -0.6vw
+      left: 0
+      width: 7.5ch
+      height: 0.3vw
+      background-color: #8CB9BD
+
+section
+  text-align: center
+  margin: 20px 0
+
+.proceder_paiement, .boutonPaypal
+  font-family: "Reem Kufi", sans-serif
+  padding: 2vw 3vw
+  background-color: #F0AA1F
+  border: none
+  border-radius: 1vw
+  cursor: pointer
+  font-size: 2.5vw
+  width: 30vw
+  float: right
+  margin-top: 3vw
+
+.boutonPrecedent
+  font-family: "Reem Kufi", sans-serif
+  padding: 2vw 3vw
+  background-color: #F0AA1F
+  border: none
+  border-radius: 1vw
+  cursor: pointer
+  font-size: 2.5vw
+  width: 30vw
+  margin: 5vw 0 3vw 5vw
+
+/* Styles pour l'overlay
+
+.overlay
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: rgba(0, 0, 0, 0.5)
+  display: none
+
+.modal-box
+  position: fixed
+  top: 0%
+  left: 50%
+  transform: translate(-50%, 0)
+
+  /* Centrer la modale
+  background: white
+  border: 0.7vw solid #8CB9BD
+  border-top: 0
+  border-radius: 2vw
+  text-align: center
+  display: none
+  width: 80%
+  padding: 2vw
+  box-shadow: 0px 0px 2vw rgba(0, 0, 0, 0.1)
+
+.headerPaiementValide
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 2vw
+  margin-bottom: 4vw
+
+  h2
+    margin: 0
+    font-size: 5vw
+
+  img
+    width: 5vw
+    height: auto
+
+  i
+    font-size: 5vw
+    color: #4CAF50
+
+.active
+  .overlay, .modal-box
+    display: block
+
+.basPage
+  display: flex
+
+/* Ajustements de style pour les petits écrans
+@media (max-width: 767px)
+  .HeaderConteneur
+    display: none
+
+  .headerPaiementValide
+    flex-direction: column
+
+    /*     gap: 5px;
+
+  h3, .boutonPrecedent
+    display: none
+
+  .PaiementVisa
+    flex-direction: column
+    margin-left: 0
+
+  .basPage
+    margin-bottom: 20vw
+
+@media (min-width: 767px)
+  .headerPaiementValide >
+    h2
+      font-size: 3vw
+
+    img
+      width: 3vw
+
+  .deuxiemeBarre, .premiereBarre, .headerDevis, .PaiementResa p
+    display: none
+
+  .infosReservationDev
+    border: solid 0.2vw #8CB9BD
+    padding: 0vw
+    display: flex
+    padding: 2vw
+    flex-direction: column
+    flex: 1
+    border-radius: 1vw
+
+  .infosLogementsTOTAL
+    display: flex
+
+  .infosLogementResa
+    display: flex
+    flex-direction: row
+    width: 100%
+
+  .devis p
+    font-size: 1.5vw
+
+  .noteResa
+    display: flex
+    align-items: center
+    margin-top: 2vw
+    font-size: 2vw
+
+  .titreLogDevis
+    font-size: 2.7vw
+
+  .infosLogement
+    margin-right: 5vw
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    border: solid 0.2vw #8CB9BD
+    flex: 1
+    padding: 1vw
+    border-radius: 1vw
+
+  .condAnnul > p
+    font-size: 1.5vw
+
+  .boutonPrecedent, .boutonPaypal
+    padding: 1vw 1.5vw
+    border-radius: 0.7vw
+    font-size: 1.8vw
+    margin-top: 10%
+
+  .boutonPrecedent
+    width: 20vw
+
+  .boutonPaypal
+    width: 12vw
+    margin: 5vw 1vw 2vw 0
+    padding: 1.5vw 5vw
+    margin: 5vw 0 0 5vw
+    padding: 1vw 1.5vw
+    border-radius: 0.7vw
+    font-size: 1.8vw
+    width: 20vw
+    float: right
+    margin: 0 5vw 5vw 0
+
+  .proceder_paiement
+    padding: 1vw 1.5vw
+    border-radius: 0.7vw
+    font-size: 1.8vw
+    width: 20vw
+    float: right
+    margin: 2vw 0vw 5vw 0
+
+  .ChoixPaiement
+    flex-direction: row
+
+  .PaiementVisa
+    flex-direction: column
+    margin-left: 2vw
+    flex: 1
+
+#Bulle
+  margin-top: 5%
+
+/*# sourceMappingURL=devis.css.map

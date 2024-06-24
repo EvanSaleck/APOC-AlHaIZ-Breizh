@@ -6,3 +6,5 @@
 /html/assets/SCSS/Front/general.css.map
 
 /html/assets/SCSS/*.css.map
+/html/Service/Config.php
+html/Service/Database.php
