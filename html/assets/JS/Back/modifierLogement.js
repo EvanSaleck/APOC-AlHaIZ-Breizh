@@ -24,65 +24,100 @@ document.addEventListener('DOMContentLoaded', function() {
       
     });
   });
+  // Gestion du drag and drop et de l'upload de photo
+  const dropZone = document.getElementById("drop-photo");
+  const fileInput = document.getElementById("photo-input");
+  const fileButton = document.getElementById("photo-button");
+
+  // Ajoute la classe "dragover" lorsque l'utilisateur fait glisser un fichier sur la zone de drop
+  dropZone.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      dropZone.classList.add("dragover");
+  });
+
+  // Supprime la classe "dragover" lorsque l'utilisateur quitte la zone de drop
+  dropZone.addEventListener("dragleave", () => {
+      dropZone.classList.remove("dragover");
+  });
+
+  // Gère le dépôt de fichier
+  dropZone.addEventListener("drop", (event) => {
+      event.preventDefault();
+      dropZone.classList.remove("dragover");
+      console.log('drop file', event.dataTransfer.files);
+      fileInput.files = event.dataTransfer.files;
+      updatePhotoName(fileInput.files);
+  });
+
+  // Ouvre le sélecteur de fichiers lorsque l'utilisateur clique sur le bouton
+  fileButton.addEventListener("click", () => {
+      fileInput.click();
+  });
+
+  // Gère la sélection de fichier via le sélecteur de fichiers
+  fileInput.addEventListener("change", (event) => {
+      console.log('file change');
+      const files = event.target.files;
+      updatePhotoName(files);
+  });
+
+  // Fonction pour mettre à jour le nom de l'image sélectionnée
+  function updatePhotoName(files) {
+      document.querySelector('#photo-nom-image').textContent = files.length > 0 ? files[0].name : '';
+  }
 
   function updateLogementInfo() {
-    let conteneur = document.querySelector('.infosReservationDev');
-    let data = JSON.parse(sessionStorage.getItem('formData'));
+    let formData = JSON.parse(sessionStorage.getItem('formData'));
 
-    const elements = {
-      titre: data.titre,
-      tarif: data.tarif,
-      nom_rue: data.nom_rue,
-      ville: data.ville,
-      cp: data.cp,
-      description: data.description,
-      nbChambres: data.nbChambres,
-      nbLitsSimples: data.nbLitsSimples,
-      nbLitsDoubles: data.nbLitsDoubles,
-      nbPersMax: data.nbPersMax,
-      surface: data.surface,
-      categorie: data.categorie,
-      type: data.type,
-      delaiAnnulMax: data.delaiAnnulMax,
-      delaiResaArrivee: data.delaiResaArrivee,
-      dureeMinLoc: data.dureeMinLoc,
-      accroche: data.accroche,
-      amenagements: data.amenagements
-    };
+    // Affichage des données dans les champs du formulaire
+    Object.keys(formData).forEach(key => {
+        let element = document.getElementById(key);
+        if (element) {
+            if (key === 'description' || key === 'accroche') {
+                element.textContent = formData[key];
+            } else if (key === 'image') {
+                let imageElement = document.getElementById('image-logement');
+                if (imageElement) {
+                    imageElement.style.backgroundImage = "url('" + formData[key] + "')";
+                }
+            } else {
+                element.value = formData[key];
+            }
+        }
+    });
 
-    for (let key in elements) {
-      let element = document.getElementById(key);
-      if (element) {
-        if (key === 'description' || key === 'accroche') {
-          element.textContent = elements[key];
+    // Sélection des options pour les éléments select (type et catégorie)
+    ['type', 'categorie'].forEach(selectId => {
+        let select = document.getElementById(selectId);
+        if (select && formData[selectId]) {
+            let selectedIndex = Array.from(select.options).findIndex(option => option.value === formData[selectId]);
+            if (selectedIndex !== -1) {
+                select.selectedIndex = selectedIndex;
+            }
+        }
+    });
+
+    // Gestion des boutons d'aménagements
+    let selectedAmenagements = formData.amenagements.split(',');
+    let amenagementsBtns = document.querySelectorAll("#amenagementsBoutons button");
+    amenagementsBtns.forEach(btn => {
+        if (selectedAmenagements.includes(btn.id)) {
+            btn.classList.add('active');
         } else {
-          element.value = elements[key];
+            btn.classList.remove('active');
         }
-      }
-    }
+    });
 
-    if (data.type) {
-      let select = document.getElementById('type');
-      let options = select.options;
-      for (let i = 0; i < options.length; i++) {
-        if (options[i].value === data.type) {
-          select.selectedIndex = i;
-          break;
-        }
-      }
+    // Affichage de l'image du logement si présente
+    let imageElement = document.getElementById('image-logement');
+    if (imageElement && formData.image) {
+        imageElement.style.backgroundImage = "url('" + formData.image + "')";
     }
+}
 
-    if (data.categorie) {
-      let select = document.getElementById('categorie');
-      let options = select.options;
-      for (let i = 0; i < options.length; i++) {
-        if (options[i].value === data.categorie) {
-          select.selectedIndex = i;
-          break;
-        }
-      }
-    }
-  }
+
+
+
 
   updateLogementInfo();
 
@@ -105,12 +140,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    const fileInput = document.getElementById('photo-input');
+    // Ajout de l'image sélectionnée s'il y en a une
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
         formData.append('photo', file);
     }
 
+    // Fonction pour mettre à jour le logement
     function updateLogement(logementId) {
         formData.append('id_logement', logementId);
 
@@ -141,5 +177,6 @@ document.addEventListener('DOMContentLoaded', function() {
         utils.ThrowAlertPopup('Erreur: ID du logement manquant.', 'error');
     }
 });
+
 
 });

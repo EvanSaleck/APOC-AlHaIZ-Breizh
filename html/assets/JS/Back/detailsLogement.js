@@ -32,38 +32,37 @@ function envoyerInfos() {
         formData[textArea[i].name] = textArea[i].value;
     }
 
-    // Inclusion de l'image du logement
-    var imageElement = document.querySelector('#image-logement');
+    // Inclusion de l'image du logement si disponible
+    var imageElement = document.getElementById('image-logement');
     if (imageElement) {
-        formData['image'] = imageElement.src;
+        formData['image'] = imageElement.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
     }
+
 
     // Traitement des boutons spécifiques pour récupérer leurs informations
     var boutons = document.querySelectorAll('#amenagementsBoutons button');
     var selectedAmenagements = [];
     for (var i = 0; i < boutons.length; i++) {
-        if (selectedAmenagements.indexOf(boutons[i].id) === -1) {
+        if (boutons[i].classList.contains('active')) {
             selectedAmenagements.push(boutons[i].id);
-            boutons[i].classList.add('active');
-        } else {
-            boutons[i].classList.remove('active');
         }
     }
 
     formData['amenagements'] = selectedAmenagements.join(',');
 
-    console.log(formData);
+    // Enregistrement dans sessionStorage
     sessionStorage.setItem('formData', JSON.stringify(formData));
 }
 
+
 console.log('detailsLogement.js');
 document.addEventListener('DOMContentLoaded', function() {
-    console.log(sessionStorage.getItem('idLogement'));
+    // console.log(sessionStorage.getItem('idLogement'));
     fetch('/api/getLogementDataById/' + sessionStorage.getItem('idLogement'))
     .then(response => response.json())
     .then(data => {
         data.forEach(logement => {
-            console.log(data)
+            // console.log(data)
 
             let logementId = data[0]['id_logement']; // Récupérer l'ID du logement
             sessionStorage.setItem('logementId', logementId); // Stocker l'ID du logement dans sessionStorage
@@ -121,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let image = document.getElementById("image-logement");
             image.style.backgroundImage = "url('" + data[0]['image_principale'] + "')";
+            //console.log(data[0]['image_principale'])
             console.log(data[0]['id_logement'])
 
             const redirectionModifs = document.querySelectorAll('.btnModifier');

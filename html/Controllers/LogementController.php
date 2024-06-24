@@ -149,85 +149,84 @@ class LogementController {
     }
     
     public function processFormUpdateLogement() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
-            // Récupération de l'ID du logement à mettre à jour
-            $idLogement = isset($_POST['id_logement']) ? intval($_POST['id_logement']) : null;
-            if ($idLogement === null) {
-                echo json_encode(['error' => 'ID du logement non fourni.']);
-                return;
-            }
-    
-            // Décodage des données encodées
-            $titre = isset($_POST['titre']) ? urldecode($_POST['titre']) : '';
-            $tarif = isset($_POST['tarif']) ? urldecode($_POST['tarif']) : '';
-            $nomRue = isset($_POST['nom_rue']) ? urldecode($_POST['nom_rue']) : '';
-            $ville = isset($_POST['ville']) ? urldecode($_POST['ville']) : '';
-            $cp = isset($_POST['cp']) ? urldecode($_POST['cp']) : '';
-            $amenagements = isset($_POST['amenagements']) ? urldecode($_POST['amenagements']) : '';
-            $surface = isset($_POST['surface']) ? urldecode($_POST['surface']) : '';
-            $nbPersMax = isset($_POST['nbPersMax']) ? urldecode($_POST['nbPersMax']) : '';
-            $nbChambres = isset($_POST['nbChambres']) ? urldecode($_POST['nbChambres']) : '';
-            $nbLitsSimples = isset($_POST['nbLitsSimples']) ? urldecode($_POST['nbLitsSimples']) : '';
-            $nbLitsDoubles = isset($_POST['nbLitsDoubles']) ? urldecode($_POST['nbLitsDoubles']) : '';
-            $type = isset($_POST['type']) ? urldecode($_POST['type']) : '';
-            $categorie = isset($_POST['categorie']) ? urldecode($_POST['categorie']) : '';
-            $pays = isset($_POST['pays']) ? urldecode($_POST['pays']) : '';
-            $etat = isset($_POST['etat']) ? urldecode($_POST['etat']) : '';
-    
-            // D'autres champs facultatifs
-            $numeroRue = isset($_POST['numero_rue']) ? urldecode($_POST['numero_rue']) : '';
-            $complementAdresse = isset($_POST['complement_adresse']) ? urldecode($_POST['complement_adresse']) : '';
-            $accroche = isset($_POST['accroche']) ? urldecode($_POST['accroche']) : '';
-            $description = isset($_POST['description']) ? urldecode($_POST['description']) : '';
-            $delaiResaArrivee = isset($_POST['delaiResaArrivee']) ? urldecode($_POST['delaiResaArrivee']) : '';
-            $dureeMinLoc = isset($_POST['dureeMinLoc']) ? urldecode($_POST['dureeMinLoc']) : '';
-            $delaiAnnulMax = isset($_POST['delaiAnnulMax']) ? urldecode($_POST['delaiAnnulMax']) : '';
-    
-            // Création de l'objet FormNewLogement avec les données décodées
-            $formLogement = new FormNewLogement(
-                $titre,
-                $tarif,
-                $nomRue,
-                $ville,
-                $cp,
-                null, // Photo (à gérer si nécessaire)
-                $amenagements,
-                $surface,
-                $nbPersMax,
-                $nbChambres,
-                $nbLitsSimples,
-                $nbLitsDoubles,
-                $type,
-                $categorie,
-                $pays,
-                $etat
-            );
-    
-            // Définition des champs non requis
-            $formLogement->setNotRequiredFields(
-                $numeroRue,
-                $complementAdresse,
-                $accroche,
-                $description,
-                $delaiResaArrivee,
-                $dureeMinLoc,
-                $delaiAnnulMax
-            );
-    
-            header('Content-Type: application/json');
-    
-            try {
-                $this->logement->updateLogementFromForm($formLogement, $idLogement);
-                echo json_encode(['success' => true]);
-            } catch (Exception $e) {
-                echo json_encode(['error' => $e->getMessage()]);
-            }
-        } else {
-            echo json_encode(['error' => 'Uniquement accessible avec la méthode POST']);
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        // Récupération de l'ID du logement à mettre à jour
+        $idLogement = isset($_POST['id_logement']) ? intval($_POST['id_logement']) : null;
+        if ($idLogement === null) {
+            echo json_encode(['error' => 'ID du logement non fourni.']);
+            return;
         }
+
+        // Décodage des données encodées
+        $titre = isset($_POST['titre']) ? urldecode($_POST['titre']) : '';
+        $tarif = isset($_POST['tarif']) ? urldecode($_POST['tarif']) : '';
+        $nomRue = isset($_POST['nom_rue']) ? urldecode($_POST['nom_rue']) : '';
+        $ville = isset($_POST['ville']) ? urldecode($_POST['ville']) : '';
+        $cp = isset($_POST['cp']) ? urldecode($_POST['cp']) : '';
+        $amenagements = isset($_POST['amenagements']) ? urldecode($_POST['amenagements']) : '';
+        $surface = isset($_POST['surface']) ? urldecode($_POST['surface']) : '';
+        $nbPersMax = isset($_POST['nbPersMax']) ? urldecode($_POST['nbPersMax']) : '';
+        $nbChambres = isset($_POST['nbChambres']) ? urldecode($_POST['nbChambres']) : '';
+        $nbLitsSimples = isset($_POST['nbLitsSimples']) ? urldecode($_POST['nbLitsSimples']) : '';
+        $nbLitsDoubles = isset($_POST['nbLitsDoubles']) ? urldecode($_POST['nbLitsDoubles']) : '';
+        $type = isset($_POST['type']) ? urldecode($_POST['type']) : '';
+        $categorie = isset($_POST['categorie']) ? urldecode($_POST['categorie']) : '';
+        $pays = isset($_POST['pays']) ? urldecode($_POST['pays']) : '';
+        $etat = isset($_POST['etat']) ? urldecode($_POST['etat']) : '';
+
+        // D'autres champs facultatifs
+        $numeroRue = isset($_POST['numero_rue']) ? urldecode($_POST['numero_rue']) : '';
+        $complementAdresse = isset($_POST['complement_adresse']) ? urldecode($_POST['complement_adresse']) : '';
+        $accroche = isset($_POST['accroche']) ? urldecode($_POST['accroche']) : '';
+        $description = isset($_POST['description']) ? urldecode($_POST['description']) : '';
+        $delaiResaArrivee = isset($_POST['delaiResaArrivee']) ? urldecode($_POST['delaiResaArrivee']) : '';
+        $dureeMinLoc = isset($_POST['dureeMinLoc']) ? urldecode($_POST['dureeMinLoc']) : '';
+        $delaiAnnulMax = isset($_POST['delaiAnnulMax']) ? urldecode($_POST['delaiAnnulMax']) : '';
+
+        // Création de l'objet FormNewLogement avec les données décodées
+        $formLogement = new FormNewLogement(
+            $titre,
+            $tarif,
+            $nomRue,
+            $ville,
+            $cp,
+            null,
+            $amenagements,
+            $surface,
+            $nbPersMax,
+            $nbChambres,
+            $nbLitsSimples,
+            $nbLitsDoubles,
+            $type,
+            $categorie,
+            $pays,
+            $etat
+        );
+
+        $formLogement->setNotRequiredFields(
+            $numeroRue,
+            $complementAdresse,
+            $accroche,
+            $description,
+            $delaiResaArrivee,
+            $dureeMinLoc,
+            $delaiAnnulMax
+        );
+
+        header('Content-Type: application/json');
+
+        try {
+            $this->logement->updateLogementFromForm($formLogement, $idLogement);
+            echo json_encode(['success' => true]);
+        } catch (Exception $e) {
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+    } else {
+        echo json_encode(['error' => 'Uniquement accessible avec la méthode POST']);
     }
-    
+}
+
     
     
         

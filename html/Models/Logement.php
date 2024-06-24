@@ -176,7 +176,8 @@ class Logement {
             // statut propriété
             $valeursLogement[] = true;
             $valeursLogement[] = $formLogement->getTarif();
-
+            // prix nuit ttc
+            $valeursLogement[] = $formLogement->getTarif() * (1 + self::TAUX_TVA); 
             $valeursLogement[] = $idProrietaire;
             $valeursLogement[] = $this->db->getPDO()->lastInsertId();
             $valeursLogement[] = $formLogement->getIdType();
@@ -303,7 +304,6 @@ class Logement {
                 'nb_lits_simples',
                 'nb_lits_doubles',
                 'statut_propriete',
-                'prix_nuit_ht',
                 'prix_nuit_ttc',
                 'L_id_type',
                 'L_id_categorie'
@@ -318,7 +318,6 @@ class Logement {
                 $formLogement->getNbLitsDoubles(),
                 true,
                 $formLogement->getTarif(),
-                $formLogement->getTarif() * (1 + self::TAUX_TVA),
                 $formLogement->getIdType(),
                 $formLogement->getIdCategorie()
             ];
@@ -350,7 +349,7 @@ class Logement {
     
             // Update du logement
             $this->db->update('logement', $colonnesLogement, $valeursLogement, 'id_logement', $idLogement);
-    
+            
             // Gestion de la photo
             if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
                 $dossier = './assets/imgs/logements/';
