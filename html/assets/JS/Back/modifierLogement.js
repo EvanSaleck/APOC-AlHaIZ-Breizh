@@ -238,6 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch((error) => {
             utils.ThrowAlertPopup('Erreur: ' + error, 'error');
+            console.log(error)
         });
     }
 

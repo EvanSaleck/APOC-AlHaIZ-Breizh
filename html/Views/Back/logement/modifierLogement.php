@@ -56,7 +56,6 @@
                     </div>
                     <div class="drop-photo" id="drop-photo">
                         <button id="photo-button" type="button">Modifier la photo</button>
-                        <span id="photo-nom-image"></span>
                         <span class="messageError"></span>  
                     </div>
                 </div>

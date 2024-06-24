@@ -376,8 +376,22 @@ class Logement {
 
         $amenagements = json_decode($formLogement->getAmenagements());
         if (isset($amenagements)) {
+            // Récupérer les aménagements existants
+            $existingAmenagements = $this->db->select('amenagements_logement', ['al_id_amenagement'], ['al_id_logement' => $idLogement]);
+            $existingAmenagements = array_column($existingAmenagements, 'al_id_amenagement');
+
+            // Ajouter les nouveaux aménagements et conserver les aménagements existants
             foreach ($amenagements as $amenagement) {
-                $this->db->insert('amenagements_logement', ['al_id_logement', 'al_id_amenagement'], [$idLogement, $amenagement]);
+                if (!in_array($amenagement, $existingAmenagements)) {
+                    $this->db->insert('amenagements_logement', ['al_id_logement', 'al_id_amenagement'], [$idLogement, $amenagement]);
+                }
+            }
+
+            // Supprimer les aménagements qui ne sont plus dans la liste
+            foreach ($existingAmenagements as $existingAmenagement) {
+                if (!in_array($existingAmenagement, $amenagements)) {
+                    $this->db->executeQuery("DELETE FROM amenagements_logement WHERE al_id_logement = ? AND al_id_amenagement = ?", [$idLogement, $existingAmenagement]);
+                }
             }
         }
 
