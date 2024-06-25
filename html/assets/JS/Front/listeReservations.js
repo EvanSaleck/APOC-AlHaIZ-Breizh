@@ -22,10 +22,9 @@ var enCours, aVenir, passe;
 
 // Initialise la liste des réservations liées aux compte propriétaire connecté
 function init() {
+    let client = JSON.parse(sessionStorage.getItem("Client"));
     let idClient = new FormData();
-    // TODO à changer quand on pourra récupérer le client du sessionStorage
-    //idClient.append("id", sessionStorage.getItem("idClient"));
-    idClient.append("id", 4);
+    idClient.append("id", client["id_compte"]);
 
     // Récupère les informations du client
     fetch('/api/getClientById', { method: "POST", body: idClient }).then(resp => resp.json()).then(client => {

@@ -22,10 +22,9 @@ var enCours, aVenir, passe;
 
 // Initialise la liste des réservations liées aux compte propriétaire connecté
 function init() {
+    let proprio = JSON.parse(sessionStorage.getItem("Proprio"));
     let idProprio = new FormData();
-    // TODO à changer quand on pourra récupérer le client du sessionStorage
-    //idProprio.append("id", sessionStorage.getItem("idProprio"));
-    idProprio.append("id", 7);
+    idProprio.append("id", proprio["id_compte"]);
 
     // Récupère les informations du propriétaire
     fetch('/api/getProprioById', { method: "POST", body: idProprio }).then(resp => resp.json()).then(data => {
@@ -43,7 +42,9 @@ function init() {
             displayAucuneReservations.classList.remove("d-none");
         }
         else {
-            ResasTout = data; console.log(ResasTout);
+            ResasTout = data;
+            console.log("Réservations trouvées pour " + proprio["prenom"] + " " + proprio["nom"] + " :\n");
+            console.log(ResasTout)
 
             let today = new Date(); // La date actuelle
 
@@ -78,13 +79,11 @@ function init() {
                     nbEnCours++;
                 }
 
-
-                // Reformate les dates pour les afficher en format Français
+                // Formatage des dates au format JJ/MM/AAAA
                 let valArr = res.date_arrivee.split('-');
                 let valDep = res.date_depart.split('-');
                 let dateArrFormatee = valArr[2] + "-" + valArr[1] + "-" + valArr[0];
                 let dateDepFormatee = valDep[2] + "-" + valDep[1] + "-" + valDep[0];
-
 
                 // Création de l'objet de réservation
                 let tr = document.createElement('tr');
@@ -109,6 +108,8 @@ function init() {
                 tr.setAttribute('class', etatClass);
 
                 tbody.appendChild(tr);
+
+                console.log(ResasTout[i].id_reservation)
             }
 
             // Ajour de lien href vers la page de détail de la réservation associée
