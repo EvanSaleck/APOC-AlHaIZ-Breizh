@@ -17,7 +17,7 @@
     align-items: center
     gap: 5vw
     width: 90%
-    margin: 1em auto
+    margin: 20vh auto 0 auto
 
     input 
         // padding: 10px
@@ -292,6 +292,7 @@
         padding: 0 5%
 
     // #filtresDesktop
+    //     display: none
     //     height: 100vh
     //     // background-image: url(/assets/imgs/imgAccueil.webp)
     //     background-image: url(/assets/imgs/imgAccueil3.jpeg)
@@ -303,60 +304,60 @@
     //     align-items: center
 
     #filtresDesktop
-        display: none
-        height: 100vh
-        background-image: url(/assets/imgs/imgAccueil3.jpeg)
-        background-size: cover
-        background-position: center
-        display: flex
-        flex-direction: column
-        justify-content: center
-        align-items: center
-        position: relative 
+      display: none !important
+      height: 100vh
+      background-image: url(/assets/imgs/imgAccueil3.jpeg)
+      background-size: cover
+      background-position: center
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      position: relative 
 
     #formFiltresDesktop
-        display: flex
-        flex-direction: row
-        justify-content: space-between
-        align-items: center
-        // padding: 20px
-        background-color: #fff
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      align-items: center
+      // padding: 20px
+      background-color: #fff
+      border-radius: 6px
+      width: 80%
+      margin: 0 auto 
+      box-sizing: border-box
+
+      > div, > button
+          flex: 1
+          min-width: 0
+          margin: 0 10px
+          box-sizing: border-box
+          border: 1px solid #000
+
+          label, input
+              display: block
+              width: 100%
+              white-space: nowrap
+              overflow: hidden
+              text-overflow: ellipsis 
+        
+      input 
+        padding: 10px
+        // on enlève les bordures sauf celle du bas
+        border: none
+        // border-bottom: 1px solid general.$couleur-front-bleu-marine
+        // on enleve les borudres de focus
+        outline: none
+      
+      button
+        background-color: general.$couleur-front-jaune-pabo
+        color: general.$couleur-front-bleu-marine
+        border: none
+        padding: 10px
         border-radius: 6px
-        width: 80%
-        margin: 0 auto 
-        box-sizing: border-box
-
-        > div, > button
-            flex: 1
-            min-width: 0
-            margin: 0 10px
-            box-sizing: border-box
-            border: 1px solid #000
-
-            label, input
-                display: block
-                width: 100%
-                white-space: nowrap
-                overflow: hidden
-                text-overflow: ellipsis 
-        
-        input 
-            padding: 10px
-            // on enlève les bordures sauf celle du bas
-            border: none
-            // border-bottom: 1px solid general.$couleur-front-bleu-marine
-            // on enleve les borudres de focus
-            outline: none
-        
-        button
-            background-color: general.$couleur-front-jaune-pabo
-            color: general.$couleur-front-bleu-marine
-            border: none
-            padding: 10px
-            border-radius: 6px
-            cursor: pointer
-            // on interdit le saut de ligne sur le bouton
-            white-space: nowrap
-            overflow: hidden
-            text-overflow: ellipsis 
+        cursor: pointer
+        // on interdit le saut de ligne sur le bouton
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis 
 
