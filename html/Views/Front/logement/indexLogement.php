@@ -6,7 +6,8 @@
  include_once 'Views/Front/composants/head.php';
  ?>
  
-
+ <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+ <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <body>
     <div id="headerAccueilMobile">
         <img src="/assets/imgs/logo.webp" id="logoAssoMobile" alt="Logo de l'association">
@@ -96,7 +97,34 @@
                 </div>
             </div>
         </div>
+
+        <!-- on ajoute la possibilité de trier par ordre croissant / décroissant avec un toggle -->
+        <!-- <div id="filtreTriContainer">
+            <label>Tri</label>
+            <div id="triContainer">
+                <button id="btnTri">Prix croissant</button>
+            </div>
+        </div> -->
     </div>
+
+    <!-- <input type="text" id="rangePicker" placeholder="Sélectionnez une période de date"> -->
+
+    <!-- <div class="date-picker-container">
+        <input type="text" id="date-range" placeholder="Select date range" readonly>
+        <div id="calendar" class="calendar hidden">
+            <div class="calendar-header">
+                <button id="prev-month">&lt;</button>
+                <span id="month-year"></span>
+                <button id="next-month">&gt;</button>
+            </div>
+            <div class="calendar-body">
+                <div class="weekdays">
+                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+                <div id="calendar-days" class="days"></div>
+            </div>
+        </div>
+    </div> -->
     <div id="cardsContainer"></div>
 
     <div id="ongletFiltres">
