@@ -264,6 +264,149 @@ class Logement {
         return true;
     }
 
+    public function updateLogementFromForm($formLogement, $idLogement) {
+    try {
+        $this->db->getPDO()->beginTransaction();
+
+        $numeroRue = $formLogement->getNoRue() != '' && is_numeric($formLogement->getNoRue()) ? $formLogement->getNoRue() : null;
+
+        // Colonnes et valeurs de l'adresse
+        $colonnesAdresse = [
+            'nom_rue',
+            'code_postal',
+            'nom_ville',
+            'pays'
+        ];
+        $valeursAdresse = [
+            $formLogement->getNomRue(),
+            $formLogement->getCp(),
+            $formLogement->getVille(),
+            $formLogement->getPays()
+        ];
+
+        if ($numeroRue !== null) {
+            $colonnesAdresse[] = 'numero_rue';
+            $valeursAdresse[] = $numeroRue;
+        }
+
+        if ($formLogement->getComplementAdresse() != '') {
+            $colonnesAdresse[] = 'complement';
+            $valeursAdresse[] = $formLogement->getComplementAdresse();
+        }
+
+        if ($formLogement->getEtat() != '') {
+            $colonnesAdresse[] = 'etat';
+            $valeursAdresse[] = $formLogement->getEtat();
+        }
+
+        // Update de l'adresse
+        $adresseId = $this->db->select('logement', ['L_id_adresse'], ['id_logement' => $idLogement])[0]['L_id_adresse'];
+        $this->db->update('adresse', $colonnesAdresse, $valeursAdresse, 'id_adresse', $adresseId);
+
+        // Colonnes et valeurs du logement
+        $colonnesLogement = [
+            'titre',
+            'surface_hab',
+            'personnes_max',
+            'nb_chambres',
+            'nb_lits_simples',
+            'nb_lits_doubles',
+            'statut_propriete',
+            'prix_nuit_ttc',
+            'L_id_type',
+            'L_id_categorie'
+        ];
+
+        $valeursLogement = [
+            $formLogement->getTitre(),
+            $formLogement->getSurfaceHabitable(),
+            $formLogement->getNbPersMax(),
+            $formLogement->getNbChambres(),
+            $formLogement->getNbLitsSimples(),
+            $formLogement->getNbLitsDoubles(),
+            true,
+            $formLogement->getTarif(),
+            $formLogement->getIdType(),
+            $formLogement->getIdCategorie()
+        ];
+
+        if ($formLogement->getAccroche() != '') {
+            $colonnesLogement[] = 'accroche';
+            $valeursLogement[] = $formLogement->getAccroche();
+        }
+
+        if ($formLogement->getDescription() != '') {
+            $colonnesLogement[] = 'description';
+            $valeursLogement[] = $formLogement->getDescription();
+        }
+
+        if ($formLogement->getAvanceResaMin() != '') {
+            $colonnesLogement[] = 'avance_resa_min';
+            $valeursLogement[] = $formLogement->getAvanceResaMin();
+        }
+
+        if ($formLogement->getDureeMinLocation() != '') {
+            $colonnesLogement[] = 'duree_min_location';
+            $valeursLogement[] = $formLogement->getDureeMinLocation();
+        }
+
+        if ($formLogement->getDelaiAnnulMax() != '') {
+            $colonnesLogement[] = 'delai_annul_max';
+            $valeursLogement[] = $formLogement->getDelaiAnnulMax();
+        }
+
+        // Update du logement
+        $this->db->update('logement', $colonnesLogement, $valeursLogement, 'id_logement', $idLogement);
+        
+        // Gestion de la photo
+        if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+            $dossier = './assets/imgs/logements/';
+            $extension = pathinfo($_FILES['photo']['name'])['extension'];
+            $fichier = $dossier . 'image_' . $idLogement . '.' . $extension;
+
+            if (!move_uploaded_file($_FILES['photo']['tmp_name'], $fichier)) {
+                throw new Exception('Erreur lors de l\'upload de la photo. :,(');
+            }
+
+            // Mise à jour du nom de la photo
+            $this->db->update('logement', ['image_principale'], [substr($fichier, 1)], 'id_logement', $idLogement);
+        }
+
+        // Mise à jour des aménagements
+
+        $amenagements = json_decode($formLogement->getAmenagements());
+        if (isset($amenagements)) {
+            // Récupérer les aménagements existants
+            $existingAmenagements = $this->db->select('amenagements_logement', ['al_id_amenagement'], ['al_id_logement' => $idLogement]);
+            $existingAmenagements = array_column($existingAmenagements, 'al_id_amenagement');
+
+            // Ajouter les nouveaux aménagements et conserver les aménagements existants
+            foreach ($amenagements as $amenagement) {
+                if (!in_array($amenagement, $existingAmenagements)) {
+                    $this->db->insert('amenagements_logement', ['al_id_logement', 'al_id_amenagement'], [$idLogement, $amenagement]);
+                }
+            }
+
+            // Supprimer les aménagements qui ne sont plus dans la liste
+            foreach ($existingAmenagements as $existingAmenagement) {
+                if (!in_array($existingAmenagement, $amenagements)) {
+                    $this->db->executeQuery("DELETE FROM amenagements_logement WHERE al_id_logement = ? AND al_id_amenagement = ?", [$idLogement, $existingAmenagement]);
+                }
+            }
+        }
+
+        $this->db->getPDO()->commit();
+    } catch (Exception $e) {
+        $this->db->getPDO()->rollBack();
+        throw new Exception('Erreur lors de la mise à jour des données : ' . $e->getMessage());
+        return false;
+    }
+
+    return true;
+}
+
+    
+
     public function getLogementCompleteByID($id) {
         $logements = $this->db->executeQuery('
         SELECT * 

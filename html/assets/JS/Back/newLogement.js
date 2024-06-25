@@ -122,7 +122,8 @@ document.addEventListener("DOMContentLoaded", function () {
     fileInput.addEventListener("change", (event) => {
         console.log('file change');
         const files = event.target.files;
-        resetErrors(); 
+
+        utils.resetErrors(); 
         if (verifPhoto(files)) {
             const file = files[0];
             console.log(fileInput.files);
@@ -132,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function validateFormData(formData) {
-  resetErrors();
+  utils.resetErrors();
 
   verifPhoto([formData.get('photo')]);
 

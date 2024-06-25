@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ThrowAlertPopup(message, type);
         localStorage.removeItem('alertPopup');
     }
+
+    console.log(sessionStorage);
     
     fetch('/api/getAbonnementsICalByProprietaire/', {
         method: 'GET',  

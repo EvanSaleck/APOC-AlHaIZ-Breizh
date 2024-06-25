@@ -1,6 +1,5 @@
 import * as utils from '../utils.js';
 
-// au chargement du dom
 var prixMin;
 var prixMax;
 
@@ -8,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectElement = document.getElementById('depts');
 
     adjustMarginTop();
-    window.addEventListener('resize', adjustMarginTop);
+    window.addEventListener('resize', adjustMarginTop);    
 
     var cardTemplate = document.getElementsByClassName('card')[0];
     var cardsContainer = document.getElementById('cardsContainer');
@@ -23,7 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(data.length == 0){
                     noResultMessage();
                 }else{
-                    data.sort(() => Math.random() - 0.5);
+                    // data.sort(() => Math.random() - 0.5);
+                    // on trie par ordre de prix croissant
+                    data.sort((a, b) => parseFloat(a.prix_nuit_ttc) - parseFloat(b.prix_nuit_ttc));
                     data.forEach(logement => {
                         let cardContent = cardTemplate.content;
 
@@ -47,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                     divCard.querySelector('.nomVille').textContent = logement.nom_ville.toUpperCase();
                                     divCard.querySelector('.titre').textContent = logement.titre;
                                     divCard.querySelector('.tarif').textContent = logement.prix_nuit_ttc + '€/nuit';
-                                    // on met a jour le prix min et max
                                     if (prixMin == undefined || parseFloat(logement.prix_nuit_ttc) < parseFloat(prixMin)) {
                                         prixMin = logement.prix_nuit_ttc;
                                     } else if (prixMax == undefined || parseFloat(logement.prix_nuit_ttc) > parseFloat(prixMax)) {
@@ -60,13 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                     let pathImage = logement.image_principale;
                                     divCard.querySelector('.imagePrincipale').src = pathImage;
                                     
-                                    // utils.fileExists(pathImage).then(exists => {
-                                    //     if (exists) {
-                                    //     } else {
-                                    //         divCard.querySelector('.imgbox').textContent = 'Erreur lors du chargement de l\'image';
-                                    //     }
-                                    // });
-
                                     divCard.addEventListener('click', function() {
                                         sessionStorage.setItem('idLogement', logement.id_logement);
                                         window.location.href = `/logement/`;
@@ -74,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         window.location.href = `/logement/`;
                                     });
                                     divCard.setAttribute('data-dept', logement.code_postal.substring(0, 2));
+                                    divCard.setAttribute('data-tarif', logement.prix_nuit_ttc);
                                 } else {
                                     divCard.querySelector('.description').textContent = "Erreur lors du chargement des données du logement";
                                 }
@@ -83,6 +77,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             // on met a jour le prix min et max
                             document.querySelector('#prixFiltresContainer #prixMin').textContent = prixMin;
                             document.querySelector('#prixFiltresContainer #prixMax').textContent = prixMax;
+                            // on ajoute des attributs min et max au bouton de prix
+                            document.getElementById('btnPrix').setAttribute('data-min', prixMin);
+                            document.getElementById('btnPrix').setAttribute('data-max', prixMax);
 
                             // on met a jour le prix min et max de la modale
                             document.querySelector('.price-input input.input-min').value = prixMin;
@@ -227,7 +224,10 @@ document.addEventListener('DOMContentLoaded', function() {
         for (var i = 0; i < cards.length; i++) {
             var card = cards[i];
             var dept = card.getAttribute('data-dept');
-            if (filters['depts'].length > 0 && !filters['depts'].includes(dept)) {
+            if (filters['depts'].length > 0 && !filters['depts'].includes(dept)
+                || parseFloat(card.getAttribute('data-tarif')) < parseFloat(document.getElementById('btnPrix').getAttribute('data-min'))
+                || parseFloat(card.getAttribute('data-tarif')) > parseFloat(document.getElementById('btnPrix').getAttribute('data-max'))
+            ) {
                 card.classList.add('d-none');                
             } else {
                 card.classList.remove('d-none');
@@ -266,48 +266,61 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener("input", e =>{
             let minPrice = parseInt(priceInput[0].value),
             maxPrice = parseInt(priceInput[1].value);
+
+            range.style.left = ((rangeInput[0].value - minPrice) / (maxPrice - minPrice)) * 100;
+            range.style.right = 100 - ((rangeInput[1].value - minPrice) / (maxPrice - minPrice)) * 100;
             
             if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
                 if(e.target.className === "input-min"){
                     rangeInput[0].value = minPrice;
-                    range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+                    range.style.left = ((rangeInput[0].value - minPrice) / (maxPrice - minPrice)) * 100 + "%";
                 } else{
                     rangeInput[1].value = maxPrice;
-                    range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                    range.style.right = 100 - ((rangeInput[1].value - minPrice) / (maxPrice - minPrice)) * 100 + "%";
                 }
             }
         });
     });
-       
+
+    // Écouteurs pour les inputs de range
     rangeInput.forEach(input => {
         input.addEventListener("input", e => {
             let minVal = parseFloat(rangeInput[0].value);
             let maxVal = parseFloat(rangeInput[1].value);
-    
 
-            
-            if ((maxVal - minVal) < priceGap) {
+            if(maxVal + priceGap > rangeInput[1].max) {
+                maxVal = rangeInput[1].max;
+            }
+
+            // Assurer que minVal est toujours inférieur ou égal à maxVal
+            if (minVal > maxVal - priceGap) {
                 if (e.target.className === "range-min") {
-                    rangeInput[0].value = maxVal - priceGap;
-                    minVal = parseFloat(rangeInput[0].value);
+                    minVal = maxVal - priceGap;
+                    rangeInput[0].value = minVal;
                 } else {
-                    rangeInput[1].value = minVal + priceGap;
-                    maxVal = parseFloat(rangeInput[1].value); 
+                    maxVal = minVal + priceGap;
+                    rangeInput[1].value = maxVal;
                 }
             }
-    
+
             priceInput[0].value = minVal;
             priceInput[1].value = maxVal;
     
-            let leftPercent = (minVal / rangeInput[0].max) * 100;
-            let rightPercent = 100 - (maxVal / rangeInput[1].max) * 100;
+            let leftPercent = ((rangeInput[0].value - rangeInput[0].min) / (rangeInput[0].max - rangeInput[0].min)) * 100;
+            let rightPercent = 100 - ((rangeInput[1].value - rangeInput[1].min) / (rangeInput[1].max - rangeInput[1].min)) * 100;
 
-            if(rightPercent < 0){
+            if (rightPercent < 0) {
                 rightPercent = 0;
             }
     
             range.style.left = leftPercent + "%";
             range.style.right = rightPercent + "%";
+
+            // Mettre à jour le texte du bouton
+            document.getElementById('btnPrix').textContent = `Prix : ${minVal}€ - ${maxVal}€`;
+            document.getElementById('btnPrix').setAttribute('data-min', minVal);
+            document.getElementById('btnPrix').setAttribute('data-max', maxVal);
+            applyFilters();
         });
     });
     

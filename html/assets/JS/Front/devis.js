@@ -1,11 +1,15 @@
+import * as utils from '../utils.js';
+
 document.addEventListener('DOMContentLoaded', function() {
+    // utils.ThrowAlertPopup("message", "success");
+
     
     document.querySelector('.retour').addEventListener('click', function() {
-        window.location.href = 'index';
+        window.location.href = '/logement/';
     });
     
     document.querySelector('.boutonPrecedent').addEventListener('click', function() {
-        window.location.href = 'index';
+        window.location.href = '/logement/';
     });
 
     function updateReservationInfo() {
@@ -76,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const cvv = document.getElementById("cvv").value;
             const nom = document.getElementById("nom").value;
             const codePostal = document.getElementById("codePostal").value;
-        
+
             const regexNumeros = /^[0-9]+$/;
             if (!regexNumeros.test(carteCredit)) {
                 alert("Le numéro de carte doit contenir uniquement des chiffres.");
@@ -94,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("La date d'expiration doit être au format MM/AAAA.");
                 return;
             }
-        
+
             // Vérifier date supérieure
             if (expirationYear < currentYear || (expirationYear === currentYear && expirationMonth <= currentMonth)) {
                 alert("La date d'expiration doit être ultérieure à la date actuelle.");
@@ -107,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("La date d'expiration ne peut pas dépasser trois ans à partir de la date actuelle.");
                 return;
             }
-        
+
             // Vérifier code CVV
             const regexCVV = /^[0-9]{3,4}$/;
             if (!regexCVV.test(cvv)) {
@@ -154,11 +158,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: formData,
             }).then(response => response.json())
                 .then((data) => {
-                console.log(data);
+                console.log(data);                
+                utils.ThrowAlertPopup("Paiement validé !", "success");
+
                 sessionStorage.setItem('idresa', data);
-                ThrowAlertPopup("Réservation ajoutée avec succès", "succes");
                 // on envoie sur la page de gestion des logements
-                window.location.href = "../detailReservation";
+                window.location.href = "/detailReservation";
             })
             
             // Disparition de la pop up au bout de 3 secondes
