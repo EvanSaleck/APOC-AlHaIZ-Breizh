@@ -118,6 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var facture = document.getElementById('facture');
         html2pdf(facture)
-        //setTimeout(function() {window.close()}, 2000);
+        setTimeout(function() {window.close()}, 2000);
     });
 });
