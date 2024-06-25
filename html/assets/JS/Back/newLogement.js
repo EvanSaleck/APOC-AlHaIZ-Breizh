@@ -122,18 +122,18 @@ document.addEventListener("DOMContentLoaded", function () {
     fileInput.addEventListener("change", (event) => {
         console.log('file change');
         const files = event.target.files;
-        resetErrors(); 
+
+        utils.resetErrors(); 
         if (verifPhoto(files)) {
             const file = files[0];
             console.log(fileInput.files);
             fileInput.files[0] = file;
         }
     });
-
 });
 
 function validateFormData(formData) {
-  resetErrors();
+  utils.resetErrors();
 
   verifPhoto([formData.get('photo')]);
 
@@ -206,7 +206,7 @@ function validateFormData(formData) {
   ]);
 
   validateField(formData, 'dureeMinLoc', [
-    { check: value => value >= 0, errorMessage: 'La durée minimale de location doit être supérieur ou égal à 0' },
+    { check: value => value >= 2, errorMessage: 'La durée minimale de location doit être supérieur ou égal à 2' },
     { check: value => !isNaN(value), errorMessage: 'La durée minimale de location doit être une valeur numérique' }
   ]);
 

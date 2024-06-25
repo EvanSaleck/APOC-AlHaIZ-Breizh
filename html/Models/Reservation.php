@@ -20,17 +20,16 @@
         }
 
         public function getReservationsForExportICal($dateDeb, $dateFin, $listeLogements) {
-            $placeholders = implode(',', array_fill(0, count($listeLogements), '?'));
-        
-            $query = "SELECT * FROM reservation WHERE date_arrivee >= ? AND date_depart <= ? AND R_id_logement IN ($placeholders)";
-            
-            $params = array_merge([$dateDeb, $dateFin], $listeLogements);
-            
-            $reservations = $this->db->executeQuery($query, $params);
-        
+            // on prend aussi nom, prenom et email du client, ainsi que l'adresse du logement loué 
+            $reservations = $this->db->executeQuery("SELECT r.id_reservation, r.date_arrivee, r.date_depart, r.tarif_total, c.pseudo, c.e_mail, l.titre, a.numero_rue, a.nom_rue, a.code_postal, a.nom_ville 
+                FROM reservation AS r 
+                    INNER JOIN logement AS l ON r.R_id_logement = l.id_logement 
+                    INNER JOIN compte_client AS c ON r.R_id_compte = c.id_compte 
+                    INNER JOIN adresse AS a ON l.l_id_adresse = a.id_adresse
+                WHERE r.date_arrivee >= '" . $dateDeb . "' AND r.date_depart <= '" . $dateFin . "' AND r.R_id_logement IN (" . implode(',', $listeLogements) . ")");
+            // $reservations = $this->db->executeQuery("SELECT * FROM reservation WHERE date_arrivee >= '" . $dateDeb . "' AND date_depart <= '" . $dateFin . "' AND R_id_logement IN (" . implode(',', $listeLogements) . ")");
             return $reservations;
         }
-        
 
         public function getReservationById($id) {
 

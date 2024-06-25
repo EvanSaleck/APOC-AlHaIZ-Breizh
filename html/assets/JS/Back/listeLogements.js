@@ -3,11 +3,13 @@ import { ThrowAlertPopup } from '../utils.js';
 document.addEventListener('DOMContentLoaded', function() {
     const storedPopup = localStorage.getItem('alertPopup');
     let message, type;
+    
 
     try {
         if (storedPopup) {
             ({ message, type } = JSON.parse(storedPopup));
             ThrowAlertPopup(message, type);
+            localStorage.removeItem('alertPopup');
         }
     } catch (error) {
         console.error('Données de popup stockées invalides:', error);
@@ -26,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           data.forEach(logement => {
               let tr = document.createElement('tr');
+              tr.setAttribute('data-id', logement.id_logement)
               
               if (!logement.statut_propriete) {
                   tr.classList.add('offline');
@@ -51,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
               checkbox.checked = logement.statut_propriete;
               checkbox.addEventListener('change', function() {
                   tr.classList.toggle('offline',!this.checked); 
-                  updateLogementStatus(toggleId, this.checked); // MAJ du statut
+                  updateLogementStatus(toggleId, this.checked); 
                   console.log(this.checked); 
               });
               
@@ -75,19 +78,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
               listeLogements.appendChild(tr);
 
-            // Sélectionnez tous les éléments cibles
-            const elementsCibles = document.querySelectorAll('tr');
+            const redirectionDetails = document.querySelectorAll('td:not(:nth-child(4):not(:nth-child(5)))');
 
-            elementsCibles.forEach(element => {
-                element.addEventListener('click', function() {
+            const redirectionModifs = document.querySelectorAll('td:nth-child(5)');
+
+            redirectionDetails.forEach(element => {
+                element.addEventListener('click', function(e) {
         
-                    sessionStorage.setItem('idLogement', this.dataset.id); 
+                    sessionStorage.setItem('idLogement', element.parentElement.getAttribute('data-id')); 
 
-                    window.location.href = `/logements/details`;
+                    window.location.href = `/logements/details/`;
                 });
             });
+            redirectionModifs.forEach(element => {
+                element.addEventListener('click', function(e) {
+        
+                    sessionStorage.setItem('idLogement', element.parentElement.getAttribute('data-id')); 
 
-
+                    window.location.href = `/logements/details/modifier`;
+                });
+            });
           });
     })
    .catch(error => {

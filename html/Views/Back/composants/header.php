@@ -19,6 +19,6 @@
     
     <div id="Bulle" class="d-none">
         <div id="Profil"></div>
-        <div id="Connexion"></div>
+        <div id="btnConnexion"></div>
     </div>
 </header>

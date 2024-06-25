@@ -13,4 +13,11 @@ SUMMARY:Reservation
 DESCRIPTION:Reservation
 STATUS:reservation_confirmee
 END:VEVENT
+BEGIN:VEVENT
+DTSTART:2024-07-15
+DTEND:2024-07-20
+SUMMARY:Reservation
+DESCRIPTION:Reservation
+STATUS:reservation_confirmee
+END:VEVENT
 END:VCALENDAR
