@@ -1,15 +1,41 @@
 <?php
+<<<<<<< HEAD
+namespace Service;
+
+use Exception;
+use PDO;
+use PDOException;
+=======
     namespace Service;
 
-    use Exception;
-    use PDO;
-    use PDOException;
+use Exception;
+use PDO;
+use PDOException;
 
     class Database {
         private $pdo;
         private $dsn = 'pgsql:host=localhost;dbname=apoc;port=5432';
         private $username = 'apoc';
         private $password = 'apoc';
+
+        public function __construct() {
+            try {
+                $this->pdo = new PDO($this->dsn, $this->username, $this->password);
+                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
+                $this->pdo->exec("set schema 'sae3'");
+            }
+            catch (PDOException $e) {
+                die('Erreur de connexion : ' . $e->getMessage());
+            }
+        }
+>>>>>>> develop
+
+class Database {
+    private $pdo;
+    private $dsn = 'pgsql:host=servbdd;dbname=pg_ymear;port=5432';
+    private $username = 'ymear';
+    private $password = 'YOHyohm2929.&';
 
         public function __construct() {
             try {

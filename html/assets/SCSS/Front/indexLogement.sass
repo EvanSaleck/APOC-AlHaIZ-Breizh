@@ -210,15 +210,15 @@
       &:nth-child(2), &:last-child
         right: -5px
 
-    input[type="range"]
-      &::-webkit-slider-thumb
-        height: 17px
-        width: 17px
-        border-radius: 50%
-        background: #17A2B8
-        pointer-events: auto
-        -webkit-appearance: none
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.05)
+  input[type="range"]
+    &::-webkit-slider-thumb
+      height: 17px
+      width: 17px
+      border-radius: 50%
+      background: #17A2B8
+      pointer-events: auto
+      -webkit-appearance: none
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.05)
 
       &::-moz-range-thumb
         height: 17px
@@ -230,61 +230,56 @@
         -moz-appearance: none
         box-shadow: 0 0 6px rgba(0, 0, 0, 0.05)
 
+// DATE PICKER
+.date-picker-container
+  position: relative
 
-    // #ongletFiltres
-    //     position: absolute
-    //     width: 100%
-    //     height: 100%
-    //     top: 0
-    //     left: 0
-    //     background-color: white
-    //     display: flex
-    //     flex-direction: column
-    //     justify-content: center
-    //     align-items: center
-    //     z-index: 1000
-    //     padding-top: 20px
-    //     overflow: scroll
-        
-    //     div
-    //       width: 100%
-    //       height: 100%
-    //       display: flex
-    //       flex-direction: column
-    //       justify-content: center
-    //       align-items: center
+#date-range
+  padding: 10px
+  width: 200px
+  cursor: pointer
 
-    // #barreFiltresMobiles
-    //   display: inline-block
-    //   width: 100px
-    //   height: 5px
-    //   background-color: general.$couleur-front-bleu-marine
-    //   border-radius: 2px
+.calendar
+  position: absolute
+  top: 40px
+  border: 1px solid #ccc
+  background-color: #fff
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+  z-index: 10
 
-    // // #prixOngletFiltreMobile
-    // //     background-color: red 
-    // //     display: flex
-    // //     flex-direction: row
-    // //     justify-content: space-between
-    // //     align-items: center
-    // //     width: 80%
-    // //     margin-bottom: 20px
+.hidden
+  display: none
 
-    // // #prixOngletFiltreMobile 
-    // //   display: flex
-    // //   flex-direction: column
-    // //   align-items: center
+.calendar-header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 10px
+  background-color: #f7f7f7
+  border-bottom: 1px solid #ccc
 
-    // //   label 
-    // //     margin-bottom: 5px
+.weekdays, .days
+  display: flex
+  flex-wrap: wrap
 
-    // //   #prixParMinDiv 
-    // //     order: 1 // Permet de mettre le champ Min en dessous
-    // //     margin-left: auto // Pour aligner à droite
+.weekdays div
+  width: 14.28%
+  text-align: center
+  padding: 10px
 
-    // //   #parPrixMaxDiv
-    // //     order: -1 // Permet de mettre le champ Max en dessous et à gauche
-    // //     margin-right: auto // Pour aligner à gauche
+.days div
+  width: 14.28%
+  text-align: center
+  padding: 10px
+  cursor: pointer
+
+  &:hover
+    background-color: #eee
+
+.selected
+  background-color: #007BFF
+  color: #fff
+
 
 @media screen and (min-width: general.$max-width-telephone)
     #headerAccueilMobile 
