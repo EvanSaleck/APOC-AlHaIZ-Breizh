@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/* Définition des couleurs du Front par défaut */
+/* Définition des couleurs du Back par défaut */
+/* Définition des tailles d'écran par défaut */
+/* Import des polices Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+/* Import de la police dyslexique Lexend */
+@import url("https://fonts.googleapis.com/css2?family=Lexend&display=swap");
+/* Définition des polices par défaut */
+/* Définition tailles de police desktop */
+/* Définition tailles de police mobile */
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Appliquer les polices */
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Reem Kufi", sans-serif;
+}
+
+.error {
+  border: 1px solid #D8000C !important;
+}
+
+.messageError {
+  color: #D8000C;
+  font-size: 0.8rem;
+}/*# sourceMappingURL=general.css.map */
