@@ -113,4 +113,29 @@ class ReservationController {
             exit;
         }
     }
+
+    public function getDataReservationById($id) {
+        try {
+            $return = $this->reservation->getDataReservationById($id);
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        }
+        catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode($e->getMessage());
+            exit;
+        }
+    }
+
+    public function exportIcal() {
+        // print_r($_POST);
+        $form = [
+            'dateDebut' => $_POST['dateDebut'],
+            'dateFin' => $_POST['dateFin'],
+            'logements' => $_POST['logements']
+        ];
+        
+        $this->icalService->exportIcal($form);
+    }
 }

@@ -7,7 +7,7 @@ function calculDevis(prixNuitTTC) {
     let tempsDateDepart = new Date(dateFin.value).getTime()
     let nbNuits = (tempsDateDepart - tempsDateArrivee)/ (1000 * 3600 * 24)
     let prixSejourTTC = prixNuitTTC * nbNuits
-    let fraisServices = prixSejourTTC * 0.01
+    let fraisServices = (prixSejourTTC * 0.01) * 1.2;
     let taxeSejour = sctNbOccupants.value * nbNuits
     let totalDevis = prixSejourTTC + fraisServices + taxeSejour
     return totalDevis
@@ -22,7 +22,7 @@ function envoiDevis(prixNuitTTC,data) {
     let tempsDateDepart = new Date(dateFin.value).getTime();
     let nbNuits = (tempsDateDepart - tempsDateArrivee) / (1000 * 3600 * 24);
     let prixSejourTTC = prixNuitTTC * nbNuits;
-    let fraisServices = prixSejourTTC * 0.01;
+    let fraisServices = (prixSejourTTC * 0.01) * 1.2;
     let taxeSejour = sctNbOccupants.value * nbNuits;
     let totalDevis = prixSejourTTC + fraisServices + taxeSejour;
     
@@ -60,6 +60,11 @@ function afficheRecap(valide) {
     }
 }
 
+if (sessionStorage.getItem('idLogement') == null) {
+    alert("Aucun logement n'a été séléctionné, veuillez séléctionner un logement");
+    window.location.href = `/`;
+}
+
 console.log('detailsLogement.js');
 document.addEventListener('DOMContentLoaded', function() {
     console.log(sessionStorage.getItem('idLogement'));
@@ -68,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(data => {
         afficheRecap(false)
         console.log(data)
-
         let titreLogement = document.getElementById("titreLog");
         titreLogement.innerHTML = data[0]['titre'];
 
@@ -116,12 +120,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     case 5:
                         imgAmenagement = "/assets/imgs/iconsAmenagements/jacuzzi.svg"
                         break;
-                
                     default:
                         imgAmenagement = "/assets/imgs/iconsAmenagements/jardin.svg"
                         break;
                 }
-                htmlAmenagement = htmlAmenagement + "<div class=badgeAmenagement><img src='" + imgAmenagement + "' alt='" + amenagement['nom_amenagement'] + "'><h3>Jardin</p></div>"
+                htmlAmenagement = htmlAmenagement + "<div class=badgeAmenagement><img src='" + imgAmenagement + "' alt='" + amenagement['nom_amenagement'] + "'><h3>"+ amenagement['nom_amenagement'] +"</h3></div>"
                 
             });
             if (htmlAmenagement == "") {
