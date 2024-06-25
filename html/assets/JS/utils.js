@@ -66,7 +66,8 @@ export function Connexion(typeConnexion){
             if (inputs.length > 1) {
                 inputs[1].classList.add('error');
             }
-
+            var div = document.getElementById('login_error');
+            div.innerHTML = data
             ThrowAlertPopup(data,'error');
 
             setTimeout(() => {
@@ -103,7 +104,7 @@ export function ThrowAlertPopup(message,type) {
 }
 
 // ----------------------------------- Ajouts à garder -----------------------------------
-function Inscription() {
+export function Inscription() {
     // Création d'un objet FormData pour recueillir les données du formulaire
     let data = new FormData();
     // Récupération des valeurs des champs du formulaire
@@ -155,20 +156,17 @@ function Inscription() {
     })
     .then(data => {
         console.log(data);
-        console.log("on est ici")
         if (data === 'Inscription réussie') {
             console.log('Inscription réussie!');
             ThrowAlertPopup(data, 'succes');
             console.log('Redirection vers la page d\'accueil...');
             setTimeout(() => {
-                console.log('pendant le time out');
                 Connexion()  // Redirection après l'inscription
-            }, 3000);
-            console.log('après le time out');
+            }, 1000);
         } else {
-            console.error(data , data.error);
-            ThrowAlertPopup(data + data.error, 'error');
-            console.log("après l'erreur");
+            var div = document.getElementById('register_error');
+            div.innerHTML = data['Erreur : '];
+            ThrowAlertPopup(data, 'error');
         }
     })
     .catch(error => {
@@ -215,7 +213,8 @@ export function CreateConnexionModal(typeConnexion) {
                 <div id="password_error"></div>
             </div>
             <button class="loginButton" id="Connexion" onclick="Connexion()">Se connecter</button>
-            <button class="needAccountButton" id="Inscription" onclick="CreateInscriptionModal()">Vous n'avez pas de compte ? Inscrivez-vous</button>
+            <div id="login_error"></div>
+            <button class="needAccountButton" id="Inscription">Vous n'avez pas de compte ? Inscrivez-vous</button>
         </div>
     </div>
     `;
@@ -244,6 +243,11 @@ export function CreateConnexionModal(typeConnexion) {
             child.classList.remove('blur');
         });
     };
+
+    let inscriptionButton = modal.querySelector('#Inscription');
+    inscriptionButton.addEventListener('click', () => {
+        CreateInscriptionModal();
+    });
 }
 
 export function CreateInscriptionModal() {
@@ -371,7 +375,7 @@ export function CreateInscriptionModal() {
                 <button type="submit" class="registerButton">S'inscrire</button>
                 <div id="register_error"></div>
             </form>
-            <button class="hasAccountButton" onclick="CreateConnexionModal()">Déjà un compte ? Connectez-vous</button>
+            <button class="hasAccountButton" id="Connexion">Déjà un compte ? Connectez-vous</button>
         </div>
     </div>
 
@@ -450,6 +454,10 @@ export function CreateInscriptionModal() {
     
     passwordInput.addEventListener('input', validatePassword);
     confirmPasswordInput.addEventListener('input', validatePassword);
+    let connexionButton = modal.querySelector('#Connexion');
+    connexionButton.addEventListener('click', () => {
+        CreateConnexionModal();
+    });
 }
 // ----------------------------------- Ajouts à garder -----------------------------------
 
