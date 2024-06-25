@@ -82,7 +82,7 @@ function init() {
                     let valArr = res.date_arrivee.split('-');
                     let valDep = res.date_depart.split('-');
                     let dateArrFormatee = valArr[2] + "-" + valArr[1] + "-" + valArr[0];
-                    let dateDepFormatee = valDep[2] + "-" + valDep[1] + "" + valDep[0];
+                    let dateDepFormatee = valDep[2] + "-" + valDep[1] + "-" + valDep[0];
 
 
                     // Création de l'objet de réservation
@@ -95,7 +95,7 @@ function init() {
                     let tdDateDep = document.createElement('td');
                     tdDateDep.textContent = dateDepFormatee;
                     let tdTarif = document.createElement('td');
-                    tdTarif.textContent = res.tarif_total + '€';
+                    tdTarif.textContent = res.tarif_total.replace(".", ",") + '€';
                     let tdClient = document.createElement('td');
                     tdClient.textContent = res.pseudo;
 
