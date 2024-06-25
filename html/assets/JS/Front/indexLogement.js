@@ -266,14 +266,17 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener("input", e =>{
             let minPrice = parseInt(priceInput[0].value),
             maxPrice = parseInt(priceInput[1].value);
+
+            range.style.left = ((rangeInput[0].value - minPrice) / (maxPrice - minPrice)) * 100;
+            range.style.right = 100 - ((rangeInput[1].value - minPrice) / (maxPrice - minPrice)) * 100;
             
             if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
                 if(e.target.className === "input-min"){
                     rangeInput[0].value = minPrice;
-                    range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+                    range.style.left = ((rangeInput[0].value - minPrice) / (maxPrice - minPrice)) * 100 + "%";
                 } else{
                     rangeInput[1].value = maxPrice;
-                    range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                    range.style.right = 100 - ((rangeInput[1].value - minPrice) / (maxPrice - minPrice)) * 100 + "%";
                 }
             }
         });
@@ -303,8 +306,8 @@ document.addEventListener('DOMContentLoaded', function() {
             priceInput[0].value = minVal;
             priceInput[1].value = maxVal;
     
-            let leftPercent = (minVal / rangeInput[0].max) * 100;
-            let rightPercent = 100 - (maxVal / rangeInput[1].max) * 100;
+            let leftPercent = ((rangeInput[0].value - rangeInput[0].min) / (rangeInput[0].max - rangeInput[0].min)) * 100;
+            let rightPercent = 100 - ((rangeInput[1].value - rangeInput[1].min) / (rangeInput[1].max - rangeInput[1].min)) * 100;
 
             if (rightPercent < 0) {
                 rightPercent = 0;
