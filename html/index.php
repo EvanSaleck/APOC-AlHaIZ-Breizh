@@ -134,7 +134,7 @@ switch($requestUrl) {
             include_once('Views/Back/reservation/listeReservations.php');
             
         }else {
-            header('Location: /');
+            header('Location: /connexionProprietaire');
         }
         break;
 
