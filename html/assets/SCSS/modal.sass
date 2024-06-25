@@ -63,9 +63,7 @@
 // //                 font-size: 1em
 // //         #inscription
 // //             font-size: 1em
-
-    user-select: none
-    text-align: center
+@media screen and (min-width: general.$max-width-tablette)
     h2
        vertical-align: middle
        text-align: center
@@ -104,75 +102,78 @@
         text-decoration: underline
         text-align: center
         cursor: pointer
+    .blur 
+        filter: blur(5px)
+        pointer-events: none
+
+    /* Ensure the modal is not blurred */
+    .exception 
+        filter: none
+        pointer-events: auto
 
 
+    .alert-popup
+        position: fixed
+        top: 0   
+        left: 50%
+        transform: translate(-50%)
+        font-size: 1em
+        cursor: pointer
 
-.blur 
-    filter: blur(5px)
-    pointer-events: none
+        // on affiche l'image a gauche et le texte a droite
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: 1em
+        width: 40%
+        // on fait en sorte que le texte puisse etre sur plusieurs lignes
+        word-wrap: break-word
 
-/* Ensure the modal is not blurred */
-.exception 
-    filter: none
-    pointer-events: auto
+        border-radius: 0 0 10px 10px
 
+        
+        z-index:999999
 
-.alert-popup
-    position: fixed
-    top: 0   
-    left: 50%
-    transform: translate(-50%)
-    font-size: 1em
-    cursor: pointer
+        background-color: #fff 
+        color: #000000
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.75)
 
-    // on affiche l'image a gauche et le texte a droite
-    display: flex
-    justify-content: space-between
-    align-items: center
-    padding: 1em
-    width: 40%
-    // on fait en sorte que le texte puisse etre sur plusieurs lignes
-    word-wrap: break-word
+        img
+            width: 20%
+        
+        p 
+            width: 70%
+            text-align: center
+        
+        animation: arrivee 0.5s, depart 0.5s 5s forwards
 
-    border-radius: 0 0 10px 10px
+        @keyframes arrivee
+            from
+                top: -100%
+            to
+                top: 0
 
-    
-    z-index:999999
-
-    background-color: #fff 
-    color: #000000
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.75)
-
-    img
-        width: 20%
-    
-    p 
-        width: 70%
-        text-align: center
-    
-    animation: arrivee 0.5s, depart 0.5s 5s forwards
-
-    @keyframes arrivee
-        from
-            top: -100%
-        to
-            top: 0
-
-    @keyframes depart
-        from
-            top: 0
-        to
-            top: -100%
-
-
+        @keyframes depart
+            from
+                top: 0
+            to
+                top: -100%
 
 
 @media screen and (max-width: general.$max-width-tablette)
-    .modal-content
-        width: 50%
-        margin-top: 5%
-        h2
-            font-size: 1.5em
+    .alert-popup
+        display: none
+    .modal-register-content
+        position: fixed
+        overflow-y: hidden
+        top: 0
+        left: 0
+        transform: none
+        z-index: 1050
+        background-color: white
+        width: 100vw
+        height: 100vh
+        font-family: general.$police-texte
         .fermer
             position: absolute 
             top: 15%
@@ -226,7 +227,6 @@
                     width: 30%
             button
                 padding: 12px 20px
-
                 border-radius: 5px
                 border: 1px solid rgb(0, 0, 0, 0)
                 cursor: pointer
@@ -237,6 +237,8 @@
                 color: white
                 &:hover
                     background-color: lighten(general.$couleur-front-bleu-verdatre, 10%)
+            #register_error
+                color: red
             .hasAccountButton
                 background-color: white
                 color: general.$couleur-front-bleu-verdatre
@@ -319,6 +321,8 @@
                 margin: 20% auto 0 auto
                 &:hover
                     background-color: lighten(general.$couleur-front-bleu-verdatre, 10%)
+            #login_error
+                color: red
             .needAccountButton
                 background-color: white
                 color: general.$couleur-front-bleu-verdatre
@@ -327,5 +331,3 @@
                     background-color: darken(white, 10%)
 
     
-// // style de la page de détail du compte desktop
-// @media screen and (min-width: general.$max-width-telephone)

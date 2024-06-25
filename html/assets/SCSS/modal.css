@@ -34,96 +34,140 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.8rem;
 }
 
-.blur {
-  filter: blur(5px);
-  pointer-events: none;
-}
-
-/* Ensure the modal is not blurred */
-.exception {
-  filter: none;
-  pointer-events: auto;
-}
-
-.alert-popup {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%);
-  font-size: 1em;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1em;
-  width: 40%;
-  word-wrap: break-word;
-  border-radius: 0 0 10px 10px;
-  z-index: 999999;
-  background-color: #fff;
-  color: #000000;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
-  animation: arrivee 0.5s, depart 0.5s 5s forwards;
-}
-.alert-popup img {
-  width: 20%;
-}
-.alert-popup p {
-  width: 70%;
-  text-align: center;
-}
-@keyframes arrivee {
-  from {
-    top: -100%;
+@media screen and (min-width: 1023px) {
+  h2 {
+    vertical-align: middle;
+    text-align: center;
   }
-  to {
-    top: 0;
-  }
-}
-@keyframes depart {
-  from {
-    top: 0;
-  }
-  to {
-    top: -100%;
-  }
-}
-
-@media screen and (max-width: 1023px) {
-  .modal-content {
-    width: 50%;
-    margin-top: 5%;
-  }
-  .modal-content h2 {
+  .fermer {
     font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: auto;
+    margin-left: 0.5em;
   }
-  .modal-content .fermer {
+  #connexionForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #connexionForm input {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #020E1C;
+    outline-color: #377E81;
+  }
+  #connexionForm button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #020E1C;
+    background-color: #377E81;
+    color: white;
+  }
+  #inscription {
+    margin-top: 10px;
+    text-decoration: underline;
+    text-align: center;
+    cursor: pointer;
+  }
+  .blur {
+    filter: blur(5px);
+    pointer-events: none;
+  }
+  /* Ensure the modal is not blurred */
+  .exception {
+    filter: none;
+    pointer-events: auto;
+  }
+  .alert-popup {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    width: 40%;
+    word-wrap: break-word;
+    border-radius: 0 0 10px 10px;
+    z-index: 999999;
+    background-color: #fff;
+    color: #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
+    animation: arrivee 0.5s, depart 0.5s 5s forwards;
+  }
+  .alert-popup img {
+    width: 20%;
+  }
+  .alert-popup p {
+    width: 70%;
+    text-align: center;
+  }
+  @keyframes arrivee {
+    from {
+      top: -100%;
+    }
+    to {
+      top: 0;
+    }
+  }
+  @keyframes depart {
+    from {
+      top: 0;
+    }
+    to {
+      top: -100%;
+    }
+  }
+}
+@media screen and (max-width: 1023px) {
+  .alert-popup {
+    display: none;
+  }
+  .modal-register-content {
+    position: fixed;
+    overflow-y: hidden;
+    top: 0;
+    left: 0;
+    transform: none;
+    z-index: 1050;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    font-family: "DM Sans", sans-serif;
+  }
+  .modal-register-content .fermer {
     position: absolute;
     top: 15%;
     left: 10%;
     font-size: 2.5em;
     cursor: pointer;
   }
-  .modal-content .desktop {
+  .modal-register-content .desktop {
     display: none;
   }
-  .modal-content .logoTitre {
+  .modal-register-content .logoTitre {
     height: 30vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
   }
-  .modal-content img {
+  .modal-register-content img {
     height: 30%;
     margin-bottom: 15px;
   }
-  .modal-content h1 {
+  .modal-register-content h1 {
     height: -moz-fit-content;
     height: fit-content;
     font-family: "Reem Kufi", sans-serif;
   }
-  .modal-content .container-creation-compte {
+  .modal-register-content .container-creation-compte {
     display: flex;
     margin: 0 auto 0 auto;
     flex-direction: column;
@@ -131,37 +175,37 @@ h1, h2, h3, h4, h5, h6 {
     height: 70vh;
     font-size: 1em;
   }
-  .modal-content .container-creation-compte .formulaire-creation-compte {
+  .modal-register-content .container-creation-compte .formulaire-creation-compte {
     margin-bottom: 15px;
   }
-  .modal-content .container-creation-compte .scroll {
+  .modal-register-content .container-creation-compte .scroll {
     overflow-y: auto;
     height: 50vh;
     margin-bottom: 15px;
   }
-  .modal-content .container-creation-compte .form {
+  .modal-register-content .container-creation-compte .form {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
   }
-  .modal-content .container-creation-compte .form #password_error, .modal-content .container-creation-compte .form #confirm_password_error {
+  .modal-register-content .container-creation-compte .form #password_error, .modal-register-content .container-creation-compte .form #confirm_password_error {
     color: red;
   }
-  .modal-content .container-creation-compte .form input, .modal-content .container-creation-compte .form select {
+  .modal-register-content .container-creation-compte .form input, .modal-register-content .container-creation-compte .form select {
     height: 40px;
     border-radius: 5px;
     border: 1px solid #ADC6E3;
   }
-  .modal-content .container-creation-compte .form input {
+  .modal-register-content .container-creation-compte .form input {
     padding: 0px 10px;
   }
-  .modal-content .container-creation-compte .form select {
+  .modal-register-content .container-creation-compte .form select {
     padding: 0px 5px;
   }
-  .modal-content .container-creation-compte .form select {
+  .modal-register-content .container-creation-compte .form select {
     width: 30%;
   }
-  .modal-content .container-creation-compte button {
+  .modal-register-content .container-creation-compte button {
     padding: 12px 20px;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0);
@@ -169,28 +213,31 @@ h1, h2, h3, h4, h5, h6 {
     transition: background-color 0.3s ease;
     width: 100%;
   }
-  .modal-content .container-creation-compte .registerButton {
+  .modal-register-content .container-creation-compte .registerButton {
     background-color: #377E81;
     color: white;
   }
-  .modal-content .container-creation-compte .registerButton:hover {
+  .modal-register-content .container-creation-compte .registerButton:hover {
     background-color: #46a1a5;
   }
-  .modal-content .container-creation-compte .hasAccountButton {
+  .modal-register-content .container-creation-compte #register_error {
+    color: red;
+  }
+  .modal-register-content .container-creation-compte .hasAccountButton {
     background-color: white;
     color: #377E81;
   }
-  .modal-content .container-creation-compte .hasAccountButton:hover {
+  .modal-register-content .container-creation-compte .hasAccountButton:hover {
     background-color: #e6e6e6;
   }
-  .modal-content .container-creation-compte .CGU-form {
+  .modal-register-content .container-creation-compte .CGU-form {
     margin-bottom: 15px;
   }
-  .modal-content .container-creation-compte .CGU-form, .modal-content .container-creation-compte .CGV-form {
+  .modal-register-content .container-creation-compte .CGU-form, .modal-register-content .container-creation-compte .CGV-form {
     display: flex;
     align-items: center;
   }
-  .modal-content .container-creation-compte .CGU-form > *:not(:last-child), .modal-content .container-creation-compte .CGV-form > *:not(:last-child) {
+  .modal-register-content .container-creation-compte .CGU-form > *:not(:last-child), .modal-register-content .container-creation-compte .CGV-form > *:not(:last-child) {
     margin-right: 10px;
   }
   .modal-content {
@@ -276,6 +323,9 @@ h1, h2, h3, h4, h5, h6 {
   }
   .modal-content .container-connexion-compte .loginButton:hover {
     background-color: #46a1a5;
+  }
+  .modal-content .container-connexion-compte #login_error {
+    color: red;
   }
   .modal-content .container-connexion-compte .needAccountButton {
     background-color: white;

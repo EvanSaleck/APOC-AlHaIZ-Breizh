@@ -140,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // si on est sur la page d'edition, on prérempli les champs et on modifie le titre et le bouton
     if (window.location.pathname.match(/^\/reservations\/abonnements\/iCal\/edit\/\d+\/$/) || window.location.pathname.match(/^\/reservations\/abonnements\/iCal\/edit\/\d+$/)) {
         let id = window.location.pathname.split('/')[5];
+        console.log(id);
         fetch('/api/reservations/abonnements/iCal/getDataICal/' + id)
         .then(response => response.json())
         .then(data => {
