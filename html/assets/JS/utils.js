@@ -66,7 +66,8 @@ export function Connexion(typeConnexion){
             if (inputs.length > 1) {
                 inputs[1].classList.add('error');
             }
-
+            var div = document.getElementById('login_error');
+            div.innerHTML = data
             ThrowAlertPopup(data,'error');
 
             setTimeout(() => {
@@ -155,17 +156,17 @@ export function Inscription() {
     })
     .then(data => {
         console.log(data);
-        console.log("on est ici")
         if (data === 'Inscription réussie') {
             console.log('Inscription réussie!');
             ThrowAlertPopup(data, 'succes');
             console.log('Redirection vers la page d\'accueil...');
             setTimeout(() => {
                 Connexion()  // Redirection après l'inscription
-            }, 3000);
+            }, 1000);
         } else {
-            console.error(data , data.error);
-            ThrowAlertPopup(data + data.error, 'error');
+            var div = document.getElementById('register_error');
+            div.innerHTML = data['Erreur : '];
+            ThrowAlertPopup(data, 'error');
         }
     })
     .catch(error => {
@@ -212,6 +213,7 @@ export function CreateConnexionModal(typeConnexion) {
                 <div id="password_error"></div>
             </div>
             <button class="loginButton" id="Connexion" onclick="Connexion()">Se connecter</button>
+            <div id="login_error"></div>
             <button class="needAccountButton" id="Inscription">Vous n'avez pas de compte ? Inscrivez-vous</button>
         </div>
     </div>

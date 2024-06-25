@@ -126,6 +126,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 @media screen and (max-width: 1023px) {
+  .alert-popup {
+    display: none;
+  }
   .modal-register-content {
     position: fixed;
     overflow-y: hidden;
