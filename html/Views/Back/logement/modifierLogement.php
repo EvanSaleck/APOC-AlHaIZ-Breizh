@@ -54,7 +54,9 @@
                         <label for="photo-input" class="souligne" id="labelDropPhoto">Photo du logement*</label>
                         <input type="file" id="photo-input" style="display: none;">
                     </div>
-                    <div class="imageLogement" id="image-logement">
+                    <div class="drop-photo" id="drop-photo">
+                        <button id="photo-button" type="button">Modifier la photo</button>
+                        <span class="messageError"></span>  
                     </div>
                 </div>
             </div>

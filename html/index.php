@@ -93,7 +93,12 @@ switch($requestUrl) {
         include_once './Views/Front/logement/detailsLogement.php';
         break;
     case '/compte':
+    case '/compte/':
         include_once './Views/Front/compte/detailsCompte.php';
+        break;
+    case '/connexion':
+    case '/connexion/':
+        include_once './Views/Front/compte/connexionCompte.php';
         break;
     case '/reservation/devis':
     case '/reservation/devis/':
@@ -118,39 +123,43 @@ switch($requestUrl) {
 
     case '/logements':
     case '/logements/':
-        if(!isset($_SESSION['proprio'])) {
+        if(isset($_SESSION['proprio'])) {
             include_once('Views/Back/logement/listeLogements.php');
         }else {
-            header('Location: /');
+            header('Location: /connexionProprietaire');
         }
         break;
 
     // routes du back
     case '/logement/new':
     case '/logement/new/':
-         if(!isset($_SESSION['proprio'])) {
+         if(isset($_SESSION['proprio'])) {
             include './Views/Back/logement/newLogement.php';
         }else {
-            header('Location: /');
+            header('Location: /connexionProprietaire');
         }
         break;
+
+    case '/logements/details':
+        case '/logements/details/';
+            include './Views/Back/logement/detailsLogement.php';
+            break;
+        
+    case '/logements/details/modifier':
+        case '/logements/details/modifier';
+            include './Views/Back/logement/modifierLogement.php';
+            break;
     
     // routes back office
     case '/logement':
     case '/logement/':
         include './Views/Back/logement/listeLogements.php';
         break;
-    case '/logements/details':
-    case '/logements/details/';
-        include './Views/Back/logement/detailsLogement.php';
+
+    case '/connexionProprietaire':
+    case '/connexionProprietaire/':
+        include './Views/Back/connexionProprietaire.php';
         break;
-
-    case '/logements/details/modifier':
-    case '/logements/details/modifier';
-        include './Views/Back/logement/modifierLogement.php';
-        break;
-
-
     case '/api/getLogementsDataForCards':
         header('Content-Type: application/json');
         echo $logementController->getLogementsDataForCards();
@@ -159,6 +168,11 @@ switch($requestUrl) {
     case '/api/processFormNewLogement/':
     case '/api/processFormNewLogement':
         $logementController->processFormNewLogement();
+        break;
+
+    case '/api/processFormUpdateLogement/':
+    case '/api/processFormUpdateLogement':
+        $logementController->processFormUpdateLogement();
         break;
     
     case '/api/getReservations':
@@ -210,6 +224,22 @@ switch($requestUrl) {
         session_destroy();
         header('Location: /');
         break;
+    
+    case '/DeconnexionProprio':
+        case '/DeconnexionProprio/':
+            $_SESSION = array();
+            session_destroy();
+            header('Location: /connexionProprietaire');
+            break;
+
+    case '/back/detailsCompte':
+        case '/back/detailsCompte/':
+            include './Views/Back/compte/detailsCompte.php';
+            break;
+    case '/gestionTokens':
+        case '/gestionTokens/':
+            include './Views/Back/compte/gestionTokens.php';
+            break;
 
     case '/api/ConnexionClient':
     case 'api/ConnexionClient':
@@ -255,6 +285,13 @@ switch($requestUrl) {
         $idCompte = $client->id_compte;
         $utilisateurController->getCompteClientDetails($idCompte);
         break;
+    
+    case '/api/getCompteProprioDetails':
+        case '/api/getCompteProprioDetails/':
+        $proprio = json_decode($_SESSION['proprio']);
+        $idCompte = $proprio->id_compte;
+        $utilisateurController->getCompteProprioDetails($idCompte);
+        break;
 
     case '/api/getReservations/all':
     case 'api/getReservations/all/':
@@ -277,17 +314,25 @@ switch($requestUrl) {
         }
         break;
 
-    case '/api/updateLogementStatus':
-    case '/api/updateLogementStatus/':
-        $id = $_POST['logementId'];
-        $status = $_POST['status'];
-        // var_dump($data);
-        // die();
-        $logementController->updateStatus($id, $status);
+    case '/api/getAllTokenById':
+    case '/api/getAllTokenById/':
+        $proprio = json_decode($_SESSION['proprio']);
+        $id = $proprio->id_compte;
+        $utilisateurController->getAllTokenById($id);
         break;
-            
 
-    
+    case '/api/deleteToken/':
+        case '/api/deleteToken':
+        $data = $_POST;
+        $utilisateurController->deleteToken($data);
+        break;
+
+    case '/api/generateToken':
+    case '/api/generateToken/':
+        $data = $_POST;
+        $utilisateurController->generateToken($data);
+        break;
+
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);
