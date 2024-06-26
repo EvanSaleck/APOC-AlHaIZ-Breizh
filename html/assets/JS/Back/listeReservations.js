@@ -22,14 +22,13 @@ var enCours, aVenir, passe;
 
 // Initialise la liste des réservations liées aux compte propriétaire connecté
 function init() {
+    // Récupère les informations du propriétaire
     let proprio = JSON.parse(sessionStorage.getItem("Proprio"));
     let idProprio = new FormData();
     idProprio.append("id", proprio["id_compte"]);
 
-    // Récupère les informations du propriétaire
-    fetch('/api/getProprioById', { method: "POST", body: idProprio }).then(resp => resp.json()).then(data => {
-        document.getElementById('bonjour').innerHTML = "Bonjour " + data.prenom + ",";
-    });
+    document.getElementById('bonjour').innerHTML = "Bonjour " + proprio["prenom"] + ",";
+    console.log(proprio["prenom"])
 
     // Récupération des données de la BDD
     fetch('/api/getReservationsProprietaire', { method: "POST", body: idProprio })
@@ -40,6 +39,8 @@ function init() {
         if(resVides) { 
             let displayAucuneReservations = document.getElementById("noReservations");
             displayAucuneReservations.classList.remove("d-none");
+            
+            utils.ThrowAlertPopup("Aucune réservation trouvée", "error");
         }
         else {
             ResasTout = data;
@@ -108,8 +109,6 @@ function init() {
                 tr.setAttribute('class', etatClass);
 
                 tbody.appendChild(tr);
-
-                console.log(ResasTout[i].id_reservation)
             }
 
             // Ajour de lien href vers la page de détail de la réservation associée
@@ -118,14 +117,14 @@ function init() {
             reservations.forEach(resa => { resa.addEventListener('click', function(e){
                     sessionStorage.setItem('idresa', ResasTout[i].id_reservation);
                     console.log(ResasTout[i].id_reservation);
-                    window.location.href = `/Back/reservations/details`;
+                    window.location.href = `/reservations/details`;
                     i++;
                 });
             });
             
             // Indicateur du nombre de réservations en cours
             let nbReservationsEnCours = document.getElementById('nbReservationsEnCours');
-            nbReservationsEnCours.innerHTML = "vous avez " + nbEnCours + " réservations en cours";
+            nbReservationsEnCours.innerHTML = "Vous avez " + nbEnCours + " réservations en cours";
         }
 
         enCours = document.getElementsByClassName("enCours");

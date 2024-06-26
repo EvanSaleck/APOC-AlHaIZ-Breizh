@@ -50,7 +50,7 @@ export function Connexion(typeConnexion){
             ThrowAlertPopup(data,'success');
             setTimeout(() => {
                 if (typeConnexion === 'proprio') {
-                    window.location.href = "/Back/reservations/";
+                    window.location.href = "/reservations/";
                 } else {
                     let url = window.location.href;
                     window.location.href = url;

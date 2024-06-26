@@ -56,10 +56,10 @@ function deleteToken(id) {
   .then(response => response.json())
   .then(response => {
     if (response == "Token supprime") {
-      utils.ThrowAlertPopup("Token supprimé", "success");
+      .ThrowAlertPopup("Token supprimé", "success");
       setTimeout(() => {
         location.reload(); 
-      }, 1500);
+      }, 1500);utils
     } else {
       utils.ThrowAlertPopup("Erreur lors de la suppression du token", "error");
     }

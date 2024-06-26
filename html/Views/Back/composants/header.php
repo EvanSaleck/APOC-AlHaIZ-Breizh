@@ -1,17 +1,15 @@
 <header>
     <div class="HeaderConteneur">
         <div class="Logo">
-            <a href="./index.php">
+            <a href="/reservations">
                 <img src="/assets/imgs/logo.webp" id="logoAssoHeaderDesktop" alt="Logo">
                 <p id="titreHeader">ALHaIZ Breizh</p>
             </a>
         </div>
         <div class="Menu">
             <ul>
-                <li><a href="/about">A propos</a></li>
-                <li><a href="/logement">Logements</a></li>
-                <li><a href="/Back/reservations">Réservations</a></li>
-                <li><a href="/">Accueil</a></li>
+                <li><a href="/reservations"> Mes Réservations</a></li>
+                <li><a href="/logements">Mes Logements</a></li>
             </ul>
             <div id="Compte"></div>
         </div>

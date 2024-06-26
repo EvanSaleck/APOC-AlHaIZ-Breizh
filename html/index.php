@@ -114,6 +114,14 @@ switch($requestUrl) {
 
         break;
 
+    case '/reservation':
+    case '/reservation/':
+        if (isset($_SESSION['client'])) {
+            include_once './Views/Front/reservation/listeReservations.php';
+        }
+        else { header('Location: /'); }
+        break;
+
     
     case preg_match('/^\/facture\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
@@ -127,15 +135,22 @@ switch($requestUrl) {
         break;
 
     
-    case '/Back/reservations':
-    case '/Back/reservations/':
-        include_once('Views/Back/reservation/listeReservations.php');
-        if(!isset($_SESSION['proprio'])) {
+    // Page principale Back / Page de liste des réservations du propriétaire
+    case '/reservations':
+    case '/reservations/':
+        if(isset($_SESSION['proprio'])) {
             include_once('Views/Back/reservation/listeReservations.php');
-            
-        }else {
-            header('Location: /connexionProprietaire');
         }
+        else { header('Location: /connexionProprietaire'); }
+        break;
+         
+    // Page de détails d'une réservation pour le propriétaire
+    case '/reservations/details':
+    case '/reservations/details/':
+        if(isset($_SESSION['proprio'])) {
+            include_once('Views/Back/reservation/detailsReservation.php');
+        }
+        else { header('Location: /connexionProprietaire'); }
         break;
 
     case '/logements':
@@ -202,6 +217,18 @@ switch($requestUrl) {
     case 'api/getReservationById':
         $data = $_POST;
         $reservationController->getReservationById($data);
+        break;
+
+    case '/api/getReservationsClient':
+    case 'api/getReservationsClient':
+        $data = $_POST;
+        $reservationController->getReservationByClientId($data['id']);
+        break;
+        
+    case '/api/getReservationsProprietaire':
+    case 'api/getReservationsProprietaire':
+        $data = $_POST;
+        $reservationController->getReservationByOwnerId($data['id']);
         break;
         
     case 'api/getTypeOfLogementById/':

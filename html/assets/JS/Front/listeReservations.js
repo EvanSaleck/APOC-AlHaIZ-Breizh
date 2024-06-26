@@ -39,6 +39,8 @@ function init() {
             if(resVides) {
                 let displayAucuneReservations = document.getElementById("noReservations");
                 displayAucuneReservations.classList.remove("d-none");
+
+                utils.ThrowAlertPopup("Aucune réservation trouvée", "error");
             }
             else {
                 ResasTout = data; console.log(ResasTout);
