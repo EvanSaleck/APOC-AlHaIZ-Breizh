@@ -115,7 +115,7 @@ function init() {
                 reservations.forEach(resa => { resa.addEventListener('click', function(e){
                         sessionStorage.setItem('idresa', ResasTout[i].id_reservation);
                         console.log(ResasTout[i].id_reservation);
-                        window.location.href = `/detailReservation`;
+                        window.location.href = `/reservations/details`;
                         i++;
                     });
                 });

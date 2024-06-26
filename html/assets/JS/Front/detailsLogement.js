@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let btnRes = document.getElementById("btnRes");
         btnRes.addEventListener('click', function() {
             envoiDevis(data[0]['prix_nuit_ttc'],data)
-            window.location.href = `/reservation/devis`;
+            window.location.href = `/reservations/devis`;
         });
         btnRes.disabled = true;
 

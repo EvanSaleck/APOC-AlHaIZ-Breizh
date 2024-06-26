@@ -45,7 +45,7 @@ function Connexion(){
         if(data === 'Connexion réussie'){
             ThrowAlertPopup(data,'succes');
             setTimeout(() => {
-                window.location.href = "/Back/reservations/";
+                window.location.href = "/back/reservations/";
             }, 1000);
         }else{
             let inputs = document.querySelectorAll('#connexionModal .modal-content #connexionForm input');

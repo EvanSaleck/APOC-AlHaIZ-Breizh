@@ -10,7 +10,7 @@
 <body>
     <section id="msgBienvenue">
         <h1 id="bonjour">Bonjour,</h1>
-        <h2 id="nbReservationsEnCours">vous avez 0 réservations en cours</h2>
+        <h2 id="nbReservationsEnCours">Vous avez 0 réservations en cours</h2>
     </section>
 
     <!-- Boutons pour trier les réservations affichées par état -->

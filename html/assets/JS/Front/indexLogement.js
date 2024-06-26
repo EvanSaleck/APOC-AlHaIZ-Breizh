@@ -62,9 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     
                                     divCard.addEventListener('click', function() {
                                         sessionStorage.setItem('idLogement', logement.id_logement);
-                                        window.location.href = `/logement/`;
-                                        sessionStorage.setItem('idLogement', logement.id_logement);
-                                        window.location.href = `/logement/`;
+                                        window.location.href = `/logements/`;
                                     });
                                     divCard.setAttribute('data-dept', logement.code_postal.substring(0, 2));
                                     divCard.setAttribute('data-tarif', logement.prix_nuit_ttc);
