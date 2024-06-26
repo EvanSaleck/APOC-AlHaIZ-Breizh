@@ -320,6 +320,7 @@ switch($requestUrl) {
         $client = json_decode($_SESSION['client']);
         $idcpt = $client->id_compte;
         $reservationController->saveReservation($data, $idcpt);
+        $factureController->createFacture();
         break;
 
     case '/detailReservation':
@@ -327,7 +328,7 @@ switch($requestUrl) {
         if(!isset($_SESSION['client'])) {
             header('Location: /');
         }else {
-            include './Views/Front/reservation/DetailReservation.php';
+            include './Views/Front/reservation/detailsReservation.php';
         }
         break;
 

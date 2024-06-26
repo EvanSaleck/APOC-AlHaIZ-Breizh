@@ -26,4 +26,8 @@ class FactureController {
             
         return $allowed;
     }
+
+    public function createFacture() {
+        $this->facture->createFacture();
+    }
 }
