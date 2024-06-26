@@ -66,7 +66,7 @@
             </tr>
             <tr>
                 <td class="titreLigne">Frais services</td>
-                <td>1</td>
+                <td>1.00</td>
                 <td><span id="fraisServicesHT1"></span> €</td>
                 <td><span id="fraisServicesHT2"></span> €</td>
                 <td><span id="tvaFraisServices"></span> €</td>
@@ -74,10 +74,10 @@
             </tr>
             <tr>
                 <td class="titreLigne">Taxe séjour</td>
-                <td>1</td>
-                <td>1 €</td>
+                <td>1.00</td>
+                <td>1.00 €</td>
                 <td><span id="taxeSejourHT"></span> €</td>
-                <td>0 €</td>
+                <td>0.00 €</td>
                 <td><span id="taxeSejourTTC"></span> €</td>
             </tr>
             <tr>

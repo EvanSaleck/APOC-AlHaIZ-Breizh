@@ -20,4 +20,14 @@ class FactureController {
             
         echo json_encode($resFacture);
     }
+
+    public function isAllowed($idFacture,$idCompte) {
+        $allowed = $this->facture->isAllowed($idFacture,$idCompte);
+            
+        return $allowed;
+    }
+
+    public function createFacture() {
+        $this->facture->createFacture();
+    }
 }

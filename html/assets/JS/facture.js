@@ -4,8 +4,8 @@ function usDateToEurDate(date) {
     return lstDate[2]+"/"+lstDate[1]+"/"+lstDate[0]
 }
 
-// Pour ouvrir cette page veuillez utiliser window.open("/facture/<id>", "_blank");
-
+    // Pour ouvrir cette page veuillez utiliser window.open("/facture/<id>", "_blank");
+    
 let urlPiece =  document.location.href.split("/")
 console.log(urlPiece[4]);
 
@@ -81,38 +81,38 @@ document.addEventListener('DOMContentLoaded', function() {
         let affNbNuits = document.getElementById("nbNuits");
         affNbNuits.innerHTML = nbNuits;
         let affPrixNuitHT = document.getElementById("prixNuitHT");
-        affPrixNuitHT.innerHTML = prixNuitHT;
+        affPrixNuitHT.innerHTML = Number.parseFloat(prixNuitHT).toFixed(2);
         let affPrixSejourHT = document.getElementById("prixSejourHT");
-        affPrixSejourHT.innerHTML = prixSejourHT;
+        affPrixSejourHT.innerHTML = Number.parseFloat(prixSejourHT).toFixed(2);
         let affTvaSejour = document.getElementById("tvaSejour");
-        affTvaSejour.innerHTML = tvaSejour;
+        affTvaSejour.innerHTML = Number.parseFloat(tvaSejour).toFixed(2);
         let affSejourTTC = document.getElementById("prixSejourTTC");
-        affSejourTTC.innerHTML = prixSejourTTC;
+        affSejourTTC.innerHTML = Number.parseFloat(prixSejourTTC).toFixed(2);
 
         let fraisServicesHT = prixSejourHT * 0.01;
         let tvaFraisServices = fraisServicesHT * 0.20;
         let fraisServicesTTC = fraisServicesHT + tvaFraisServices;
 
         let affFraisServicesHT1 = document.getElementById("fraisServicesHT1");
-        affFraisServicesHT1.innerHTML = fraisServicesHT;
+        affFraisServicesHT1.innerHTML = Number.parseFloat(fraisServicesHT).toFixed(2);
         let affFraisServicesHT2 = document.getElementById("fraisServicesHT2");
-        affFraisServicesHT2.innerHTML = fraisServicesHT;
+        affFraisServicesHT2.innerHTML = Number.parseFloat(fraisServicesHT).toFixed(2);
         let affTvaFraisServices = document.getElementById("tvaFraisServices");
-        affTvaFraisServices.innerHTML = tvaFraisServices;
+        affTvaFraisServices.innerHTML = Number.parseFloat(tvaFraisServices).toFixed(2);
         let affFraisServicesTTC = document.getElementById("fraisServicesTTC");
-        affFraisServicesTTC.innerHTML = fraisServicesTTC;
+        affFraisServicesTTC.innerHTML = Number.parseFloat(fraisServicesTTC).toFixed(2);
 
         let taxeSejour = data[0]['nb_occupant'] * nbNuits;
 
         let affTaxeSejourHT = document.getElementById("taxeSejourHT");
-        affTaxeSejourHT.innerHTML = taxeSejour;
+        affTaxeSejourHT.innerHTML = Number.parseFloat(taxeSejour).toFixed(2);
         let affTaxeSejourTTC = document.getElementById("taxeSejourTTC");
-        affTaxeSejourTTC.innerHTML = taxeSejour;
+        affTaxeSejourTTC.innerHTML = Number.parseFloat(taxeSejour).toFixed(2);
 
         let totalDevis = prixSejourTTC + fraisServicesTTC + taxeSejour;
 
         let affTotalTTC = document.getElementById("totalTTC");
-        affTotalTTC.innerHTML = totalDevis;
+        affTotalTTC.innerHTML = Number.parseFloat(totalDevis).toFixed(2);
 
         // Fin tableau
 

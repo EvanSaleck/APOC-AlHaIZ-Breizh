@@ -25,57 +25,60 @@
 
             return $facture;
         }
-        /*
-        public function getDataReservationById($id) {
-            $reservations = $this->db->executeQuery("
-            SELECT client.nom AS nomClient, 
-                client.prenom AS prenomClient, 
-                proprietaire.nom AS nomPro, 
-                proprietaire.prenom AS prenomPro, 
+
+        public function isAllowed($idFacture,$idCompte) {
+            $facture = $this->db->executeQuery("
+                SELECT id_facture
+                FROM facture
+                INNER JOIN reservation ON id_reservation = f_id_reservation
+                INNER JOIN logement AS l ON l.id_logement = reservation.r_id_logement
+                WHERE id_facture = ".$idFacture." AND (r_id_compte = ".$idCompte." OR l_id_compte = ".$idCompte.")"
+            );
+
+            return !empty($facture);
+        }
+
+        public function createFacture() {
+            $facture = $this->db->executeQuery("
+            INSERT INTO facture (date_facture,nom_logement,prix_nuit_ht,numero_rue_pro,nom_rue_pro,code_postal_pro,nom_ville_pro,pays_pro,complement_pro,etat_pro,numero_rue_client,nom_rue_client,code_postal_client,nom_ville_client,pays_client,complement_client,etat_client,nom_proprietaire,prenom_proprietaire,email_proprietaire,nom_client,prenom_client,email_client,f_id_reservation) 
+            SELECT NOW() AS date_facture,
                 
-                adresseFacturation.numero_rue AS numRueFact, 
-                adresseFacturation.nom_rue AS nomRueFact, 
-                adresseFacturation.complement AS compFact,
-                adresseFacturation.code_postal AS codePostFact,
-                adresseFacturation.nom_ville AS nomVilleFact,
-                adresseFacturation.etat AS etatFact,
-                adresseFacturation.pays AS paysFact,
+                logement.titre AS nom_logement,
+                logement.prix_nuit_ht AS prix_nuit_ht,
                 
-                adresseProprietaire.numero_rue AS numRuePro, 
-                adresseProprietaire.nom_rue AS nomRuePro, 
-                adresseProprietaire.complement AS compPro,
-                adresseProprietaire.code_postal AS codePostPro,
-                adresseProprietaire.nom_ville AS nomVillePro,
-                adresseProprietaire.etat AS etatPro,
-                adresseProprietaire.pays AS paysPro,
+                adresseProprietaire.numero_rue AS numero_rue_pro, 
+                adresseProprietaire.nom_rue AS nom_rue_pro, 
+                adresseProprietaire.code_postal AS code_postal_pro,
+                adresseProprietaire.nom_ville AS nom_ville_pro,
+                adresseProprietaire.pays AS pays_pro,
+                adresseProprietaire.etat AS etat_pro,
+                adresseProprietaire.complement AS complement_pro,
+                                    
+                adresseFacturation.numero_rue AS numero_rue_client, 
+                adresseFacturation.nom_rue AS nom_rue_client, 
+                adresseFacturation.code_postal AS code_postal_client,
+                adresseFacturation.nom_ville AS nom_ville_client,
+                adresseFacturation.pays AS pays_client,
+                adresseFacturation.etat AS etat_client,
+                adresseFacturation.complement AS complement_client,
                 
-                adresseLogement.numero_rue AS numRueLog, 
-                adresseLogement.nom_rue AS nomRueLog, 
-                adresseLogement.complement AS compLog,
-                adresseLogement.code_postal AS codePostLog,
-                adresseLogement.nom_ville AS nomVilleLog,
+                proprietaire.nom AS nom_proprietaire, 
+                proprietaire.prenom AS prenom_proprietaire, 
+                proprietaire.e_mail AS email_proprietaire,
                 
-                reservation.date_arrivee,
-                reservation.date_depart,
-                reservation.nb_occupant,
-                reservation.nb_nuit,
-                reservation.frais_service,
-                reservation.tarif_total AS tarif_total_resa,
-                reservation.total_tarif_ttc AS tarif_sejour,
-                reservation.taxe_sejour,
+                client.nom AS nom_client, 
+                client.prenom AS prenom_client, 
+                client.e_mail AS email_client,
                 
-                logement.prix_nuit_ttc
-                
+                id_reservation
+                                
             FROM reservation
-            INNER JOIN logement ON R_id_logement = id_logement
+            INNER JOIN logement ON id_logement = R_id_logement
             INNER JOIN compte_client AS client ON R_id_compte = client.id_compte
             INNER JOIN compte_proprietaire AS proprietaire ON L_id_compte = proprietaire.id_compte
-            INNER JOIN adresse AS adresseFacturation ON client.CC_id_adresse = adresseFacturation.id_adresse
+            INNER JOIN adresse AS adresseFacturation ON client.C_id_adresse = adresseFacturation.id_adresse
             INNER JOIN adresse AS adresseProprietaire ON proprietaire.C_id_adresse = adresseProprietaire.id_adresse
-            INNER JOIN adresse AS adresseLogement ON logement.L_id_adresse = adresseLogement.id_adresse
-            WHERE id_reservation = " . $id);
-            return $reservations;
+            WHERE id_reservation = (SELECT MAX(id_reservation) FROM reservation)");
         }
-        */
     }
 ?>
