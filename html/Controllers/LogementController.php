@@ -215,6 +215,8 @@ class LogementController
                 $statutPropriete = false; // Valeur par défaut si aucune valeur n'est trouvée
             }
 
+            $photo = $_POST['photo'] ?? null;
+
             // Création de l'objet FormNewLogement avec les données décodées
             $formLogement = new FormNewLogement(
                 $titre,
@@ -270,8 +272,4 @@ class LogementController
 
             }
         }
-    }
-
-
-
 }

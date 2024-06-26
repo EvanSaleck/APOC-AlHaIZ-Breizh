@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then((response) => response.json())
             .then((data) => {
-                if (data.error) {
+                if (data != true) {
                     utils.ThrowAlertPopup(data.error, 'error');
                 } else {
                     const message = 'Le logement a bien été mis à jour !';
