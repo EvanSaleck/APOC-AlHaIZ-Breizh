@@ -92,12 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             redirectionModifs.forEach(element => {
                 element.addEventListener('click', function(e) {
-        
-                    sessionStorage.setItem('idLogement', element.parentElement.getAttribute('data-id')); 
-
+                    e.stopPropagation();
+                    const logementId = element.parentElement.getAttribute('data-id');
+                    sessionStorage.setItem('logementId', logementId);
                     window.location.href = `/logements/details/modifier`;
                 });
             });
+            
           });
     })
    .catch(error => {
