@@ -248,8 +248,9 @@ switch($requestUrl) {
 
     case '/api/getLogementsByProprietaireId':
     case '/api/getLogementsByProprietaireId/':
-        // $data = $_POST;
-        $logementController->getLogementsByProprietaireId($prop);
+        $proprio = json_decode($_SESSION['proprio']);
+        $idCompte = $proprio->id_compte;
+        $logementController->getLogementsByProprietaireId($idCompte);
         break;
 
     // Routes des API
