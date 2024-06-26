@@ -51,8 +51,8 @@ include_once 'Views/Front/composants/head.php';
 <body>
     <main>
         <div class="logoTitre">
-            <img src="assets/imgs/logo.webp" alt="Logo ALHalIZ Breizh">
-            <h1>ALHalIZ Breizh</h1>
+            <img src="assets/imgs/logo.webp" alt="Logo ALHaIZ Breizh">
+            <h1>ALHaIZ Breizh</h1>
         </div>
         <div class="container-creation-compte">
             <form class="formulaire-creation-compte" action="/signup" method="post">
@@ -95,12 +95,12 @@ include_once 'Views/Front/composants/head.php';
                     <div id="agreement-form" class="form">
                         <div class="CGU-form">
                             <input type="checkbox" id="terms_conditions" name="terms_conditions" required>
-                            <label for="terms_conditions">En cochant cette case, je confirme avoir lu et accepté les <a href="/terms-conditions">Conditions Générales d'Utilisation</a> d'ALHalIZ Breizh.</label>
+                            <label for="terms_conditions">En cochant cette case, je confirme avoir lu et accepté les <a href="/terms-conditions">Conditions Générales d'Utilisation</a> d'ALHaIZ Breizh.</label>
                         </div>
 
                         <div class="CGV-form">
                             <input type="checkbox" id="sales_conditions" name="sales_conditions" required>
-                            <label for="sales_conditions">En cochant cette case, je reconnais avoir lu et accepté les <a href="/sales-conditions">Conditions Générales de Vente</a> d'ALHalIZ Breizh.</label>
+                            <label for="sales_conditions">En cochant cette case, je reconnais avoir lu et accepté les <a href="/sales-conditions">Conditions Générales de Vente</a> d'ALHaIZ Breizh.</label>
                         </div>
                     </div>
                 </div>

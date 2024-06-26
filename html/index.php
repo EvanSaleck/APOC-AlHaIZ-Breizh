@@ -320,6 +320,7 @@ switch($requestUrl) {
         $client = json_decode($_SESSION['client']);
         $idcpt = $client->id_compte;
         $reservationController->saveReservation($data, $idcpt);
+        $factureController->createFacture();
         break;
     case '/api/updateLogementStatus':
     case '/api/updateLogementStatus/':
@@ -335,7 +336,7 @@ switch($requestUrl) {
         if(!isset($_SESSION['client'])) {
             header('Location: /');
         }else {
-            include './Views/Front/reservation/DetailReservation.php';
+            include './Views/Front/reservation/detailsReservation.php';
         }
         break;
 
@@ -356,6 +357,24 @@ switch($requestUrl) {
     case '/api/generateToken/':
         $data = $_POST;
         $utilisateurController->generateToken($data);
+        break;
+
+    case '/api/updatePassword':
+        case '/api/updatePassword/':
+            $data = $_POST;
+            $utilisateurController->updatePassword($data);
+        break;
+
+    case '/api/updateCliPassword':
+        case '/api/updateCliPassword/':
+                $data = $_POST;
+                $utilisateurController->updateCliPassword($data);
+            break;
+
+    case '/api/updateProfile':
+        case '/api/updateProfile/':
+            $data = $_POST;
+            $utilisateurController->updateProfile($data);
         break;
 
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:

@@ -1,29 +1,36 @@
 #define _XOPEN_SOURCE
+// Gestion du Socket
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+// Gestion de la BDD
 #include <postgresql/libpq-fe.h>
+// Bases
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+// Gestion du JSON 
 #include <cjson/cJSON.h>
+// Permet la gestion des options notamment --help 
+#include <getopt.h>
 
 // Clé admin 
-const char ADMINKEY[] = "adminadmin99";
+const char ADMINKEY[] = "3086da87fe06e2b024cd8e294616cfc4019e57f6212ecd48a3321c738bb7aa75";
 
 // Définition des variables
 int sock;
 int ret;
 int size;
 int cnx;
+int max_attempts = 3;
 PGconn *connection;
 struct sockaddr_in conn_addr;
 struct sockaddr_in addr;
 
-// Structure du tokent pour la simplicité du stockage
+// Structure du token pour la simplicité du stockage
 struct token {
     int id_proprio;
     char cle[256];
@@ -100,6 +107,17 @@ void sendReponse(PGresult *data) {
     cJSON_Delete(json);
 }
 
+
+void helper() {
+    printf("Exemple: <nom_programme> -d <conteneur> -p <port>\n");
+    printf("Options:\n");
+    printf("  -d <ip>       Spécifie le conteneur docker de votre base de donnée\n");
+    printf("  -p <port>     Spécifie le port du serveur\n");
+    printf("  --help        Affiche ce message d'aide\n");
+    printf("Une fois lancé il vous suffit de laisser le processus tourner ainsi tout le monde pourra effectuer des requêtes\n");
+}
+
+
 void showDisponibiliteByLogement(struct token *t) {
     char buffer[1024];
     int bytes_read;
@@ -123,11 +141,11 @@ void showDisponibiliteByLogement(struct token *t) {
     }
 
     // Envoyer la liste des logements à l'utilisateur
-    write(cnx, "Veuillez choisir un logement parmi les suivants :\n", 51);
+    snprintf(buffer, sizeof(buffer), "%d\n", nblignes);
+    write(cnx, buffer, strlen(buffer));
     for (int i = 0; i < nblignes; i++) {
-        char ligne[256];
-        snprintf(ligne, sizeof(ligne), "%d) %s\n", i + 1, PQgetvalue(resultat, i, 1));
-        write(cnx, ligne, strlen(ligne));
+        snprintf(buffer, sizeof(buffer), "%d) %s\n", i + 1, PQgetvalue(resultat, i, 1));
+        write(cnx, buffer, strlen(buffer));
     }
 
     // Lire le choix de l'utilisateur
@@ -151,7 +169,6 @@ void showDisponibiliteByLogement(struct token *t) {
     PQclear(resultat);
 
     // Lire la date de début
-    write(cnx, "Veuillez entrer la date de début de votre période (format YYYY-MM-DD) :\n", 74);
     bytes_read = read(cnx, buffer, sizeof(buffer) - 1);
     if (bytes_read <= 0) {
         write(cnx, "Erreur de lecture. Veuillez réessayer.\n", 40);
@@ -170,7 +187,6 @@ void showDisponibiliteByLogement(struct token *t) {
     }
 
     // Lire la date de fin
-    write(cnx, "Veuillez entrer la date de fin de votre période (format YYYY-MM-DD) :\n", 72);
     bytes_read = read(cnx, buffer, sizeof(buffer) - 1);
     if (bytes_read <= 0) {
         write(cnx, "Erreur de lecture. Veuillez réessayer.\n", 40);
@@ -195,7 +211,7 @@ void showDisponibiliteByLogement(struct token *t) {
     PGresult *resultat2 = PQexec(connection, sql2);
     if (PQresultStatus(resultat2) != PGRES_TUPLES_OK) {
         fprintf(stderr, "Erreur de requête SQL : %s\n", PQerrorMessage(connection));
-        write(cnx, "Erreur, Veuillez réessayer", 28);
+        write(cnx, "Erreur, veuillez réessayer.\n", 28);
         PQclear(resultat2);
         return;
     }
@@ -254,7 +270,6 @@ void showDisponibiliteByLogement(struct token *t) {
 }
 
 
-
 void showAllLogements() {
     char sql[256];
     snprintf(sql, sizeof(sql), "SELECT * FROM sae3.logement");
@@ -285,20 +300,13 @@ void showLogementByProprio(struct token *t) {
     PQclear(resultat);
 }
 
-void deconnexion() {
-    write(cnx, "Merci d'avoir utilisé l'API\n", 29);
-    close(cnx); // Ferme la connexion avec le client
-}
-
 void handleClientConnection(int client_sock) {
     struct token t;
     cnx = client_sock;
-    write(cnx, "Veuillez vous identifier avec votre clé, si vous n'en avez pas, créez-en une sur le site\n", 91);
 
     char buffer[1024];
     bool validite = false;
     int attempts = 0;
-    int max_attempts = 3; // Nombre maximum de tentatives
 
     while (attempts < max_attempts && !validite) {
         int bytes_read = read(cnx, buffer, sizeof(buffer) - 1);
@@ -316,9 +324,16 @@ void handleClientConnection(int client_sock) {
     }
 
     if (validite) {
-        write(cnx, "Connexion effectuée\n", 22);
+        if(strcmp(t.cle, ADMINKEY) == 0){
+            write(cnx, "1/Admin", 8);
+        } else {
+            write(cnx, "1/User", 7);
+        }
+
+
         while (1) {
             if (strcmp(t.cle, ADMINKEY) == 0) {
+
                 write(cnx, "Que souhaitez-vous faire ?\n1) Afficher tout les logements sur le site \n\n0) Quitter l'API", 89);
 
                 int bytes_read = read(cnx, buffer, sizeof(buffer) - 1);
@@ -334,7 +349,7 @@ void handleClientConnection(int client_sock) {
 
                 switch (choix) {
                 case 0:
-                    deconnexion();
+                    // deconnexion();
                     close(cnx);
                     return;
                 case 1:
@@ -345,8 +360,6 @@ void handleClientConnection(int client_sock) {
                     break;
                 }
             } else {
-                write(cnx, "Que souhaitez-vous faire ?\n1) Afficher la liste de vos logements\n2) Afficher les disponibilités de vos logements\n\n0) Quitter l'API\n", 132);
-
                 int bytes_read = read(cnx, buffer, sizeof(buffer) - 1);
                 if (bytes_read == -1) {
                     perror("Échec de la lecture");
@@ -358,10 +371,6 @@ void handleClientConnection(int client_sock) {
 
                 int choix = atoi(buffer);
                 switch (choix) {
-                case 0:
-                    deconnexion();
-                    close(cnx);
-                    return;
                 case 1:
                     showLogementByProprio(&t);
                     break;
@@ -382,12 +391,47 @@ void handleClientConnection(int client_sock) {
 }
 
 int main(int argc, char **argv) {
-    if (argc < 3) {
-        fprintf(stderr, "Usage: %s <port> <container_name>\n", argv[0]);
+    char *nomdb = NULL;
+    int port = 0;
+    int opt;
+    int option_index = 0;
+
+        // Permet de prendre en considération une option longue --help
+    struct option long_options[] = {
+        {"help", no_argument, 0,  0 },
+        {0, 0, 0, 0}
+    };
+
+    // Traitement des arguments avec getopt_long pour le --help
+    while ((opt = getopt_long(argc, argv, "d:p:", long_options, &option_index)) != -1) {
+        switch (opt) {
+            case 0:
+                if (strcmp(long_options[option_index].name, "help") == 0) {
+                    helper();
+                    return EXIT_SUCCESS;
+                }
+                break;
+            case 'd':
+                nomdb = optarg;
+                break;
+            case 'p':
+                port = atoi(optarg);
+                break;
+            case '--help':
+                helper();
+                break;
+            default:
+                helper();
+                return EXIT_FAILURE;
+        }
+    }
+
+    if (nomdb == NULL || port == 0) {
+        printf("Veuillez renseigner les paramètres nécessaires au fonctionnement du programme :\n");
+        helper();
         return EXIT_FAILURE;
     }
 
-    char *nomdb = argv[2];
     char cmd[256];
     snprintf(cmd, sizeof(cmd), "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' %s", nomdb);
 
@@ -415,8 +459,6 @@ int main(int argc, char **argv) {
         PQfinish(connection);
         return EXIT_FAILURE;
     }
-
-    int port = atoi(argv[1]);
 
     // Création du socket
     sock = socket(AF_INET, SOCK_STREAM, 0);

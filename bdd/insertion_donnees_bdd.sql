@@ -161,10 +161,10 @@ VALUES ('Mr', 'Tong', 'Marco', 'Marco.Tong@gmail.fr', '$2y$10$K9Pqj5NAb9LHPaf/WD
 /* Ensemble des logements */ 
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Cabanon dans la forêt', 2, '/assets/imgs/logements/image_1.svg', 48.0275, -2.2163, 15, 1, 0, 1, 80, false, 2, 7, 7, 1, 7, 4, 4, 'Petit refuge rustique', 'Un cabanon rustique parfait pour une escapade en pleine nature, idéal pour deux personnes.', 88);
+VALUES ('Cabanon dans la forêt', 2, '/assets/imgs/logements/image_1.webp', 48.0275, -2.2163, 15, 1, 0, 1, 80, false, 2, 7, 7, 1, 7, 4, 4, 'Petit refuge rustique', 'Un cabanon rustique parfait pour une escapade en pleine nature, idéal pour deux personnes.', 88);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Maisonnette en plein air', 3, '/assets/imgs/logements/image_2.svg', 0.5, 1.2, 170, 2, 1, 1, 60, true, 7, 3, 3, 2, 8, 2, 5, 'Charmante maisonnette', 'Une maisonnette située en bord de mer, offrant une vue imprenable et un confort optimal pour trois personnes.', 66);
+VALUES ('Maisonnette en plein air', 3, '/assets/imgs/logements/image_2.webp', 0.5, 1.2, 170, 2, 1, 1, 60, true, 7, 3, 3, 2, 8, 2, 5, 'Charmante maisonnette', 'Une maisonnette située en bord de mer, offrant une vue imprenable et un confort optimal pour trois personnes.', 66);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
 VALUES ('Maison de campagne', 6, '/assets/imgs/logements/image_3.webp', 48.2345, -2.4567, 110, 3, 2, 1, 120, true, 4, 6, 7, 3, 7, 2, 2, 'Maison spacieuse', 'Une maison spacieuse pouvant accueillir jusquà six personnes, idéale pour les familles ou les groupes.', 132);
@@ -173,7 +173,7 @@ INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude
 VALUES ('Maison moderne', 4, '/assets/imgs/logements/image_4.webp', 48.3456, -2.5678, 60, 1, 0, 1, 90, true, 2, 4, 7, 4, 9, 3, 3, 'Maison moderne', 'Une maison moderne et confortable, parfait pour quatre personnes, situé dans un quartier dynamique.', 99);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Maison familiale', 6, '/assets/imgs/logements/image_5.svg', 48.2345, -2.4567, 90, 4, 2, 1, 120, true, 4, 6, 7, 4, 11, 3, 3, 'Maison familiale', 'Une maison familiale pouvant accueillir jusquà six personnes, avec toutes les commodités nécessaires pour un séjour confortable.', 132);
+VALUES ('Maison familiale', 6, '/assets/imgs/logements/image_5.webp', 48.2345, -2.4567, 90, 4, 2, 1, 120, true, 4, 6, 7, 4, 11, 3, 3, 'Maison familiale', 'Une maison familiale pouvant accueillir jusquà six personnes, avec toutes les commodités nécessaires pour un séjour confortable.', 132);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
 VALUES ('Maisonette de forêt', 3, '/assets/imgs/logements/image_6.webp', 48.5678, -2.7890, 130, 3, 2, 1, 80, true, 5, 7, 7, 5, 7, 5, 5, 'Maison à deux pas de la fôret, idéales pour des balades !', 'Une petite maison de vacances parfaite pour les groupes ou les familles, pouvant accueillir trois personnes.', 165);
@@ -191,7 +191,7 @@ INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude
 VALUES ('Villa luxueuse', 12, '/assets/imgs/logements/image_10.webp', 75.9876, 30.1234, 200, 5, 3, 2, 500, true, 7, 14, 30, 1, 7, 6, 2, 'Villa de luxe avec piscine', 'Une villa luxueuse et spacieuse avec piscine privée, parfaite pour des vacances de rêve en famille ou entre amis.', 550);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Maison luxueuse', 8, '/assets/imgs/logements/image_11.svg', 45.9876, 3.1234, 150, 4, 2, 2, 300, true, 4, 7, 14, 2, 8, 5, 2, 'Maison luxueuse', 'Une maison luxueuse offrant tout le confort moderne dans un cadre magnifique.', 330);
+VALUES ('Maison luxueuse', 8, '/assets/imgs/logements/image_11.webp', 45.9876, 3.1234, 150, 4, 2, 2, 300, true, 4, 7, 14, 2, 8, 5, 2, 'Maison luxueuse', 'Une maison luxueuse offrant tout le confort moderne dans un cadre magnifique.', 330);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
 VALUES ('Maison familiale', 8, '/assets/imgs/logements/image_12.webp', 45.9876, 3.1234, 180, 5, 2, 3, 250, true, 5, 7, 14, 3, 9, 5, 2, 'Maison familiale', 'Une maison familiale spacieuse avec un grand jardin et une vue superbe.', 275);
@@ -200,28 +200,28 @@ INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude
 VALUES ('Cabanon en bord de rivière', 3, '/assets/imgs/logements/image_13.webp', 131.9876, 56.1234, 50, 1, 1, 1, 70, false, 2, 3, 7, 4, 10, 1, 4, 'Cabanon en bord de rivière', 'Un cabanon cosy et rustique au bord d une rivière paisible.', 77);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Cabane en foret', 4, '/assets/imgs/logements/image_14.jpg', 45.9876, 3.1234, 60, 2, 2, 1, 120, false, 3, 5, 10, 5, 11, 2, 4, 'Cabane en forêt', 'Une cabane en forêt, idéale pour une escapade nature en famille ou entre amis.', 132);
+VALUES ('Cabane en foret', 4, '/assets/imgs/logements/image_14.webp', 45.9876, 3.1234, 60, 2, 2, 1, 120, false, 3, 5, 10, 5, 11, 2, 4, 'Cabane en forêt', 'Une cabane en forêt, idéale pour une escapade nature en famille ou entre amis.', 132);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Grande maison familiale', 8, '/assets/imgs/logements/image_15.jpg', 45.9876, 3.1234, 140, 4, 2, 2, 350, true, 6, 14, 30, 6, 7, 4, 2, 'Grande maison familiale', 'Une grande maison parfaite pour des réunions de famille, avec de nombreuses commodités.', 385);
+VALUES ('Grande maison familiale', 8, '/assets/imgs/logements/image_15.webp', 45.9876, 3.1234, 140, 4, 2, 2, 350, true, 6, 14, 30, 6, 7, 4, 2, 'Grande maison familiale', 'Une grande maison parfaite pour des réunions de famille, avec de nombreuses commodités.', 385);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Maison à côté du phare', 5, '/assets/imgs/logements/image_16.jpg', 45.9876, 3.1234, 100, 3, 1, 2, 180, false, 3, 10, 14, 7, 8, 3, 4, 'Maison à côté du phare', 'Une maison pittoresque à côté dun phare, avec une vue incroyable sur la mer.', 198);
+VALUES ('Maison à côté du phare', 5, '/assets/imgs/logements/image_16.webp', 45.9876, 3.1234, 100, 3, 1, 2, 180, false, 3, 10, 14, 7, 8, 3, 4, 'Maison à côté du phare', 'Une maison pittoresque à côté dun phare, avec une vue incroyable sur la mer.', 198);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Maison de bord de mer', 6, '/assets/imgs/logements/image_17.jpg', 45.9876, 3.1234, 120, 3, 2, 1, 220, true, 5, 7, 14, 8, 9, 4, 4, 'Maison de bord de mer', 'Une maison charmante en bord de mer, parfaite pour des vacances relaxantes.', 242);
+VALUES ('Maison de bord de mer', 6, '/assets/imgs/logements/image_17.webp', 45.9876, 3.1234, 120, 3, 2, 1, 220, true, 5, 7, 14, 8, 9, 4, 4, 'Maison de bord de mer', 'Une maison charmante en bord de mer, parfaite pour des vacances relaxantes.', 242);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Maison ancienne de village', 5, '/assets/imgs/logements/image_18.jpg', 45.9876, 3.1234, 90, 3, 2, 1, 160, false, 4, 7, 14, 9, 10, 3, 4, 'Maison ancienne de village', 'Une maison ancienne pleine de charme située dans un village pittoresque.', 176);
+VALUES ('Maison ancienne de village', 5, '/assets/imgs/logements/image_18.webp', 45.9876, 3.1234, 90, 3, 2, 1, 160, false, 4, 7, 14, 9, 10, 3, 4, 'Maison ancienne de village', 'Une maison ancienne pleine de charme située dans un village pittoresque.', 176);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Maison typique bretonne', 6, '/assets/imgs/logements/image_19.jpg', 45.9876, 3.1234, 110, 3, 2, 1, 180, true, 4, 10, 20, 10, 11, 3, 4, 'Maison typique bretonne', 'Une maison typique bretonne avec beaucoup de caractère, idéale pour des vacances en famille.', 198);
+VALUES ('Maison typique bretonne', 6, '/assets/imgs/logements/image_19.webp', 45.9876, 3.1234, 110, 3, 2, 1, 180, true, 4, 10, 20, 10, 11, 3, 4, 'Maison typique bretonne', 'Une maison typique bretonne avec beaucoup de caractère, idéale pour des vacances en famille.', 198);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Petite maison de ville', 4, '/assets/imgs/logements/image_20.jpg', 45.9876, 3.1234, 70, 2, 1, 1, 100, false, 3, 5, 10, 11, 11, 2, 4, 'Petite maison de ville', 'Une petite maison de ville pratique et confortable, idéale pour un séjour en ville.', 110);
+VALUES ('Petite maison de ville', 4, '/assets/imgs/logements/image_20.webp', 45.9876, 3.1234, 70, 2, 1, 1, 100, false, 3, 5, 10, 11, 11, 2, 4, 'Petite maison de ville', 'Une petite maison de ville pratique et confortable, idéale pour un séjour en ville.', 110);
 
 INSERT INTO logement(titre, personnes_max, image_principale, latitude, longitude, surface_hab, nb_chambres, nb_lits_simples, nb_lits_doubles, prix_nuit_ht, statut_propriete, duree_min_location, avance_resa_min, delai_annul_max, L_id_adresse, L_id_compte, L_id_type, L_id_categorie, accroche, description, prix_nuit_ttc)
-VALUES ('Chalet dans les bois', 6, '/assets/imgs/logements/image_21.jpg', 45.9876, 3.1234, 100, 3, 1, 2, 200, true, 5, 7, 14, 12, 10, 3, 4, 'Chalet dans les bois', 'Un chalet chaleureux situé dans les bois, parfait pour une retraite paisible.', 220);
+VALUES ('Chalet dans les bois', 6, '/assets/imgs/logements/image_21.webp', 45.9876, 3.1234, 100, 3, 1, 2, 200, true, 5, 7, 14, 12, 10, 3, 4, 'Chalet dans les bois', 'Un chalet chaleureux situé dans les bois, parfait pour une retraite paisible.', 220);
 
 
 /* Reservation */
@@ -351,45 +351,6 @@ VALUES ('0745678901','+33', 10);
 INSERT INTO numero_telephone(numero_tel, prefixe, id_compte)
 VALUES ('0756789012','+33', 11);
 
-
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (7,1);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (8,1);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (9,1);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (10,1);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (11,1);
-
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (7,2);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (9,2);
-
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (7,3);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (8,3);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (9,3);
-
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (9,4);
-
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (10,5);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (11,5);
-
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (9,6);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (10,6);
-
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (8,7);
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (11,7);
-
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (8,8);
-
-INSERT INTO langue_parlee(LP_id_compte, LP_id_langue) VALUES (10,9);
-
-
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (1,1);
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (2,1);
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (10,1);
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (5,1);
-
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (3,2);
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (4,2);
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (12,2);
-
 INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
 VALUES (7,1);
 INSERT INTO langue_parlee(LP_id_compte, LP_id_langue)
@@ -481,19 +442,6 @@ VALUES (8,5);
 INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement)
 VALUES (11,5);
 
-INSERT INTO facture (f_id_reservation,date_facture,nom_client,prenom_client,email_client,nom_proprietaire,prenom_proprietaire,email_proprietaire,numero_rue_client,nom_rue_client,complement_client,code_postal_client,nom_ville_client,etat_client,pays_client,numero_rue_pro,nom_rue_pro,complement_pro,code_postal_pro,nom_ville_pro,etat_pro,pays_pro,nom_logement,prix_nuit_ht) 
-VALUES
-  (1,'11/06/2024','Neymar','Jean','Jean.Neymar@gmail.com','Kniglait','Keira','Keira.Kniglait@gmail.fr',12,'rue de Blancbois',NULL,'22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Cabanon dans la forêt',80.00),
-  (2,'12/06/2024','Waxson','Emmi','emmmi.waxson@outlook.com','Toman','Ks','toman.ks@apple.us',17,'rue du Pont',NULL,'22300','Lannion',NULL,'France',1,'rue Victor Hugo','bis','29200','Brest',NULL,'France','Maisonnette en plein air',60.00),
-  (3,'14/06/2024','Daip','Jauni','Daip.Jauni@wanadoo.com','Kniglait','Keira','Keira.Kniglait@gmail.fr',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Maisonnette',120.00),
-  (4,'21/06/2024','Magi','Renou','magi.renou@gmail.eu','Cam','Ailaion','Ailaion.cam@gmail.fr',5,'rue des tournesols',NULL,'29200','Brest',NULL,'France',17,'rue du Pont',NULL,'22300','Lannion',NULL,'France','Maison moderne',90.00),
-  (5,'01/06/2024','Daip','Jauni','Daip.Jauni@wanadoo.com','Dupont','Paul','paul.dupont@example.com',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France','Maison familiale',120.00),
-  (6,'07/06/2024','Waxson','Emmi','emmmi.waxson@outlook.com','Kniglait','Keira','Keira.Kniglait@gmail.fr',17,'rue du Pont',NULL,'22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Cabanon dans la forêt',80.00),
-  (7,'09/06/2024','Neymar','Jean','Jean.Neymar@gmail.com','Kniglait','Keira','Keira.Kniglait@gmail.fr',12,'rue de Blancbois',NULL,'22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Maisonnette',120.00),
-  (8,'12/06/2024','Magi','Renou','magi.renou@gmail.eu','Dupont','Paul','paul.dupont@example.com',5,'rue des tournesols',NULL,'29200','Brest',NULL,'France',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France','Maison familiale',120.00),
-  (9,'15/06/2024','Daip','Jauni','Daip.Jauni@wanadoo.com','Kniglait','Keira','Keira.Kniglait@gmail.fr',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Cabanon dans la forêt',80.00),
-  (10,'27/06/2024','Mir','Ador','mir.ador@gmail.us','Toman','Ks','toman.ks@apple.us',5,'Columbia Street',NULL,'20001','Washington DC','Columbia','USA',1,'rue Victor Hugo','bis','29200','Brest',NULL,'France','Maisonnette en plein air',60.00);
-
 INSERT INTO cle_api(cle, c_id_proprio)
 VALUES ('769a4ba84b6b8d63d9364242ddc3f4b1f0e755580090b6015c56729a7dfe4c7f', 7);
 INSERT INTO cle_api(cle, c_id_proprio)
@@ -501,12 +449,16 @@ VALUES ('0df3bf12328fbd6511b21db218c2f2cb708fda6d2a1571fa56484681f9a7e98a', 8);
 INSERT INTO cle_api(cle, c_id_proprio)
 VALUES ('59e4c3ba79fa4af1549347fd9a471d36e96e5a67f99e83acdfdd64618ff50fcd', 9);
 
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (1,4);
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (3,4);
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (4,4);
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (13,4);
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (18,4);
-
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (7,5);
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (8,5);
-INSERT INTO amenagements_logement(al_id_logement, al_id_amenagement) VALUES (11,5);
+INSERT INTO facture (F_id_reservation,date_facture,nom_client,prenom_client,email_client,nom_proprietaire,prenom_proprietaire,email_proprietaire,numero_rue_client,nom_rue_client,complement_client,code_postal_client,nom_ville_client,etat_client,pays_client,numero_rue_pro,nom_rue_pro,complement_pro,code_postal_pro,nom_ville_pro,etat_pro,pays_pro,nom_logement,prix_nuit_ht) 
+VALUES
+  (1,'25/06/2024','Turain','Jean','Jean.Turain@gmail.com','Dumont','Keira','Keira.Dumont@gmail.fr',12,'rue de Blancbois',NULL,'22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Cabanon dans la forêt',80.00),
+  (2,'25/06/2024','Waxson','Emmi','emmmi.waxson@outlook.com','Turner','Thomas','turner.thomas@apple.us',17,'rue du Pont',NULL,'22300','Lannion',NULL,'France',1,'rue Victor Hugo','bis','29200','Brest',NULL,'France','Maisonnette en plein air',60.00),
+  (3,'25/06/2024','François','Jonathan','François.Jonathan@wanadoo.com','Dumont','Keira','Keira.Dumont@gmail.fr',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Maison de campagne',120.00),
+  (4,'25/06/2024','Bouleau','Romain','bouleau.romain@gmail.eu','Monroe','Camille','Camille.monroe@gmail.fr',5,'rue des tournesols',NULL,'29200','Brest',NULL,'France',17,'rue du Pont',NULL,'22300','Lannion',NULL,'France','Maison moderne',90.00),
+  (5,'25/06/2024','François','Jonathan','François.Jonathan@wanadoo.com','Dupont','Paul','paul.dupont@gmail.com',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France','Maison familiale',120.00),
+  (6,'25/06/2024','Waxson','Emmi','emmmi.waxson@outlook.com','Dumont','Keira','Keira.Dumont@gmail.fr',17,'rue du Pont',NULL,'22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Cabanon dans la forêt',80.00),
+  (7,'25/06/2024','Turain','Jean','Jean.Turain@gmail.com','Dumont','Keira','Keira.Dumont@gmail.fr',12,'rue de Blancbois',NULL,'22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Maison de campagne',120.00),
+  (8,'25/06/2024','Bouleau','Romain','bouleau.romain@gmail.eu','Dupont','Paul','paul.dupont@gmail.com',5,'rue des tournesols',NULL,'29200','Brest',NULL,'France',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France','Maison familiale',120.00),
+  (9,'25/06/2024','François','Jonathan','François.Jonathan@wanadoo.com','Dumont','Keira','Keira.Dumont@gmail.fr',21,'rue de Villeneuve','Etage 3','22300','Lannion',NULL,'France',7,'avenue Charles de Gaulle',NULL,'22300','Lannion',NULL,'France','Cabanon dans la forêt',80.00),
+  (10,'25/06/2024','Kim','Severine','kim.severine@gmail.us','Turner','Thomas','turner.thomas@apple.us',5,'Columbia Street',NULL,'20001','Washington DC','Columbia','USA',1,'rue Victor Hugo','bis','29200','Brest',NULL,'France','Maisonnette en plein air',60.00),
+  (11,'25/06/2024','Kim','Severine','kim.severine@gmail.us','Turner','Thomas','turner.thomas@apple.us',5,'Columbia Street',NULL,'20001','Washington DC','Columbia','USA',1,'rue Victor Hugo','bis','29200','Brest',NULL,'France','Maisonnette en plein air',60.00);

@@ -23,7 +23,7 @@ class Utilisateur {
                 a.numero_rue, a.nom_rue, a.code_postal, a.nom_ville, a.pays, a.complement, a.etat
             FROM sae3.compte_client cc
             INNER JOIN compte c ON cc.id_compte = c.id_compte
-            INNER JOIN adresse a ON cc.cc_id_adresse = a.id_adresse
+            INNER JOIN adresse a ON cc.c_id_adresse = a.id_adresse
             WHERE c.id_compte = " . $idCompte;
         $dataCompteClient = $this->db->executeQuery($sql);
     
@@ -60,7 +60,7 @@ class Utilisateur {
             return 'Connexion réussie';
         } else {
             http_response_code(500);
-            return 'Identifiants incorrects';
+            return 'Identifiant et/ou mot de passe incorrects';
         }
     }
 
@@ -219,6 +219,52 @@ class Utilisateur {
 
 
         return 'Token genere';
+    }
+
+    public function updatePassword($mdp, $newmdp, $confmdp, $id){
+        $sql = "SELECT mdp FROM sae3.compte_proprietaire WHERE id_compte = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if (!password_verify($mdp, $result['mdp'])) {
+            return 'Mot de passe incorrect';
+        }  
+        if ($newmdp != $confmdp) {
+            return 'Les mots de passe ne correspondent pas';
+        }
+
+        $newhash = password_hash($newmdp, PASSWORD_DEFAULT);
+        $sql = "UPDATE sae3.compte_proprietaire SET mdp = ? WHERE id_compte = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$newhash, $id]);
+
+        return 'Mot de passe modifie';
+    }
+
+    public function updateCliPassword($mdp, $newmdp, $confmdp, $id){
+        $sql = "SELECT mdp FROM sae3.compte_client WHERE id_compte = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if (!password_verify($mdp, $result['mdp'])) {
+            return 'Mot de passe incorrect';
+        }  
+        if ($newmdp != $confmdp) {
+            return 'Les mots de passe ne correspondent pas';
+        }
+
+        $newhash = password_hash($newmdp, PASSWORD_DEFAULT);
+        $sql = "UPDATE sae3.compte_proprietaire SET mdp = ? WHERE id_compte = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$newhash, $id]);
+
+        return 'Mot de passe modifie';
+    }
+
+    public function updateProfile($values){
+        $sql = "UPDATE sae3.compte_proprietaire SET civilite = ?, nom = ?, prenom = ?, e_mail = ?, pseudo = ?, ddn = ? WHERE id_compte = ?";
     }
 
 }

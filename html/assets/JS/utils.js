@@ -66,7 +66,8 @@ export function Connexion(typeConnexion){
             if (inputs.length > 1) {
                 inputs[1].classList.add('error');
             }
-
+            var div = document.getElementById('login_error');
+            div.innerHTML = data
             ThrowAlertPopup(data,'error');
 
             setTimeout(() => {
@@ -103,7 +104,7 @@ export function ThrowAlertPopup(message,type) {
 }
 
 // ----------------------------------- Ajouts à garder -----------------------------------
-function Inscription() {
+export function Inscription() {
     // Création d'un objet FormData pour recueillir les données du formulaire
     let data = new FormData();
     // Récupération des valeurs des champs du formulaire
@@ -155,20 +156,17 @@ function Inscription() {
     })
     .then(data => {
         console.log(data);
-        console.log("on est ici")
         if (data === 'Inscription réussie') {
             console.log('Inscription réussie!');
             ThrowAlertPopup(data, 'succes');
             console.log('Redirection vers la page d\'accueil...');
             setTimeout(() => {
-                console.log('pendant le time out');
                 Connexion()  // Redirection après l'inscription
-            }, 3000);
-            console.log('après le time out');
+            }, 1000);
         } else {
-            console.error(data , data.error);
-            ThrowAlertPopup(data + data.error, 'error');
-            console.log("après l'erreur");
+            var div = document.getElementById('register_error');
+            div.innerHTML = data['Erreur : '];
+            ThrowAlertPopup(data['Erreur : '], 'error');
         }
     })
     .catch(error => {
@@ -193,13 +191,13 @@ export function CreateConnexionModal(typeConnexion) {
     modal.innerHTML = `
     <div class="modal-content">
         <span class="fermer">&times;</span>   
-        <h2 class="desktop">Connexion</h2>
+        <h2 class="desktop modalTitle">Connexion</h2>
         
         <!-- -------------------------------- Mobile -------------------------------------- -->
         
         <div class="logoTitre mobile">
-            <img src="assets/imgs/logo.webp" alt="Logo ALHaIZ Breizh">
-            <h1>ALHaIZ Breizh</h1>
+            <img src="assets/imgs/logo.webp" alt="Logo ALHaIZ Breizh" class="mobile">
+            <h1 class="mobile">ALHaIZ Breizh</h1>
         </div>
 
         <!-- ------------------------------------------------------------------------------ -->
@@ -215,7 +213,8 @@ export function CreateConnexionModal(typeConnexion) {
                 <div id="password_error"></div>
             </div>
             <button class="loginButton" id="Connexion" onclick="Connexion()">Se connecter</button>
-            <button class="needAccountButton" id="Inscription" onclick="CreateInscriptionModal()">Vous n'avez pas de compte ? Inscrivez-vous</button>
+            <div id="login_error"></div>
+            <button class="needAccountButton" id="Inscription">Vous n'avez pas de compte ? Inscrivez-vous</button>
         </div>
     </div>
     `;
@@ -244,6 +243,11 @@ export function CreateConnexionModal(typeConnexion) {
             child.classList.remove('blur');
         });
     };
+
+    let inscriptionButton = modal.querySelector('#Inscription');
+    inscriptionButton.addEventListener('click', () => {
+        CreateInscriptionModal();
+    });
 }
 
 export function CreateInscriptionModal() {
@@ -262,13 +266,13 @@ export function CreateInscriptionModal() {
     modal.innerHTML = `
     <div class="modal-register-content">
         <span class="fermer">&times;</span>   
-        <h2 class="desktop">Inscription</h2>
+        <h2 class="desktop modalTitle">Inscription</h2>
         
         <!-- -------------------------------- Mobile -------------------------------------- -->
         
         <div class="logoTitre mobile">
-            <img src="assets/imgs/logo.webp" alt="Logo ALHaIZ Breizh">
-            <h1>ALHaIZ Breizh</h1>
+            <img src="assets/imgs/logo.webp" alt="Logo ALHaIZ Breizh" class="mobile">
+            <h1 class="mobile">ALHaIZ Breizh</h1>
         </div>
 
          <!-- ------------------------------------------------------------------------------ -->
@@ -359,19 +363,19 @@ export function CreateInscriptionModal() {
                     <div id="agreement-form" class="form">
                         <div class="CGU-form">
                             <input  type="checkbox" id="terms_conditions" name="terms_conditions" required>
-                            <label for="terms_conditions">En cochant cette case, je confirme avoir lu et accepté les <a href="/terms-conditions">Conditions Générales d'Utilisation</a> d'ALHalIZ Breizh.</label>
+                            <label for="terms_conditions">En cochant cette case, je confirme avoir lu et accepté les <a href="/terms-conditions">Conditions Générales d'Utilisation</a> d'ALHaIZ Breizh.</label>
                         </div>
 
                         <div class="CGV-form">
                             <input  type="checkbox" id="sales_conditions" name="sales_conditions" required>
-                            <label for="sales_conditions">En cochant cette case, je reconnais avoir lu et accepté les <a href="/sales-conditions">Conditions Générales de Vente</a> d'ALHalIZ Breizh.</label>
+                            <label for="sales_conditions">En cochant cette case, je reconnais avoir lu et accepté les <a href="/sales-conditions">Conditions Générales de Vente</a> d'ALHaIZ Breizh.</label>
                         </div>
                     </div>
                 </div>
                 <button type="submit" class="registerButton">S'inscrire</button>
                 <div id="register_error"></div>
             </form>
-            <button class="hasAccountButton" onclick="CreateConnexionModal()">Déjà un compte ? Connectez-vous</button>
+            <button class="hasAccountButton" id="Connexion">Déjà un compte ? Connectez-vous</button>
         </div>
     </div>
 
@@ -397,21 +401,20 @@ export function CreateInscriptionModal() {
     // Attacher l'événement de soumission du formulaire à la fonction handleFormSubmit
     form.addEventListener('submit', handleFormSubmit);
 
-    // Apply blur to all elements except the modal
-    // Array.from(document.body.children).forEach(child => {
-    //     if (child !== modal) {
-    //         child.classList.add('blur');
-    //     }
-    // });
+    //Apply blur to all elements except the modal
+    Array.from(document.body.children).forEach(child => {
+        if (child !== modal) {
+            child.classList.add('blur');
+        }
+    });
 
     // Remove the modal when the close button is clicked
     let span = document.getElementsByClassName('fermer')[0];
     span.onclick = function() {
         modal.remove();
-        document.body.classList.remove('modal-open');
-        // Array.from(document.body.children).forEach(child => {
-        //     child.classList.remove('blur');
-        // });
+        Array.from(document.body.children).forEach(child => {
+            child.classList.remove('blur');
+        });
     };
     // Verify if the password is correct and the same as the confirm password
     var passwordInput = document.getElementById('password');
@@ -450,6 +453,10 @@ export function CreateInscriptionModal() {
     
     passwordInput.addEventListener('input', validatePassword);
     confirmPasswordInput.addEventListener('input', validatePassword);
+    let connexionButton = modal.querySelector('#Connexion');
+    connexionButton.addEventListener('click', () => {
+        CreateConnexionModal();
+    });
 }
 // ----------------------------------- Ajouts à garder -----------------------------------
 
