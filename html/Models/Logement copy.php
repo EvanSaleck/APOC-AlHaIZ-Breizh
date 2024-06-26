@@ -274,10 +274,10 @@ class Logement {
         $this->db->getPDO()->beginTransaction();
         try {
             // Utilisation de la méthode executeQuery pour récupérer l'ID de l'adresse
-            $adresseID = $this->db->executeQuery("SELECT L_id_adresse FROM logement WHERE id_logement =?", [$idLogement]);
+            $result = $this->db->executeQuery("SELECT L_id_adresse FROM logement WHERE id_logement =?", [$idLogement]);
 
-            if (!empty($adresseID)) {
-                $firstRow = $adresseID[0];
+            if (!empty($result)) {
+                $firstRow = $result[0];
 
                 $adresseId = $firstRow["l_id_adresse"];
             } else {
@@ -293,8 +293,6 @@ class Logement {
         if ($formLogement->getNoRue()!= '' && is_numeric($formLogement->getNoRue())) {
             $numeroRue = $formLogement->getNoRue();
         }
-
-        
         
         /**Colonnes et valeurs de l'adresse */
         $colonnesAdresse = [
@@ -332,9 +330,6 @@ class Logement {
             // Gérer le cas où l'ID de l'adresse n'est pas trouvé
             throw new Exception('Adresse non trouvée pour le logement.'); // Lancer une exception si l'ID de l'adresse est null
         }
-        
-        
-        
 
 
 
@@ -346,13 +341,11 @@ class Logement {
             'nb_chambres',
             'nb_lits_simples',
             'nb_lits_doubles',
+            'statut_propriete',
             'prix_nuit_ttc',
-            //'L_id_compte',
             'L_id_type',
             'L_id_categorie'
         ];
-
-        // $idProprietaire = $_SESSION['Proprio']['id_compte'];
 
         $valeursLogement = [
             $formLogement->getTitre(),
@@ -361,13 +354,12 @@ class Logement {
             $formLogement->getNbChambres(),
             $formLogement->getNbLitsSimples(),
             $formLogement->getNbLitsDoubles(),
+            $formLogement-> getStatutPropriete(),
             $formLogement->getTarif(),
-            // $idProprietaire,
             $formLogement->getIdType(),
             $formLogement->getIdCategorie()
         ];
-
-
+        // print_r($valeursLogement);
 
         if ($formLogement->getAccroche() != '') {
             $colonnesLogement[] = 'accroche';
@@ -394,15 +386,11 @@ class Logement {
             $valeursLogement[] = $formLogement->getDelaiAnnulMax();
         }
 
-        
-
-        
-
         // Update du logement
         $this->db->update('logement', $colonnesLogement, $valeursLogement, 'id_logement', $idLogement);
         
-         // Gestion de la photo
-         if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+        // Gestion de la photo
+        if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $dossier = './assets/imgs/logements/';
             $extension = pathinfo($_FILES['photo']['name'])['extension'];
             $fichier = $dossier . 'image_' . $idLogement . '.' . $extension;
@@ -416,9 +404,8 @@ class Logement {
         }
 
         // Mise à jour des aménagements
-        
+
         $amenagements = json_decode($formLogement->getAmenagements());
-        //var_dump($amenagements);
         if (isset($amenagements)) {
             // Récupérer les aménagements existants
             $existingAmenagements = $this->db->select('amenagements_logement', ['al_id_amenagement'], ['al_id_logement' => $idLogement]);
@@ -496,26 +483,19 @@ class Logement {
         return $logements;
     }
 
-    public function getStatutProprieteOfLogementById($id) {
-        $logements = $this->db->executeQuery('
-        SELECT statut_propriete
-        FROM logement 
-        
-        WHERE id_logement = ' . $id);
-        
-        return $logements;
-    }
-
     
 
     public function updateStatutLogement($id, $nouveauStatut) {
+        // Correction de la syntaxe SQL pour l'insertion de variables
         $sql = 'UPDATE logement SET statut_propriete = ? WHERE id_logement =?';
-
+        
+        // Préparation et exécution de la requête
         $statement = $this->pdo->prepare($sql);
         $statement->execute([$nouveauStatut, $id]);
 
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
-
+        
+        // Retourner le nombre de lignes affectées
         return $result;
     }
     

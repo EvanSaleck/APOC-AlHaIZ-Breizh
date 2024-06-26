@@ -321,6 +321,14 @@ switch($requestUrl) {
         $idcpt = $client->id_compte;
         $reservationController->saveReservation($data, $idcpt);
         break;
+    case '/api/updateLogementStatus':
+    case '/api/updateLogementStatus/':
+        $id = $_POST['logementId'];
+        $status = $_POST['status'];
+        // var_dump($data);
+        // die();
+        $logementController->updateStatus($id, $status);
+        break;
 
     case '/detailReservation':
     case '/detailReservation/':
