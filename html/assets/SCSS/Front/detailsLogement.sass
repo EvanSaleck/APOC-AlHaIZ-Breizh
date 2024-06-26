@@ -12,203 +12,8 @@
     justify-content: center
     align-items: center
 
-@media screen and (min-width: general.$max-width-tablette)
-    body
-        font-size: 1.2em
-
-@media screen and (min-width: general.$max-width-telephone)
-    #descLogement
-        display: block
-        font-family: 'DM Sans'
-        font-size: 1.2em
-
-        #sectionDesc
-            grid-column: 1
-            grid-row: 1
-            width: 60vw
-            padding: 0 5vw
-
-            #imageLogement
-                height: 50vh
-                width: 50vw
-                object-fit: cover
-
-            #divTitre
-                order: -1
-                display: flex
-                margin: 3vh 0
-
-                h1
-                    font-size: 1.8em
-                    margin: 0 0.5vw
-
-            #btnRetourMobile
-                display: none
-
-            article
-                margin: 2.5vh 0
-
-            #artPrixNote 
-                display: flex
-                flex-flow: row nowrap
-                font-weight: 600
-                margin: 0 2vw
-
-                #note
-                    display: flex
-                    flex-flow: row nowrap
-                    margin: 0 1vw
-
-                    p
-                        font-size: 1.5em
-                        margin: 1vh 1vw 1vh 0
-
-                    img
-                        width: 2vw
-                    
-                #divPrix
-                    display: flex
-                    flex-flow: row wrap
-
-                    span
-                        font-size: 1.5em
-                        margin: 1vh 0
-
-                    p
-                        font-size: 1.5em
-                        margin: 1vh 0.5vw
-                
-            .barre
-                padding: 2px 120px
-                background-color: general.$couleur-front-bleu-nuageux
-                margin: 2.5vh 0
-                width: 0
-                height: 0
-
-            h2
-                font-size: 1.5em
-                margin: 0 0 2.5vh 0
-
-            #carateristiques
-                font-size: 1.2em
-
-                #divNbPersonnesMax
-                    display: flex
-                    flex-flow: row nowrap
-
-                    margin: 2vh 1vw
-
-                    p
-                        margin: 0 0.5vw 0 0
-                        font-weight: 600
-
-                #literie5
-                    display: flex
-                    flex-flow: row nowrap
-
-                    margin: 2vh 1vw
-
-                    div
-                        margin: 0 2vw 0 0
-                        display: flex
-                        flex-flow: row nowrap
-                        
-                        p
-                            margin: 0 0.5vw 0 0
-                            font-weight: 600
-                
-            #descDet
-                margin: 0 1vw
-
-            .badgeAmenagement
-                @include flexRow
-                background-color: general.$couleur-front-bleu-verdatre
-                color: white
-                margin: 1vh 5vw
-                border-radius: 10px
-                width: 150px
-
-                img
-                    height: 25px
-                    width: 25px
-                    padding: 5px 10px
-
-                h3
-                    height: 25px
-                    width: 100px
-                    padding: 5px 10px
-
-                    font-size: 1.2em
-                    font-weight: 600
-
-        #recap
-            display: none
-            position: fixed
-            left: 100vw
-
-        #popupDate
-            @include flexCol
-            width: 400px
-            background-color: white
-            box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, .2)
-            position: fixed
-            right: 30px
-            top: 200px
-
-            h3
-                padding: 10px
-            
-            .ligneSaisiePopup
-                @include flexRow
-                padding: 10px 0
-
-                .labelPopup
-                    display: block
-                    width: 175px
-                    font-size: 1.2em
-
-                .champSaisiePopup
-                    height: 40px
-                    width: 200px
-                    font-size: 1.5em
-                    text-align: center
-
-        #reservation
-            @include flexRow
-            position: fixed
-            top: 100px
-            right: 30px
-            height: 75px
-            width: 400px
-            background-color: white
-            box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, .2)
-
-            .btn
-                @include flexRow
-                height: 45px
-                border: none
-                border-radius: 5px
-                font-size: 1.2em
-                font-weight: 500
-
-            #btnRes
-                background-color: general.$couleur-front-jaune-pabo
-                padding: 5px
-
-            #btnDate
-                display: none
-                padding: 5px
-
-            #sctNbOccupants
-                width: 200px
-                padding: 2px
-
-    .navbar
-        display: none
-
-
-        
-@media screen and (max-width: general.$max-width-telephone)
+// Telephone et en dessous
+@media screen and (max-width: 879px)
     #descLogement
         @include flexCol
         font-family: 'DM Sans'
@@ -269,7 +74,7 @@
 
         .barre
             padding: 1px 120px
-            background-color: general.$couleur-front-bleu-nuageux
+            background-color: general.$couleur-front-bleu-verdatre
             margin: 2.5vh 0
 
         h2
@@ -408,3 +213,230 @@
 
 #Bulle 
     margin-top: 5%
+
+// Petit ecran et plus
+@media screen and (min-width: 880px)
+    #descLogement
+        position: relative
+        display: grid
+        grid-template-columns: auto 450px
+        font-family: 'DM Sans'
+        margin: 0
+        top: 85px
+
+        #sectionDesc
+            grid-column: 1
+            grid-row: 1
+
+            #imageLogement
+                width: 95%
+                height: 50vh
+                object-fit: cover
+                padding: 0 10px
+
+            #divTitre
+                order: -1
+                display: flex
+                flex-flow: column nowrap
+                margin: 3vh 0
+                padding: 0 50px
+
+                h1
+                    display: none
+                    font-size: 1.8em
+                    margin: 0 0.5vw
+
+                #titreLog
+                    display: inline
+                    
+                #villeLog
+                    display: inline
+                    text-transform: uppercase
+                    
+
+            #btnRetourMobile
+                display: none
+
+            article
+                margin: 2.5vh 0
+                padding: 0 50px
+
+            #artPrixNote 
+                display: flex
+                flex-flow: row nowrap
+                font-weight: 600
+                margin: 0 2vw
+                padding: 0 50px
+
+                #note
+                    display: flex
+                    flex-flow: row nowrap
+                    margin: 0 1vw
+
+                    p
+                        font-size: 1.5em
+                        margin: 1vh 1vw 1vh 0
+
+                    img
+                        width: 2vw
+                    
+                #divPrix
+                    display: flex
+                    flex-flow: row wrap
+
+                    span
+                        margin: 1vh 0
+
+                    p
+                        font-size: 1.5em
+                        margin: 1vh 0.5vw
+                
+            .barre
+                padding: 2px 120px
+                background-color: general.$couleur-front-bleu-verdatre
+                margin: 2.5vh 0
+                width: 0
+                height: 0
+
+            h2
+                font-size: 1.5em
+                margin: 0 0 2.5vh 0
+
+            #carateristiques
+                font-size: 1.2em
+
+                #divNbPersonnesMax
+                    display: flex
+                    flex-flow: row nowrap
+
+                    margin: 0 20px
+
+                    p
+                        margin: 0 5px 0 0
+
+                #literie
+                    display: flex
+                    flex-flow: column nowrap
+
+                    margin: 0 20px
+
+                    div
+                        display: flex
+                        flex-flow: row nowrap
+                        
+                        p
+                            margin: 0 5px 0 0
+                
+            #descDet
+                margin: 0 1vw
+
+            #listeAmenagements
+                display: flex
+
+                .badgeAmenagement
+                    @include flexRow
+                    background-color: general.$couleur-front-bleu-verdatre
+                    color: white
+                    border-radius: 10px
+                    width: 150px
+                    align-items: center
+                    margin: 0 15px 0 0
+
+                    img
+                        height: 25px
+                        width: 25px
+                        padding: 5px 10px
+                        filter: brightness(0) saturate(100%) invert(100%) contrast(100%)
+
+                    h3
+                        height: 25px
+                        width: 100px
+                        padding: 5px 10px
+
+                        font-size: 1.2em
+                        font-weight: 600
+
+        #recap
+            display: none
+            grid-column: 2
+            grid-row: 3
+            position: fixed
+            left: 100vw
+
+        #popupDate
+            @include flexCol
+            grid-column: 2
+            grid-row: 2
+            width: 400px
+            background-color: white
+            box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, .2)
+            position: fixed
+            right: 30px
+            top: 200px
+            border-radius: 5px
+
+            h3
+                padding: 10px
+            
+            .ligneSaisiePopup
+                @include flexRow
+                padding: 10px 0
+
+                .labelPopup
+                    display: block
+                    width: 175px
+                    font-size: 1.2em
+
+                .champSaisiePopup
+                    height: 40px
+                    width: 200px
+                    font-size: 1.5em
+                    text-align: center
+
+        #reservation
+            @include flexRow
+            grid-column: 2
+            grid-row: 1
+            position: fixed
+            top: 100px
+            right: 30px
+            height: 75px
+            width: 400px
+            background-color: white
+            box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, .2)
+            border-radius: 5px
+
+            .btn
+                @include flexRow
+                height: 45px
+                border: none
+                border-radius: 5px
+                font-size: 1.2em
+                font-weight: 500
+
+            #btnRes
+                background-color: general.$couleur-front-jaune-pabo
+                padding: 5px
+                width: 115px
+
+            #btnDate
+                display: none
+                padding: 5px
+
+            #sctNbOccupants
+                width: 220px
+                padding: 2px
+
+    .navbar
+        display: none
+        
+// Grand écran
+@media screen and (min-width: general.$max-width-desktop-big)
+    #descLogement
+        margin: 0 15vw
+
+        #popupDate
+            right: 16%
+
+        #reservation
+            right: 16%
