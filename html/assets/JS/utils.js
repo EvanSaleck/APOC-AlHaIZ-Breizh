@@ -56,7 +56,26 @@ export function Connexion(typeConnexion){
                     window.location.href = url;
                 }
             }, 1000);
-        }else{
+        } else if (data === "Identifiants incorrects"){
+            // let inputs = document.querySelectorAll('#connexionModal .modal-content #connexionForm input');
+            // console.log(inputs);
+
+            // if (inputs.length > 0) {
+            //     inputs[0].classList.add('error');
+            // }
+            // if (inputs.length > 1) {
+            //     inputs[1].classList.add('error');
+            // }
+            // var div = document.getElementById('login_error');
+            // div.innerHTML = data
+            ThrowAlertPopup(data,'error');
+
+            // setTimeout(() => {
+            //     inputs[0].classList.remove('error');
+            //     inputs[1].classList.remove('error');
+            // }
+            // , 2000);
+        } else{
             let inputs = document.querySelectorAll('#connexionModal .modal-content #connexionForm input');
             console.log(inputs);
 
