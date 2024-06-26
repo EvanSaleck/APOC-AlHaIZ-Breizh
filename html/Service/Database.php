@@ -7,11 +7,11 @@ use Exception;
 use PDO;
 use PDOException;
 
-class Database {
-    private $pdo;
-    private $dsn = DB_DSN;
-    private $username = DB_USERNAME;
-    private $password = DB_PASSWORD;
+    class Database {
+        private $pdo;
+        private $dsn = DB_DSN;
+        private $username = DB_USERNAME;
+        private $password = DB_PASSWORD;
 
     public function __construct() {
         try {

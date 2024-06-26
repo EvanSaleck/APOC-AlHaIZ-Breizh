@@ -1,101 +1,152 @@
-var ResasTout=[];
-
-/* à utiliser pour les tris à rajouter dans les US 2.23 à 2.25
-    var ResasEnCours=[];
-    var ResasAVenir=[];
-    var ResasPasse=[];
-
-    var d = String(today.getDate()).padStart(2, '0');
-    var m = String(today.getMonth() + 1).padStart(2, '0');
-    var y = today.getFullYear();
-    var today = new Date(d + '/' + m + '/' + y);
-*/
-
-/* à utiliser pour les tris à rajouter dans les US 2.23 à 2.25
-    if(today.getTime() > res.date_depart.getTime()) {
-        ResasPasse.push(res);
-    }
-    else if(today.getTime() < res.date_arrivee.getTime()) {
-        ResasAVenir.push(res);
-    }
-    else if((today.getTime() >= res.date_arrivee.getTime())
-        && (today.getTime() <= res.date_depart.getTime())) {
-        ResasEnCours.push(res);
-    }
-    else { console.log("ERROR : Aucune date récupérée"); }
-*/
-
-
-
 document.addEventListener('DOMContentLoaded', init);
 
+// Contient tous les résultats de réservations
+var ResasTout=[];
+
+var contentReservations = document.getElementById('contentReservations'); // Espace d'affichage du conetenu des réservations
+var nbPasse = 0, nbEnCours = 0, nbAVenir = 0; // Valeurs pour stocker le nombre de réservations par filtre
+
+// Boutons de tri pour les états de réservation
+var bnEnCours = document.getElementById('enCours');
+var bnAVenir = document.getElementById('aVenir');
+var bnPasse = document.getElementById('passe');
+var bnTout = document.getElementById('tout');
+// Assigne la fonction de rechargement du contenu de la table aux boutons
+bnEnCours.addEventListener('click', function(){reloadReservations(1)});
+bnAVenir.addEventListener('click', function(){reloadReservations(2)});
+bnPasse.addEventListener('click', function(){reloadReservations(3)});
+bnTout.addEventListener('click', function(){reloadReservations(4)});
+
+var enCours, aVenir, passe;
+
+
+// Initialise la liste des réservations liées aux compte propriétaire connecté
 function init() {
+    let proprio = JSON.parse(sessionStorage.getItem("Proprio"));
+    let idProprio = new FormData();
+    idProprio.append("id", proprio["id_compte"]);
+
+    // Récupère les informations du propriétaire
+    fetch('/api/getProprioById', { method: "POST", body: idProprio }).then(resp => resp.json()).then(data => {
+        document.getElementById('bonjour').innerHTML = "Bonjour " + data.prenom + ",";
+    });
+
     // Récupération des données de la BDD
-    fetch('/api/getReservations').then(response => response.json()).then(data => {
+    fetch('/api/getReservationsProprietaire', { method: "POST", body: idProprio })
+        .then(response => response.json()).then(data => {
 
         // Si aucune donnée n'est renvoyée par l'API, affiche qu'aucune réservation n'a été trouvée
-        if(data.length == 0) {
-            let contentReservations = document.getElementById('contentReservations');
-            contentReservations.innerHTML = '<h1>Aucune réservation trouvée</h1>';
+        let resVides = (data.length == 0);
+        if(resVides) { 
+            let displayAucuneReservations = document.getElementById("noReservations");
+            displayAucuneReservations.classList.remove("d-none");
         }
         else {
             ResasTout = data;
-            console.log(ResasTout);
+            console.log("Réservations trouvées pour " + proprio["prenom"] + " " + proprio["nom"] + " :\n");
+            console.log(ResasTout)
 
-            let bnTout = document.querySelector('#tout');
+            let today = new Date(); // La date actuelle
+
+            let tbody = document.getElementById('tableContent'); // Corps du tableau pour afficher les objets de réservations
+            tbody.innerHTML = "";
 
             // Maj du contenu du tableau avec des valeurs de la BDD
-            bnTout.innerHTML = 'Tout (' + ResasTout.length + ')';
-            
-
-            let content = "";
-            let max = (ResasTout.length < 7) ? ResasTout.length : 6 ;
-
-            for (let i = 0; i<max; i++) {
+            for(let i = 0; i<ResasTout.length; i++) {
                 let res = ResasTout[i];
-                console.log(res);
 
-                content += `<tr>
-    <td>${res.titre}</td>
-    <td>${res.date_arrivee}</td>
-    <td>${res.date_depart}</td>
-    <td>${res.tarif_total}</td>
-    <td>${res.pseudo}</td>
-</tr>`;
+                // Créé des objets dates pour savoir si une réservation est passée, en cours ou à venir
+                let dateArr = new Date(res.date_arrivee);
+                let dateDep = new Date(res.date_depart);
+                
+                let etatClass; // Classe à attribuer à la réservation pour l'affichage
 
-                console.log(content);
+                // Si la date d'aujourd'hui est supérieure à la date de départ,
+                // considéré comme une réservation avec état "Passé"
+                if(today > dateDep) {
+                    etatClass = "passe";
+                    nbPasse++;
+                }
+                // Si la date d'aujourd'hui est inférieure à la date d'arrivée,
+                // considéré comme une réservation avec état "A venir"
+                else if (today < dateArr) {
+                    etatClass = "aVenir";
+                    nbAVenir++;
+                }
+                // Sinon, considéré comme une réservation avec état "En cours"
+                else {
+                    etatClass = "enCours";
+                    nbEnCours++;
+                }
+
+                // Formatage des dates au format JJ/MM/AAAA
+                let valArr = res.date_arrivee.split('-');
+                let valDep = res.date_depart.split('-');
+                let dateArrFormatee = valArr[2] + "-" + valArr[1] + "-" + valArr[0];
+                let dateDepFormatee = valDep[2] + "-" + valDep[1] + "-" + valDep[0];
+
+                // Création de l'objet de réservation
+                let tr = document.createElement('tr');
+
+                let tdLogement = document.createElement('td');
+                tdLogement.textContent = res.titre;
+                let tdDateArr = document.createElement('td');
+                tdDateArr.textContent = dateArrFormatee;
+                let tdDateDep = document.createElement('td');
+                tdDateDep.textContent = dateDepFormatee;
+                let tdTarif = document.createElement('td');
+                tdTarif.textContent = res.tarif_total.replace(".", ",") + '€';
+                let tdClient = document.createElement('td');
+                tdClient.textContent = res.pseudo;
+
+                tr.appendChild(tdLogement);
+                tr.appendChild(tdDateArr);
+                tr.appendChild(tdDateDep);
+                tr.appendChild(tdTarif);
+                tr.appendChild(tdClient);
+
+                tr.setAttribute('class', etatClass);
+
+                tbody.appendChild(tr);
+
+                console.log(ResasTout[i].id_reservation)
             }
 
-            let tbody = document.getElementById('tableContent');
-            tbody.innerHTML = content;
+            // Ajour de lien href vers la page de détail de la réservation associée
+            let reservations = document.querySelectorAll('tbody > tr');
+            let i = 0;
+            reservations.forEach(resa => { resa.addEventListener('click', function(e){
+                    sessionStorage.setItem('idresa', ResasTout[i].id_reservation);
+                    console.log(ResasTout[i].id_reservation);
+                    window.location.href = `/Back/reservations/details`;
+                    i++;
+                });
+            });
+            
+            // Indicateur du nombre de réservations en cours
+            let nbReservationsEnCours = document.getElementById('nbReservationsEnCours');
+            nbReservationsEnCours.innerHTML = "vous avez " + nbEnCours + " réservations en cours";
         }
+
+        enCours = document.getElementsByClassName("enCours");
+        aVenir = document.getElementsByClassName("aVenir");
+        passe = document.getElementsByClassName("passe");
+
+        // Affiche le nombre de réservations par filtre
+        bnEnCours.innerHTML = 'En cours (' + (resVides ? '0' : nbEnCours) + ')';
+        bnAVenir.innerHTML = 'A venir (' + (resVides ? '0' : nbAVenir) + ')';
+        bnPasse.innerHTML = 'Passé (' + (resVides ? '0' : nbPasse) + ')';
+        bnTout.innerHTML = 'Tout (' + ResasTout.length + ')';
+
+        // Utilise le choix de tri le plus pertinent en fonction des réservations
+        if(nbEnCours > 0) { bnEnCours.click(); }
+        else if(nbAVenir > 0) { bnAVenir.click(); }
     }); 
 }
 
 
-// idCompteProprietaire pas encore utilisé pour récupérer les données liées au propriétaire connecté
-function getReservationByOwnerId(idCompteProprietaire) {
-    let reservations = [];
-    fetch('/api/getReservations').then(response => response.json()).then(data => {
-        foreach(data => {
-            reservations.push(data);
-        })
-    });
-    return reservations;
-}
-
-
-var bnTout = document.getElementById('tout');
-
 // Change le style du bouton sélectionné
 function handleButtonStyle(bnID) {
-    // Boutons de tri pour les états de réservation
-    let bnEnCours = document.getElementById('enCours');
-    let bnAVenir = document.getElementById('aVenir');
-    let bnPasse = document.getElementById('passe');
-    let bnTout = document.getElementById('tout');
-    
-
     bnEnCours.classList.remove("ongletSelect");
     bnAVenir.classList.remove("ongletSelect");
     bnPasse.classList.remove("ongletSelect");
@@ -119,20 +170,54 @@ function handleButtonStyle(bnID) {
             break;
 
         default:
-            console.log("ERROR : Invalid button ID given")
+            console.log("ERREUR : ID de bouton invalide");
             break;
     }
 }
 
-// Recharge le contenu de la table dans la <div> "listeResa"
+
+// Recharge le contenu de la table dans la <div> "listeResa" en fonction du filtre choisi
 function reloadReservations(bnID) {
     handleButtonStyle(bnID);
-    init();
-}
 
-/* Assigne la fonction de recharge du contenu de la table aux boutons
-bnEnCours.addEventListener('click', reloadReservations(1));
-bnAVenir.addEventListener('click', reloadReservations(2));
-bnPasse.addEventListener('click', reloadReservations(3));
-bnTout.addEventListener('click', reloadReservations(4));
-*/
+    let displayAucuneReservations = document.getElementById("noReservations");
+
+    // Affiche / cache les réservations associées au filtre choisi
+    switch (bnID) {
+        case 1:
+            for(var i = 0; i < enCours.length; i++){ enCours[i].classList.remove("d-none"); }
+            for(var i = 0; i < aVenir.length; i++){ aVenir[i].classList.add("d-none"); }
+            for(var i = 0; i < passe.length; i++){ passe[i].classList.add("d-none"); }
+            if(nbEnCours == 0) { displayAucuneReservations.classList.remove("d-none");}
+            else { displayAucuneReservations.classList.add("d-none");}
+            break;
+
+        case 2:
+            for(var i = 0; i < enCours.length; i++){ enCours[i].classList.add("d-none"); }
+            for(var i = 0; i < aVenir.length; i++){ aVenir[i].classList.remove("d-none"); }
+            for(var i = 0; i < passe.length; i++){ passe[i].classList.add("d-none"); }
+            if(nbAVenir == 0) { displayAucuneReservations.classList.remove("d-none");}
+            else { displayAucuneReservations.classList.add("d-none");}
+            break;
+
+        case 3:
+            for(var i = 0; i < enCours.length; i++){ enCours[i].classList.add("d-none"); }
+            for(var i = 0; i < aVenir.length; i++){ aVenir[i].classList.add("d-none"); }
+            for(var i = 0; i < passe.length; i++){ passe[i].classList.remove("d-none"); }
+            if(nbPasse == 0) { displayAucuneReservations.classList.remove("d-none");}
+            else { displayAucuneReservations.classList.add("d-none");}
+            break;
+
+        case 4:
+            for(var i = 0; i < enCours.length; i++){ enCours[i].classList.remove("d-none"); }
+            for(var i = 0; i < aVenir.length; i++){ aVenir[i].classList.remove("d-none"); }
+            for(var i = 0; i < passe.length; i++){ passe[i].classList.remove("d-none"); }
+            if(ResasTout.length == 0) { displayAucuneReservations.classList.remove("d-none");}
+            else { displayAucuneReservations.classList.add("d-none");}
+            break;
+
+        default:
+            console.log("ERREUR : ID de bouton invalide");
+            break;
+    }
+}
