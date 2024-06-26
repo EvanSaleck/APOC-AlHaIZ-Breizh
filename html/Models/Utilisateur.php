@@ -256,7 +256,7 @@ class Utilisateur {
         }
 
         $newhash = password_hash($newmdp, PASSWORD_DEFAULT);
-        $sql = "UPDATE sae3.compte_proprietaire SET mdp = ? WHERE id_compte = ?";
+        $sql = "UPDATE sae3.compte_client SET mdp = ? WHERE id_compte = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$newhash, $id]);
 
@@ -264,8 +264,96 @@ class Utilisateur {
     }
 
     public function updateProfile($values){
-        $sql = "UPDATE sae3.compte_proprietaire SET civilite = ?, nom = ?, prenom = ?, e_mail = ?, pseudo = ?, ddn = ? WHERE id_compte = ?";
+
+        $sql = "UPDATE sae3.compte_proprietaire 
+                SET civilite = ?, nom = ?, prenom = ?, e_mail = ?, pseudo = ?, ddn = ? 
+                WHERE id_compte = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            $values['civilite'], 
+            $values['nom'], 
+            $values['prenom'], 
+            $values['email'], 
+            $values['pseudo'], 
+            $values['ddn'], 
+            $values['id']
+        ]);
+    
+        $sqladresse = "SELECT c_id_adresse FROM sae3.compte_proprietaire WHERE id_compte = ?";
+        $stmtadresse = $this->pdo->prepare($sqladresse);
+        $stmtadresse->execute([$values['id']]);
+        $adr = $stmtadresse->fetch(\PDO::FETCH_ASSOC);
+    
+        // Vérifier si l'adresse a été trouvée
+        if ($adr) {
+            // Extraction du numéro de rue et du nom de rue
+            $rueParts = explode(' ', $values['rue'], 2);
+            $numero_rue = $rueParts[0];
+            $nom_rue = isset($rueParts[1]) ? $rueParts[1] : '';
+    
+            // Requête UPDATE pour adresse
+            $sql2 = "UPDATE sae3.adresse 
+                     SET numero_rue = ?, nom_rue = ?, code_postal = ?, nom_ville = ?, pays = ? 
+                     WHERE id_adresse = ?";
+            $stmt2 = $this->pdo->prepare($sql2);
+            $stmt2->execute([
+                $numero_rue, 
+                $nom_rue, 
+                $values['codePostal'], 
+                $values['ville'], 
+                $values['pays'], 
+                $adr['c_id_adresse']
+            ]);
+        }
+    
+        return 'Profil modifie';
     }
+
+    public function updateCliProfile($values){
+        $sql = "UPDATE sae3.compte_client
+                SET civilite = ?, nom = ?, prenom = ?, e_mail = ?, pseudo = ?
+                WHERE id_compte = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            $values['civilite'], 
+            $values['nom'], 
+            $values['prenom'], 
+            $values['email'], 
+            $values['pseudo'], 
+            $values['id']
+        ]);
+    
+        // Requête pour récupérer l'identifiant de l'adresse
+        $sqladresse = "SELECT c_id_adresse FROM sae3.compte_client WHERE id_compte = ?";
+        $stmtadresse = $this->pdo->prepare($sqladresse);
+        $stmtadresse->execute([$values['id']]);
+        $adr = $stmtadresse->fetch(\PDO::FETCH_ASSOC);
+    
+        // Vérifier si l'adresse a été trouvée
+        if ($adr) {
+            // Extraction du numéro de rue et du nom de rue
+            $rueParts = explode(' ', $values['rue'], 2);
+            $numero_rue = $rueParts[0];
+            $nom_rue = isset($rueParts[1]) ? $rueParts[1] : '';
+    
+            // Requête UPDATE pour adresse
+            $sql2 = "UPDATE sae3.adresse 
+                     SET numero_rue = ?, nom_rue = ?, code_postal = ?, nom_ville = ?, pays = ? 
+                     WHERE id_adresse = ?";
+            $stmt2 = $this->pdo->prepare($sql2);
+            $stmt2->execute([
+                $numero_rue, 
+                $nom_rue, 
+                $values['codePostal'], 
+                $values['ville'], 
+                $values['pays'], 
+                $adr['c_id_adresse']
+            ]);
+        }
+    
+        return 'Profil modifie';
+    }
+    
 
 }
 

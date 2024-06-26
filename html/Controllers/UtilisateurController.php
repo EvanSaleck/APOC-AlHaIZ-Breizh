@@ -226,4 +226,17 @@
                 echo json_encode($e->getMessage());
             }
         }
+
+        public function updateCliProfile($values){
+            try {
+                $return = $this->user->updateCliProfile($values);
+
+                header('Content-Type: application/json');
+                echo json_encode($return);
+            }
+            catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode($e->getMessage());
+            }
+        }
     }
