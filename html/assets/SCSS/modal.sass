@@ -64,54 +64,64 @@
 // //         #inscription
 // //             font-size: 1em
 @media screen and (min-width: general.$max-width-tablette)
-    h2
-       vertical-align: middle
-       text-align: center
+    // h2
+    //    vertical-align: middle
+    //    text-align: center
+    // .fermer
+    //     font-size: 1.5em
+    //     font-weight: bold
+    //     cursor: pointer
+    //     margin-right: auto
+    //     margin-left: 0.5em
+    // #connexionForm
+    //     display: flex
+    //     flex-direction: column
+    //     align-items: center
 
-    .fermer
-        font-size: 1.5em
-        font-weight: bold
-        cursor: pointer
-        margin-right: auto
-        margin-left: 0.5em
-
-
-    #connexionForm
-        display: flex
-        flex-direction: column
-        align-items: center
-
-        input 
-            margin: 10px
-            padding: 10px
-            border-radius: 5px
-            border: 1px solid general.$couleur-front-bleu-charbon
-            outline-color: general.$couleur-front-bleu-verdatre
+    //     input 
+    //         margin: 10px
+    //         padding: 10px
+    //         border-radius: 5px
+    //         border: 1px solid general.$couleur-front-bleu-charbon
+    //         outline-color: general.$couleur-front-bleu-verdatre
 
 
-        button 
-            margin: 10px
-            padding: 10px
-            border-radius: 5px
-            border: 1px solid general.$couleur-front-bleu-charbon
-            background-color: general.$couleur-front-bleu-verdatre
-            color: white
+    //     button 
+    //         margin: 10px
+    //         padding: 10px
+    //         border-radius: 5px
+    //         border: 1px solid general.$couleur-front-bleu-charbon
+    //         background-color: general.$couleur-front-bleu-verdatre
+    //         color: white
+    // #inscription
+    //     margin-top: 10px
+    //     text-decoration: underline
+    //     text-align: center
+    //     cursor: pointer
+    // .blur 
+    //     filter: blur(5px)
+    //     pointer-events: none
+    // /* Ensure the modal is not blurred */
+    // .exception 
+    //     filter: none
+    //     pointer-events: auto
+    .modal-register-content
+        position: fixed
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        z-index: 1050
+        width: 80%
+        max-width: 500px
+        background: white
+        padding: 20px
+        border-radius: 5px
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .5)
+        .mobile
+            display: none
         
-    #inscription
-        margin-top: 10px
-        text-decoration: underline
-        text-align: center
-        cursor: pointer
-    .blur 
-        filter: blur(5px)
-        pointer-events: none
-
-    /* Ensure the modal is not blurred */
-    .exception 
-        filter: none
-        pointer-events: auto
-
-
+    .modal-content
+        position: fixed
     .alert-popup
         position: fixed
         top: 0   
