@@ -1,6 +1,8 @@
 import { ThrowAlertPopup } from '../utils.js';
 
 document.addEventListener('DOMContentLoaded', function() {
+    let proprio = JSON.parse(sessionStorage.getItem("Proprio"));
+    document.getElementById('bonjour').innerHTML = "Bonjour " + proprio.prenom + ",";
     const storedPopup = localStorage.getItem('alertPopup');
     let message, type;
     
