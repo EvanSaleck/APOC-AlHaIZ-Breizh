@@ -9,47 +9,54 @@ use Models\Logement;
 use Service\FormNewLogement;
 use Exception;
 
-class LogementController {
+class LogementController
+{
     private $logement;
     private $newLogement;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->logement = new Logement();
     }
-        
-    public function getAllLogements() {            
+
+    public function getAllLogements()
+    {
         $logements = $this->logement->getAllLogements();
-            
+
         header('Content-Type: application/json');
-            
+
         echo json_encode($logements);
     }
 
-    public function getLogementsByProprietaireId($id) {
+    public function getLogementsByProprietaireId($id)
+    {
         $logements = $this->logement->getLogementsByProprietaireId($id);
 
         header('Content-Type: application/json');
 
         echo json_encode($logements);
     }
-        
-    public function getLogementById($id) {
-            
+
+    public function getLogementById($id)
+    {
+
         $logement = $this->logement->getLogementById($id);
-                    
+
         header('Content-Type: application/json');
-            
+
         echo json_encode($logement);
-    }  
-    
-    public function updateStatus($id, $status){
+    }
+
+    public function updateStatus($id, $status)
+    {
         $logement = $this->logement->updateStatutLogement($id, $status);
 
         header('Content-Type: application/json');
-            
+
         echo json_encode($logement);
     }
-    public function getLogementsDataForCards() {
+    public function getLogementsDataForCards()
+    {
         $dataLogements = $this->logement->getLogementsDataForCards();
 
         header('Content-Type: application/json');
@@ -57,7 +64,8 @@ class LogementController {
         echo json_encode($dataLogements);
     }
 
-    public function getLogementDataById($id) {
+    public function getLogementDataById($id)
+    {
         $logement = $this->logement->getLogementCompleteByID($id);
 
         header('Content-Type: application/json');
@@ -65,7 +73,8 @@ class LogementController {
         echo json_encode($logement);
     }
 
-    public function getAmenagementsOfLogementById($id) {
+    public function getAmenagementsOfLogementById($id)
+    {
         $amenagements = $this->logement->getAmenagementsOfLogementById($id);
 
         header('Content-Type: application/json');
@@ -73,7 +82,8 @@ class LogementController {
         echo json_encode($amenagements);
     }
 
-    public function getTypeOfLogementById($id) {
+    public function getTypeOfLogementById($id)
+    {
         $logements = $this->logement->getTypeOfLogementById($id);
 
         header('Content-Type: application/json');
@@ -81,7 +91,8 @@ class LogementController {
         echo json_encode($logements);
     }
 
-    public function getCategorieOfLogementById($id) {
+    public function getCategorieOfLogementById($id)
+    {
         $logements = $this->logement->getCategorieOfLogementById($id);
 
         header('Content-Type: application/json');
@@ -90,16 +101,17 @@ class LogementController {
     }
 
 
-    public function processFormNewLogement() { 
+    public function processFormNewLogement()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $tabNomRue = explode(' ', htmlentities($_POST['nom_rue']));
-            if(is_numeric($tabNomRue[0])) {
+            if (is_numeric($tabNomRue[0])) {
                 $numeroRue = $tabNomRue[0];
                 $nomRue = '';
                 for ($i = 1; $i < count($tabNomRue); $i++) {
                     $nomRue .= $tabNomRue[$i] . ' ';
-                } 
+                }
             } else {
                 $numeroRue = null;
                 $nomRue = htmlentities($_POST['nom_rue']);
@@ -134,8 +146,8 @@ class LogementController {
                 (isset($_POST['delaiResaArrivee']) ? htmlentities($_POST['delaiResaArrivee']) : ''),
                 (isset($_POST['dureeMinLoc']) ? htmlentities($_POST['dureeMinLoc']) : ''),
                 (isset($_POST['delaiAnnulMax']) ? htmlentities($_POST['delaiAnnulMax']) : '')
-            );     
-            
+            );
+
             header('Content-Type: application/json');
 
             try {
@@ -148,8 +160,9 @@ class LogementController {
             echo json_encode(['error' => 'uniquement accessible avec la methode POST']);
         }
     }
-    
-    public function processFormUpdateLogement() {
+
+    public function processFormUpdateLogement()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Récupération de l'ID du logement à mettre à jour
             $idLogement = isset($_POST['id_logement']) ? intval($_POST['id_logement']) : null;
@@ -157,19 +170,19 @@ class LogementController {
                 echo json_encode(['error' => 'ID du logement non fourni.']);
                 return;
             }
-    
+
             $tabNomRue = explode(' ', htmlentities($_POST['nom_rue']));
             if (is_numeric($tabNomRue[0])) {
                 $numeroRue = $tabNomRue[0];
                 $nomRue = '';
                 for ($i = 1; $i < count($tabNomRue); $i++) {
                     $nomRue .= $tabNomRue[$i] . ' ';
-                } 
+                }
             } else {
                 $numeroRue = null;
                 $nomRue = htmlentities($_POST['nom_rue']);
             }
-    
+
             // Décodage des données encodées
             $titre = isset($_POST['titre']) ? urldecode($_POST['titre']) : '';
             $tarif = isset($_POST['tarif']) ? urldecode($_POST['tarif']) : '';
@@ -186,7 +199,7 @@ class LogementController {
             $categorie = isset($_POST['categorie']) ? urldecode($_POST['categorie']) : '';
             $pays = isset($_POST['pays']) ? urldecode($_POST['pays']) : '';
             $etat = isset($_POST['etat']) ? urldecode($_POST['etat']) : '';
-    
+
             // D'autres champs facultatifs
             $numeroRue = isset($_POST['numero_rue']) ? urldecode($_POST['numero_rue']) : '';
             $complementAdresse = isset($_POST['complement_adresse']) ? urldecode($_POST['complement_adresse']) : '';
@@ -201,7 +214,7 @@ class LogementController {
             } else {
                 $statutPropriete = false; // Valeur par défaut si aucune valeur n'est trouvée
             }
-    
+
             // Création de l'objet FormNewLogement avec les données décodées
             $formLogement = new FormNewLogement(
                 $titre,
@@ -221,7 +234,7 @@ class LogementController {
                 $pays,
                 $etat
             );
-    
+
             $formLogement->setNotRequiredFields(
                 $numeroRue,
                 $complementAdresse,
@@ -232,29 +245,33 @@ class LogementController {
                 $delaiAnnulMax,
                 $statutPropriete
             );
-
-    
-            header('Content-Type: application/json');
-    
-            try {
-                $this->logement->updateLogementFromForm($formLogement, $idLogement);
-    
-                if ($photo !== null) {
-                    $this->db->update('logement', ['image_principale'], [$photo], 'id_logement', $idLogement);
-                }
-                
-    
-                echo json_encode(['success' => true]);
-            } catch (Exception $e) {
-                echo json_encode(['error' => $e->getMessage()]);
+            // Récupération de l'ID du logement à mettre à jour
+            $idLogement = isset($_POST['id_logement']) ? intval($_POST['id_logement']) : null;
+            if ($idLogement === null) {
+                echo json_encode(['error' => 'ID du logement non fourni.']);
+                return;
             }
-        } else {
-            echo json_encode(['error' => 'Uniquement accessible avec la méthode POST']);
+
+                header('Content-Type: application/json');
+
+                try {
+                    $this->logement->updateLogementFromForm($formLogement, $idLogement);
+
+                    if ($photo !== null) {
+                        $this->db->update('logement', ['image_principale'], [$photo], 'id_logement', $idLogement);
+                    }
+
+                    echo json_encode(true);
+                } catch (Exception $e) {
+                    echo json_encode(['error' => $e->getMessage()]);
+                }
+            } else {
+                echo json_encode(['error' => 'Uniquement accessible avec la méthode POST']);
+
+            }
         }
     }
-    
 
-    
-    
-        
+
+
 }

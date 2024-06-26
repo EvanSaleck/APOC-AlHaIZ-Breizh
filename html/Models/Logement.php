@@ -440,13 +440,12 @@ class Logement {
         }
 
         $this->db->getPDO()->commit();
+
+        return true;
     } catch (Exception $e) {
         $this->db->getPDO()->rollBack();
         throw new Exception('Erreur lors de la mise à jour des données : ' . $e->getMessage());
-        return false;
     }
-
-    return true;
 }
 
     
