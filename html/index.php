@@ -104,6 +104,24 @@ switch($requestUrl) {
     case '/connexion/':
         include_once './Views/Front/compte/connexionCompte.php';
         break;
+
+    case '/mentionsLegales':
+    case '/mentionsLegales/':
+        include_once './Views/Front/legislation/mentionsLegales.php';
+        break;
+    case '/back/mentionsLegales':
+    case '/back/mentionsLegales/':
+        include_once './Views/Back/legislation/mentionsLegales.php';
+        break;
+    case '/CGU_CGV':
+    case '/CGU_CGV/':
+        include_once './Views/Front/legislation/CGU_CGV.php';
+        break;
+    case '/back/CGU_CGV':
+    case '/back/CGU_CGV/':
+        include_once './Views/Back/legislation/CGU_CGV.php';
+        break;
+        
     case '/reservation/devis':
     case '/reservation/devis/':
         if (!isset($_SESSION['client'])) {
