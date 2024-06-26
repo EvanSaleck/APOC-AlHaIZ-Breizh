@@ -43,12 +43,26 @@
         }
 
         public function getReservationByOwnerId($id) {
-            // l_id_compte représente l'ID du compte d'un propriétaire
-            $reservations = $this->db->executeQuery("SELECT l.titre, r.date_arrivee, r.date_depart, r.tarif_total, c.pseudo FROM reservation AS r 
-            INNER JOIN logement AS l ON id_logement = R_id_logement INNER JOIN compte_client AS c ON id_compte = R_id_compte
+            // Récupère les données nécessaires à l'affichage réduit de détails des réservation sur la page de liste des réservations Propriétaire
+            $reservationsProprietaire = $this->db->executeQuery("SELECT id_reservation, l.titre, r.date_arrivee, r.date_depart, r.tarif_total, c.pseudo 
+            FROM reservation AS r INNER JOIN logement AS l ON id_logement = R_id_logement INNER JOIN compte_client AS c ON id_compte = R_id_compte
             WHERE l.id_logement = r.r_id_logement AND l.l_id_compte = " . $id);
 
-            return $reservations;
+            return $reservationsProprietaire;
+        }
+
+        public function getReservationByClientId($id) {
+            // Récupère les données nécessaires à l'affichage réduit de détails des réservation sur la page de liste des réservations Client
+            $reservationsClient = $this->db->executeQuery("SELECT l.titre, r.date_arrivee, r.date_depart, r.tarif_total, p.pseudo FROM reservation AS r 
+            INNER JOIN logement AS l ON id_logement = R_id_logement INNER JOIN compte_proprietaire AS p ON id_compte = l_id_compte
+            WHERE l.id_logement = r.r_id_logement AND r.r_id_compte = " . $id);
+
+            return $reservationsClient;
+        }
+
+        public function getOwnerById($id) {            
+            $owner = $this->db->executeQuery("SELECT * FROM compte_proprietaire WHERE id_compte = " . $id);
+            return $owner;
         }
 
         public function reservationExists($id) {

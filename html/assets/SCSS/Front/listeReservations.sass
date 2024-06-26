@@ -1,6 +1,5 @@
 @use '../general' as general
 
-// TODO à modifier avec la version de Lucas
 #ongletFiltres
   position: absolute
   width: 100%
@@ -29,12 +28,12 @@
   display: inline-block
   width: 100px
   height: 5px
-  background-color: general.$couleur-front-bleu-marine
+  background-color: general.$couleur-front-bleu-verdatre
   border-radius: 2px
 
 
 body
-  color: general.$couleur-back-bleu-zodiac
+  color: black
   font-family: general.$police-texte
   align-items: center
   margin-top: 120px
@@ -70,7 +69,7 @@ body
     @media screen and ( max-width: 960 )
       font-size: 1.4vw
 
-    background-color: general.$couleur-back-jaune-canteloup
+    background-color: general.$couleur-front-jaune-pabo
     border-width: 0px
     border-radius: 5px 5px 0px 0px
     font-size: 1.2vw
@@ -78,7 +77,7 @@ body
   .ongletSelect
     height: 2.5vw
     background-color: #FFFFFF
-    border: 2px solid general.$couleur-back-bleu-zodiac
+    border: 2px solid general.$couleur-front-bleu-verdatre
     border-bottom-color: #FFFFFF
 
 
@@ -86,13 +85,13 @@ body
   display: inline-block
   width: 100%
   height: 2px
-  background-color: general.$couleur-front-bleu-marine
+  background-color: general.$couleur-front-bleu-verdatre
 
 
 #croissantDecroissant
   width: 30%
   border-radius: 5px
-  border: 0.3vw solid general.$couleur-back-bleu-zodiac
+  border: 0.3vw solid general.$couleur-front-bleu-verdatre
 
   margin: 2vw 3vw
   background: url('../../../assests/imgs/mobile/Chevron2.svg') no-repeat left center
@@ -131,7 +130,7 @@ body
     border-collapse: collapse
 
     border: 2px solid
-    border-color: general.$couleur-back-bleu-zodiac 
+    border-color: general.$couleur-front-bleu-verdatre
 
     tr
       cursor: pointer
@@ -146,11 +145,11 @@ body
     thead
       height: 3vh
       tr
-        background-color: general.$couleur-back-bleu-zodiac
+        background-color: general.$couleur-front-bleu-verdatre
         padding: 1vw 0vw
         th
           width: 20%
-          background-color: general.$couleur-back-bleu-zodiac
+          background-color: general.$couleur-front-bleu-verdatre
           color: #FFFFFF
         
 
