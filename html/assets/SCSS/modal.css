@@ -35,24 +35,182 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media screen and (min-width: 1023px) {
+  .modalTitle {
+    vertical-align: middle;
+    text-align: center;
+    font-size: 2em;
+    font-family: "Reem Kufi", sans-serif;
+    margin-bottom: 10%;
+  }
+  .fermer {
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    margin-left: 2%;
+  }
+  .blur {
+    filter: blur(2px);
+    pointer-events: none;
+  }
+  .exception {
+    /* Ensure the modal is not blurred */
+    filter: none;
+    pointer-events: auto;
+  }
   .modal-register-content {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1050;
-    width: 80%;
+    width: 50%;
     max-width: 500px;
     background: white;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
   .modal-register-content .mobile {
     display: none;
   }
+  .modal-register-content .container-creation-compte {
+    display: flex;
+    width: 90%;
+    margin: 0 auto 0 auto;
+    flex-direction: column;
+    font-size: 1em;
+  }
+  .modal-register-content .container-creation-compte .formulaire-creation-compte {
+    margin-bottom: 15px;
+  }
+  .modal-register-content .container-creation-compte .scroll {
+    overflow-y: auto;
+    height: 50vh;
+    margin-bottom: 15px;
+  }
+  .modal-register-content .container-creation-compte .form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  .modal-register-content .container-creation-compte .form #password_error, .modal-register-content .container-creation-compte .form #confirm_password_error {
+    color: red;
+  }
+  .modal-register-content .container-creation-compte .form input, .modal-register-content .container-creation-compte .form select {
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ADC6E3;
+  }
+  .modal-register-content .container-creation-compte .form input {
+    padding: 0px 10px;
+  }
+  .modal-register-content .container-creation-compte .form select {
+    padding: 0px 5px;
+  }
+  .modal-register-content .container-creation-compte .form select {
+    width: 30%;
+  }
+  .modal-register-content .container-creation-compte button {
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  .modal-register-content .container-creation-compte .registerButton {
+    background-color: #377E81;
+    color: white;
+  }
+  .modal-register-content .container-creation-compte .registerButton:hover {
+    background-color: #46a1a5;
+  }
+  .modal-register-content .container-creation-compte #register_error {
+    display: none;
+  }
+  .modal-register-content .container-creation-compte .hasAccountButton {
+    background-color: white;
+    color: #377E81;
+  }
+  .modal-register-content .container-creation-compte .hasAccountButton:hover {
+    background-color: #e6e6e6;
+  }
+  .modal-register-content .container-creation-compte .CGU-form {
+    margin-bottom: 15px;
+  }
+  .modal-register-content .container-creation-compte .CGU-form, .modal-register-content .container-creation-compte .CGV-form {
+    display: flex;
+    align-items: center;
+  }
+  .modal-register-content .container-creation-compte .CGU-form > *:not(:last-child), .modal-register-content .container-creation-compte .CGV-form > *:not(:last-child) {
+    margin-right: 10px;
+  }
   .modal-content {
     position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1050;
+    width: 50%;
+    max-width: 500px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+  .modal-content .mobile {
+    display: none;
+  }
+  .modal-content .container-connexion-compte {
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    width: 90%;
+    margin: 0 auto 0 auto;
+  }
+  .modal-content .container-connexion-compte .form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  .modal-content .container-connexion-compte .form #password_error, .modal-content .container-connexion-compte .form #confirm_password_error {
+    color: red;
+  }
+  .modal-content .container-connexion-compte input {
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ADC6E3;
+  }
+  .modal-content .container-connexion-compte input {
+    padding: 0px 10px;
+  }
+  .modal-content .container-connexion-compte button {
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  .modal-content .container-connexion-compte .loginButton {
+    background-color: #377E81;
+    color: white;
+    margin: 10% auto 0 auto;
+  }
+  .modal-content .container-connexion-compte .loginButton:hover {
+    background-color: #46a1a5;
+  }
+  .modal-content .container-connexion-compte #login_error {
+    display: none;
+  }
+  .modal-content .container-connexion-compte .needAccountButton {
+    background-color: white;
+    color: #377E81;
+    margin: 15px auto 0 auto;
+  }
+  .modal-content .container-connexion-compte .needAccountButton:hover {
+    background-color: #e6e6e6;
   }
   .alert-popup {
     position: fixed;
@@ -72,7 +230,6 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #fff;
     color: #000000;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
-    animation: arrivee 0.5s, depart 0.5s 5s forwards;
   }
   .alert-popup img {
     width: 20%;
@@ -80,6 +237,7 @@ h1, h2, h3, h4, h5, h6 {
   .alert-popup p {
     width: 70%;
     text-align: center;
+    animation: arrivee 0.5s, depart 0.5s 5s forwards;
   }
   @keyframes arrivee {
     from {
