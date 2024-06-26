@@ -350,6 +350,24 @@ switch($requestUrl) {
         $utilisateurController->generateToken($data);
         break;
 
+    case '/api/updatePassword':
+        case '/api/updatePassword/':
+            $data = $_POST;
+            $utilisateurController->updatePassword($data);
+        break;
+
+    case '/api/updateCliPassword':
+        case '/api/updateCliPassword/':
+                $data = $_POST;
+                $utilisateurController->updateCliPassword($data);
+            break;
+
+    case '/api/updateProfile':
+        case '/api/updateProfile/':
+            $data = $_POST;
+            $utilisateurController->updateProfile($data);
+        break;
+
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);

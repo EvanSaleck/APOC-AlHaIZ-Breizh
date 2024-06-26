@@ -1,8 +1,8 @@
-
 @use '../general' as general
 
 // style de la page de détail du compte mobile
 // @media screen and (max-width: general.$max-width-telephone)
+
 .compte
   font-family: general.$police-texte
   color: general.$couleur-front-bleu-charbon
@@ -76,15 +76,6 @@
     text-align: center
 
   .mdp
-    background-color: general.$couleur-front-bleu-verdatre
-    border: 4px solid general.$couleur-front-bleu-verdatre
-    width: 80%
-    &:hover
-      border-color: lighten(general.$couleur-front-bleu-verdatre, 5%)
-    &:focus
-      border-color: lighten(general.$couleur-front-bleu-verdatre, 15%)
-
-  .update
     background-color: #e20000
     border: 4px solid #e20000
     width: 100%
@@ -93,5 +84,63 @@
     &:focus
       border-color: lighten(#e20000, 15%)
 
+
+div
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+
+  input 
+    text-align: center
+    border: none
+    width: fit-content
+    background-color: transparent
+    border-bottom: 1px solid general.$couleur-front-bleu-nuageux
+
+  .divAdresse
+    display: flex
+    flex-direction: column
+    justify-content: center
+    gap: 5px
+
+  .update
+    background-color: general.$couleur-front-bleu-verdatre
+    border: 4px solid general.$couleur-front-bleu-verdatre
+    width: 100%
+    &:hover
+      border-color: lighten(general.$couleur-front-bleu-verdatre, 5%)
+    &:focus
+      border-color: lighten(general.$couleur-front-bleu-verdatre, 15%)
+
+  a
+    text-decoration: none
+    
+.d-none
+  display: none
+
+#zonemodif
+  margin-bottom: 5%
+  input
+    border: none
+    border-bottom: 1px solid general.$couleur-front-bleu-nuageux
+    outline: none
+
+.save 
+  background-color: rgb(25, 135, 84)
+  border: 4px solid rgb(25, 135, 84)
+  width: 100%
+  &:hover
+    border-color: lighten(rgb(25, 135, 84), 5%)
+  &:focus
+    border-color: lighten(rgb(25, 135, 84), 15%)
+.valid
+  background-color: rgb(25, 135, 84)
+  border: 4px solid rgb(25, 135, 84)
+  width: 100%
+  &:hover
+    border-color: lighten(rgb(25, 135, 84), 5%)
+  &:focus
+    border-color: lighten(rgb(25, 135, 84), 15%)
 // style de la page de détail du compte desktop
 // @media screen and (min-width: general.$max-width-telephone)

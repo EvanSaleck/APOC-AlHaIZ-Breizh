@@ -176,4 +176,54 @@
                 echo json_encode($e->getMessage());
             }
         }
+
+        public function updatePassword($values){
+            try {
+                $mdp = $values['oldPwd'];
+                $newmdp = $values['newPwd'];
+                $confmdp = $values['confPwd'];
+                $id = $values['id'];
+
+
+                $return = $this->user->updatePassword($mdp, $newmdp, $confmdp, $id);
+
+                header('Content-Type: application/json');
+                echo json_encode($return);
+            }
+            catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode($e->getMessage());
+            }
+        }
+
+        public function updateCliPassword($values){
+            try {
+                $mdp = $values['oldPwd'];
+                $newmdp = $values['newPwd'];
+                $confmdp = $values['confPwd'];
+                $id = $values['id'];
+
+                $return = $this->user->updateCliPassword($mdp, $newmdp, $confmdp, $id);
+
+                header('Content-Type: application/json');
+                echo json_encode($return);    
+            }
+            catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode($e->getMessage());
+            }            
+        }
+
+        public function updateProfile($values){
+            try {
+                $return = $this->user->updateProfile($values);
+
+                header('Content-Type: application/json');
+                echo json_encode($return);
+            }
+            catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode($e->getMessage());
+            }
+        }
     }

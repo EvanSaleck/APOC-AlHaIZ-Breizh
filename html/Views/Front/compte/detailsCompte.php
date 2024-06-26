@@ -24,7 +24,18 @@ include_once 'Views/Front/composants/head.php';
           <h3>Email :</h3>
           <p class="email"></p>
         </div>
+
+        <div class="d-none" id="zonemodif">
+          <h3>Ancien mot de passe :</h3>
+          <input class="oldPwd" type="password"/>
+          <h3>Tapez mot de passe :</h3>
+          <input class="newPwd" type="password"/>
+          <h3>Confirmation mot de passe :</h3>
+          <input class="confPwd" type="password"/>
+        </div>
+
         <button class="mdp">Modifier Mot de passe</button>
+        <button class="annul d-none">Annuler</button>
       </div>
       <div class="infoPer">
         <h2>Informations personnelles</h2>
