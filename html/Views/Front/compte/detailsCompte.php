@@ -13,16 +13,15 @@ include_once 'Views/Front/composants/head.php';
       </div>
       <h1>Détails du compte</h1>
     </div>
-    <div>
-      <div class="infoCo">
+    <div class="infoCo">
         <h2>Informations de connexion</h2>
         <div class="divPseudo">
           <h3>Identifiant :</h3>
-          <p class="pseudo"></p>
+          <input class="pseudo" type="text" disabled/>
         </div>
         <div class="divEmail">
           <h3>Email :</h3>
-          <p class="email"></p>
+          <input class="email" type="email" disabled/>
         </div>
 
         <div class="d-none" id="zonemodif">
@@ -42,30 +41,35 @@ include_once 'Views/Front/composants/head.php';
         <div>
           <div class="divNom">
             <h3>Nom :</h3>
-            <p class="nom"></p>
+            <input class="nom" type="text" disabled/>
           </div>
           <div class="divPrenom">
             <h3>Prénom :</h3>
-            <p class="prenom"></p>
+            <input class="prenom" type="text" disabled/>
           </div>
           <div class="divCivilite">
             <h3>Civilité :</h3>
-            <p class="civilite"></p>
+            <select class="civilite" disabled>
+              <option value="Mr">Monsieur</option>
+              <option value="Mme">Madame</option>
+              <option value="Non spécifié">Non spécifié</option>
+            </select>
           </div>
           <div class="divAdresse">
             <h3>Adresse de facturation :</h3>
-            <p class="rue"></p>
-            <p class="codePostal"></p>
-            <p class="ville"></p>
-            <p class="pays"></p>
+            <input class="rue" type="text" disabled/>
+            <input class="codePostal" type="number" disabled/>
+            <input class="ville" type="text" disabled/>
+            <input class="pays" type="text" disabled/>
           </div>
         </div>
       </div>
 
     </div>
     <div>
-
       <button class="update">Modifier le profil</button>
+      <button class="save d-none">Enregistrer</button>
+      <button class="annul d-none" id="annulmodif">Annuler</button>
     </div>
   </div>
 </body>

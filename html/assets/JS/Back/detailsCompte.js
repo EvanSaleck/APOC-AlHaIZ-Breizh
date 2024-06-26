@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelector('.email').value = compte.e_mail;
                 document.querySelector('.dateNaissance').value = compte.ddn;
                 document.querySelector('.cni').value = compte.date_cni_fin_valid;
+
+                // Stockage des données originales
+                storeOriginalProfileData();
             }
         })
         .catch(error => {
@@ -50,6 +53,15 @@ document.addEventListener('DOMContentLoaded', function() {
             compteContainer.innerHTML = '<h2 class="error">Erreur lors du chargement des détails du compte.</h2>';
         });
 });
+
+let originalProfileData = {};
+
+function storeOriginalProfileData() {
+    const fields = document.querySelectorAll('.infoPer input, .infoCo input, .infoPer select');
+    fields.forEach(field => {
+        originalProfileData[field.className] = field.value;
+    });
+}
 
 function togglePasswordModification(){
     const passwordZone = document.getElementById('zonemodif');
@@ -115,14 +127,13 @@ function cancelPasswordModification(){
     document.querySelector('.annul').classList.add('d-none');
 }
 
-let originalProfileData = {};
-
 function enableProfileModification(){
-    const fields = document.querySelectorAll('.infoPer input, .infoCo input');
+    const fields = document.querySelectorAll('.infoPer input, .infoCo input, .infoPer select');
     fields.forEach(field => {
-        originalProfileData[field.className] = field.value;
         field.disabled = false;
     });
+
+    document.querySelector('.cni').disabled = true;
     
     document.querySelector('.update').classList.add('d-none');
     document.querySelector('.save').classList.remove('d-none');
@@ -130,7 +141,7 @@ function enableProfileModification(){
 }
 
 function cancelProfileModification(){
-    const fields = document.querySelectorAll('.infoPer input, .infoCo input');
+    const fields = document.querySelectorAll('.infoPer input, .infoCo input, .infoPer select');
     fields.forEach(field => {
         field.value = originalProfileData[field.className];
         field.disabled = true;
@@ -148,7 +159,6 @@ function saveProfileChanges(){
     const prenom = document.querySelector('.prenom').value;
     const civilite = document.querySelector('.civilite').value;
     const ddn = document.querySelector('.dateNaissance').value;
-    const cni = document.querySelector('.cni').value;
     const rue = document.querySelector('.rue').value;
     const codePostal = document.querySelector('.codePostal').value;
     const ville = document.querySelector('.ville').value;
@@ -161,12 +171,19 @@ function saveProfileChanges(){
     formData.append('prenom', prenom);
     formData.append('civilite', civilite);
     formData.append('ddn', ddn);
-    formData.append('cni', cni);
     formData.append('rue', rue);
     formData.append('codePostal', codePostal);
     formData.append('ville', ville);
     formData.append('pays', pays);
     formData.append('id', JSON.parse(sessionStorage.getItem('Proprio')).id_compte);
+
+    if(pseudo === '' || email === '' || nom === '' || prenom === '' || civilite === '' || ddn === '' || rue === '' || codePostal === '' || ville === '' || pays === ''){
+        return utils.ThrowAlertPopup('Veuillez remplir tous les champs', 'error');
+    }
+
+    // if(originalProfileData.pseudo == pseudo && originalProfileData.email == email && originalProfileData.nom == nom && originalProfileData.prenom == prenom && originalProfileData.civilite == civilite && originalProfileData.ddn == ddn  && originalProfileData.codePostal == codePostal && originalProfileData.ville == ville && originalProfileData.pays == pays){
+    //     return utils.ThrowAlertPopup('Aucune modification détectée', 'error');
+    // }
 
     fetch('/api/updateProfile', {
         method: 'POST',
@@ -174,13 +191,16 @@ function saveProfileChanges(){
     })
     .then(response => response.json())
     .then(data => {
-        if(data.success){
+        if(data == "Profil modifie"){
             utils.ThrowAlertPopup('Profil mis à jour avec succès', 'success');
-            const fields = document.querySelectorAll('.infoPer input, .infoCo input');
+            const fields = document.querySelectorAll('.infoPer input, .infoCo input, .infoPer select');
             fields.forEach(field => field.disabled = true);
             document.querySelector('.update').classList.remove('d-none');
             document.querySelector('.save').classList.add('d-none');
             document.getElementById('annulmodif').classList.add('d-none');
+            
+            // Mettre à jour les données originales
+            storeOriginalProfileData();
         } else {
             utils.ThrowAlertPopup('Erreur lors de la mise à jour du profil', 'error');
         }

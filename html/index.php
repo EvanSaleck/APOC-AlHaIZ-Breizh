@@ -377,6 +377,12 @@ switch($requestUrl) {
             $utilisateurController->updateProfile($data);
         break;
 
+    case '/api/updateCliProfile':
+        case '/api/updateCliProfile/':
+            $data = $_POST;
+            $utilisateurController->updateCliProfile($data);
+        break;
+
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);

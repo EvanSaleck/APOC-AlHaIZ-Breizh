@@ -46,7 +46,11 @@ include_once 'Views/Back/composants/head.php';
           </div>
           <div class="divCivilite">
             <h3>Civilité :</h3>
-            <input class="civilite" type="text" disabled/>
+            <select class="civilite" disabled>
+              <option value="Mr">Monsieur</option>
+              <option value="Mme">Madame</option>
+              <option value="Non spécifié">Non spécifié</option>
+            </select>
           </div>
           <div class="divDateNaissance">
             <h3>Date de naissance :</h3>
