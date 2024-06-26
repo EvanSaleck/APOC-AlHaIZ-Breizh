@@ -1,120 +1,157 @@
 @use './general' as general
 
-
-// .modal-register-content
-//   position: fixed
-//   top: 50%
-//   left: 50%
-//   transform: translate(-50%, -50%)
-//   z-index: 1050
-//   width: 80%
-//   max-width: 500px
-//   background: white
-//   padding: 20px
-//   border-radius: 5px
-//   box-shadow: 0 5px 15px rgba(0, 0, 0, .5)
-//   .mobile
-//     display: none
-
-// body.modal-open
-//   overflow: hidden
-//   .modal-backdrop
-//     position: fixed
-//     top: 0
-//     left: 0
-//     width: 100%
-//     height: 100%
-//     background: rgba(239, 10, 10, 0.637)
-//     z-index: 1040
-
-// @media screen and (max-width: general.$max-width-tablette)
-//     .modal-content
-//         width: 50%
-//         margin-top: 5%
-//         h2
-//             font-size: 1.5em
-//         .fermer
-//             font-size: 1em
-//         #connexionForm
-//             input
-//                 width: 80%
-//                 font-size: 1em
-//             button
-//                 width: 80%
-//                 font-size: 1em
-//         #inscription
-//             font-size: 1em
-
-// // @media screen and (max-width: 560px)
-// //     .modal-content
-// //         width: 100%
-// //         margin-top: 5% !important
-// //         margin-left: 10% !important
-// //         h2
-// //             font-size: 1.5em
-// //         .fermer
-// //             font-size: 1em
-// //         #connexionForm
-// //             input
-// //                 width: 80%
-// //                 font-size: 1em
-// //             button
-// //                 width: 80%
-// //                 font-size: 1em
-// //         #inscription
-// //             font-size: 1em
 @media screen and (min-width: general.$max-width-tablette)
-    h2
-       vertical-align: middle
-       text-align: center
-
+    // utile pour les pages de connexion et d'inscription ----------------------------
+    .modalTitle
+        vertical-align: middle
+        text-align: center
+        font-size: 2em
+        font-family: general.$police-titre
+        margin-bottom: 10%
     .fermer
-        font-size: 1.5em
+        font-size: 2em
         font-weight: bold
         cursor: pointer
-        margin-right: auto
-        margin-left: 0.5em
-
-
-    #connexionForm
-        display: flex
-        flex-direction: column
-        align-items: center
-
-        input 
-            margin: 10px
-            padding: 10px
-            border-radius: 5px
-            border: 1px solid general.$couleur-front-bleu-charbon
-            outline-color: general.$couleur-front-bleu-verdatre
-
-
-        button 
-            margin: 10px
-            padding: 10px
-            border-radius: 5px
-            border: 1px solid general.$couleur-front-bleu-charbon
-            background-color: general.$couleur-front-bleu-verdatre
-            color: white
-        
-    #inscription
-        margin-top: 10px
-        text-decoration: underline
-        text-align: center
-        cursor: pointer
-    .blur 
-        filter: blur(5px)
+        position: absolute
+        margin-left: 2%
+    .blur
+        filter: blur(2px)
         pointer-events: none
-
-    /* Ensure the modal is not blurred */
-    .exception 
+    .exception
+        /* Ensure the modal is not blurred */
         filter: none
         pointer-events: auto
+    // --------------------------------------------------------------------------------
+    .modal-register-content
+        position: fixed
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        z-index: 1050
+        width: 50%
+        max-width: 500px
+        background: white
+        padding: 20px
+        border-radius: 10px
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .5)
+        .mobile
+            display: none
+        .container-creation-compte
+            display: flex
+            width: 90%
+            margin: 0 auto 0 auto
+            flex-direction: column
+            font-size: general.$taille-police-texte-mobile
+            .formulaire-creation-compte
+                margin-bottom: 15px
+            .scroll
+                overflow-y: auto
+                height: 50vh
+                margin-bottom: 15px
+            .form
+                display: flex
+                flex-direction: column
+                margin-bottom: 15px
+                #password_error, #confirm_password_error
+                    color: red
 
+                input, select
+                    height: 40px
+                    border-radius: 5px
+                    border: 1px solid general.$couleur-front-bleu-nuageux
+                input
+                    padding: 0px 10px
+                select
+                    padding: 0px 5px
+                select
+                    width: 30%
+            button
+                padding: 12px 20px
+                border-radius: 5px
+                border: 1px solid rgb(0, 0, 0, 0)
+                cursor: pointer
+                transition: background-color 0.3s ease
+                width: 100%
+            .registerButton
+                background-color: general.$couleur-front-bleu-verdatre
+                color: white
+                &:hover
+                    background-color: lighten(general.$couleur-front-bleu-verdatre, 10%)
+            #register_error
+                display: none
+            .hasAccountButton
+                background-color: white
+                color: general.$couleur-front-bleu-verdatre
+                &:hover
+                    background-color: darken(white, 10%)
+            .CGU-form
+                margin-bottom: 15px
+            .CGU-form, .CGV-form
+                display: flex
+                align-items: center
+                > *:not(:last-child)
+                    margin-right: 10px
+
+
+    // --------------------------------- Style de la page de connexion desktop ---------------------------------
+    .modal-content
+        position: fixed
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        z-index: 1050
+        width: 50%
+        max-width: 500px
+        background: white
+        padding: 20px
+        border-radius: 10px
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .5)
+        .mobile
+            display: none
+        .container-connexion-compte
+            display: flex
+            flex-direction: column
+            font-size: general.$taille-police-texte-mobile
+            width: 90%
+            margin: 0 auto 0 auto
+            .form
+                display: flex
+                flex-direction: column
+                margin-bottom: 15px
+                #password_error, #confirm_password_error
+                    color: red
+
+            input
+                height: 40px
+                border-radius: 5px
+                border: 1px solid general.$couleur-front-bleu-nuageux
+            input
+                padding: 0px 10px
+            button
+                padding: 12px 20px
+                border-radius: 5px
+                border: 1px solid rgb(0, 0, 0, 0)
+                cursor: pointer
+                transition: background-color 0.3s ease
+                width: 100%
+            .loginButton
+                background-color: general.$couleur-front-bleu-verdatre
+                color: white
+                margin: 10% auto 0 auto
+                &:hover
+                    background-color: lighten(general.$couleur-front-bleu-verdatre, 10%)
+            #login_error
+                display: none
+            .needAccountButton
+                background-color: white
+                color: general.$couleur-front-bleu-verdatre
+                margin: 15px auto 0 auto
+                &:hover
+                    background-color: darken(white, 10%)
 
     .alert-popup
         position: fixed
-        top: 0   
+        top: 0
         left: 50%
         transform: translate(-50%)
         font-size: 1em
@@ -131,21 +168,20 @@
 
         border-radius: 0 0 10px 10px
 
-        
-        z-index:999999
+        z-index: 999999
 
-        background-color: #fff 
+        background-color: #fff
         color: #000000
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.75)
 
         img
             width: 20%
-        
-        p 
+
+        p
             width: 70%
             text-align: center
-        
-        animation: arrivee 0.5s, depart 0.5s 5s forwards
+
+            animation: arrivee 0.5s, depart 0.5s 5s forwards
 
         @keyframes arrivee
             from
@@ -158,7 +194,6 @@
                 top: 0
             to
                 top: -100%
-
 
 @media screen and (max-width: general.$max-width-tablette)
     .alert-popup
@@ -175,7 +210,7 @@
         height: 100vh
         font-family: general.$police-texte
         .fermer
-            position: absolute 
+            position: absolute
             top: 15%
             left: 10%
             font-size: 2.5em
@@ -251,7 +286,8 @@
                 align-items: center
                 > *:not(:last-child)
                     margin-right: 10px
-    // --------------------------------- Style de la page de de connexion mobile ---------------------------------
+
+    // --------------------------------- Style de la page de connexion mobile ---------------------------------
     .modal-content
         position: fixed
         overflow-y: hidden
@@ -264,7 +300,7 @@
         height: 100vh
         font-family: general.$police-texte
         .fermer
-            position: absolute 
+            position: absolute
             top: 15%
             left: 10%
             font-size: 2.5em
@@ -283,7 +319,6 @@
         h1
             height: fit-content
             font-family: general.$police-titre
-
         .container-connexion-compte
             display: flex
             margin: 10% auto 0 auto
@@ -329,5 +364,3 @@
                 margin: 15px auto 0 auto
                 &:hover
                     background-color: darken(white, 10%)
-
-    
