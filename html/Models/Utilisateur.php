@@ -60,7 +60,7 @@ class Utilisateur {
             return 'Connexion réussie';
         } else {
             http_response_code(500);
-            return 'Identifiants incorrects';
+            return 'Identifiant et/ou mot de passe incorrects';
         }
     }
 
