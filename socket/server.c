@@ -114,7 +114,7 @@ void helper() {
     printf("  -d <ip>       Spécifie le conteneur docker de votre base de donnée\n");
     printf("  -p <port>     Spécifie le port du serveur\n");
     printf("  --help        Affiche ce message d'aide\n");
-    printf("Une fois lancé il vous suffit de laisser le processu tourner ainsi tout le monde pourra effectuer des requêtes\n");
+    printf("Une fois lancé il vous suffit de laisser le processus tourner ainsi tout le monde pourra effectuer des requêtes\n");
 }
 
 
@@ -403,7 +403,7 @@ int main(int argc, char **argv) {
     };
 
     // Traitement des arguments avec getopt_long pour le --help
-    while ((opt = getopt_long(argc, argv, "i:p:", long_options, &option_index)) != -1) {
+    while ((opt = getopt_long(argc, argv, "d:p:", long_options, &option_index)) != -1) {
         switch (opt) {
             case 0:
                 if (strcmp(long_options[option_index].name, "help") == 0) {
