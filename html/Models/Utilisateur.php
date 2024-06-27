@@ -106,7 +106,7 @@ class Utilisateur {
 
             
             // puis creation compte a laquelle rajouter l'id de l'adresse
-            $query = "INSERT INTO sae3.compte_client (code_client, civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, C_id_adresse, CC_id_adresse) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO sae3.compte_client (code_client, civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $statement = $this->pdo->prepare($query);
             $date = date('Y-m-d', strtotime($data['ddn']));
@@ -123,7 +123,6 @@ class Utilisateur {
                 $data['pseudo'],
                 $data['photo_profil'],
                 $date,
-                $idAdresse,
                 $idAdresse,
             ]);
 
