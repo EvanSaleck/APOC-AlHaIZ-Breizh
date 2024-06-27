@@ -15,7 +15,7 @@
         <img src="/assets/imgs/logo.webp" alt="Logo">
             <ul>
                 <!-- Pages à créer pour les liens -->
-                <li class="Front"><a href="./Views/MentionsLegales.php">Mentions légales</a></li>
+                <li class="Front"><a href="/mentionsLegales">Mentions légales</a></li>
             </ul>
         </div>
 

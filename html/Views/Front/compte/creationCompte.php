@@ -95,12 +95,7 @@ include_once 'Views/Front/composants/head.php';
                     <div id="agreement-form" class="form">
                         <div class="CGU-form">
                             <input type="checkbox" id="terms_conditions" name="terms_conditions" required>
-                            <label for="terms_conditions">En cochant cette case, je confirme avoir lu et accepté les <a href="/terms-conditions">Conditions Générales d'Utilisation</a> d'ALHaIZ Breizh.</label>
-                        </div>
-
-                        <div class="CGV-form">
-                            <input type="checkbox" id="sales_conditions" name="sales_conditions" required>
-                            <label for="sales_conditions">En cochant cette case, je reconnais avoir lu et accepté les <a href="/sales-conditions">Conditions Générales de Vente</a> d'ALHaIZ Breizh.</label>
+                            <label for="terms_conditions">En cochant cette case, je confirme avoir lu et accepté les <a href="/CGU_CGV">Conditions Générales d'Utilisation /de Ventes</a> d'ALHaIZ Breizh.</label>
                         </div>
                     </div>
                 </div>
