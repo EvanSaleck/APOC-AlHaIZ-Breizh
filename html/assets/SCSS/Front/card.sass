@@ -1,18 +1,27 @@
 @use '../general' as general
 
 .card
-    min-height: 37vh
+    min-height: 40vh
     margin: 1em auto
-    border: 1px solid black
     border-radius: 5px
     background-color: #fff
     font-family: general.$police-titre
     cursor: pointer
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)
+
+    //hover
+    &:hover
+        // zoom qui n'affecte pas la disposition des éléments
+        transform: scale(1.02)
+        transition: transform 0.2s
 
     .imgbox
-        height: 20vh
+        height: 25vh
         overflow: hidden
         img
+            // border raduis conins du haut
+            border-top-left-radius: 5px
+            border-top-right-radius: 5px
             width: 100%
             height: 100%  // Assure que l'image couvre toute la hauteur de imgbox
             object-fit: cover  // Garantit que l'image couvre la zone disponible, coupant l'excès de façon à préserver les proportions
@@ -76,6 +85,9 @@
 @media screen and (max-width: general.$max-width-telephone)
     .card
         width: 76vw
+
+        &:hover
+            transform: scale(1)
 
 
 @media screen and (min-width: general.$max-width-telephone)

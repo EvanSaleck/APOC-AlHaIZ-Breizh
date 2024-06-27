@@ -39,8 +39,29 @@ class Logement {
         return $logement;
     }
 
-    public function getLogementsDataForCards() {
-        $dataLogements = $this->db->executeQuery('
+    public function getLogementsDataForCards($startDate = null, $endDate = null) {
+        // $query = '
+        // select  l.id_logement,
+        //         l.titre,
+        //         l.description,
+        //         l.image_principale,
+        //         l.prix_nuit_ttc,
+        //         ad.nom_ville,
+        //         ad.code_postal,
+        //         avg(av.note_avis) as moyenne_logement, 
+        //         count(av.id_avis) as nb_avis
+        //     from logement l 
+        //         inner join adresse ad
+        //             on l.l_id_adresse  = ad.id_adresse 
+        //     left join reservation r 
+        //         on l.id_logement = r.r_id_logement 
+        //     left join avis av
+        //         on r.id_reservation = av.av_id_reservation 
+        //     group by (l.id_logement,ad.id_adresse);
+        // ';
+        
+        // meme requete que la précédente mais en prenant l'id, nom et prenom du propriétaire en mem temps
+        $query = '
         select  l.id_logement,
                 l.titre,
                 l.description,
@@ -49,18 +70,93 @@ class Logement {
                 ad.nom_ville,
                 ad.code_postal,
                 avg(av.note_avis) as moyenne_logement, 
-                count(av.id_avis) as nb_avis
+                count(av.id_avis) as nb_avis,
+                c.id_compte,
+                c.nom,
+                c.prenom
             from logement l 
                 inner join adresse ad
                     on l.l_id_adresse  = ad.id_adresse 
+                inner join compte_proprietaire c
+                    on l.L_id_compte = c.id_compte
             left join reservation r 
                 on l.id_logement = r.r_id_logement 
             left join avis av
                 on r.id_reservation = av.av_id_reservation 
-            group by (l.id_logement,ad.id_adresse);
-        ');
+            group by (l.id_logement,ad.id_adresse,c.id_compte);
+        ';
+        
+        
+        // on créé une query qu'on module en fonction de la date de début et de fin 
+        // // on rajoute le where des date que si elles sont renseignées (différentes de null)
+        // $query = '
+        //     select l.id_logement,
+        //             l.titre,
+        //             l.description,
+        //             l.image_principale,
+        //             l.prix_nuit_ttc,
+        //             ad.nom_ville,
+        //             ad.code_postal,
+        //             avg(av.note_avis) as moyenne_logement, 
+        //             count(av.id_avis) as nb_avis
+        //         from logement l 
+        //             inner join adresse ad
+        //                 on l.l_id_adresse  = ad.id_adresse 
+        //         left join reservation r 
+        //             on l.id_logement = r.r_id_logement 
+        //         left join avis av
+        //             on r.id_reservation = av.av_id_reservation ';
+
+        // // on utilise isDisponible pour savoir si le logement est disponible pour la période donnée
+        // if ($startDate != 'null' && $endDate != 'null') {
+        //     $query .= 'where l.id_logement in (
+        //         select l.id_logement
+        //         from logement l
+        //         where l.id_logement not in (
+        //             select r.r_id_logement
+        //             from reservation r
+        //             where r.date_arrivee <= \'' . $endDate . '\' and r.date_depart >= \'' . $startDate . '\'
+        //         )
+        //     ) ';
+        // }
+
+        // $query .= 'group by (l.id_logement,ad.id_adresse);';
+
+        $dataLogements = $this->db->executeQuery($query);
 
         return $dataLogements;
+    }
+
+    // retourne la liste des id de logements disponibles pour une période donnée
+    public function getLogementsDispo($startDate, $endDate) {
+        $query = '
+        select l.id_logement
+        from logement l
+        where l.id_logement not in (
+            select r.r_id_logement
+            from reservation r
+            where r.date_arrivee <= \'' . $endDate . '\' and r.date_depart >= \'' . $startDate . '\'
+        )';
+
+        $listeLogements = $this->db->executeQuery($query);
+        
+        return $listeLogements;
+    }
+
+    // tous les logements disponibles pour une période donnée (qui n'ont aucune réservation pour cette période)
+    public function isDisponible(string $dateDebut, string $dateFin) {
+        $query = '
+        select l.id_logement
+        from logement l
+        where l.id_logement not in (
+            select r.r_id_logement
+            from reservation r
+            where r.date_arrivee <= \'' . $dateFin . '\' and r.date_depart >= \'' . $dateDebut . '\'
+        )';
+
+        $result = $this->db->executeQuery($query);
+
+        return $result;
     }
 
     public function getLogementsByAbonnement($id){
@@ -299,6 +395,10 @@ class Logement {
             $valeursAdresse[] = $formLogement->getEtat();
         }
 
+        header('Content-Type: application/json');
+        echo json_encode(['id_logement' => $idLogement]);
+        die();
+
         // Update de l'adresse
         $adresseId = $this->db->select('logement', ['L_id_adresse'], ['id_logement' => $idLogement])[0]['L_id_adresse'];
         $this->db->update('adresse', $colonnesAdresse, $valeursAdresse, 'id_adresse', $adresseId);
@@ -452,7 +552,10 @@ class Logement {
         return $logements;
     }
 
-    
+    public function getCommunes() {
+        $communes = $this->db->executeQuery('SELECT DISTINCT nom_ville FROM adresse');
+        return $communes;
+    }
 
     public function updateStatutLogement($id, $nouveauStatut) {
         // Correction de la syntaxe SQL pour l'insertion de variables

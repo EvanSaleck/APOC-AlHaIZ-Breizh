@@ -48,12 +48,26 @@ class LogementController {
             
         echo json_encode($logement);
     }
-    public function getLogementsDataForCards() {
-        $dataLogements = $this->logement->getLogementsDataForCards();
+    public function getLogementsDataForCards($startDate = null, $endDate = null) {
+        $dataLogements = $this->logement->getLogementsDataForCards($startDate, $endDate);
 
         header('Content-Type: application/json');
 
         echo json_encode($dataLogements);
+    }
+
+    public function getLogementsDispo($startDate = null, $endDate = null) {
+        header('Content-Type: application/json');
+        
+        if ($startDate === null || $endDate === null) {
+            echo json_encode(['error' => 'Dates de début et de fin non fournies.']);
+            return;
+        }
+
+        $logements = $this->logement->getLogementsDispo($startDate, $endDate);
+
+
+        echo json_encode($logements);
     }
 
     public function getLogementDataById($id) {
@@ -86,6 +100,15 @@ class LogementController {
         header('Content-Type: application/json');
 
         echo json_encode($logements);
+    }
+
+    
+    public function getCommunes(){
+        $communes = $this->logement->getCommunes();
+
+        header('Content-Type: application/json');
+
+        echo json_encode($communes);
     }
 
 

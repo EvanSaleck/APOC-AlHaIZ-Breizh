@@ -6,8 +6,10 @@
  include_once 'Views/Front/composants/head.php';
  ?>
  
- <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="/assets/SCSS/Front/datePicker.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <body>
     <div id="headerAccueilMobile">
         <img src="/assets/imgs/logo.webp" id="logoAssoMobile" alt="Logo de l'association">
@@ -15,46 +17,13 @@
             <img src="/assets/imgs/mobile/Menu.svg" alt="Logo menu">
         </button>
     </div>
-    <div id="filtresDesktop">
-        <form id="formFiltresDesktop">
-            <div title="Commune">
-                <label for="commune">Commune</label>
-                <input type="text" name="commune" id="commune" placeholder="Ville">
-            </div>
+    <div id="imageAccueil"></div>
 
-            <div title="Département">
-                <label for="departement">Département</label>
-                <input type="text" name="departement" id="departement" placeholder="Dépt.">
-            </div>
-
-            <div title="Date d'arrivée">
-                <label for="dateArrivee">Date d'arrivée</label>
-                <input type="date" name="dateArrivee" id="dateArrivee" placeholder="Arrivée">
-            </div>
-
-            <div title="Date de départ">
-                <label for="dateDepart">Date de départ</label>
-                <input type="date" name="dateDepart" id="dateDepart" placeholder="Départ">
-            </div>
-
-            <div title="Prix max">
-                <label for="prixMa">Prix max</label>
-                <input type="text" name="prixMa" id="prixMa" placeholder="Max (€)">
-            </div>
-
-            <div title="Prix min">
-                <label for="prixMin">Prix min</label>
-                <input type="text" name="prixMin" id="prixMin" placeholder="Min (€)">
-            </div>
-
-            <button type="submit" title="Trouver mon logement">Trouver mon logement</button>
-        </form>
-    </div>
     <div id="filtres">
-        <div class="multiselect-container">
-            <label>Choisissez un département</label>
+        <div class="filtreContainer multiselect-container">
+            <label>Par département</label>
             <div class="select-box" id="select-box">
-                <div class="selected-items" id="selected-items">Sélectionnez des options</div>
+                <div class="selected-items" id="selected-items">Choisir</div>
                 <div class="arrow">&#9660;</div>
             </div>
             <div class="dropdown" id="dropdown">
@@ -67,21 +36,18 @@
                 </ul>
             </div>
         </div>
-        <!-- bouton permettant d'afficher la modale de selection de prix  -->
-        <div id="filtrePrixContainer">
+
+        <div id="filtrePrixContainer" class="filtreContainer">
             <div id="prixFiltresContainer">
-                <label>Prix</label> 
+                <label>Par tranche de prix</label>
                 <button id="btnPrix"><span id="prixMin"></span> - <span id="prixMax"></span> €/nuit</button>
-            </div>
-    
-            <!-- modale de selection de prix -->
-            <div id="wrapper">
-                <div class="price-input">
-                    <div class="field">
-                        <span>Min</span>
-                        <input type="number" class="input-min">
-                    </div>
-                    <div class="separator">-</div>
+                <div id="wrapper">
+                    <div class="price-input">
+                        <div class="field">
+                            <span>Min</span>
+                            <input type="number" class="input-min">
+                        </div>
+                        <div class="separator">-</div>
                         <div class="field">
                             <span>Max</span>
                             <input type="number" class="input-max">
@@ -98,35 +64,41 @@
             </div>
         </div>
 
-        <!-- on ajoute la possibilité de trier par ordre croissant / décroissant avec un toggle -->
-        <!-- <div id="filtreTriContainer">
-            <label>Tri</label>
-            <div id="triContainer">
-                <button id="btnTri">Prix croissant</button>
-            </div>
-        </div> -->
-    </div>
+        <div class="filtreContainer">
+            <label for="rangePicker">Par date</label>
+            <input type="text" id="rangePicker" placeholder="Sélectionnez une période de date">
+        </div>
 
-    <!-- <input type="text" id="rangePicker" placeholder="Sélectionnez une période de date"> -->
-
-    <!-- <div class="date-picker-container">
-        <input type="text" id="date-range" placeholder="Select date range" readonly>
-        <div id="calendar" class="calendar hidden">
-            <div class="calendar-header">
-                <button id="prev-month">&lt;</button>
-                <span id="month-year"></span>
-                <button id="next-month">&gt;</button>
+        <div class="filtreContainer multiselect-container">
+            <label>Par commune</label>
+            <div class="select-box" id="select-box-commune">
+                <div class="selected-items" id="selected-items-commune">Choisir</div>
+                <div class="arrow">&#9660;</div>
             </div>
-            <div class="calendar-body">
-                <div class="weekdays">
-                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-                </div>
-                <div id="calendar-days" class="days"></div>
+            <div class="dropdown" id="dropdown-commune">
+                <input type="text" id="search-commune" placeholder="Rechercher...">
+                <ul id="options-list-commune"></ul>
             </div>
         </div>
-    </div> -->
-    <div id="cardsContainer"></div>
 
+        <div class="filtreContainer multiselect-container">
+            <label>Par propriétaire</label>
+            <div class="select-box" id="select-box-prop">
+                <div class="selected-items" id="selected-items-prop">Choisir</div>
+                <div class="arrow">&#9660;</div>
+            </div>
+            <div class="dropdown" id="dropdown-prop">
+                <input type="text" id="search-prop" placeholder="Rechercher...">
+                <ul id="options-list-prop"></ul>
+            </div>
+        </div>
+
+        <div id="sortingContainer" class="filtreContainer">
+            <label for="tri">Tri</label>
+            <button id="sortToggle">Trier par prix croissant</button>
+        </div>
+    </div>
+    <div id="cardsContainer"></div>
     <div id="ongletFiltres">
         
         <!-- <h1>Filtres</h1>

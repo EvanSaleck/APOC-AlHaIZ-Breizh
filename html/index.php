@@ -160,6 +160,31 @@ switch($requestUrl) {
     case '/connexionProprietaire/':
         include './Views/Back/connexionProprietaire.php';
         break;
+
+    // case preg_match('/^\/api\/getLogementsDataForCards(\?.*)?$/', $requestUrl) ? true : false:
+    //     header('Content-Type: application/json');
+        
+    //     // Extraire les paramètres de la chaîne de requête
+    //     $queryParams = [];
+    //     parse_str(parse_url($requestUrl, PHP_URL_QUERY), $queryParams);
+        
+    //     $startDate = isset($queryParams['startDate']) ? $queryParams['startDate'] : null;
+    //     $endDate = isset($queryParams['endDate']) ? $queryParams['endDate'] : null;
+
+    //     echo $logementController->getLogementsDataForCards($startDate, $endDate);
+    //     break;
+    
+    // on créé la route api logementDispo
+    case preg_match('/^\/api\/logementsDispo(\?.*)?$/', $requestUrl) ? true : false:
+        $queryParams = [];
+        parse_str(parse_url($requestUrl, PHP_URL_QUERY), $queryParams);
+        
+        $startDate = isset($queryParams['startDate']) ? $queryParams['startDate'] : null;
+        $endDate = isset($queryParams['endDate']) ? $queryParams['endDate'] : null;
+
+        echo $logementController->getLogementsDispo($startDate, $endDate);
+        break;
+        
     case '/api/getLogementsDataForCards':
         header('Content-Type: application/json');
         echo $logementController->getLogementsDataForCards();
@@ -192,6 +217,12 @@ switch($requestUrl) {
         $data = $_POST;
         $logementController->getTypeOfLogementById($data);
         break;
+
+    case '/api/getCommunes':
+    case 'api/getCommunes':
+        $logementController->getCommunes();
+        break;
+
     /*
     case 'api/getCategorieOfLogementById/':
     case 'api/getCategorieOfLogementById/':

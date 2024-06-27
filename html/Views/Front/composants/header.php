@@ -3,7 +3,7 @@
         <div class="Logo">
             <a href="/">
                 <img src="/assets/imgs/logo.webp" alt="Logo">
-                <p id="titre">AlHaIZ Breizh</p>
+                <p id="titre">ALHaIZ Breizh</p>
             </a>
         </div>
         <div class="Menu">

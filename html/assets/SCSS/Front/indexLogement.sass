@@ -1,6 +1,5 @@
 @use '../general' as general 
 
-
 #not-found
   display: flex
   flex-direction: column
@@ -15,38 +14,81 @@
     flex-direction: row
     justify-content: start
     align-items: center
-    gap: 5vw
+    gap: 1vw
     width: 90%
     margin: 1em auto
+    flex-grow: 1
+    font-size: 1rem
+    // on saute la ligne quand les filtres sortent de l'écran
+    flex-wrap: wrap
+    
 
     input 
-        // padding: 10px
         border: none
         outline: none
     
     button
-        background-color: general.$couleur-front-jaune-pabo
-        color: general.$couleur-front-bleu-marine
         border: none
         padding: 10px
         border-radius: 6px
         cursor: pointer
-        // on interdit le saut de ligne sur le bouton
         white-space: nowrap
         overflow: hidden
         text-overflow: ellipsis
+        // meme style que les boutons de filtres
+        background-color: #fff
+        color: #000
+        border: 1px solid #ccc
+        padding: 10px
+        border-radius: 6px
+        cursor: pointer
+
+        &:hover
+            background-color: #f0f0f0
+
+    .filtreContainer
+      display: flex
+      flex-direction: column
+
+      label
+        white-space: nowrap
+        overflow: elipsis
+      
+      button
+        font-size: 1rem
+      
+      #rangePicker
+        font-size: 1rem
+        // meme style que les boutons de filtres
+        background-color: #fff
+        color: #000
+        border: 1px solid #ccc
+        padding: 10px
+        border-radius: 6px
+        cursor: pointer
+
+        &:hover
+            background-color: #f0f0f0      
 
 .multiselect-container
   position: relative
   width: 300px
+
+  label
+        white-space: nowrap
+        overflow: elipsis
 
 .select-box
   display: flex
   justify-content: space-between
   align-items: center
   padding: 10px
-  border: 1px solid #ccc
   cursor: pointer
+  border-radius: 5px
+  border: 1px solid #ccc
+
+  &:hover
+    background-color: #f0f0f0
 
 .selected-items
   flex-grow: 1
@@ -55,8 +97,8 @@
   overflow-x: auto
   white-space: nowrap
   scrollbar-width: thin
-//   scrollbar-color: general.$couleur-front-bleu-nuageux #f0f0f0
-  scrollbar-color: general.$couleur-front-bleu-nuageux #f0f0f0
+  // scrollbar-color: #000 #f0f0f0
+  // scrollbar-color: general.$couleur-front-bleu-verdatre #f0f0f0
 
   &::-webkit-scrollbar
     height: 6px    
@@ -69,8 +111,10 @@
     display: none
 
 .selected-item
-  background-color: general.$couleur-front-bleu-nuageux
-  color: general.$couleur-front-bleu-charbon
+  // background-color: general.$couleur-front-bleu-nuageux
+  // color: general.$couleur-front-bleu-charbon
+  background-color: general.$couleur-front-jaune-pabo
+  color: #000
   padding: 0px 10px
   border-radius: 5px
   display: inline-flex
@@ -120,30 +164,44 @@
             background-color: #f0f0f0
 
         &.selected
-            background-color: general.$couleur-front-bleu-nuageux
-            color: general.$couleur-front-bleu-charbon
+            // background-color: general.$couleur-front-bleu-nuageux
+            // color: general.$couleur-front-bleu-charbon
+            background-color: general.$couleur-front-jaune-pabo
+            color: #000
 
 // FILTRE PRIX
-#prixFiltresContainer
-  // on met le label au dessu du bouton
+#filtrePrixContainer
+  position: relative
   display: flex
   flex-direction: column
-  font-size: 0.8em
 
-  button
+  #prixFiltresContainer
+    display: flex
+    flex-direction: column
+
+    button
+      background-color: #fff
+      color: #000
+      border: 1px solid #ccc
+      padding: 10px
+      border-radius: 6px
+      cursor: pointer
+
+      &:hover
+        background-color: #f0f0f0
+
+  #wrapper
+    display: none
+    position: absolute
+    top: 100%
+    left: 0
     background-color: #fff
-    color: #000
-    border: 1px solid #000
-    padding: 10px
-    border-radius: 6px
-    cursor: pointer
-  
-#wrapper
-  display: none
-  position: absolute
-  background-color: #fff
-  border: 1px solid #000
-  padding: 1em
+    // border: 1px solid #000
+    padding: 1em
+    z-index: 1000
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4)
+    width: 20vw
+    border-radius: 5px
 
   p
     margin-top: 5px
@@ -191,8 +249,8 @@
     right: 0
     position: absolute
     border-radius: 5px
-    background: #17A2B8
-
+    background: general.$couleur-front-jaune-pabo
+    // background: general.$couleur-front-bleu-verdatre
 
   .range-input
     position: relative
@@ -215,7 +273,8 @@
       height: 17px
       width: 17px
       border-radius: 50%
-      background: #17A2B8
+      background-color: general: . $couleur-front-jaune-pabo
+      // background: general.$couleur-front-bleu-verdatre
       pointer-events: auto
       -webkit-appearance: none
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.05)
@@ -231,6 +290,9 @@
         box-shadow: 0 0 6px rgba(0, 0, 0, 0.05)
 
 // DATE PICKER
+#rangePicker .flatpickr-input
+  border: 1px solid black
+
 .date-picker-container
   position: relative
 
@@ -280,6 +342,53 @@
   background-color: #007BFF
   color: #fff
 
+@media screen and (max-width: general.$max-width-telephone)    
+    #headerAccueilMobile 
+      height: 7vh
+      background-color: white
+      padding: 20px
+      display: flex
+      align-items: center
+      justify-content: space-between
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5)
+      align-items: end
+      position: fixed
+      top: 0
+      left: 0
+      right: 0
+
+    #logoAssoMobile 
+        max-width: 20%
+
+    #buttonfiltresMobile 
+        width: 15%
+        aspect-ratio: 1/1
+        border-radius: 50%
+        background-color: white
+        border: 2px solid #000
+        
+        #logoAssoMobile
+            width: 60%
+            height: 60%
+
+    #cardsContainer
+        margin-bottom: 25%
+
+    #imageAccueil
+        display: none
+
+    #filtres
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      width: 100vw
+      height: 100vh
+      gap: 1em
+      padding: 1em
+      background-color: #fff
+      z-index: 1000 
+
 
 @media screen and (min-width: general.$max-width-telephone)
     #headerAccueilMobile 
@@ -291,72 +400,29 @@
         grid-column-gap: 0px
         padding: 0 5%
 
-    // #filtresDesktop
-    //     height: 100vh
-    //     // background-image: url(/assets/imgs/imgAccueil.webp)
-    //     background-image: url(/assets/imgs/imgAccueil3.jpeg)
-    //     background-size: cover
-    //     background-position: center
-    //     display: flex
-    //     flex-direction: column
-    //     justify-content: center
-    //     align-items: center
-
-    #filtresDesktop
-        display: none
-        height: 100vh
-        background-image: url(/assets/imgs/imgAccueil3.jpeg)
+    #imageAccueil
+        height:60vh
+        background-image: url(/assets/imgs/imgAccueil.webp)
         background-size: cover
-        background-position: center
+        background-position: top
+        
         display: flex
         flex-direction: column
         justify-content: center
         align-items: center
         position: relative 
+        // on rajoute un fondu progessif vers le bas pour que l'image laisse place au filtre le fondu s'acccentue de plus en plus vers le bas
+        &:before
+            content: ''
+            position: absolute
+            top: 0
+            left: 0
+            right: 0
+            bottom: 0
+            // background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))
+            // pas linéaire le dégradé doit commencer à 50% de la hauteur de l'image
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 1)) 
 
-    #formFiltresDesktop
-        display: flex
-        flex-direction: row
-        justify-content: space-between
-        align-items: center
-        // padding: 20px
-        background-color: #fff
-        border-radius: 6px
-        width: 80%
-        margin: 0 auto 
-        box-sizing: border-box
+            z-index: 1
 
-        > div, > button
-            flex: 1
-            min-width: 0
-            margin: 0 10px
-            box-sizing: border-box
-            border: 1px solid #000
-
-            label, input
-                display: block
-                width: 100%
-                white-space: nowrap
-                overflow: hidden
-                text-overflow: ellipsis 
-        
-        input 
-            padding: 10px
-            // on enlève les bordures sauf celle du bas
-            border: none
-            // border-bottom: 1px solid general.$couleur-front-bleu-marine
-            // on enleve les borudres de focus
-            outline: none
-        
-        button
-            background-color: general.$couleur-front-jaune-pabo
-            color: general.$couleur-front-bleu-marine
-            border: none
-            padding: 10px
-            border-radius: 6px
-            cursor: pointer
-            // on interdit le saut de ligne sur le bouton
-            white-space: nowrap
-            overflow: hidden
-            text-overflow: ellipsis 
 

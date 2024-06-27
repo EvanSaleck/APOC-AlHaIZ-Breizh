@@ -9,7 +9,6 @@
 
 <body>
     <button class="boutonPrecedent">Précédent</button>
-        
     <div class="devis">
         <div class="headerDevis">
             <button class="retour">
