@@ -20,12 +20,16 @@
                     <figure><img class="photoLogResa" id="photologresa"></figure>
                 </div>
 
-                <div class="Client">
-                    <h2>Client</h2>
-                    <img id="photoClient">
-                    <p id="nomClient"></p>
-                    <p id="mailClient"></p>
-                </div>
+                <article class="Client">
+                    <div>
+                        <h2 class="titreClient">Client</h2>
+                        <img id="photoClient">
+                    </div>
+                    <div>
+                        <p id="nomClient"></p>
+                        <p id="mailClient"></p>
+                    </div>
+                </article>
             </div>
         </div>
 
@@ -51,12 +55,12 @@
             <div class="deuxiemeBarre"></div>
 
             <div>
-                <p class="info-label">Tarif TTC :</p>
-                <p id="tarifTTC"></p>
+                <p class="info-label">Frais de services :</p>
+                <p id="fraisServices"></p>
             </div>
 
             <div>
-                <p class="info-label">Taxes & Frais de services:</p>
+                <p class="info-label">Taxes :</p>
                 <p id="taxeSejour"></p>
             </div>
 
@@ -64,8 +68,15 @@
                 <p class="info-label">Total pour 12 nuits (en €) :</p>
                 <p id="totalTtc"></p>
             </div>
+
+            <div>
+                <p class="info-label">Tarif TTC :</p>
+                <p id="tarifTTC"></p>
+            </div>
         </div>
     </div>
+
+    <div class="bnTel"><button id="boutonTelecharger">Télécharger Facture</button></div>
 
     <div class="condAnnul">
         <h3>Conditions d'annulation</h3>

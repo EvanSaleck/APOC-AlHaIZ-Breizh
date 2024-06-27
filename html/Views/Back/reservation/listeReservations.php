@@ -11,6 +11,7 @@
     <section id="msgBienvenue">
         <h1 id="bonjour">Bonjour,</h1>
         <h2 id="nbReservationsEnCours">Vous avez 0 réservations en cours</h2>
+        <a href="/reservations/abonnements/liste" id="btniCal">Gérer mes abonnements iCal</a>
     </section>
 
     <!-- Boutons pour trier les réservations affichées par état -->

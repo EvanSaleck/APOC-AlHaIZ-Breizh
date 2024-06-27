@@ -14,6 +14,7 @@
         <h1 id="bonjour">Bonjour,</h1>
         <h1> Voici la liste de vos logements </h1>
 
+        <a href="/back/logement/new" id="btnNewLogement">Créer un logement</a>
     </section>
 
 

@@ -1,10 +1,11 @@
+// Convertit la date en format de 
 function usDateToEurDate(date) {
     let lstDate = date.split("-")
 
     return lstDate[2]+"/"+lstDate[1]+"/"+lstDate[0]
 }
 
-    // Pour ouvrir cette page veuillez utiliser window.open("/facture/<id>", "_blank");
+// Pour ouvrir cette page veuillez utiliser window.open("/facture/<id>", "_blank");
     
 let urlPiece =  document.location.href.split("/")
 console.log(urlPiece[4]);

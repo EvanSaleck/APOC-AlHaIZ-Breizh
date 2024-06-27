@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.addEventListener('click', function(e) {
                     e.preventDefault();
                     envoyerInfos();
-                    window.location.href = '/logements/details/modifier';
+                    window.location.href = '/back/logements/details/modifier';
                 });
             });
 

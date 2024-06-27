@@ -247,8 +247,11 @@ class Logement {
             ];
 
             $valeursLogement = [];
-            // $idProrietaire = $_SESSION['Proprio']['id_compte'];
-            $idProrietaire = 7;
+            $idProrietaire = $_SESSION['proprio'];
+
+            // header('Content-Type: application/json');
+            // echo json_encode($idProrietaire);
+            // die();
 
             try {
                 // on initialise la chaine de caractère de l'adresse

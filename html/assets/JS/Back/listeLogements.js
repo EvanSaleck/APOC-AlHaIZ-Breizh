@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
                     sessionStorage.setItem('idLogement', element.parentElement.getAttribute('data-id')); 
 
-                    window.location.href = `/logements/details/`;
+                    window.location.href = `/back/logements/details/`;
                 });
             });
             redirectionModifs.forEach(element => {
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     e.stopPropagation();
                     const logementId = element.parentElement.getAttribute('data-id');
                     sessionStorage.setItem('logementId', logementId);
-                    window.location.href = `/logements/details/modifier`;
+                    window.location.href = `/back/logements/details/modifier`;
                 });
             });
             

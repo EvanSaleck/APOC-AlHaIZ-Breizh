@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 storeOriginalProfileData();
             }
         })
-        .catch(error => {
-            console.error('Erreur lors de la récupération des données du compte:', error);
-            compteContainer.innerHTML = '<h2 class="error">Erreur lors du chargement des détails du compte.</h2>';
-        });
+        // .catch(error => {
+        //     console.error('Erreur lors de la récupération des données du compte:', error);
+        //     compteContainer.innerHTML = '<h2 class="error">Erreur lors du chargement des détails du compte.</h2>';
+        // });
 });
 
 let originalProfileData = {};

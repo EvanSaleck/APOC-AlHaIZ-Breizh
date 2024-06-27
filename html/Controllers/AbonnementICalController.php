@@ -18,7 +18,7 @@ class AbonnementICalController {
         $this->icalService = new ICalService();
     }
 
-    public function newAction() {
+    public function newAction($id) {
         $titre = $_POST['titreAbo'];
         $dateDebut = $_POST['dateDebut'];
         $dateFin = $_POST['dateFin'];
@@ -32,7 +32,7 @@ class AbonnementICalController {
         $abonnement = new AbonnementICal($titre, $dateDebut, $dateFin, $listeLogements);
 
         header('Content-Type: application/json');
-        echo json_encode($abonnement->newAbonnement());
+        echo json_encode($abonnement->newAbonnement($id));
     }
 
     public function editAction($id) {

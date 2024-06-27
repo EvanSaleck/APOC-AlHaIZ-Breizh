@@ -36,7 +36,7 @@ class AbonnementICal {
         $this->db = new Database();
     }
 
-    public function newAbonnement() {
+    public function newAbonnement($id) {
 
         try {
             $this->db->getPDO()->beginTransaction();
@@ -50,7 +50,7 @@ class AbonnementICal {
                 ':date_debut' => $this->dateDebut,
                 ':date_fin' => $this->dateFin,
                 ':token' => $token,
-                ':AR_id_compte' => $_SESSION['proprio']
+                ':AR_id_compte' => $id
             ));
 
             $idAbonnement = $this->db->getPDO()->lastInsertId();

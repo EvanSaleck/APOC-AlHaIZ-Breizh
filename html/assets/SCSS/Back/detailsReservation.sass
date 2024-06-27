@@ -130,22 +130,45 @@ input
   width: 30vw
   margin: 5vw 0 3vw 5vw
 
+.bnTel
+  display: flex
+  justify-content: center
+  #boutonTelecharger
+    font-family: "Reem Kufi", sans-serif
+    padding: 2vw 3vw
+    background-color: #F0AA1F
+    border: none
+    border-radius: 1vw
+    cursor: pointer
+    font-size: 24px
+    width: 70%
+    margin: 5vw 0 3vw 5vw
 
-img#photoProprio
+img#photoClient
   border-radius: 1vw
 
-.proprio
+.Client
   width: fit-content
-  padding:2vw 5vw
   text-align: center
   margin:4vw
+  padding: 2vw 3vw
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  flex: 1
+  font-size: 1vw
+  border-radius: 1vw
+  flex-direction: row
+  flex-wrap: wrap
   
-  #photoProprio
+  #photoClient
     width: 10vw
     height: 9.5vw
     border-radius: 50%
-    border: 0.2vw solid general.$couleur-front-bleu-marine
+    border: 0.2vw solid general.$couleur-back-bleu-zodiac
     margin: 0 auto 2vw auto
+    object-fit: cover
 
     
 #Bulle 
@@ -158,6 +181,24 @@ img#photoProprio
 
   input, h3, .boutonPrecedent, .boutonPaypal
     display: none
+
+  .detailResa .infosLogement
+    flex-direction: column
+    flex-wrap: wrap
+    align-items: center
+
+    .Client
+      flex-direction: row
+      gap: 5vw
+      .titreClient
+        display: none
+
+    .logementResa
+      align-items: center
+      align-content: center
+      .titreLogDevis
+        font-size: 4vw
+
 
 @media (min-width: 768px)
   .headerPaiementValide >
@@ -224,4 +265,3 @@ img#photoProprio
   .boutonPrecedent
     width: 20vw
 
-/*# sourceMappingURL=DetailReservation.css.map

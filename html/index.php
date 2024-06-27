@@ -25,7 +25,6 @@ $factureController = new FactureController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
-$prop = 11;
 
 switch($requestUrl) {
     // ROUTES ICAL
@@ -37,21 +36,23 @@ switch($requestUrl) {
     // Page de liste des abonnements iCal
     case '/reservations/abonnements/liste':
     case '/reservations/abonnements/liste/':
-        $_SESSION['proprio'] = $prop;
+        $prop = json_decode($_SESSION['proprio']);
         include_once './Views/Back/reservation/listeAbonnementsICal.php';
         break;
 
     // Récupère les abonnements iCal liés à un propriétaire
     case '/api/getAbonnementsICalByProprietaire':
     case '/api/getAbonnementsICalByProprietaire/':
-        $id = $_SESSION['proprio'];
-        $abonnementICalController->getAbonnementsICalByProprietaire($prop);
+        $proprio = json_decode($_SESSION['proprio']);
+        $idCompte = $proprio->id_compte;
+        $abonnementICalController->getAbonnementsICalByProprietaire($idCompte);
         break;
 
     // Page de création d'un abonnement iCal
     case '/reservations/abonnements/iCal/new':
     case '/reservations/abonnements/iCal/new/':
-        $_SESSION['proprio'] = $prop;
+        $proprio = json_decode($_SESSION['proprio']);
+        $prop = $proprio->id_compte;
         include_once './Views/Back/reservation/abonnementICal.php';
         break;    
     
@@ -71,7 +72,10 @@ switch($requestUrl) {
     // Création d'un abonement iCal
     case '/api/reservations/abonnements/iCal/new':
     case '/api/reservations/abonnement/iCal/new/':
-        $abonnementICalController->newAction();        
+        $proprio = json_decode($_SESSION['proprio']);
+        $prop = $proprio->id_compte;
+
+        $abonnementICalController->newAction($prop);        
         break;
     
     // Vue d'édition d'abonnement iCal
@@ -232,8 +236,8 @@ switch($requestUrl) {
         break;
      
     // Page de modification d'un logement
-    case '/logements/details/modifier':
-    case '/logements/details/modifier';
+    case '/back/logements/details/modifier':
+    case '/back/logements/details/modifier';
         include './Views/Back/logement/modifierLogement.php';
         break;
 
@@ -329,8 +333,10 @@ switch($requestUrl) {
 
     case '/api/getLogementsByProprietaireId':
     case '/api/getLogementsByProprietaireId/':
-        // $data = $_POST;
-        $logementController->getLogementsByProprietaireId($prop);
+        $idCompte = json_decode($_SESSION['proprio']);
+        $idCompte = $idCompte->id_compte;
+
+        $logementController->getLogementsByProprietaireId($idCompte);
         break;
 
     case '/api/getLogementsDataForCards':
@@ -380,6 +386,15 @@ switch($requestUrl) {
         break;
     */
 
+    case '/api/updateLogementStatus':
+    case '/api/updateLogementStatus/':
+        $id = $_POST['logementId'];
+        $status = $_POST['status'];
+        // var_dump($data);
+        // die();
+        $logementController->updateStatus($id, $status);
+        break;
+
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
         $url_parts = explode('/', $requestUrl);
         $logement_id = end($url_parts);
@@ -405,6 +420,48 @@ switch($requestUrl) {
         break;
 
 
+        case '/api/getAllTokenById':
+    case '/api/getAllTokenById/':
+        $proprio = json_decode($_SESSION['proprio']);
+        $id = $proprio->id_compte;
+        $utilisateurController->getAllTokenById($id);
+        break;
+
+    case '/api/deleteToken/':
+        case '/api/deleteToken':
+        $data = $_POST;
+        $utilisateurController->deleteToken($data);
+        break;
+
+    case '/api/generateToken':
+    case '/api/generateToken/':
+        $data = $_POST;
+        $utilisateurController->generateToken($data);
+        break;
+
+    case '/api/updatePassword':
+        case '/api/updatePassword/':
+            $data = $_POST;
+            $utilisateurController->updatePassword($data);
+        break;
+
+    case '/api/updateCliPassword':
+        case '/api/updateCliPassword/':
+                $data = $_POST;
+                $utilisateurController->updateCliPassword($data);
+            break;
+
+    case '/api/updateProfile':
+        case '/api/updateProfile/':
+            $data = $_POST;
+            $utilisateurController->updateProfile($data);
+        break;
+
+    case '/api/updateCliProfile':
+        case '/api/updateCliProfile/':
+            $data = $_POST;
+            $utilisateurController->updateCliProfile($data);
+        break;
 
     // FONCTIONS D'API POUR LES RESERVATIONS //////////////////////////////////////////////////////////////////////
     case '/api/getReservations/all':
@@ -420,14 +477,18 @@ switch($requestUrl) {
 
     case '/api/getReservationsClient':
     case 'api/getReservationsClient':
-        $data = $_POST;
-        $reservationController->getReservationByClientId($data['id']);
+        // $data = $_POST;
+        $client = json_decode($_SESSION['client']);
+        $reservationController->getReservationByClientId($client);
         break;
 
     case '/api/getReservationsProprietaire':
     case 'api/getReservationsProprietaire':
-        $data = $_POST;
-        $reservationController->getReservationByOwnerId($data['id']);
+        // $data = $_POST;
+        $proprio = json_decode($_SESSION['proprio']);
+        $idCompte = $proprio->id_compte;
+        
+        $reservationController->getReservationByOwnerId($idCompte);
         break;
 
     case '/api/insertReservation':
@@ -435,7 +496,7 @@ switch($requestUrl) {
         $data = $_POST;
         $client = json_decode($_SESSION['client']);
         $idcpt = $client->id_compte;
-        $reservationController->saveReservation($data, $idcpt);
+        $reservationController->saveReservation($data, $client);
         break;
 
     /*
@@ -451,26 +512,32 @@ switch($requestUrl) {
     // FONCTIONS D'API POUR INFOS COMPTES /////////////////////////////////////////////////////////////////////////
     case '/api/getClientById':
     case 'api/getClientById':
-        $data = $_POST;
-        $utilisateurController->getCompteClientDetails($data['id']);
+        // $data = $_POST;
+        $client = json_decode($_SESSION['client']);
+        $client = $client->id_compte;
+        $utilisateurController->getCompteClientDetails($client);
         break;
 
     case '/api/getProprioById':
     case 'api/getProprioById':
-        $data = $_POST;
-        $utilisateurController->getProprioById($data['id']);
+        // $data = $_POST;
+        $proprio = json_decode($_SESSION['proprio']);
+        $proprio = $proprio->id_compte;
+        $utilisateurController->getProprioById($proprio);
         break;
     
     case '/api/getCompteClientDetails':
-        // $idCompte = $_SESSION['client'];
+        // $idCompte = $_SESSION['client
         $client = json_decode($_SESSION['client']);
         $idCompte = $client->id_compte;
         $utilisateurController->getCompteClientDetails($idCompte);
         break;
 
     case '/api/getCompteClientDetailsById':
-        $data = $_POST;
-        $utilisateurController->getProprioById($data['id']);
+        // $data = $_POST;
+        $id = json_decode($_SESSION['client']);
+        $id = $id->id_compte;
+        $utilisateurController->getProprioById($id);
         break;
     
     case '/api/getCompteProprioDetails':
@@ -478,6 +545,30 @@ switch($requestUrl) {
         $proprio = json_decode($_SESSION['proprio']);
         $idCompte = $proprio->id_compte;
         $utilisateurController->getCompteProprioDetails($idCompte);
+        break;
+
+    case '/api/updatePassword':
+    case '/api/updatePassword/':
+        $data = $_POST;
+        $utilisateurController->updatePassword($data);
+    break;
+
+    case '/api/updateCliPassword':
+    case '/api/updateCliPassword/':
+            $data = $_POST;
+            $utilisateurController->updateCliPassword($data);
+        break;
+
+    case '/api/updateProfile':
+        case '/api/updateProfile/':
+            $data = $_POST;
+            $utilisateurController->updateProfile($data);
+        break;
+
+    case '/api/updateCliProfile':
+        case '/api/updateCliProfile/':
+            $data = $_POST;
+            $utilisateurController->updateCliProfile($data);
         break;
 
 
@@ -500,15 +591,17 @@ switch($requestUrl) {
     // Création d'un token pour un propriétaire
     case '/api/generateToken':
     case '/api/generateToken/':
-        $data = $_POST;
-        $utilisateurController->generateToken($data);
+        // $data = $_POST;
+        $id = json_decode($_SESSION['proprio']);
+        $utilisateurController->generateToken($id);
         break;
 
     // Suppression d'un token d'un propriétaire
     case '/api/deleteToken/':
         case '/api/deleteToken':
-        $data = $_POST;
-        $utilisateurController->deleteToken($data);
+        // $data = $_POST;
+        $id = json_decode($_SESSION['proprio']);
+        $utilisateurController->deleteToken($id);
         break;
 
 
