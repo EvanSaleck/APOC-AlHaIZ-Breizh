@@ -81,7 +81,7 @@
             $avanceResaMin,
             $dureeMinLocation,
             $delaiAnnulMax,
-            $statutPropriete
+            $statutPropriete = null
         ) {
             // on set seulement si les champs sont renseignés
             if (!empty($noRue)) {

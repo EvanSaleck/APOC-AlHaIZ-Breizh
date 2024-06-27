@@ -6,7 +6,7 @@
     <section>
         <div id="logo">
             <img src="/assets/imgs/logo.webp" id="logoAssoHeaderDesktop" alt="Logo">
-            <p id="titreHeader">AlHaIZ Breizh</p>
+            <p id="titreHeader">ALHaIZ Breizh</p>
         </div>
         <h1>Connexion propriétaire</h1>
         <div class="form-group">

@@ -4,19 +4,23 @@ namespace Controllers;
 
 include_once 'Models/Logement.php';
 include_once 'Service/FormNewLogement.php';
+include_once 'Service/Database.php';
 
 use Models\Logement;
 use Service\FormNewLogement;
+use Service\Database;
 use Exception;
 
 class LogementController
 {
     private $logement;
     private $newLogement;
+    private $db;
 
     public function __construct()
     {
         $this->logement = new Logement();
+        $this->db = new Database();
     }
 
     public function getAllLogements()
