@@ -496,7 +496,7 @@ switch($requestUrl) {
         $data = $_POST;
         $client = json_decode($_SESSION['client']);
         $idcpt = $client->id_compte;
-        $reservationController->saveReservation($data, $client);
+        $reservationController->saveReservation($data, $idcpt);
         break;
 
     /*
