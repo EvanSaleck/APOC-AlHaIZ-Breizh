@@ -111,10 +111,51 @@ void sendReponse(PGresult *data) {
 void helper() {
     printf("Exemple: <nom_programme> -d <conteneur> -p <port>\n");
     printf("Options:\n");
-    printf("  -d <ip>       Spécifie le conteneur docker de votre base de donnée\n");
+    printf("  -d <ip>       Spécifie le conteneur docker de votre base de données\n");
     printf("  -p <port>     Spécifie le port du serveur\n");
     printf("  --help        Affiche ce message d'aide\n");
-    printf("Une fois lancé il vous suffit de laisser le processus tourner ainsi tout le monde pourra effectuer des requêtes\n");
+    printf("Une fois lancé, il vous suffit de laisser le processus tourner afin que tout le monde puisse effectuer des requêtes.\n");
+
+    printf("\n\n");
+
+    printf("METHODE DE CONNEXION:\n");
+    printf("Une fois le serveur lancé, il est à l'écoute d'une connexion.\nCette connexion s'effectue grâce à un token généré sur le site (apoc.ventsdouest.dev/gestionTokens) qui permet d'authentifier la connexion.\n");
+    printf("Le client a 3 essais pour s'authentifier. Si les 3 entrées ne correspondent pas à un token existant, le serveur met fin à la connexion.\n");
+
+    printf("\n");
+
+    printf("TYPES DE TOKENS:\n");
+    printf("Il existe deux types de tokens :\n");
+    printf(" - Le token privilégié : qui donne des accès 'root' sur l'API\n");
+    printf(" - Le token par défaut : qui est généré pour un propriétaire et qui permet de consulter des informations sur ses logements.\n");
+
+    printf("\n");
+
+    printf("OPTIONS UNE FOIS CONNECTE:\n");
+    printf("- Avec un accès privilégié :\n");
+    printf("  - En saisissant '1' sur le serveur, je peux consulter tous les logements disponibles sur le site.\n");
+    printf("  - En saisissant '0' sur le serveur, je peux me déconnecter de l'API.\n");
+    printf("- Avec un accès lambda :\n");
+    printf("  - En saisissant '1' sur le serveur, je peux consulter tous mes logements.\n");
+    printf("  - En saisissant '2' sur le serveur, je peux consulter la disponibilité d'un logement sur une période donnée (il vous sera demandé de choisir quel logement vous voulez visualiser ainsi que la période souhaitée).\n");
+    printf("  - En saisissant '0' sur le serveur, je peux me déconnecter de l'API.\n");
+
+    printf("\n");
+
+    printf("MAINTENANCE:\n");
+    printf("Si vous êtes amenés à changer de nom de conteneur ou de port, il vous suffit de modifier les options au redémarrage du script.\n");
+
+    printf("\n");
+
+    printf("CREDITS\n");
+    printf("_____ ______   ________  ________  _______           ________      ___    ___      ________  ________  ________  ________\n");     
+    printf("|\\   _ \\  _   \\|\\   __  \\|\\   ___ \\|\\  ___ \\         |\\   __  \\    |\\  \\  /  /|    |\\   __  \\|\\   __  \\|\\   __  \\|\\   ____\\ \n");   
+    printf("\\ \\  \\\\__\\ \\  \\ \\  \\|\\  \\ \\  \\_|\\ \\ \\   __/|        \\ \\  \\|\\ /_   \\ \\  \\/  / /    \\ \\  \\|\\  \\ \\  \\|\\  \\ \\  \\|\\  \\ \\  \\___| \n");  
+    printf(" \\ \\  \\|__| \\  \\ \\   __  \\ \\  \\ \\ \\ \\  \\_|/__       \\ \\   __  \\   \\ \\    / /      \\ \\   __  \\ \\   ____\\ \\  \\\\  \\ \\  \\ \n");     
+    printf("  \\ \\  \\    \\ \\  \\ \\  \\ \\  \\ \\  \\_\\ \\ \\  \\_|\\ \\       \\ \\  \\|\\  \\   \\/  /  /        \\ \\  \\ \\  \\ \\  \\___|\\ \\  \\\\  \\ \\  \\____\n "); 
+    printf("   \\ \\__\\    \\ \\__\\ \\__\\ \\__\\ \\_______\\ \\_______\\       \\ \\_______\\__/  / /           \\ \\__\\ \\__\\ \\__\\    \\ \\_______\\ \\_______\\\n");
+    printf("    \\|__|     \\|__|\\|__|\\|__|\\|_______|\\|_______|        \\|_______|\\___/ /             \\|__|\\|__|\\|__|     \\|_______|\\|_______|\n");
+    printf("                                                                  \\|___|/                                                     \n"); 
 }
 
 

@@ -3,5 +3,5 @@
 - Codage et tests : 
     - 100 % Evan Saleck
 - Documentation :
-    - 75 % Evan Saleck
-    - 25 % Lucas Gourmelon
+    - 50 % Lucas Gourmelon
+    - 50 % Evan Saleck
