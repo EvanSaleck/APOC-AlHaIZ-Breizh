@@ -208,7 +208,8 @@ int main(int argc, char *argv[]) {
             deconnexion();
             break;
         } else if (strcmp(choix, "1") == 0) {
-            receptionMessage(buffer, sizeof(buffer));
+            sleep(1);
+	    receptionMessage(buffer, sizeof(buffer));
             printf("Liste des logements :\n%s\n", buffer);
         } else if (strcmp(choix, "2") == 0) {
             receptionMessage(buffer, sizeof(buffer));
