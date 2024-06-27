@@ -247,7 +247,7 @@ class Logement {
             ];
 
             $valeursLogement = [];
-            $idProrietaire = $_SESSION['proprio'];
+            $idProrietaire = json_decode($_SESSION['proprio'])->id_compte;
 
             // header('Content-Type: application/json');
             // echo json_encode($idProrietaire);
