@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('buttonfiltresMobile').addEventListener('click', function() {
+        var filters = document.getElementById('filtres');
+
+        if (filters.style.display === 'none' || filters.style.display === '') {
+            filters.style.display = 'flex';
+        } else {
+            filters.style.display = 'none';
+        }
+
+
     });
 
     var communes = [];
@@ -45,7 +54,17 @@ document.addEventListener('DOMContentLoaded', function() {
         flatpickr("#rangePicker", {
             mode: "range",
             dateFormat: "Y-m-d",
-            // time_24hr: true,
+            locale: {
+                firstDayOfWeek: 1,
+                weekdays: {
+                    shorthand: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                    longhand: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                },
+                months: {
+                    shorthand: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
+                    longhand: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                },
+            },
             onChange: function(selectedDates) {
                 if (selectedDates.length === 2) {
 
@@ -285,7 +304,6 @@ document.addEventListener('DOMContentLoaded', function() {
             var cardTarif = parseFloat(card.getAttribute('data-tarif'));
             var cardProprietaire = card.getAttribute('data-proprietaire');
 
-            console.log(filters.communes,card.querySelector('.nomVille').textContent);
 
             if(
                 (filters.depts.length === 0 || filters.depts.includes(cardDept)) &&

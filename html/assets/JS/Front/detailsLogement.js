@@ -1,3 +1,15 @@
+import { ThrowAlertPopup } from '../utils.js'
+
+    const storedPopup = localStorage.getItem('alertPopup');
+    let message, type;
+    
+    if (storedPopup) {
+        ({ message, type } = JSON.parse(storedPopup));
+        ThrowAlertPopup(message, type);
+        localStorage.removeItem('alertPopup');
+    }
+
+
 function calculDevis(prixNuitTTC) {
     let dateDebut = document.getElementById("dateDebut");
     let dateFin = document.getElementById("dateFin");
@@ -179,8 +191,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
         let btnRes = document.getElementById("btnRes");
         btnRes.addEventListener('click', function() {
+            // on teste avec une requet ajax si le logmeen est disonible
+            fetch('/api/isDisponible/' + sessionStorage.getItem('idLogement') + '/' + dateDebut.value + '/' + dateFin.value)
+            .then(response => response.json())
+            .then(res => {
+                console.log(res);
+                if (res !== true) {
+                    let message = "Le logement n'est pas disponible pour ces dates"
+                    ThrowAlertPopup(message,'error')
+                    localStorage.setItem('alertPopup', JSON.stringify({ message: message, type: 'error' }));
+                    window.location.href = `/logement`;
+                }
+            });
+
             envoiDevis(data[0]['prix_nuit_ttc'],data)
-            window.location.href = `/reservations/devis`;
+            window.location.href = `/reservation/devis`;
         });
         btnRes.disabled = true;
 

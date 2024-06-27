@@ -54,11 +54,8 @@ function envoyerInfos() {
     sessionStorage.setItem('formData', JSON.stringify(formData));
 }
 
-
-console.log('detailsLogement.js');
 document.addEventListener('DOMContentLoaded', function() {
-    // console.log(sessionStorage.getItem('idLogement'));
-    fetch('/api/getLogementDataById/' + sessionStorage.getItem('idLogement'))
+        fetch('/api/getLogementDataById/' + sessionStorage.getItem('idLogement'))
     .then(response => response.json())
     .then(data => {
         data.forEach(logement => {
@@ -120,8 +117,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let image = document.getElementById("image-logement");
             image.style.backgroundImage = "url('" + data[0]['image_principale'] + "')";
-            //console.log(data[0]['image_principale'])
-            console.log(data[0]['id_logement'])
 
             const redirectionModifs = document.querySelectorAll('.btnModifier');
             redirectionModifs.forEach(element => {
@@ -135,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch('/api/getCategorieOfLogementById/' + sessionStorage.getItem('idLogement'))
             .then(response => response.json())
             .then(dataCategorie => {
-                console.log(dataCategorie);
                 let categorie = document.getElementById("categorie");
                 let selectedIndex = -1;
                 for (let i = 0; i < categorie.options.length; i++) {
@@ -154,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch('/api/getTypeOfLogementById/' + sessionStorage.getItem('idLogement'))
             .then(response => response.json())
             .then(dataType => {
-                console.log(dataType);
                 let type = document.getElementById("type");
                 let selectedIndex = -1;
                 for (let i = 0; i < type.options.length; i++) {
@@ -174,7 +167,6 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch('/api/getAmenagementsOfLogementById/' + sessionStorage.getItem('idLogement'))
             .then(response => response.json())
             .then(dataAm => {
-                console.log(dataAm);
                 let idsAmenagementsActifs = dataAm.map(amenagement => amenagement.id_amenagement);
 
                 for (let bouton of boutonsAmenagements.getElementsByTagName('button')) {

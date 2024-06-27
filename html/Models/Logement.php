@@ -143,8 +143,8 @@ class Logement {
         return $listeLogements;
     }
 
-    // tous les logements disponibles pour une période donnée (qui n'ont aucune réservation pour cette période)
-    public function isDisponible(string $dateDebut, string $dateFin) {
+    // renvoie un boolean en fonction de si le logement est disponible pour une période donnée
+    public function isDisponible($id,string $dateDebut, string $dateFin) {
         $query = '
         select l.id_logement
         from logement l
@@ -152,11 +152,11 @@ class Logement {
             select r.r_id_logement
             from reservation r
             where r.date_arrivee <= \'' . $dateFin . '\' and r.date_depart >= \'' . $dateDebut . '\'
-        )';
+        ) and l.id_logement = ' . $id;
 
-        $result = $this->db->executeQuery($query);
+        $logementDispo = $this->db->executeQuery($query);
 
-        return $result;
+        return count($logementDispo) > 0;
     }
 
     public function getLogementsByAbonnement($id){

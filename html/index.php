@@ -163,6 +163,17 @@ switch($requestUrl) {
     case '/CGU_CGV/':
         include_once './Views/Front/legislation/CGU_CGV.php';
         break;
+
+    case '/reservation/devis':
+    case '/reservation/devis/':
+        if (!isset($_SESSION['client'])) {
+            header('Location: /');
+        } else {
+            include_once './Views/Front/reservation/devis.php';
+        }
+
+        break;
+        
     
 
     /////////////////////////////
@@ -325,6 +336,25 @@ switch($requestUrl) {
     case '/api/getLogementsDataForCards':
         header('Content-Type: application/json');
         echo $logementController->getLogementsDataForCards();
+        break;
+
+    case preg_match('/^\/api\/logementsDispo(\?.*)?$/', $requestUrl) ? true : false:
+        $queryParams = [];
+        parse_str(parse_url($requestUrl, PHP_URL_QUERY), $queryParams);
+        
+        $startDate = isset($queryParams['startDate']) ? $queryParams['startDate'] : null;
+        $endDate = isset($queryParams['endDate']) ? $queryParams['endDate'] : null;
+
+        echo $logementController->getLogementsDispo($startDate, $endDate);
+        break;
+
+    //'/api/isDisponible/' + sessionStorage.getItem('idLogement') + '/' + dateDebut.value + '/' + dateFin.value)
+    case preg_match('/^\/api\/isDisponible\/\d+\/\d{4}-\d{2}-\d{2}\/\d{4}-\d{2}-\d{2}$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $logement_id = $url_parts[3];
+        $dateDebut = $url_parts[4];
+        $dateFin = $url_parts[5];
+        echo $logementController->isDisponible($logement_id, $dateDebut, $dateFin);
         break;
     
     case '/api/processFormNewLogement/':

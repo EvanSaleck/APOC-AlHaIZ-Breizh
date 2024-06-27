@@ -273,8 +273,7 @@
       height: 17px
       width: 17px
       border-radius: 50%
-      background-color: general: . $couleur-front-jaune-pabo
-      // background: general.$couleur-front-bleu-verdatre
+      background-color: general.$couleur-front-jaune-pabo
       pointer-events: auto
       -webkit-appearance: none
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.05)
@@ -378,16 +377,28 @@
         display: none
 
     #filtres
-      display: flex
+      display: none
       flex-direction: column
       justify-content: center
       align-items: center
-      width: 100vw
-      height: 100vh
-      gap: 1em
-      padding: 1em
+      width: 100% 
+      height: 100%
+      // gap: 1em
       background-color: #fff
       z-index: 1000 
+
+      // je veux que tous les champs aient la même largeur
+      input, button
+        width: 90%
+        margin: 0.5em
+
+      .filtreContainer
+        width: 90%
+        margin: 0.5em
+      
+      .multiselect-container
+        width: 90%
+        margin: 0.5emfez
 
 
 @media screen and (min-width: general.$max-width-telephone)

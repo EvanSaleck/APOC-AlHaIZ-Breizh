@@ -80,6 +80,33 @@ class LogementController {
         echo json_encode($logements);
     }
 
+    public function getLogementsDispo($startDate = null, $endDate = null) {
+        header('Content-Type: application/json');
+        
+        if ($startDate === null || $endDate === null) {
+            echo json_encode(['error' => 'Dates de début et de fin non fournies.']);
+            return;
+        }
+
+        $logements = $this->logement->getLogementsDispo($startDate, $endDate);
+
+
+        echo json_encode($logements);
+    }
+
+    public function isDisponible($id, $startDate = null, $endDate = null) {
+        header('Content-Type: application/json');
+        
+        if ($startDate === null || $endDate === null) {
+            echo json_encode(['error' => 'Dates de début et de fin non fournies.']);
+            return;
+        }
+
+        $dispo = $this->logement->isDisponible($id, $startDate, $endDate);
+
+        echo json_encode($dispo);
+    }
+
     public function getCategorieOfLogementById($id) {
         $logements = $this->logement->getCategorieOfLogementById($id);
 
