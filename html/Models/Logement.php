@@ -222,7 +222,7 @@ class Logement {
                 $valeursAdresse[] = $formLogement->getEtat();
             }
 
-            print_r($valeursAdresse);
+            // print_r($valeursAdresse);
 
 
             $this->db->insert('adresse', $colonnesAdresse, $valeursAdresse);
@@ -281,7 +281,7 @@ class Logement {
             $valeursLogement[] = $formLogement->getNbLitsSimples();
             $valeursLogement[] = $formLogement->getNbLitsDoubles();
             // statut propriété
-            $valeursLogement[] = false;
+            $valeursLogement[] = 'false';
             $valeursLogement[] = $formLogement->getTarif();
             // prix nuit ttc
             $valeursLogement[] = $formLogement->getTarif() * (1 + self::TAUX_TVA); 
@@ -289,7 +289,7 @@ class Logement {
             $valeursLogement[] = $this->db->getPDO()->lastInsertId();
             $valeursLogement[] = $formLogement->getIdType();
             $valeursLogement[] = $formLogement->getIdCategorie();
-            print_r($valeursLogement);
+            // print_r($valeursLogement);
 
             // accroche 
             if ($formLogement->getAccroche() != '') {
@@ -319,8 +319,11 @@ class Logement {
                 $valeursLogement[] = $formLogement->getDelaiAnnulMax();
             }
 
-            
+    
+            // print_r($colonnesLogement);
+            // print_r($valeursLogement);
             $this->db->insert('logement', $colonnesLogement, $valeursLogement);
+    
 
             // Amenagements
             $idLogement = $this->db->getPDO()->lastInsertId();

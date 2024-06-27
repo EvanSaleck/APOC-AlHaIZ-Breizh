@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     document.querySelector('.retour').addEventListener('click', function() {
-        window.location.href = '/logement/';
+        window.location.href = '/logements/';
     });
     
     document.querySelector('.boutonPrecedent').addEventListener('click', function() {
-        window.location.href = '/logement/';
+        window.location.href = '/logements/';
     });
 
     function updateReservationInfo() {
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 sessionStorage.setItem('idresa', data);
                 // on envoie sur la page de gestion des logements
-                window.location.href = "/detailReservation";
+                window.location.href = "/reservations/details";
             })
             
             // Disparition de la pop up au bout de 3 secondes

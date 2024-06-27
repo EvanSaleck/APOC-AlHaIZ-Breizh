@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
           })
           .catch((error) => {
             console.log("Erreur: " + error);
-            ThrowAlertPopup("Erreur: " + error, "error");
+            utils.ThrowAlertPopup("Erreur: " + error, "error");
           });
       }
     });
@@ -103,15 +103,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Gère le dépôt de fichier
     dropZone.addEventListener("drop", (event) => {
-        event.preventDefault();
-        dropZone.classList.remove("dragover");
-        console.log('drop file', event.dataTransfer.files);
-        fileInput.files = event.dataTransfer.files;
-
-        // Déclenche manuellement l'événement 'change'
-        const changeEvent = new Event('change');
-        fileInput.dispatchEvent(changeEvent);
+      event.preventDefault();
+      dropZone.classList.remove("dragover");
+      console.log('drop file', event.dataTransfer.files);
+  
+      // Use DataTransfer to assign files
+      const dataTransfer = new DataTransfer();
+      for (let i = 0; i < event.dataTransfer.files.length; i++) {
+          dataTransfer.items.add(event.dataTransfer.files[i]);
+      }
+      fileInput.files = dataTransfer.files;
+  
+      // Déclenche manuellement l'événement 'change'
+      const changeEvent = new Event('change');
+      fileInput.dispatchEvent(changeEvent);
     });
+  
 
     // Ouvre le sélecteur de fichiers lorsque l'utilisateur clique sur le bouton
     fileButton.addEventListener("click", () => {
@@ -120,15 +127,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Gère la sélection de fichier via le sélecteur de fichiers
     fileInput.addEventListener("change", (event) => {
-        console.log('file change');
-        const files = event.target.files;
-
-        utils.resetErrors(); 
-        if (verifPhoto(files)) {
-            const file = files[0];
-            console.log(fileInput.files);
-            fileInput.files[0] = file;
-        }
+      console.log('file change');
+      const files = event.target.files;
+  
+      utils.resetErrors(); 
+      if (verifPhoto(files)) {
+          const file = files[0];
+          console.log(fileInput.files);
+  
+          // Use DataTransfer to assign the file
+          const dataTransfer = new DataTransfer();
+          dataTransfer.items.add(file);
+          fileInput.files = dataTransfer.files;
+      }
     });
 });
 
@@ -342,7 +353,9 @@ function verifPhoto(files) {
   }
 
   var file = files[0];
-  document.querySelector('#photo-nom-image').textContent = file.name;
+  if (file){
+    document.querySelector('#photo-nom-image').textContent = file.name;
+  }
 
   if (file && !isValidImageType(file)) {
       getNextErrorSpan('photo-input').textContent = 'Le fichier doit être une image de type jpeg, png, gif ou webp';

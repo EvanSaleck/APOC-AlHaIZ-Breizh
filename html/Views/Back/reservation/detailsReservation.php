@@ -3,7 +3,7 @@
     include_once 'Views/Back/composants/head.php';
 ?>
 <div class="detailResa">
-    <a href="/Back/reservations/"><button class="boutonPrecedent">Précédent</button></a>
+    <a href="/back/reservations/"><button class="boutonPrecedent">Précédent</button></a>
 
     <div class="headerDevis">
         <button class="retour">

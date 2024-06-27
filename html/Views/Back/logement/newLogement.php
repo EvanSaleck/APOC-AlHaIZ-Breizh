@@ -18,13 +18,13 @@
                     <div class="ligneDeuxInputs">
                         <div class="input1">
                             <label for="titre" class="souligne">Titre*</label>
-                            <input type="text" name="titre" id="titre" placeholder="ex : Maison de campagne">
+                            <input type="text" name="titre" id="titre" placeholder="ex : Maison de campagne" value="MAison test">
                             <span class="messageError"></span>
                         </div>
                         <div class="input2">
                             <label for="tarif" class="souligne">Tarif par nuit*</label>
                             <div class="divTarif">
-                                <input type="text" name="tarif" id="tarif" placeholder="ex : 50"><span>€</span>
+                                <input type="text" name="tarif" id="tarif" placeholder="ex : 50" value="54"><span>€</span>
                             </div>
                             <span class="messageError"></span>  
                         </div>
@@ -33,18 +33,18 @@
                     <div id="adresse">
                         <div>
                             <label for="nom_rue">N° et Nom de rue*</label>
-                            <input type="text" name="nom_rue" id="nom_rue" placeholder="ex : 50 rue des Lilas" >
+                            <input type="text" name="nom_rue" id="nom_rue" placeholder="ex : 50 rue des Lilas" value="43 rue gregregreg">
                         </div>
                         <span class="messageError"></span>
                         <div class="ligneDeuxInputs">
                             <div class="input1">
                                 <label for="ville">Ville*</label>
-                                <input type="text" name="ville" id="ville" placeholder="ex : Lannion" >
+                                <input type="text" name="ville" id="ville" placeholder="ex : Lannion" value="Lannion">
                                 <span class="messageError"></span>
                             </div>
                             <div class="input2">
                                 <label for="cp">Code postal*</label>
-                                <input type="text" name="cp" id="cp" placeholder="ex : 22700" >
+                                <input type="text" name="cp" id="cp" placeholder="ex : 22700" value="22700">
                                 <span class="messageError"></span>  
                             </div>
                         </div>
@@ -146,27 +146,27 @@
                         <div id="caracteristique">
                             <div>
                                 <label for="surface">Surface habitable (en m²)*</label>
-                                <input type="text" name="surface" id="surface" placeholder="20">
+                                <input type="text" name="surface" id="surface" placeholder="20" value="23">
                             </div>
                             <span class="messageError"></span>  
                             <div>
                                 <label for="nbPersMax">Nombre pers. max*</label>
-                                <input type="text" name="nbPersMax" id="nbPersMax" placeholder="6" >
+                                <input type="text" name="nbPersMax" id="nbPersMax" placeholder="6" value="3">
                             </div>
                             <span class="messageError"></span>   
                             <div>
                                 <label for="nbChambres">Nombre de chambres*</label>
-                                <input type="text" name="nbChambres" id="nbChambres" placeholder="3" > 
+                                <input type="text" name="nbChambres" id="nbChambres" placeholder="3" value="3"> 
                             </div>
                             <span class="messageError"></span>  
                             <div>
                                 <label for="nbLitsSimples">Nomre de lits simples*</label>
-                                <input type="text" name="nbLitsSimples" id="nbLitsSimples" placeholder="2" > 
+                                <input type="text" name="nbLitsSimples" id="nbLitsSimples" placeholder="2" value="3"> 
                             </div>
                             <span class="messageError"></span>  
                             <div>
                                 <label for="nbLitsDoubles">Nombre de lits doubles*</label>
-                                <input type="text" name="nbLitsDoubles" id="nbLitsDoubles" placeholder="2" > 
+                                <input type="text" name="nbLitsDoubles" id="nbLitsDoubles" placeholder="2" value="4"> 
                             </div>
                             <span class="messageError"></span>  
                         </div>
@@ -187,9 +187,10 @@
                             </div>
                             <span class="messageError"></span>  
                             <div>
-                                <label for="dureeMinLoc">Durée minimale location</label>
+                                <label for="dureeMinLoc">Durée minimale location 
+                                    <br>(au moins <br> deux jours)</label>
                                 <div class="selectJour">
-                                    <input type="text" name="dureeMinLoc" id="dureeMinLoc" placeholder="4">
+                                    <input type="text" name="dureeMinLoc" id="dureeMinLoc" placeholder="4" value="5">
                                     <select name="uniteDureeMinLoc" id="uniteDureeMinLoc">
                                         <option value="jours">Jour(s)</option>
                                         <option value="semaines">Semaine(s)</option>

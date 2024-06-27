@@ -95,14 +95,10 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then((response) => response.json())
             .then((data) => {
-                if (data != true) {
-                    utils.ThrowAlertPopup(data.error, 'error');
-                } else {
-                    const message = 'Le logement a bien été mis à jour !';
-                    utils.ThrowAlertPopup(message, 'success');
-                    localStorage.setItem('alertPopup', JSON.stringify({ message, type: 'success' }));
-                    window.location.href = '/logements';
-                }
+                const message = 'Le logement a bien été mis à jour !';
+                utils.ThrowAlertPopup(message, 'success');
+                localStorage.setItem('alertPopup', JSON.stringify({ message, type: 'success' }));
+                window.location.href = '/back/logements';
             })
             .catch((error) => {
                 utils.ThrowAlertPopup(`Erreur: ${error}`, 'error');

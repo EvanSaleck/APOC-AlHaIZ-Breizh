@@ -8,8 +8,8 @@
         </div>
         <div class="Menu">
             <ul>
-                <li><a href="/">A propos</a></li>
                 <li><a href="/">Accueil</a></li>
+                <li><a href="/reservations">Réservations</a></li>
             </ul>
             <div id="Compte"></div>
         </div>
