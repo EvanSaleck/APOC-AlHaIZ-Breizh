@@ -43,12 +43,26 @@
         }
 
         public function getReservationByOwnerId($id) {
-            // l_id_compte représente l'ID du compte d'un propriétaire
-            $reservations = $this->db->executeQuery("SELECT l.titre, r.date_arrivee, r.date_depart, r.tarif_total, c.pseudo FROM reservation AS r 
-            INNER JOIN logement AS l ON id_logement = R_id_logement INNER JOIN compte_client AS c ON id_compte = R_id_compte
+            // Récupère les données nécessaires à l'affichage réduit de détails des réservation sur la page de liste des réservations Propriétaire
+            $reservationsProprietaire = $this->db->executeQuery("SELECT id_reservation, l.titre, r.date_arrivee, r.date_depart, r.tarif_total, c.pseudo 
+            FROM reservation AS r INNER JOIN logement AS l ON id_logement = R_id_logement INNER JOIN compte_client AS c ON id_compte = R_id_compte
             WHERE l.id_logement = r.r_id_logement AND l.l_id_compte = " . $id);
 
-            return $reservations;
+            return $reservationsProprietaire;
+        }
+
+        public function getReservationByClientId($id) {
+            // Récupère les données nécessaires à l'affichage réduit de détails des réservation sur la page de liste des réservations Client
+            $reservationsClient = $this->db->executeQuery("SELECT l.titre, r.date_arrivee, r.date_depart, r.tarif_total, p.pseudo FROM reservation AS r 
+            INNER JOIN logement AS l ON id_logement = R_id_logement INNER JOIN compte_proprietaire AS p ON id_compte = l_id_compte
+            WHERE l.id_logement = r.r_id_logement AND r.r_id_compte = " . $id);
+
+            return $reservationsClient;
+        }
+
+        public function getOwnerById($id) {            
+            $owner = $this->db->executeQuery("SELECT * FROM compte_proprietaire WHERE id_compte = " . $id);
+            return $owner;
         }
 
         public function reservationExists($id) {
@@ -86,6 +100,57 @@
             $lastInsertId = $this->pdo->lastInsertId();
 
             return $lastInsertId;
+        }
+
+        public function getDataReservationById($id) {
+            $reservations = $this->db->executeQuery("
+            SELECT client.nom AS nomClient, 
+                client.prenom AS prenomClient, 
+                proprietaire.nom AS nomPro, 
+                proprietaire.prenom AS prenomPro, 
+                
+                adresseFacturation.numero_rue AS numRueFact, 
+                adresseFacturation.nom_rue AS nomRueFact, 
+                adresseFacturation.complement AS compFact,
+                adresseFacturation.code_postal AS codePostFact,
+                adresseFacturation.nom_ville AS nomVilleFact,
+                adresseFacturation.etat AS etatFact,
+                adresseFacturation.pays AS paysFact,
+                
+                adresseProprietaire.numero_rue AS numRuePro, 
+                adresseProprietaire.nom_rue AS nomRuePro, 
+                adresseProprietaire.complement AS compPro,
+                adresseProprietaire.code_postal AS codePostPro,
+                adresseProprietaire.nom_ville AS nomVillePro,
+                adresseProprietaire.etat AS etatPro,
+                adresseProprietaire.pays AS paysPro,
+                
+                adresseLogement.numero_rue AS numRueLog, 
+                adresseLogement.nom_rue AS nomRueLog, 
+                adresseLogement.complement AS compLog,
+                adresseLogement.code_postal AS codePostLog,
+                adresseLogement.nom_ville AS nomVilleLog,
+                
+                reservation.date_arrivee,
+                reservation.date_depart,
+                reservation.nb_occupant,
+                reservation.nb_nuit,
+                reservation.frais_service,
+                reservation.tarif_total AS tarif_total_resa,
+                reservation.total_tarif_ttc AS tarif_sejour,
+                reservation.taxe_sejour,
+                
+                logement.prix_nuit_ttc
+                
+            FROM reservation
+            INNER JOIN logement ON R_id_logement = id_logement
+            INNER JOIN compte_client AS client ON R_id_compte = client.id_compte
+            INNER JOIN compte_proprietaire AS proprietaire ON L_id_compte = proprietaire.id_compte
+            INNER JOIN adresse AS adresseFacturation ON client.CC_id_adresse = adresseFacturation.id_adresse
+            INNER JOIN adresse AS adresseProprietaire ON proprietaire.C_id_adresse = adresseProprietaire.id_adresse
+            INNER JOIN adresse AS adresseLogement ON logement.L_id_adresse = adresseLogement.id_adresse
+            WHERE id_reservation = " . $id);
+            return $reservations;
         }
     }
 ?>

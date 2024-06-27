@@ -23,6 +23,7 @@
         private $nbChambres;
         private $nbLitsSimples;
         private $nbLitsDoubles;
+        private $statutPropriete;
         private $avanceResaMin;
         private $dureeMinLocation;
         private $delaiAnnulMax;
@@ -79,7 +80,8 @@
             $description,
             $avanceResaMin,
             $dureeMinLocation,
-            $delaiAnnulMax
+            $delaiAnnulMax,
+            $statutPropriete
         ) {
             // on set seulement si les champs sont renseignés
             if (!empty($noRue)) {
@@ -108,6 +110,9 @@
 
             if (!empty($delaiAnnulMax)) {
                 $this->setDelaiAnnulMax($delaiAnnulMax);
+            }
+            if (!empty($statutPropriete)) {
+                $this->setStatutPropriete($statutPropriete);
             }
             
         }
@@ -205,7 +210,7 @@
         }
 
         public function getStatutPropriete() {
-            return $this->statut_propriete;
+            return $this->statutPropriete;
         }
     
 
@@ -305,6 +310,12 @@
             return $this;
         }
 
+        public function setStatutPropriete($statutPropriete) {
+            $this->statutPropriete = $statutPropriete;
+
+            return $this;
+        }
+
         public function setAvanceResaMin($avanceResaMin) {
             $this->avanceResaMin = $avanceResaMin;
 
@@ -365,6 +376,7 @@
                 'nbChambres' => $this->nbChambres,
                 'nbLitsSimples' => $this->nbLitsSimples,
                 'nbLitsDoubles' => $this->nbLitsDoubles,
+                'statutPropriete' => $this->statutPropriete,
                 'avanceResaMin' => $this->avanceResaMin,
                 'dureeMinLocation' => $this->dureeMinLocation,
                 'delaiAnnulMax' => $this->delaiAnnulMax,

@@ -4,14 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const hiddenInput = document.getElementById('amenagements');
     let selectedAmenagements = [];
 
-    // Vérifier s'il y a des aménagements déjà sélectionnés dans le champ caché
-    if (hiddenInput.value) {
-        selectedAmenagements = JSON.parse(hiddenInput.value);
-    }
+    const amenagementsBtns = document.querySelectorAll("#amenagementsBoutons button");
 
-    let amenagementsBtns = document.querySelectorAll("#amenagementsBoutons button");
-
-    // Fonction pour mettre à jour l'état des boutons d'aménagement
     function updateAmenagementsButtons() {
         amenagementsBtns.forEach(btn => {
             const id = btn.id;
@@ -23,28 +17,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Mettre à jour les boutons d'aménagements au chargement
-    updateAmenagementsButtons();
-
-    // Gérer le clic sur les boutons d'aménagements
     amenagementsBtns.forEach(btn => {
-        btn.addEventListener("click", function (e) {
+        btn.addEventListener("click", function(e) {
+            e.stopPropagation(); // Empêcher la propagation de l'événement click vers le formulaire
             btn.classList.toggle("active");
             const id = this.id;
             const index = selectedAmenagements.indexOf(id);
 
             if (index > -1) {
-                selectedAmenagements.splice(index, 1); // Désélectionner l'aménagement
+                selectedAmenagements.splice(index, 1);
             } else {
-                selectedAmenagements.push(id); // Sélectionner l'aménagement
+                selectedAmenagements.push(id);
             }
 
-            hiddenInput.value = JSON.stringify(selectedAmenagements); // Mettre à jour la valeur du champ caché
-            console.log(selectedAmenagements); // Debug
+            hiddenInput.value = JSON.stringify(selectedAmenagements);
         });
     });
 
-    // Gestion du drag and drop et de l'upload de photo (non modifié)
     const dropZone = document.getElementById("drop-photo");
     const fileInput = document.getElementById("photo-input");
     const fileButton = document.getElementById("photo-button");
@@ -61,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
     dropZone.addEventListener("drop", (event) => {
         event.preventDefault();
         dropZone.classList.remove("dragover");
-        console.log('drop file', event.dataTransfer.files);
         fileInput.files = event.dataTransfer.files;
         updatePhotoName(fileInput.files);
     });
@@ -71,90 +59,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     fileInput.addEventListener("change", (event) => {
-        console.log('file change');
         const files = event.target.files;
         updatePhotoName(files);
     });
 
     function updatePhotoName(files) {
         const imagePreviewElement = document.getElementById('drop-photo');
-    
         if (files.length > 0) {
-            imagePreviewElement.style.backgroundImage = "url('" + URL.createObjectURL(files[0]) + "')";
+            imagePreviewElement.style.backgroundImage = `url('${URL.createObjectURL(files[0])}')`;
         } else {
             imagePreviewElement.style.backgroundImage = "none";
         }
     }
-    
 
-    function updateLogementInfo() {
-        let formData = JSON.parse(sessionStorage.getItem('formData'));
-
-        // Affichage des données dans les champs du formulaire (non modifié)
-        Object.keys(formData).forEach(key => {
-            let element = document.getElementById(key);
-            if (element) {
-                if (key === 'description' || key === 'accroche') {
-                    element.textContent = formData[key];
-                } else if (key === 'image') {
-                    let imageElement = document.getElementById('image-logement');
-                    if (imageElement) {
-                        imageElement.style.backgroundImage = "url('" + formData[key] + "')";
-                    }
-                } else {
-                    element.value = formData[key];
-                }
-            }
-        });
-
-        // Sélection des options pour les éléments select (type et catégorie) (non modifié)
-        ['type', 'categorie'].forEach(selectId => {
-            let select = document.getElementById(selectId);
-            if (select && formData[selectId]) {
-                let selectedIndex = Array.from(select.options).findIndex(option => option.value === formData[selectId]);
-                if (selectedIndex !== -1) {
-                    select.selectedIndex = selectedIndex;
-                }
-            }
-        });
-
-        // Gestion des boutons d'aménagements
-        selectedAmenagements = formData.amenagements ? formData.amenagements.split(',') : [];
-        updateAmenagementsButtons();
-
-        // Affichage de l'image du logement si présente (non modifié)
-        let imageElement = document.getElementById('drop-photo');
-        if (imageElement && formData.image) {
-            imageElement.style.backgroundImage = "url('" + formData.image + "')";
-        }
-    }
-
-    updateLogementInfo();
-
-    document.getElementById('formNewLogement').addEventListener('submit', function (event) {
+    document.getElementById('formNewLogement').addEventListener('submit', function(event) {
         event.preventDefault();
-
-        window.scroll({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scroll({ top: 0, behavior: 'smooth' });
 
         const formData = new FormData(this);
         formData.append('pays', 'France');
         formData.append('etat', '');
-
-        formData.forEach((value, key) => {
-            if (typeof value === 'string') {
-                formData.set(key, encodeURIComponent(value));
-            }
-        });
 
         if (fileInput.files.length > 0) {
             const file = fileInput.files[0];
             formData.append('photo', file);
         }
 
-        function updateLogement(logementId) {
+        const logementId = sessionStorage.getItem('logementId');
+        if (logementId) {
             formData.append('id_logement', logementId);
 
             fetch('/api/processFormUpdateLogement', {
@@ -163,92 +95,75 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then((response) => response.json())
             .then((data) => {
-                if (data.error) {
+                if (data != true) {
                     utils.ThrowAlertPopup(data.error, 'error');
                 } else {
-                    let message = 'Le logement a bien été mis à jour !';
+                    const message = 'Le logement a bien été mis à jour !';
                     utils.ThrowAlertPopup(message, 'success');
-                    localStorage.setItem('alertPopup', JSON.stringify({ message: message, type: 'success' }));
+                    localStorage.setItem('alertPopup', JSON.stringify({ message, type: 'success' }));
                     window.location.href = '/logements';
                 }
             })
             .catch((error) => {
-                utils.ThrowAlertPopup('Erreur: ' + error, 'error');
+                utils.ThrowAlertPopup(`Erreur: ${error}`, 'error');
             });
-        }
-
-        const logementId = sessionStorage.getItem('logementId');
-        if (logementId) {
-            updateLogement(logementId);
         } else {
             utils.ThrowAlertPopup('Erreur: ID du logement manquant.', 'error');
         }
     });
 
-
-
-
-
-
-  updateLogementInfo();
-
-  document.getElementById('formNewLogement').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    window.scroll({
-        top: 0,
-        behavior: 'smooth'
-    });
-
-    const formData = new FormData(this);
-    formData.append('pays', 'France');
-    formData.append('etat', '');
-
-    // Utilisation de encodeURIComponent pour les valeurs de texte
-    formData.forEach((value, key) => {
-        if (typeof value === 'string') {
-            formData.set(key, encodeURIComponent(value));
+    function updateLogementInfo() {
+        const logementId = sessionStorage.getItem('logementId');
+        if (!logementId) {
+            utils.ThrowAlertPopup('Erreur: ID du logement manquant.', 'error');
+            return;
         }
-    });
 
-    // Ajout de l'image sélectionnée s'il y en a une
-    if (fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        formData.append('photo', file);
-    }
-
-    // Fonction pour mettre à jour le logement
-    function updateLogement(logementId) {
-        formData.append('id_logement', logementId);
-
-        fetch('/api/processFormUpdateLogement', {
-            method: 'POST',
-            body: formData,
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.error) {
-                utils.ThrowAlertPopup(data.error, 'error');
-            } else {
-                let message = 'Le logement a bien été mis à jour !';
-                utils.ThrowAlertPopup(message, 'success');
-                localStorage.setItem('alertPopup', JSON.stringify({ message: message, type: 'success' }));
-                window.location.href = '/logements';
+        fetch(`/api/getLogementDataById/${logementId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (!data || data.length === 0) {
+                utils.ThrowAlertPopup('Erreur: Données du logement non trouvées.', 'error');
+                return;
             }
+
+            const logement = data[0];
+            document.getElementById('titre').value = logement['titre'];
+            document.getElementById('ville').value = logement['nom_ville'];
+            document.getElementById('tarif').value = parseFloat(logement['prix_nuit_ttc']);
+            document.getElementById('nom_rue').value = logement['nom_rue'];
+            document.getElementById('cp').value = logement['code_postal'];
+            document.getElementById('complement_adresse').value = logement['complement'];
+            document.getElementById('accroche').textContent = logement['accroche'];
+            document.getElementById('description').textContent = logement['description'];
+            document.getElementById('surface').value = logement['surface_hab'];
+            document.getElementById('nbPersMax').value = logement['personnes_max'];
+            document.getElementById('nbChambres').value = logement['nb_chambres'];
+            document.getElementById('nbLitsSimples').value = logement['nb_lits_simples'];
+            document.getElementById('nbLitsDoubles').value = logement['nb_lits_doubles'];
+            document.getElementById('delaiResaArrivee').value = logement['avance_resa_min'];
+            document.getElementById('dureeMinLoc').value = logement['duree_min_location'];
+            document.getElementById('delaiAnnulMax').value = logement['delai_annul_max'];
+
+            const imageElement = document.getElementById('drop-photo');
+            imageElement.style.backgroundImage = `url('${logement['image_principale']}')`;
+
+            fetch(`/api/getAmenagementsOfLogementById/${logementId}`)
+            .then(response => response.json())
+            .then(dataAm => {
+                const idsAmenagementsActifs = dataAm.map(amenagement => amenagement.id_amenagement);
+                selectedAmenagements = idsAmenagementsActifs.map(id => id.toString());
+                updateAmenagementsButtons();
+                hiddenInput.value = JSON.stringify(selectedAmenagements);
+            })
+            .catch(error => {
+                utils.ThrowAlertPopup(`Erreur lors de la récupération des aménagements: ${error}`, 'error');
+            });
         })
-        .catch((error) => {
-            utils.ThrowAlertPopup('Erreur: ' + error, 'error');
-            console.log(error)
+        .catch(error => {
+            utils.ThrowAlertPopup(`Erreur lors de la récupération des données du logement: ${error}`, 'error');
         });
     }
 
-    const logementId = sessionStorage.getItem('logementId');
-    if (logementId) {
-        updateLogement(logementId);
-    } else {
-        utils.ThrowAlertPopup('Erreur: ID du logement manquant.', 'error');
-    }
-});
-
-
+    updateLogementInfo();
 });

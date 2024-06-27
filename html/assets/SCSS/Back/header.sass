@@ -1,8 +1,15 @@
 @use '../general' as general
 
 .HeaderConteneur
+
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    z-index: 9999
+
     /* Taille */
-    height: 75px
+    height: 80px
 
     /* Display */
     display: flex
@@ -81,18 +88,22 @@
     display: flex
     flex-direction: column
 
+    position: fixed
 
-    float: right
-
+    right: 0px
+    z-index: 99999
+    padding: 5px
     border: 2px solid #D0CDC4
     border-radius: 10px
 
-    background-color: #FDFBF5
-
-    margin-top: 5%
+    background-color: white
+    
     margin-right: 0.5%
+    margin-top: 6%
 
-    color: black
+    svg
+        height: 15px
+        width: 15px
     hr 
         width: 75%
         margin: 0 auto
@@ -101,40 +112,35 @@
         margin-top: 0.5%
         display: flex
         flex-direction: row
-        justify-content: center
-
+        justify-content: space-between
+        align-items: center
         cursor: pointer
-
-        gap: 10px   
+        gap: 10px
         p
             font-family: 'Reem Kufi'
-            font-size: 20px
+            font-size: general.$police-texte
             vertical-align: middle
     #btnConnexion
         margin-top: 2%
         display: flex
         flex-direction: row
-        justify-content: center
-        gap: 10px
-
+        justify-content: space-between
+        align-items: center
         cursor: pointer
+        gap: 10px
         p
             font-family: 'Reem Kufi'
-            font-size: 20px
-            vertical-align: middle
-        a
-            font-family: 'Reem Kufi'
-            font-size: 20px
-            color: #FFFFFF
-            text-decoration: none
+            font-size: general.$police-texte
             vertical-align: middle
 
 .d-none 
     display: none !important
         
-
 @media screen and (max-width: 767px)
-    .headerConteneur
+    .HeaderConteneur
+        display: none
+
+    #Bulle
         display: none
 
 

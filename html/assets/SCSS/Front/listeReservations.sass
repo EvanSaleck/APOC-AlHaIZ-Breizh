@@ -1,0 +1,171 @@
+@use '../general' as general
+
+#ongletFiltres
+  position: absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  background-color: white
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  z-index: 1000
+  padding-top: 20px
+  overflow: scroll
+  display: none
+    
+  div
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+#barreFiltres
+  display: inline-block
+  width: 100px
+  height: 5px
+  background-color: general.$couleur-front-bleu-verdatre
+  border-radius: 2px
+
+
+body
+  color: black
+  font-family: general.$police-texte
+  align-items: center
+  margin-top: 120px
+
+  h1
+    font-family: general.$police-titre
+    font-size: 2.5vw
+  
+  h2
+    font-family: general.$police-titre
+    font-size: 2vw
+
+
+#msgBienvenue
+  margin: 2vw 3.5vw
+
+#noReservations
+  display: flex
+  justify-content: center
+  margin: 3vw 2vw
+
+
+#etatResa
+  display: flex
+  justify-content: center
+
+  button
+    margin-right: 10px
+    width: 13vw
+    height: 2.5vw
+    cursor: pointer
+
+    @media screen and ( max-width: 960 )
+      font-size: 1.4vw
+
+    background-color: general.$couleur-front-jaune-pabo
+    border-width: 0px
+    border-radius: 5px 5px 0px 0px
+    font-size: 1.2vw
+    
+  .ongletSelect
+    height: 2.5vw
+    background-color: #FFFFFF
+    border: 2px solid general.$couleur-front-bleu-verdatre
+    border-bottom-color: #FFFFFF
+
+
+#barreEtat
+  display: inline-block
+  width: 100%
+  height: 2px
+  background-color: general.$couleur-front-bleu-verdatre
+
+
+#croissantDecroissant
+  width: 30%
+  border-radius: 5px
+  border: 0.3vw solid general.$couleur-front-bleu-verdatre
+
+  margin: 2vw 3vw
+  background: url('../../../assests/imgs/mobile/Chevron2.svg') no-repeat left center
+
+  padding: 0.8vw 0.8vw
+
+  display: flex
+  flex-direction: row
+  flex-basis: content
+
+  button
+    background-color: #FFFFFF
+    margin-left: 1vw
+    border: none
+    font-size: 1.2vw
+
+
+#listeReservations
+  height: 55%
+  
+  overflow-x: auto
+  
+  justify-content: center
+  align-items: center
+  font-family: general.$police-texte
+
+  margin: 3vw 10%
+
+  table
+    text-align: center
+    font-size: 1.5vw
+    width: 100%
+
+    resize: none
+    overflow: auto
+    border-collapse: collapse
+
+    border: 2px solid
+    border-color: general.$couleur-front-bleu-verdatre
+
+    tr
+      cursor: pointer
+      max-height: 88px
+      background-color: #FFFFFF
+      td 
+        padding: 2vw
+
+    tr:nth-child(even)
+      background-color: #FBE6BC
+
+    thead
+      height: 3vh
+      tr
+        background-color: general.$couleur-front-bleu-verdatre
+        padding: 1vw 0vw
+        th
+          width: 20%
+          background-color: general.$couleur-front-bleu-verdatre
+          color: #FFFFFF
+        
+
+
+// Utile pour plus tard pour afficher plus de réservations
+section
+
+  #notFound
+    display: flex
+    justify-content: center
+    align-items: center
+    text-align: center
+
+  #voirPlus
+    font-family: general.$police-titre
+    text-align: center
+
+.d-none
+  display: none

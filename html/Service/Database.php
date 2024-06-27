@@ -1,15 +1,17 @@
 <?php
 namespace Service;
 
+include_once 'Service/Config.php';
+
 use Exception;
 use PDO;
 use PDOException;
 
-class Database {
-    private $pdo;
-    private $dsn = 'pgsql:host=localhost;dbname=apoc;port=5432';
-    private $username = 'apoc';
-    private $password = 'apoc';
+    class Database {
+        private $pdo;
+        private $dsn = DB_DSN;
+        private $username = DB_USERNAME;
+        private $password = DB_PASSWORD;
 
     public function __construct() {
         try {

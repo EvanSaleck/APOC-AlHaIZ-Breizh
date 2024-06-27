@@ -1,0 +1,64 @@
+@use '../general' as general
+
+body
+  font-family: general.$police-texte
+  line-height: 1.6
+  padding: 0 2vw
+
+h1, h2, h3, h4, h5, h6
+  font-family: general.$police-titre
+
+
+.titrePrincipal
+  margin: 10% 0 3% 0
+  display: flex
+  align-items: center
+  flex-direction: column
+  text-align: center
+
+.cgv
+  max-width: 70vw
+  margin: 0 auto
+  padding: 4vw
+
+  .categorie
+    margin-bottom: 8vw
+    padding: 4vw
+    border: 1px solid general.$couleur-front-bleu-nuageux
+    border-radius: 2vw
+
+    h2
+      margin-bottom: 4vw
+      font-size: 2vw
+      color: general.$couleur-front-bleu-charbon
+
+  .clause
+    margin-bottom: 4vw
+    padding: 4vw
+    background-color: lighten(general.$couleur-front-bleu-nuageux, 3%)
+    border: 0.2vw general.$couleur-front-bleu-charbon
+    border-radius: 1.6vw
+
+    h3
+      margin-bottom: 2vw
+      font-size: 1.5vw
+      color: black
+
+    p
+      margin-bottom: 2vw
+
+ul
+  margin-left: 2%
+
+a
+  color: general.$couleur-front-bleu-charbon
+  text-decoration: none
+  transition: color 0.3s ease, transform 0.3s ease
+
+  &:hover, &:focus
+    color: general.$couleur-front-bleu-charbon, 80%
+    transform: scale(1.05)
+
+  &:active
+    color: general.$couleur-front-bleu-charbon
+    transform: scale(0.95)

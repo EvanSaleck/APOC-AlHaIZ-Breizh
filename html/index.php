@@ -5,6 +5,7 @@ include_once './Controllers/LogementController.php';
 include_once './Controllers/ReservationController.php';
 include_once './Controllers/UtilisateurController.php';
 include_once './Controllers/AbonnementICalController.php';
+include_once './Controllers/FactureController.php';
 
 
 // Use des controllers
@@ -12,12 +13,15 @@ use Controllers\LogementController;
 use Controllers\ReservationController;
 use Controllers\UtilisateurController;
 use Controllers\AbonnementICalController;
+use Controllers\FactureController;
+
 
 // Initialisation des controllers
 $logementController = new LogementController();
 $reservationController = new ReservationController();
 $utilisateurController = new UtilisateurController();
 $abonnementICalController = new AbonnementICalController();
+$factureController = new FactureController();
 
 
 $requestUrl = $_SERVER['REQUEST_URI'];
@@ -100,16 +104,47 @@ switch($requestUrl) {
     case '/connexion/':
         include_once './Views/Front/compte/connexionCompte.php';
         break;
+
+    case '/mentionsLegales':
+    case '/mentionsLegales/':
+        include_once './Views/Front/legislation/mentionsLegales.php';
+        break;
+    case '/back/mentionsLegales':
+    case '/back/mentionsLegales/':
+        include_once './Views/Back/legislation/mentionsLegales.php';
+        break;
+    case '/CGU_CGV':
+    case '/CGU_CGV/':
+        include_once './Views/Front/legislation/CGU_CGV.php';
+        break;
+    case '/back/CGU_CGV':
+    case '/back/CGU_CGV/':
+        include_once './Views/Back/legislation/CGU_CGV.php';
+        break;
+        
     case '/reservation/devis':
     case '/reservation/devis/':
-        if(!isset($_SESSION['client'])) {
+        if (!isset($_SESSION['client'])) {
             header('Location: /');
-        }else {
+        } else {
             include_once './Views/Front/reservation/devis.php';
         }
 
         break;
+
+    
+    case preg_match('/^\/facture\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+
+        include_once './Views/facture.php';
         
+        break;
+
+    case '/test':
+        echo '<script>window.open("/facture/1", "_blank")</script>';
+        break;
+
+    
     case '/Back/reservations':
     case '/Back/reservations/':
         include_once('Views/Back/reservation/listeReservations.php');
@@ -117,7 +152,7 @@ switch($requestUrl) {
             include_once('Views/Back/reservation/listeReservations.php');
             
         }else {
-            header('Location: /');
+            header('Location: /connexionProprietaire');
         }
         break;
 
@@ -244,8 +279,9 @@ switch($requestUrl) {
 
     case '/api/getLogementsByProprietaireId':
     case '/api/getLogementsByProprietaireId/':
-        // $data = $_POST;
-        $logementController->getLogementsByProprietaireId($prop);
+        $proprio = json_decode($_SESSION['proprio']);
+        $idCompte = $proprio->id_compte;
+        $logementController->getLogementsByProprietaireId($idCompte);
         break;
 
     // Routes des API
@@ -334,6 +370,15 @@ switch($requestUrl) {
         $client = json_decode($_SESSION['client']);
         $idcpt = $client->id_compte;
         $reservationController->saveReservation($data, $idcpt);
+        $factureController->createFacture();
+        break;
+    case '/api/updateLogementStatus':
+    case '/api/updateLogementStatus/':
+        $id = $_POST['logementId'];
+        $status = $_POST['status'];
+        // var_dump($data);
+        // die();
+        $logementController->updateStatus($id, $status);
         break;
 
     case '/detailReservation':
@@ -341,7 +386,7 @@ switch($requestUrl) {
         if(!isset($_SESSION['client'])) {
             header('Location: /');
         }else {
-            include './Views/Front/reservation/DetailReservation.php';
+            include './Views/Front/reservation/detailsReservation.php';
         }
         break;
 
@@ -362,6 +407,30 @@ switch($requestUrl) {
     case '/api/generateToken/':
         $data = $_POST;
         $utilisateurController->generateToken($data);
+        break;
+
+    case '/api/updatePassword':
+        case '/api/updatePassword/':
+            $data = $_POST;
+            $utilisateurController->updatePassword($data);
+        break;
+
+    case '/api/updateCliPassword':
+        case '/api/updateCliPassword/':
+                $data = $_POST;
+                $utilisateurController->updateCliPassword($data);
+            break;
+
+    case '/api/updateProfile':
+        case '/api/updateProfile/':
+            $data = $_POST;
+            $utilisateurController->updateProfile($data);
+        break;
+
+    case '/api/updateCliProfile':
+        case '/api/updateCliProfile/':
+            $data = $_POST;
+            $utilisateurController->updateCliProfile($data);
         break;
 
     case preg_match('/^\/api\/getLogementDataById\/\d+$/', $requestUrl) ? true : false:
@@ -391,6 +460,21 @@ switch($requestUrl) {
 
         echo $logementController->getTypeOfLogementById($logement_id);
         break;
+
+    case preg_match('/^\/api\/getFactureByResId\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $idResa = end($url_parts);
+
+        echo $factureController->getFactureByResId($idResa);
+        break;
+
+    /*
+    case preg_match('/^\/api\/getDataReservationById\/\d+$/', $requestUrl) ? true : false:
+        $url_parts = explode('/', $requestUrl);
+        $idResa = end($url_parts);
+        echo $reservationController->getDataReservationById($idResa);
+        break;
+    */
 
     default:
         http_response_code(404);

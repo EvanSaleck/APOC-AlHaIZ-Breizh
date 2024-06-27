@@ -1,6 +1,8 @@
 import { ThrowAlertPopup } from '../utils.js';
 
 document.addEventListener('DOMContentLoaded', function() {
+    let proprio = JSON.parse(sessionStorage.getItem("Proprio"));
+    document.getElementById('bonjour').innerHTML = "Bonjour " + proprio.prenom + ",";
     const storedPopup = localStorage.getItem('alertPopup');
     let message, type;
     
@@ -92,12 +94,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             redirectionModifs.forEach(element => {
                 element.addEventListener('click', function(e) {
-        
-                    sessionStorage.setItem('idLogement', element.parentElement.getAttribute('data-id')); 
-
+                    e.stopPropagation();
+                    const logementId = element.parentElement.getAttribute('data-id');
+                    sessionStorage.setItem('logementId', logementId);
                     window.location.href = `/logements/details/modifier`;
                 });
             });
+            
           });
     })
    .catch(error => {

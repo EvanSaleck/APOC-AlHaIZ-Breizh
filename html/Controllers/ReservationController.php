@@ -28,11 +28,27 @@ class ReservationController {
     }
         
     public function getReservationByOwnerId($id) {
-        $reservations = $this->reservation->getReservationByOwnerId($id);
+        $reservationsProprietaire = $this->reservation->getReservationByOwnerId($id);
                     
         header('Content-Type: application/json');
             
-        echo json_encode($reservations);
+        echo json_encode($reservationsProprietaire);
+    }
+
+    public function getReservationByClientId($id) {
+        $reservationsClient = $this->reservation->getReservationByClientId($id);
+                    
+        header('Content-Type: application/json');
+            
+        echo json_encode($reservationsClient);
+    }
+
+    public function getOwnerById($id) {
+        $owner = $this->reservation->getOwnerById($id);
+                    
+        header('Content-Type: application/json');
+            
+        echo json_encode($owner);
     }
 
     public function reservationExists($id) {
@@ -96,5 +112,30 @@ class ReservationController {
             echo json_encode($e->getMessage());
             exit;
         }
+    }
+
+    public function getDataReservationById($id) {
+        try {
+            $return = $this->reservation->getDataReservationById($id);
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        }
+        catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode($e->getMessage());
+            exit;
+        }
+    }
+
+    public function exportIcal() {
+        // print_r($_POST);
+        $form = [
+            'dateDebut' => $_POST['dateDebut'],
+            'dateFin' => $_POST['dateFin'],
+            'logements' => $_POST['logements']
+        ];
+        
+        $this->icalService->exportIcal($form);
     }
 }

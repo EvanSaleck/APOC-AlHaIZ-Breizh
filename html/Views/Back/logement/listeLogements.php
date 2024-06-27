@@ -11,7 +11,7 @@
 
 <body>
     <section id="msgBienvenue">
-        <h1>Bonjour Jean,</h1>
+        <h1 id="bonjour">Bonjour,</h1>
         <h1> Voici la liste de vos logements </h1>
 
     </section>

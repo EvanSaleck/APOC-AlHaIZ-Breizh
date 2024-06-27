@@ -1,8 +1,8 @@
-
 @use '../general' as general
 
 // style de la page de détail du compte mobile
 // @media screen and (max-width: general.$max-width-telephone)
+
 .compte
   font-family: general.$police-texte
   color: general.$couleur-front-bleu-charbon
@@ -63,50 +63,106 @@
       padding: 5px
       color: general.$couleur-front-bleu-charbon
 
-  button
-    color: white
-    padding: 10px 20px
-    font-size: general.$taille-police-texte-mobile
-    border-radius: 5px
-    cursor: pointer
-    transition: background-color 0.3s ease
-    display: block
-    margin-left: auto
-    margin-right: auto
-    text-align: center
-
   .mdp
     background-color: general.$couleur-front-bleu-verdatre
     border: 4px solid general.$couleur-front-bleu-verdatre
-    width: 80%
+    width: 100%
     &:hover
       border-color: lighten(general.$couleur-front-bleu-verdatre, 5%)
     &:focus
       border-color: lighten(general.$couleur-front-bleu-verdatre, 15%)
 
+
 div
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
 
-    .update
-        background-color: #e20000
-        border: 4px solid #e20000
-        width: 100%
-        &:hover
-        border-color: lighten(#e20000, 5%)
-        &:focus
-        border-color: lighten(#e20000, 15%)
+  input, select
+    text-align: center
+    border: none
+    width: fit-content
+    background-color: transparent
+    border-bottom: 1px solid general.$couleur-front-bleu-nuageux
 
-    a
-        text-decoration: none
+  .divAdresse
+    display: flex
+    flex-direction: column
+    justify-content: center
+    gap: 5px
 
+  .update
+    background-color: general.$couleur-front-bleu-verdatre
+    border: 4px solid general.$couleur-front-bleu-verdatre
+    width: 100%
+    &:hover
+      border-color: lighten(general.$couleur-front-bleu-verdatre, 5%)
+    &:focus
+      border-color: lighten(general.$couleur-front-bleu-verdatre, 15%)
 
-    .token
-        margin-top: 5%
-        background-color: general.$couleur-front-bleu-verdatre
-        border: 4px solid general.$couleur-front-bleu-verdatre
-        width: 100%
-        &:hover
-            border-color: lighten(general.$couleur-front-bleu-verdatre, 5%)
-        &:focus
-            border-color: lighten(general.$couleur-front-bleu-verdatre, 15%)
+  a
+    text-decoration: none
+
+  .token
+    margin-top: 5%
+    background-color: general.$couleur-front-bleu-verdatre
+    border: 4px solid general.$couleur-front-bleu-verdatre
+    width: 100%
+    &:hover
+      border-color: lighten(general.$couleur-front-bleu-verdatre, 5%)
+    &:focus
+      border-color: lighten(general.$couleur-front-bleu-verdatre, 15%)
+
+.d-none
+  display: none
+
+#zonemodif
+  margin-bottom: 5%
+  input
+    border: none
+    border-bottom: 1px solid general.$couleur-front-bleu-nuageux
+    outline: none
+
+.save 
+  background-color: rgb(25, 135, 84)
+  border: 4px solid rgb(25, 135, 84)
+  width: 100%
+  &:hover
+    border-color: lighten(rgb(25, 135, 84), 5%)
+  &:focus
+    border-color: lighten(rgb(25, 135, 84), 15%)
+.valid
+  background-color: rgb(25, 135, 84)
+  border: 4px solid rgb(25, 135, 84)
+  width: 100%
+  &:hover
+    border-color: lighten(rgb(25, 135, 84), 5%)
+  &:focus
+    border-color: lighten(rgb(25, 135, 84), 15%)
+
+.annul 
+  margin-top : 5%
+  background-color:  #e20000
+  border: 4px solid #e20000
+  width: 100%
+  &:hover
+    border-color: lighten(#e20000, 5%)
+  &:focus
+    border-color: lighten(#e20000, 15%)
+  
+button
+  color: white
+  padding: 10px 20px
+  font-size: general.$taille-police-texte-mobile
+  border-radius: 5px
+  cursor: pointer
+  transition: background-color 0.3s ease
+  display: block
+  margin-left: auto
+  margin-right: auto
+  text-align: center
+
+    
 // style de la page de détail du compte desktop
 // @media screen and (min-width: general.$max-width-telephone)

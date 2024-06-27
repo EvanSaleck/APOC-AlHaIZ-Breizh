@@ -222,6 +222,9 @@ class Logement {
                 $valeursAdresse[] = $formLogement->getEtat();
             }
 
+            print_r($valeursAdresse);
+
+
             $this->db->insert('adresse', $colonnesAdresse, $valeursAdresse);
 
             /** Colonnes et valeurs du logement */
@@ -278,7 +281,7 @@ class Logement {
             $valeursLogement[] = $formLogement->getNbLitsSimples();
             $valeursLogement[] = $formLogement->getNbLitsDoubles();
             // statut propriété
-            $valeursLogement[] = true;
+            $valeursLogement[] = false;
             $valeursLogement[] = $formLogement->getTarif();
             // prix nuit ttc
             $valeursLogement[] = $formLogement->getTarif() * (1 + self::TAUX_TVA); 
@@ -286,6 +289,7 @@ class Logement {
             $valeursLogement[] = $this->db->getPDO()->lastInsertId();
             $valeursLogement[] = $formLogement->getIdType();
             $valeursLogement[] = $formLogement->getIdCategorie();
+            print_r($valeursLogement);
 
             // accroche 
             if ($formLogement->getAccroche() != '') {
@@ -320,6 +324,7 @@ class Logement {
 
             // Amenagements
             $idLogement = $this->db->getPDO()->lastInsertId();
+            // print_r($idLogement);
 
 
             // on gère l'insert de la photo après avoir eu l'id du logement
@@ -363,45 +368,71 @@ class Logement {
     public function updateLogementFromForm($formLogement, $idLogement) {
     try {
         $this->db->getPDO()->beginTransaction();
+        try {
+            // Utilisation de la méthode executeQuery pour récupérer l'ID de l'adresse
+            $adresseID = $this->db->executeQuery("SELECT L_id_adresse FROM logement WHERE id_logement =?", [$idLogement]);
 
-        $numeroRue = $formLogement->getNoRue() != '' && is_numeric($formLogement->getNoRue()) ? $formLogement->getNoRue() : null;
+            if (!empty($adresseID)) {
+                $firstRow = $adresseID[0];
 
-        // Colonnes et valeurs de l'adresse
+                $adresseId = $firstRow["l_id_adresse"];
+            } else {
+                echo "Aucun résultat trouvé pour l'ID de logement : $idLogement\n";
+                throw new Exception("Aucun résultat trouvé pour l'ID de logement : $idLogement");
+            }
+        } catch (\Exception $e) {
+            echo "Erreur lors de la récupération de l'ID de l'adresse : ". $e->getMessage();
+            return; // Arrêter l'exécution ici si une exception est levée
+        }
+        
+        $numeroRue = null; // Initialisation de la variable
+        if ($formLogement->getNoRue()!= '' && is_numeric($formLogement->getNoRue())) {
+            $numeroRue = $formLogement->getNoRue();
+        }
+
+        
+        
+        /**Colonnes et valeurs de l'adresse */
         $colonnesAdresse = [
             'nom_rue',
             'code_postal',
             'nom_ville',
             'pays'
         ];
-        $valeursAdresse = [
-            $formLogement->getNomRue(),
-            $formLogement->getCp(),
-            $formLogement->getVille(),
-            $formLogement->getPays()
-        ];
-
-        if ($numeroRue !== null) {
+        $valeursAdresse = [];
+        
+        $valeursAdresse[] = $formLogement->getNomRue();
+        $valeursAdresse[] = $formLogement->getCp();
+        $valeursAdresse[] = $formLogement->getVille();
+        $valeursAdresse[] = $formLogement->getPays();
+        
+        // on ajoute le numéro de rue seulement si c'est un chiffre
+        if ($formLogement->getNoRue()!= '') {
             $colonnesAdresse[] = 'numero_rue';
-            $valeursAdresse[] = $numeroRue;
+            $valeursAdresse[] = $formLogement->getNoRue();
         }
-
-        if ($formLogement->getComplementAdresse() != '') {
+        
+        if ($formLogement->getComplementAdresse()!= '') {
             $colonnesAdresse[] = 'complement';
             $valeursAdresse[] = $formLogement->getComplementAdresse();
         }
-
-        if ($formLogement->getEtat() != '') {
+        
+        if ($formLogement->getEtat()!= '') {
             $colonnesAdresse[] = 'etat';
             $valeursAdresse[] = $formLogement->getEtat();
         }
+        
+        if ($adresseId!== null) {
+            $this->db->update('adresse', $colonnesAdresse, $valeursAdresse, 'id_adresse', $adresseId);
+        } else {
+            // Gérer le cas où l'ID de l'adresse n'est pas trouvé
+            throw new Exception('Adresse non trouvée pour le logement.'); // Lancer une exception si l'ID de l'adresse est null
+        }
+        
+        
+        
 
-        header('Content-Type: application/json');
-        echo json_encode(['id_logement' => $idLogement]);
-        die();
 
-        // Update de l'adresse
-        $adresseId = $this->db->select('logement', ['L_id_adresse'], ['id_logement' => $idLogement])[0]['L_id_adresse'];
-        $this->db->update('adresse', $colonnesAdresse, $valeursAdresse, 'id_adresse', $adresseId);
 
         // Colonnes et valeurs du logement
         $colonnesLogement = [
@@ -411,11 +442,13 @@ class Logement {
             'nb_chambres',
             'nb_lits_simples',
             'nb_lits_doubles',
-            'statut_propriete',
             'prix_nuit_ttc',
+            //'L_id_compte',
             'L_id_type',
             'L_id_categorie'
         ];
+
+        // $idProprietaire = $_SESSION['Proprio']['id_compte'];
 
         $valeursLogement = [
             $formLogement->getTitre(),
@@ -424,11 +457,13 @@ class Logement {
             $formLogement->getNbChambres(),
             $formLogement->getNbLitsSimples(),
             $formLogement->getNbLitsDoubles(),
-            true,
             $formLogement->getTarif(),
+            // $idProprietaire,
             $formLogement->getIdType(),
             $formLogement->getIdCategorie()
         ];
+
+
 
         if ($formLogement->getAccroche() != '') {
             $colonnesLogement[] = 'accroche';
@@ -455,11 +490,15 @@ class Logement {
             $valeursLogement[] = $formLogement->getDelaiAnnulMax();
         }
 
+        
+
+        
+
         // Update du logement
         $this->db->update('logement', $colonnesLogement, $valeursLogement, 'id_logement', $idLogement);
         
-        // Gestion de la photo
-        if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+         // Gestion de la photo
+         if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $dossier = './assets/imgs/logements/';
             $extension = pathinfo($_FILES['photo']['name'])['extension'];
             $fichier = $dossier . 'image_' . $idLogement . '.' . $extension;
@@ -473,8 +512,9 @@ class Logement {
         }
 
         // Mise à jour des aménagements
-
+        
         $amenagements = json_decode($formLogement->getAmenagements());
+        //var_dump($amenagements);
         if (isset($amenagements)) {
             // Récupérer les aménagements existants
             $existingAmenagements = $this->db->select('amenagements_logement', ['al_id_amenagement'], ['al_id_logement' => $idLogement]);
@@ -496,13 +536,12 @@ class Logement {
         }
 
         $this->db->getPDO()->commit();
+
+        return true;
     } catch (Exception $e) {
         $this->db->getPDO()->rollBack();
         throw new Exception('Erreur lors de la mise à jour des données : ' . $e->getMessage());
-        return false;
     }
-
-    return true;
 }
 
     
@@ -552,22 +591,31 @@ class Logement {
         return $logements;
     }
 
+    public function getStatutProprieteOfLogementById($id) {
+        $logements = $this->db->executeQuery('
+        SELECT statut_propriete
+        FROM logement 
+        
+        WHERE id_logement = ' . $id);
+        
+        return $logements;
+    }
+
+
+
     public function getCommunes() {
         $communes = $this->db->executeQuery('SELECT DISTINCT nom_ville FROM adresse');
         return $communes;
     }
 
     public function updateStatutLogement($id, $nouveauStatut) {
-        // Correction de la syntaxe SQL pour l'insertion de variables
         $sql = 'UPDATE logement SET statut_propriete = ? WHERE id_logement =?';
-        
-        // Préparation et exécution de la requête
+
         $statement = $this->pdo->prepare($sql);
         $statement->execute([$nouveauStatut, $id]);
 
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
-        
-        // Retourner le nombre de lignes affectées
+
         return $result;
     }
     
