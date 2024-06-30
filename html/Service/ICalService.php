@@ -41,10 +41,6 @@ class ICalService {
         
         $reservations = $this->reservationModel->getReservationsForExportICal($dateDebut, $dateFin, $idsLogements);
         
-        header('Content-Type: application/json');
-        echo json_encode($reservations);
-        die();
-        
         $reservationICal =  $this->getReservationsIcal($reservations,$sequence, $nomAbonnment);
         
         $file = fopen("icalfiles/$token.ics", "w");
