@@ -14,6 +14,9 @@
             $this->pdo = $this->db->getPDO();
         }
 
+        /**
+         * Récupère les factures d'un compte client
+         */
         public function getFactureByResId($id) {
             $facture = $this->db->executeQuery("
                 SELECT * 
@@ -26,6 +29,9 @@
             return $facture;
         }
 
+        /**
+         * Récupère les factures d'un compte client
+         */
         public function isAllowed($idFacture,$idCompte) {
             $facture = $this->db->executeQuery("
                 SELECT id_facture
@@ -38,6 +44,9 @@
             return !empty($facture);
         }
 
+        /**
+         * Création d'une facture
+         */
         public function createFacture() {
             $facture = $this->db->executeQuery("
             INSERT INTO facture (date_facture,nom_logement,prix_nuit_ht,numero_rue_pro,nom_rue_pro,code_postal_pro,nom_ville_pro,pays_pro,complement_pro,etat_pro,numero_rue_client,nom_rue_client,code_postal_client,nom_ville_client,pays_client,complement_client,etat_client,nom_proprietaire,prenom_proprietaire,email_proprietaire,nom_client,prenom_client,email_client,f_id_reservation) 

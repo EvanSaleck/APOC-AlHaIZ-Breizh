@@ -1,15 +1,18 @@
 var inputs = document.getElementsByTagName('input');
+// Désactivation des champs input
 for (var i = 0; i < inputs.length; i++) {
     if (inputs[i].id !== 'btnModifier') {
         inputs[i].disabled = true;
     }
 }
 
+// Désactivation des champs select
 var selects = document.getElementsByTagName('select');
 for (var i = 0; i < selects.length; i++) {
     selects[i].disabled = true;
 }
 
+// Désactivation des zones de texte
 var textArea = document.getElementsByTagName('textarea');
 for (var i = 0; i < textArea.length; i++) {
     textArea[i].disabled = true;
@@ -55,11 +58,11 @@ function envoyerInfos() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-        fetch('/api/getLogementDataById/' + sessionStorage.getItem('idLogement'))
+    //  Récupération des données du logement
+    fetch('/api/getLogementDataById/' + sessionStorage.getItem('idLogement'))
     .then(response => response.json())
     .then(data => {
         data.forEach(logement => {
-            // console.log(data)
 
             let logementId = data[0]['id_logement']; // Récupérer l'ID du logement
             sessionStorage.setItem('logementId', logementId); // Stocker l'ID du logement dans sessionStorage
@@ -127,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
 
+            // Récupération des catégories du logement
             fetch('/api/getCategorieOfLogementById/' + sessionStorage.getItem('idLogement'))
             .then(response => response.json())
             .then(dataCategorie => {
@@ -145,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
+            // Récupération des types du logement
             fetch('/api/getTypeOfLogementById/' + sessionStorage.getItem('idLogement'))
             .then(response => response.json())
             .then(dataType => {
@@ -163,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
+            // Récupération des amengements du logement
             let boutonsAmenagements = document.getElementById("amenagementsBoutons");
             fetch('/api/getAmenagementsOfLogementById/' + sessionStorage.getItem('idLogement'))
             .then(response => response.json())

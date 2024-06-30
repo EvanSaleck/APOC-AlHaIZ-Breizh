@@ -14,11 +14,17 @@
             $this->pdo = $this->db->getPDO();
         }
 
+        /**
+         * Récupère toutes les réservations
+         */
         public function getAllReservation() {
             $reservations = $this->db->executeQuery("SELECT * FROM reservation");
             return $reservations;
         }
 
+        /**
+         * Récupère les réservations formatés pour l'export iCal
+         */
         public function getReservationsForExportICal($dateDeb, $dateFin, $listeLogements) {
             // on prend aussi nom, prenom et email du client, ainsi que l'adresse du logement loué 
             $reservations = $this->db->executeQuery("SELECT r.id_reservation, r.date_arrivee, r.date_depart, r.tarif_total, c.pseudo, c.e_mail, l.titre, a.numero_rue, a.nom_rue, a.code_postal, a.nom_ville 
@@ -31,6 +37,9 @@
             return $reservations;
         }
 
+        /**
+         * Récupère une réservation par son id
+         */
         public function getReservationById($id) {
 
             $query = "SELECT * FROM reservation WHERE id_reservation = ?";
@@ -42,6 +51,9 @@
             return $resa;
         }
 
+        /**
+         * Récupère les réservations d'un propriétaire
+         */
         public function getReservationByOwnerId($id) {
             // Récupère les données nécessaires à l'affichage réduit de détails des réservation sur la page de liste des réservations Propriétaire
             $reservationsProprietaire = $this->db->executeQuery("SELECT id_reservation, l.titre, r.date_arrivee, r.date_depart, r.tarif_total, c.pseudo 
@@ -51,6 +63,9 @@
             return $reservationsProprietaire;
         }
 
+        /**
+         * Récupère les réservations d'un client
+         */
         public function getReservationByClientId($id) {
             // Récupère les données nécessaires à l'affichage réduit de détails des réservation sur la page de liste des réservations Client
             $reservationsClient = $this->db->executeQuery("SELECT l.titre, r.date_arrivee, r.date_depart, r.tarif_total, p.pseudo FROM reservation AS r 
@@ -60,21 +75,33 @@
             return $reservationsClient;
         }
 
+        /**
+         * Récupère le propriétaire d'une réservation 
+         */
         public function getOwnerById($id) {            
             $owner = $this->db->executeQuery("SELECT * FROM compte_proprietaire WHERE id_compte = " . $id);
             return $owner;
         }
 
+        /**
+         * verifie si une réservation existe
+         */
         public function reservationExists($id) {
             $reservation = $this->db->executeQuery("SELECT * FROM reservation WHERE id_reservation = " . $id);
             return count($reservation) > 0;
         }
 
+        /**
+         * verifie si un propriétaire existe
+         */
         public function proprietaireExists($id) {
             $reservation = $this->db->executeQuery("SELECT * FROM compte_proprietaire WHERE id_compte = " . $id);
             return count($reservation) > 0;
         }
 
+        /**
+         * enrigisre une réservation
+         */
         public function saveReservation($data, $idcpt){
 
             $query = "INSERT INTO reservation (nb_nuit, date_arrivee, date_depart, nb_occupant, total_tarif_ttc, frais_service, taxe_sejour, tarif_total,  date_reservation, en_annulation, R_id_logement, R_id_compte) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, FALSE, ?, ?)";
@@ -102,6 +129,9 @@
             return $lastInsertId;
         }
 
+        /**
+         * récupère les données d'une réservation par son id
+         */
         public function getDataReservationById($id) {
             $reservations = $this->db->executeQuery("
             SELECT client.nom AS nomClient, 

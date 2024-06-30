@@ -20,18 +20,27 @@ class Logement {
         $this->pdo = $this->db->getPDO(); 
     }
 
+    /**
+     * Récupère tous les logements
+     */
     public function getAllLogements() {
         $logements = $this->db->executeQuery('SELECT * FROM logement');
 
         return $logements;
     }
 
+    /**
+     * Récupère les logements d'un propriétaire
+     */
     public function getLogementsByProprietaireId($id) {
         $logements = $this->db->executeQuery('SELECT * FROM logement WHERE L_id_compte = ' . $id);
 
         return $logements;
     }
 
+    /**
+     * Récupère un logement par son id
+     */
     public function getLogementById($id) {
 
         $logement = $this->db->executeQuery('SELECT * FROM logement WHERE id_logement = ' . $id);
@@ -39,6 +48,9 @@ class Logement {
         return $logement;
     }
 
+    /**
+     * Récupère les données de tous les logements pour les afficher dans des cards de la page d'accueil
+     */
     public function getLogementsDataForCards($startDate = null, $endDate = null) {
         // $query = '
         // select  l.id_logement,
@@ -159,6 +171,9 @@ class Logement {
         return count($logementDispo) > 0;
     }
 
+    /**
+     * Récupère les logements d'un abonnement
+     */
     public function getLogementsByAbonnement($id){
         // on selectionne seulement le contenu de la table logement
         $logements = $this->db->executeQuery('
@@ -171,11 +186,17 @@ class Logement {
         return $logements;
     }
 
+    /**
+     * verifie si un logement existe
+     */
     public function logementExists($id) {
         $logement = $this->db->executeQuery('SELECT * FROM logement WHERE id_logement = ' . $id);
         return count($logement) > 0;
     }
 
+    /**
+     * Insert un logement à partir d'un formulaire
+     */
     public function insertLogementFromForm($formLogement) {
         try {
             $this->db->getPDO()->beginTransaction();
@@ -209,8 +230,6 @@ class Logement {
                 $colonnesAdresse[] = 'numero_rue';
                 $valeursAdresse[] = $formLogement->getNoRue();
             }
-            
-
 
             if ($formLogement->getComplementAdresse() != '') {
                 $colonnesAdresse[] = 'complement';
@@ -249,10 +268,6 @@ class Logement {
             $valeursLogement = [];
             $idProrietaire = json_decode($_SESSION['proprio'])->id_compte;
 
-            // header('Content-Type: application/json');
-            // echo json_encode($idProrietaire);
-            // die();
-
             try {
                 // on initialise la chaine de caractère de l'adresse
                 $adresse = $formLogement->getNoRue() . ' ' . $formLogement->getNomRue() . ', ' . $formLogement->getVille() . ', ' . $formLogement->getCp() . ', ' . $formLogement->getPays();
@@ -274,7 +289,8 @@ class Logement {
                 // Gestion des exceptions
                 echo 'Erreur : ' . $e->getMessage();
             }            
-
+            
+            // on ajoute les valeurs du logement    
             $valeursLogement[] = $formLogement->getTitre();
             $valeursLogement[] = $coordonnees[0];
             $valeursLogement[] = $coordonnees[1];
@@ -322,16 +338,11 @@ class Logement {
                 $valeursLogement[] = $formLogement->getDelaiAnnulMax();
             }
 
-    
-            // print_r($colonnesLogement);
-            // print_r($valeursLogement);
+            // on insere le logement en fonction des champs et valeurs qui ont été renseignés 
             $this->db->insert('logement', $colonnesLogement, $valeursLogement);
-    
 
-            // Amenagements
+            // on récupère l'id du logement (dernier insert)
             $idLogement = $this->db->getPDO()->lastInsertId();
-            // print_r($idLogement);
-
 
             // on gère l'insert de la photo après avoir eu l'id du logement
             if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
@@ -371,6 +382,9 @@ class Logement {
         return true;
     }
 
+    /**
+     *  Met à jour un logement à partir d'un formulaire
+     */
     public function updateLogementFromForm($formLogement, $idLogement) {
     try {
         $this->db->getPDO()->beginTransaction();
@@ -496,11 +510,6 @@ class Logement {
             $valeursLogement[] = $formLogement->getDelaiAnnulMax();
         }
 
-        
-
-        
-
-        // Update du logement
         $this->db->update('logement', $colonnesLogement, $valeursLogement, 'id_logement', $idLogement);
         
          // Gestion de la photo
@@ -518,7 +527,6 @@ class Logement {
         }
 
         // Mise à jour des aménagements
-        
         $amenagements = json_decode($formLogement->getAmenagements());
         //var_dump($amenagements);
         if (isset($amenagements)) {
@@ -551,7 +559,9 @@ class Logement {
 }
 
     
-
+    /**
+     * renvoie les données d'un logement avec son adresse
+     */
     public function getLogementCompleteByID($id) {
         $logements = $this->db->executeQuery('
         SELECT * 
@@ -563,6 +573,9 @@ class Logement {
         return $logements;
     }
 
+    /**
+     * renvoie les aménagements d'un logement
+     */
     public function getAmenagementsOfLogementById($id) {
         $logements = $this->db->executeQuery('
         SELECT id_amenagement, nom_amenagement
@@ -575,6 +588,9 @@ class Logement {
         return $logements;
     }
 
+    /**
+     * renvoie le type de logement à partir d'un id
+     */
     public function getTypeOfLogementById($id) {
         $logements = $this->db->executeQuery('
         SELECT id_type, nom_type
@@ -586,6 +602,9 @@ class Logement {
         return $logements;
     }
 
+    /**
+     * renvoie la catégorie de logement à partir d'un id
+     */
     public function getCategorieOfLogementById($id) {
         $logements = $this->db->executeQuery('
         SELECT id_categorie, nom_categorie
@@ -597,6 +616,9 @@ class Logement {
         return $logements;
     }
 
+    /**
+     * renvoie le status d'un logement à partir de son id
+     */
     public function getStatutProprieteOfLogementById($id) {
         $logements = $this->db->executeQuery('
         SELECT statut_propriete
@@ -607,13 +629,17 @@ class Logement {
         return $logements;
     }
 
-
-
+    /**
+     * renvoie la liste des communes liés à des logements
+     */
     public function getCommunes() {
         $communes = $this->db->executeQuery('SELECT DISTINCT nom_ville FROM adresse');
         return $communes;
     }
 
+    /**
+     * met à jour le statut d'un logement
+     */
     public function updateStatutLogement($id, $nouveauStatut) {
         $sql = 'UPDATE logement SET statut_propriete = ? WHERE id_logement =?';
 
@@ -624,9 +650,4 @@ class Logement {
 
         return $result;
     }
-    
-    
-
-    
-    
 }

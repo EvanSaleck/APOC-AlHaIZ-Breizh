@@ -18,7 +18,10 @@ class ReservationController {
         $this->reservation = new Reservation();
         $this->icalService = new ICalService();
     }
-        
+     
+    /**
+     * Récupère toutes les réservations
+     */
     public function getAllReservations(){
         $reservations = $this->reservation->getAllReservation();
             
@@ -27,6 +30,9 @@ class ReservationController {
         echo json_encode($reservations);
     }
         
+    /**
+     * Récupère les réservations d'un propriétaire
+     */
     public function getReservationByOwnerId($id) {
         $reservationsProprietaire = $this->reservation->getReservationByOwnerId($id);
                     
@@ -35,6 +41,9 @@ class ReservationController {
         echo json_encode($reservationsProprietaire);
     }
 
+    /**
+     * Récupère les réservations par l'id d'un client
+     */
     public function getReservationByClientId($id) {
         $reservationsClient = $this->reservation->getReservationByClientId($id);
                     
@@ -43,6 +52,9 @@ class ReservationController {
         echo json_encode($reservationsClient);
     }
 
+    /**
+     * Récupère le propriétaire d'une réservation par son id
+     */
     public function getOwnerById($id) {
         $owner = $this->reservation->getOwnerById($id);
                     
@@ -51,6 +63,9 @@ class ReservationController {
         echo json_encode($owner);
     }
 
+    /**
+     * Verifie si une réservation existe
+     */
     public function reservationExists($id) {
         $reservations = $this->reservation->reservationExists($id);
                     
@@ -59,6 +74,9 @@ class ReservationController {
         echo ($reservations ? 'true' : 'false');
     }
 
+    /**
+     * Verifie si un propriétaire existe
+     */
     public function proprietaireExists($id) {
         $proprietaire = $this->reservation->proprietaireExists($id);
                     
@@ -67,6 +85,9 @@ class ReservationController {
         echo ($proprietaire ? 'true' : 'false');
     }
 
+    /**
+     * Enregistre une réservation
+     */
     public function saveReservation($data, $idcpt){
         try{
 
@@ -82,6 +103,9 @@ class ReservationController {
 
     }
 
+    /**
+     * Renvoie la dernière réservation en fonction de la date d'arrivée et de la date de départ
+     */
     public function getLastReservationfromDateDebutAndDateFin($data, $idcpt) {
         try {
             $date_arrivee = $data['date_arrivee'];
@@ -99,6 +123,9 @@ class ReservationController {
         }
     }
 
+    /**
+     * Récupère une réservation par son id
+     */
     public function getReservationById($data) {
         try {
             $id = $data['id'];
@@ -114,6 +141,9 @@ class ReservationController {
         }
     }
 
+    /**
+     * Récupère des données d'une réservation par son id
+     */
     public function getDataReservationById($id) {
         try {
             $return = $this->reservation->getDataReservationById($id);

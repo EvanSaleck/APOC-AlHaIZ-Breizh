@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "#amenagementsBoutons button"
   );
 
+  // on met à jour les boutons d'aménagement
   amenagementsBtns.forEach((btn) => {
     btn.addEventListener("click", function (e) {
       btn.classList.toggle("active");
@@ -32,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+
   document
     .getElementById("formNewLogement")
     .addEventListener("submit", function (event) {
@@ -53,12 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const file = fileInput.files[0];
         formData.append("photo", file);
       }
-     
-      // lister dans la console les données du formulaire
-      // for (var pair of formData.entries()) {
-      //   console.log(pair[0] + ", " + pair[1]);
-      // }
         
+      // on envoie le formulaire en le traitant si il est valide
       if (validateFormData(formData)) {
         fetch("/api/processFormNewLogement", {
           method: "POST",
@@ -143,9 +141,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Fonction pour valider les données du formulaire
 function validateFormData(formData) {
+  // on remet a zero les erreurs
   utils.resetErrors();
 
+  // Vérification de la photo
   verifPhoto([formData.get('photo')]);
 
   validateField(formData, 'titre', [
@@ -240,6 +241,7 @@ function validateField(formData, fieldName, validations) {
   });
 }
 
+// fonciton permettant de récupérer le prochain élément avec la classe 'messageError'
 function getNextErrorSpan(id) {
   // Trouver l'élément initial à partir de son ID
   var initialElement = document.getElementById(id);

@@ -2,8 +2,8 @@ addEventListener("DOMContentLoaded", () => {
     let idresa = sessionStorage.getItem("idresa");
     let id = new FormData();
     id.append("id", idresa);
-    console.log(sessionStorage)
 
+    // Récupération des données de la réservation
     fetch("/api/getReservationById", { method: "POST", body: id })
         .then((response) => response.json())
         .then((data) => {
@@ -39,6 +39,8 @@ addEventListener("DOMContentLoaded", () => {
                 window.open("/facture/"+idresa)
             });
             
+
+            // Récupération des données du logement
             fetch("/api/getLogementById", { method: "POST", body: id })
                 .then((response) => response.json())
                 .then((data) => {

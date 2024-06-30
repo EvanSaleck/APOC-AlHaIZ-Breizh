@@ -14,6 +14,9 @@
             $this->user = new Utilisateur();
         }
 
+        /**
+         * Récupère les détails d'un compte client
+         */
         public function getCompteClientDetails($idCompte) {
             
             $dataCompteClient = $this->user->getCompteClientDetails($idCompte);
@@ -22,6 +25,9 @@
             echo json_encode($dataCompteClient);
         }
 
+        /**
+         * connexion d'un client
+         */
         public function connexionClient($data) {
             try {
                 $return = $this->user->connexionClient($data);
@@ -36,20 +42,9 @@
             }
         }
 
-        public function connexionProprietaire($data) {
-            try {
-                $return = $this->user->connexionProprietaire($data);
-
-                header('Content-Type: application/json');
-                echo json_encode($return);
-            }
-            catch (Exception $e) {
-                http_response_code(500);
-                echo json_encode($e->getMessage());
-                exit;
-            }
-        }
-
+        /**
+         *  Inscription d'un client
+         */
         public function inscriptionClient($data) {
             try {
                 $return = $this->user->inscriptionClient($data);
@@ -63,20 +58,10 @@
                 exit;
             }
         }
-        public function inscriptionProprietaire($data) {
-            try {
-                $return = $this->user->inscriptionProprietaire($data);
 
-                header('Content-Type: application/json');
-                echo json_encode($return);
-            }
-            catch (Exception $e) {
-                http_response_code(500);
-                echo json_encode(['Erreur : ' => $e->getMessage()]);
-                exit;
-            }
-        }
-
+        /**
+         * connexion d'un propriétaire
+         */
         public function connexionProprio($data) {
             try {
                 $return = $this->user->connexionProprio($data);
@@ -91,6 +76,9 @@
             }
         }
 
+        /**
+         * Inscription d'un propriétaire
+         */
         public function inscriptionProprio($data) {
             try {
                 $return = $this->user->inscriptionProprio($data);
@@ -105,6 +93,9 @@
             }
         }
 
+        /**
+         * Récupère les détails d'un compte propriétaire par son id
+         */
         public function getProprioById($id) {
             try {
                 $utilisateur = new Utilisateur();
@@ -120,6 +111,9 @@
             }
         }
 
+        /**
+         * Récupère les détails d'un compte propriétaire par son id 
+         */
         public function getCompteProprioDetails($id){
             try {
                 $dataCompteProprio = $this->user->getCompteProprietaireDetails($id);
@@ -134,6 +128,9 @@
             }
         }
 
+        /**
+         * Récupère tous les tokens d'un propriétaire avec son id
+         */
         public function getAllTokenById($id){
             try {
                 $return = $this->user->getAllTokenById($id);
@@ -148,6 +145,9 @@
             }
         }
 
+        /**
+         * Supprime un token d'un propriétaire
+         */
         public function deleteToken($values){
             try {
                 $cle = $values['id_cle'];
@@ -164,6 +164,9 @@
             }
         }
         
+        /**
+         * génère un token pour un propriétaire
+         */
         public function generateToken($values){
             try {
                 $return = $this->user->generateToken($values['id_proprio']);
@@ -177,6 +180,9 @@
             }
         }
 
+        /**
+         * met à jour le mot de passe d'un utilisateur
+         */
         public function updatePassword($values){
             try {
                 $mdp = $values['oldPwd'];
@@ -196,6 +202,9 @@
             }
         }
 
+        /**
+         * met à jour le mot de passe d'un client
+         */
         public function updateCliPassword($values){
             try {
                 $mdp = $values['oldPwd'];
@@ -214,6 +223,9 @@
             }            
         }
 
+        /**
+         * met à jour le profil d'un utilisateur
+         */
         public function updateProfile($values){
             try {
                 $return = $this->user->updateProfile($values);
@@ -227,6 +239,9 @@
             }
         }
 
+        /**
+         * met à jour le profil d'un client
+         */
         public function updateCliProfile($values){
             try {
                 $return = $this->user->updateCliProfile($values);

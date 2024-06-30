@@ -8,6 +8,7 @@ addEventListener("DOMContentLoaded", () => {
   AddListeners();
 });
 
+// Fonction pour ajouter les listeners sur les boutons de connexion et de profil
 function AddListeners() {
   // Si la taille de l'écran est inférieure à 992px, on ajoute un listener sur le bouton de connexion
   let compte;
@@ -28,6 +29,7 @@ function AddListeners() {
 
 }
 
+// Fonction pour récupérer l'utilisateur connecté
 function GetConnected() {
   if (sessionStorage.getItem("User") != null) {
     let user = JSON.parse(sessionStorage.getItem('User')) || "Guest";
@@ -36,6 +38,7 @@ function GetConnected() {
   }
 }
 
+// Fonction pour définir l'image de profil et le modal de connexion
 function SetModalAndProfilePicture() { 
     let compte = document.getElementById("Compte");
     if (currentUser === undefined || currentUser === null) {
@@ -45,6 +48,7 @@ function SetModalAndProfilePicture() {
     }
 }
 
+// Fonction pour afficher le modal de connexion
 function ShowModalConnexion() {
 
   let modal = document.getElementById("Bulle");
@@ -67,6 +71,7 @@ function ShowModalConnexion() {
   }, 1000); 
 }
 
+// Fonction pour afficher le modal de profil
 function ShowModalProfile() {
   let modal = document.getElementById("Bulle");
   let profile = document.getElementById("Profil");
@@ -92,6 +97,7 @@ function ShowModalProfile() {
   }, 1000); // Ajou
 }
 
+// Fonction pour fermer le modal
 function closeModal(e) {
   let modal = document.getElementById("Bulle");
   if (!modal.contains(e.target) && e.target.id != "Connexion") {

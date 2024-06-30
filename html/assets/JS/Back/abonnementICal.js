@@ -17,10 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
         dateDebut.max = dateFin.value;
     });
 
+
+    // on récupère les logements du propriétaire
     fetch('/api/getLogementsByProprietaireId')
     .then(response => response.json())
     .then(data => {
         data.forEach(logement => {
+            // on crée un div pour chaque logement avec un label et un checkbox
             let div = document.createElement('div');
         
             let label = document.createElement('label');
@@ -42,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
     });
 
+    // on ajoute un event listener sur le formulaire
     let form = document.getElementById('formICal');
     form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -49,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var formData = new FormData(this); 
 
         if(validateFormData(e)) {
+            // si on est sur la page d'edition, on update, sinon on crée
             if (window.location.pathname.match(/^\/reservations\/abonnements\/iCal\/edit\/\d+\/$/) || window.location.pathname.match(/^\/reservations\/abonnements\/iCal\/edit\/\d+$/)) {
                 let id = window.location.pathname.split('/')[5];
                 updateAbonnement(id, formData);
@@ -58,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // pour véirifier que les données entrées sont correctes
     function validateFormData(e) {
         resetErrors();
         let isValid = true;
@@ -167,11 +173,9 @@ document.addEventListener('DOMContentLoaded', function() {
         submit.value = 'Modifier l\'abonnement';
     }
 
-    function createAbonnement(formData) {
-        // formData.entries().forEach(element => {
-        //     console.log(element);
-        // });
 
+    function createAbonnement(formData) {
+        // on envoie les données du formulaire pour créer un nouvel abonnement
         fetch("/api/reservations/abonnements/iCal/new", {
             method: "POST",
             body: formData,
@@ -191,8 +195,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // update 
     function updateAbonnement(id, formData) {
+        // on envoie les données du formulaire pour modifier un abonnement
         fetch("/api/reservations/abonnements/iCal/edit/" + id, {
             method: "POST",
             body: formData,

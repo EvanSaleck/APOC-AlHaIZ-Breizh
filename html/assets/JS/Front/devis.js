@@ -142,6 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let data = JSON.parse(sessionStorage.getItem('Logement'));
             
+            // Création du formulaire pour l'envoi des données de la réservation
             let formData = new FormData();
             formData.append('dateArrivee', document.getElementById('dateArrivee').textContent);
             formData.append('dateDepart', document.getElementById('dateFin').textContent);
@@ -153,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('tariftotalnuit', document.getElementById('prixNuitTtc').textContent.split("€")[0]);
             formData.append('id_logement', sessionStorage.getItem('idLogement'));
 
+            // Envoi de la requête pour insérer la réservation
             fetch("/api/insertReservation", {
                 method: "POST",
                 body: formData,

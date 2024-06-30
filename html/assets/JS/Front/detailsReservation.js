@@ -3,6 +3,7 @@ addEventListener("DOMContentLoaded", () => {
     let id = new FormData();
     id.append("id", idresa);
     
+    // Récupération des informations de la réservation 
     fetch("/api/getReservationById", { method: "POST", body: id })
         .then((response) => response.json())
         .then((data) => {
@@ -29,6 +30,7 @@ addEventListener("DOMContentLoaded", () => {
 
             let idproprio = null;
 
+            // Récupération des informations du logement
             fetch("/api/getLogementById", { method: "POST", body: id })
                 .then((response) => response.json())
                 .then((data) => {
@@ -44,7 +46,6 @@ addEventListener("DOMContentLoaded", () => {
                     .then((response) => response.json())
                     .then((data) => {
                       
-                    console.log(data);
                     document.getElementById("nomproprio").textContent = data.pseudo;
                     document.getElementById("mailproprio").textContent = data.e_mail;
                     document.getElementById("photoproprio").src = data.photo_profil;

@@ -29,6 +29,7 @@ use PDOException;
         return $this->pdo;
     }
 
+    // fonction pour executer une requete à partir d'une chaine de caractère ou d'une requete préparée avec des paramètres
     public function executeQuery($query, $params = null) {
         try {
             $statement = $this->pdo->prepare($query);
@@ -40,17 +41,20 @@ use PDOException;
         }
     }
 
+    /**
+     * permet d'insérer en bdd avec le nom de la table, les colonnes et les valeurs
+     */
     public function insert($table, $columns, $values) {
-        // Ensure $columns and $values are arrays and have the same length
+        // verification que les colonnes et les valeurs sont des tableaux et de même longueur
         if (!is_array($columns) || !is_array($values) || count($columns) !== count($values)) {
             throw new Exception('Les colonnes et les valeurs doivent être des tableaux de même longueur.');
         }
 
-        // Prepare column names and placeholders for the query
+        // preparation des colonnes et des placeholders pour la requete
         $columnsString = implode(', ', $columns);
         $placeholders = implode(', ', array_fill(0, count($values), '?'));
 
-        // Create the SQL query
+        // creation de la requet 
         $query = "INSERT INTO $table ($columnsString) VALUES ($placeholders)";
 
         try {
@@ -61,13 +65,16 @@ use PDOException;
         }
     }
 
+    /**
+     * permet de mettre à jour en bdd avec le nom de la table, les colonnes et les valeurs, la colonne de condition et la valeur de condition
+     */
     public function update($table, $columns, $values, $whereColumn, $whereValue) {
         // Ensure $columns and $values are arrays and have the same length
         if (!is_array($columns) || !is_array($values) || count($columns) !== count($values)) {
             throw new Exception('Les colonnes et les valeurs doivent être des tableaux de même longueur.');
         }
 
-        // Prepare column names and placeholders for the query
+        // on prepare les colonnes et les placeholders pour la requete
         $set = '';
         for ($i = 0; $i < count($columns); $i++) {
             $set .= $columns[$i] . ' = ?';
@@ -76,7 +83,7 @@ use PDOException;
             }
         }
 
-        // Create the SQL query
+        // creation de la requete
         $query = "UPDATE $table SET $set WHERE $whereColumn = ?";
 
         try {
@@ -87,11 +94,14 @@ use PDOException;
         }
     }
 
+    /**
+     * permet de faire un select en bdd avec le nom de la table, les colonnes, les conditions, l'ordre et la limite
+     */
     public function select($table, $columns = ['*'], $conditions = [], $orderBy = null, $limit = null) {
         // Prepare columns
         $columnsString = implode(', ', $columns);
 
-        // Prepare conditions
+        // on prepare les conditions si elles sont définies
         $where = '';
         $params = [];
         if (!empty($conditions)) {
@@ -103,19 +113,19 @@ use PDOException;
             $where = rtrim($where, ' AND ');
         }
 
-        // Prepare ORDER BY
+        // on ajoute l'ordre de tri si il est défini
         $orderByString = '';
         if ($orderBy !== null) {
             $orderByString = " ORDER BY $orderBy";
         }
 
-        // Prepare LIMIT
+        // on ajoute la limite si elle est définie
         $limitString = '';
         if ($limit !== null) {
             $limitString = " LIMIT $limit";
         }
 
-        // Create the SQL query
+       // creation de la requete
         $query = "SELECT $columnsString FROM $table $where $orderByString $limitString";
 
         try {

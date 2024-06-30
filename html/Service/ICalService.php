@@ -20,29 +20,35 @@ class ICalService {
         $this->logementModel = new Logement();
     }
 
+    /**
+     * Génère un fichier ics à partir d'un token
+     */
     public function generateFileWithToken($token) {
         $abonnement = new AbonnementICal();
         $abonnement = $abonnement->getAbonnementByToken($token);
         
+        // Récupération des informations de l'abonnement
         $dateDebut = $abonnement[0]['date_debut'];
         $dateFin = $abonnement[0]['date_fin'];
         $sequence = $abonnement[0]['nb_modifications'];
         $nomAbonnment = $abonnement[0]['titre'];
 
+        // Récupération des logements de l'abonnement
         $logements = $this->logementModel->getLogementsByAbonnement($abonnement[0]['id_abonnement']);
 
+        // Récupération des id des logements
         $idsLogements = [];
         foreach($logements as $logement) {
             $idsLogements[] = $logement['id_logement'];
         }
-
-
         
-        
+        // Récupération des réservations pour les logements de l'abonnement
         $reservations = $this->reservationModel->getReservationsForExportICal($dateDebut, $dateFin, $idsLogements);
         
+        // Génération du fichier ics
         $reservationICal =  $this->getReservationsIcal($reservations,$sequence, $nomAbonnment);
         
+        // on enregistre le fichier ics dans le dossier icalfiles
         $file = fopen("icalfiles/$token.ics", "w");
         fwrite($file, $reservationICal);
         fclose($file);
@@ -50,12 +56,18 @@ class ICalService {
         return $reservationICal;
     }
 
+    /**
+     * Récupère l'url du fichier ics à partir d'un token
+     */
     public function urlFromToken($token) {
         $server = $_SERVER['HTTP_HOST'];
         $url = "http://$server/icalfiles/$token.ics";
         return $url;
     }
 
+    /**
+     * Génère un fichier ics à partir d'une liste de réservations
+     */
     public function getReservationsIcal($reservations, $sequence, $nomAbonnment) {        
         $ical = "BEGIN:VCALENDAR\n";
         $ical .= "VERSION:2.0\n";
@@ -79,12 +91,16 @@ class ICalService {
             $ical .= "END:VEVENT\n";
         }
 
+        // on incrémente le numéro de séquence à chaque modification en bdd, ce qui permet de mettre à jour le calendrier
         $ical .= "SEQUENCE:" . $sequence . "\n";
         $ical .= "END:VCALENDAR";
 
         return $ical;
     }
 
+    /**
+     * Formate les informations des abonnements pour l'affichage
+     */
     public function formatAbonnementTab($id) {
         $abonnementFormat = [];
 

@@ -150,6 +150,7 @@ function handleButtonStyle(bnID) {
     bnPasse.classList.remove("ongletSelect");
     bnTout.classList.remove("ongletSelect");
 
+    // Applique le style au bouton sélectionné
     switch (bnID) {
         case 1:
             bnEnCours.classList.add("ongletSelect");

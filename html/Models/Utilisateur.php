@@ -15,6 +15,9 @@ class Utilisateur {
         $this->pdo = $this->db->getPDO(); 
     }
 
+    /**
+     * Récupère les détails d'un compte client
+     */
     public function getCompteClientDetails($idCompte) {
         $sql = "
             SELECT 
@@ -30,6 +33,9 @@ class Utilisateur {
         return $dataCompteClient;
     }
 
+    /**
+     * Récupère les détails d'un compte propriétaire
+     */
     public function getCompteProprietaireDetails($idCompte) {
         $sql = "
             SELECT 
@@ -44,6 +50,9 @@ class Utilisateur {
         return $dataCompteClient;
     }
 
+    /**
+     * connexionClient
+     */
     public function connexionClient($data) {
         if(str_contains($data['pseudo'], '@')) {
             $query = "SELECT * FROM sae3.compte_client WHERE e_mail = ?";
@@ -64,12 +73,13 @@ class Utilisateur {
         }
     }
 
-    
+    /**
+     * inscriptionClient
+     */
     public function inscriptionClient($data) {
         try {
             $this->db->getPDO()->beginTransaction();
             // on commence par regarder si un utilisateur n'existe pas deja avec le meme email
-
             $query = "SELECT * FROM sae3.compte_client WHERE e_mail = ?";
             $statement = $this->pdo->prepare($query);
             $statement->execute([$data['email']]);
@@ -150,11 +160,14 @@ class Utilisateur {
         }
     }
     
-    
-    
-
-
+    /**
+     * connexion propietaire
+     */
     public function connexionProprio($data) {
+        // le champ peut être un pseudo ou un email
+        // on vérifie si le champ contient un @ pour savoir si c'est un email
+        // si c'est un email on fait la requête avec le champ e_mail
+        // sinon on fait la requête avec le champ pseudo
         if(str_contains($data['pseudo'], '@')) {
             $query = "SELECT * FROM sae3.compte_proprietaire WHERE e_mail = ?";
         } else {
@@ -165,6 +178,7 @@ class Utilisateur {
 
         $utilisateur = $statement->fetch(\PDO::FETCH_ASSOC);
 
+        // si l'utilisateur existe et que le mot de passe est correct on connecte l'utilisateur 
         if ($utilisateur && password_verify($data['password'], $utilisateur['mdp'])) {
             $_SESSION['proprio'] = json_encode($utilisateur);
             return 'Connexion réussie';
@@ -174,14 +188,22 @@ class Utilisateur {
         }
     }
 
+    /**
+     * inscription propietaire
+     */
     public function inscriptionProprio($data) {
         $query = "INSERT INTO sae3.compte_proprietaire (civilite, nom, prenom, e_mail, mdp, pseudo, photo_profil, ddn, c_id_adresse, code_client) VALUES (?, ?, ?)";
         $statement = $this->pdo->prepare($query);
+
+        // on hash le mot de passe à l'inscription
         $statement->execute([$data['pseudo'], $data['email'], password_hash($data['password'], PASSWORD_DEFAULT)]);
 
         return 'Inscription réussie';
     }
 
+    /**
+     * Récupère un compte propriétaire par son id
+     */
     public function getProprioById($id) {
 
         $query = "SELECT * FROM sae3.compte_proprietaire WHERE id_compte = ?";
@@ -193,6 +215,9 @@ class Utilisateur {
         return $proprio;
     }   
 
+    /**
+     *  on récupère les informations tous les tokens d'un propriétaire 
+     */
     public function getAllTokenById($id){
         $query = "SELECT * FROM sae3.cle_api WHERE c_id_proprio = ?";
         $statement = $this->pdo->prepare($query);
@@ -203,6 +228,9 @@ class Utilisateur {
         return $tokens;
     }
 
+    /**
+     * suppresion d'un token
+     */
     public function deleteToken($cle, $idproprio){
         $query = "DELETE FROM sae3.cle_api WHERE cle = ? AND c_id_proprio = ?";
         $statement = $this->pdo->prepare($query);
@@ -211,6 +239,9 @@ class Utilisateur {
         return 'Token supprime';
     }
 
+    /**
+     * génération d'un token
+     */
     public function generateToken($id){
         $token = bin2hex(random_bytes(32));
         $query = "INSERT INTO sae3.cle_api (cle, c_id_proprio) VALUES (?, ?)";
@@ -221,12 +252,16 @@ class Utilisateur {
         return 'Token genere';
     }
 
+    /**
+     * mise à jour d'un mot de passe
+     */
     public function updatePassword($mdp, $newmdp, $confmdp, $id){
         $sql = "SELECT mdp FROM sae3.compte_proprietaire WHERE id_compte = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
+        // on vérifie si le mot de passe actuel est correct 
         if (!password_verify($mdp, $result['mdp'])) {
             return 'Mot de passe incorrect';
         }  
@@ -234,6 +269,7 @@ class Utilisateur {
             return 'Les mots de passe ne correspondent pas';
         }
 
+        // on hash le nouveau mot de passe
         $newhash = password_hash($newmdp, PASSWORD_DEFAULT);
         $sql = "UPDATE sae3.compte_proprietaire SET mdp = ? WHERE id_compte = ?";
         $stmt = $this->pdo->prepare($sql);
@@ -242,12 +278,16 @@ class Utilisateur {
         return 'Mot de passe modifie';
     }
 
+    /**
+     * mise à jour d'un mot de passe pour un client
+     */
     public function updateCliPassword($mdp, $newmdp, $confmdp, $id){
         $sql = "SELECT mdp FROM sae3.compte_client WHERE id_compte = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$id]);
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
+        // on vérifie si le mot de passe actuel est correct
         if (!password_verify($mdp, $result['mdp'])) {
             return 'Mot de passe incorrect';
         }  
@@ -255,6 +295,7 @@ class Utilisateur {
             return 'Les mots de passe ne correspondent pas';
         }
 
+        // on hash le nouveau mot de passe
         $newhash = password_hash($newmdp, PASSWORD_DEFAULT);
         $sql = "UPDATE sae3.compte_client SET mdp = ? WHERE id_compte = ?";
         $stmt = $this->pdo->prepare($sql);
@@ -263,8 +304,10 @@ class Utilisateur {
         return 'Mot de passe modifie';
     }
 
+    /**
+     * mise à jour d'un profil
+     */
     public function updateProfile($values){
-
         $sql = "UPDATE sae3.compte_proprietaire 
                 SET civilite = ?, nom = ?, prenom = ?, e_mail = ?, pseudo = ?, ddn = ? 
                 WHERE id_compte = ?";
@@ -309,6 +352,7 @@ class Utilisateur {
         return 'Profil modifie';
     }
 
+    // mise à jour d'un profil pour un client
     public function updateCliProfile($values){
         $sql = "UPDATE sae3.compte_client
                 SET civilite = ?, nom = ?, prenom = ?, e_mail = ?, pseudo = ?
@@ -353,6 +397,4 @@ class Utilisateur {
     
         return 'Profil modifie';
     }
-    
-
 }

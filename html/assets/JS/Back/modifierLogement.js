@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const amenagementsBtns = document.querySelectorAll("#amenagementsBoutons button");
 
+    // Fonction pour mettre à jour les boutons d'aménagement
     function updateAmenagementsButtons() {
         amenagementsBtns.forEach(btn => {
             const id = btn.id;
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Ajout d'un listener sur chaque bouton d'aménagement
     amenagementsBtns.forEach(btn => {
         btn.addEventListener("click", function(e) {
             e.stopPropagation(); // Empêcher la propagation de l'événement click vers le formulaire
@@ -34,35 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const dropZone = document.getElementById("drop-photo");
-    const fileInput = document.getElementById("photo-input");
-    const fileButton = document.getElementById("photo-button");
-
-    dropZone.addEventListener("dragover", (event) => {
-        event.preventDefault();
-        dropZone.classList.add("dragover");
-    });
-
-    dropZone.addEventListener("dragleave", () => {
-        dropZone.classList.remove("dragover");
-    });
-
-    dropZone.addEventListener("drop", (event) => {
-        event.preventDefault();
-        dropZone.classList.remove("dragover");
-        fileInput.files = event.dataTransfer.files;
-        updatePhotoName(fileInput.files);
-    });
-
-    fileButton.addEventListener("click", () => {
-        fileInput.click();
-    });
-
-    fileInput.addEventListener("change", (event) => {
-        const files = event.target.files;
-        updatePhotoName(files);
-    });
-
+    // Fonction pour mettre à jour l'aperçu de l'image
     function updatePhotoName(files) {
         const imagePreviewElement = document.getElementById('drop-photo');
         if (files.length > 0) {
@@ -71,7 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
             imagePreviewElement.style.backgroundImage = "none";
         }
     }
-
+     
+    // ajut d'un listener sur le formulaire pour traiter la soumission du formulaire
     document.getElementById('formNewLogement').addEventListener('submit', function(event) {
         event.preventDefault();
         window.scroll({ top: 0, behavior: 'smooth' });
@@ -80,11 +55,13 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('pays', 'France');
         formData.append('etat', '');
 
+        // Ajout de l'image
         if (fileInput.files.length > 0) {
             const file = fileInput.files[0];
             formData.append('photo', file);
         }
 
+        // Ajout des aménagements sélectionnés
         const logementId = sessionStorage.getItem('logementId');
         if (logementId) {
             formData.append('id_logement', logementId);
@@ -115,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        // Récupération des données du logement
         fetch(`/api/getLogementDataById/${logementId}`)
         .then(response => response.json())
         .then(data => {
@@ -123,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            // Remplissage des champs du formulaire
             const logement = data[0];
             document.getElementById('titre').value = logement['titre'];
             document.getElementById('ville').value = logement['nom_ville'];
@@ -144,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const imageElement = document.getElementById('drop-photo');
             imageElement.style.backgroundImage = `url('${logement['image_principale']}')`;
 
+            // Récupération des aménagements du logement
             fetch(`/api/getAmenagementsOfLogementById/${logementId}`)
             .then(response => response.json())
             .then(dataAm => {

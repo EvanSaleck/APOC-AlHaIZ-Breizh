@@ -73,6 +73,7 @@
             $this->logement = new Logement();
         }
         
+        // permet de set les champs non obligatoires
         public function setNotRequiredFields(
             $noRue,
             $complementAdresse,
@@ -116,6 +117,10 @@
             }
             
         }
+
+        /**
+         * Getters
+         */
 
         public function getTitre() {
             return $this->titre;
@@ -213,6 +218,11 @@
             return $this->statutPropriete;
         }
     
+
+        /**
+         * Setters
+         */
+
 
         public function setTitre($titre) {
             $this->titre = $titre;
@@ -358,6 +368,9 @@
             return $this;
         }
 
+        /**
+         * permet de convertir l'objet en tableau
+         */
         public function toArray(){
             return [
                 'titre' => $this->titre,
@@ -388,6 +401,9 @@
         
         }
 
+        /**
+         * permet d'insérer le logement à partir de l'objet 
+         */
         public function insert() {
             try {
                 $this->logement->insertLogementFromForm($this);

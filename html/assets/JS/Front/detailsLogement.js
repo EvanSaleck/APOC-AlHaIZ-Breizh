@@ -1,15 +1,16 @@
 import { ThrowAlertPopup } from '../utils.js'
+// si une alerte est stockée dans le local storage, on l'affiche
+const storedPopup = localStorage.getItem('alertPopup');
+let message, type;
 
-    const storedPopup = localStorage.getItem('alertPopup');
-    let message, type;
-    
-    if (storedPopup) {
-        ({ message, type } = JSON.parse(storedPopup));
-        ThrowAlertPopup(message, type);
-        localStorage.removeItem('alertPopup');
-    }
+if (storedPopup) {
+    ({ message, type } = JSON.parse(storedPopup));
+    ThrowAlertPopup(message, type);
+    localStorage.removeItem('alertPopup');
+}
 
 
+// Fonction pour calculer le devis
 function calculDevis(prixNuitTTC) {
     let dateDebut = document.getElementById("dateDebut");
     let dateFin = document.getElementById("dateFin");
@@ -25,6 +26,7 @@ function calculDevis(prixNuitTTC) {
     return totalDevis
 }
 
+// Fonction pour envoyer le devis
 function envoiDevis(prixNuitTTC,data) {
     let dateDebut = document.getElementById("dateDebut");
     let dateFin = document.getElementById("dateFin");
@@ -53,12 +55,11 @@ function envoiDevis(prixNuitTTC,data) {
         
     };
     
-    // console.log(JSON.stringify(logementJSON));
+    // On stocke le devis dans le sessionStorage
     sessionStorage.setItem("Logement", JSON.stringify(logementJSON));
-    
-    
 }
 
+// Fonction pour afficher ou cacher le récapitulatif du devis
 function afficheRecap(valide) {
     let btnRes = document.getElementById("btnRes");
     let recapitulatifDevis = document.getElementById("recap");
@@ -72,14 +73,14 @@ function afficheRecap(valide) {
     }
 }
 
+// Vérification de la présence d'un logement séléctionné
 if (sessionStorage.getItem('idLogement') == null) {
     alert("Aucun logement n'a été séléctionné, veuillez séléctionner un logement");
     window.location.href = `/`;
 }
 
-console.log('detailsLogement.js');
 document.addEventListener('DOMContentLoaded', function() {
-    console.log(sessionStorage.getItem('idLogement'));
+    // On récupère les informations du logement
     fetch('/api/getLogementDataById/' + sessionStorage.getItem('idLogement'))
     .then(response => response.json())
     .then(data => {
@@ -116,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(dataAm => {
             let imgAmenagement
             dataAm.forEach(amenagement => {
+                // On attribue une image à chaque aménagement
                 switch (amenagement['id_amenagement']) {
                     case 1:
                         imgAmenagement = "/assets/imgs/iconsAmenagements/jardin.svg"
@@ -145,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
             listeAmenagements.innerHTML = htmlAmenagement
         });
 
+        // On récupère les dates de début et de fin
         let sctNbOccupants = document.getElementById("sctNbOccupants");
         let htmlSelectNbPersonnes = ""
         for (let i = 1; i <= data[0]['personnes_max']; i++) {
@@ -162,25 +165,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+
+        // gestion des dates
         let totalTtc = document.getElementById("totalTtc");
         let dateDebut = document.getElementById("dateDebut");
         let dateArrivee = document.getElementById("dateArrivee");
         let dateFin = document.getElementById("dateFin");
         let dateDepart = document.getElementById("dateDepart");
 
-        console.log(dateDebut.value)
         dateArrivee.innerHTML = dateDebut.value
         dateDepart.innerHTML = dateFin.value
 
         dateDebut.setAttribute("max",dateFin.value);
         dateFin.setAttribute("min",dateDebut.value);
 
+        // On vérifie si les dates sont valides
         dateDebut.addEventListener("input", () => {
             dateFin.setAttribute("min",dateDebut.value)
             dateArrivee.innerHTML = dateDebut.value
             totalTtc.innerHTML = calculDevis(data[0]['prix_nuit_ttc'])
             afficheRecap(new Date(dateDebut.value).getTime() - new Date(dateFin.value).getTime() <= 0 )
         });
+
         dateFin.addEventListener("input", () => {
             dateDebut.setAttribute("max",dateFin.value)
             dateDepart.innerHTML = dateFin.value
@@ -188,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
             afficheRecap(new Date(dateDebut.value).getTime() - new Date(dateFin.value).getTime() <= 0 )
         });
         totalTtc.innerHTML = calculDevis(data[0]['prix_nuit_ttc'])
-    
+
         let btnRes = document.getElementById("btnRes");
         btnRes.addEventListener('click', function() {
             // on teste avec une requet ajax si le logmeen est disonible
@@ -204,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
+            // on envoi le devis
             envoiDevis(data[0]['prix_nuit_ttc'],data)
             window.location.href = `/reservation/devis`;
         });

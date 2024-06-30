@@ -8,6 +8,8 @@ addEventListener("DOMContentLoaded", () => {
   AddListeners();
 });
 
+
+// Ajout des écouteurs d'événements
 function AddListeners() {
   let compte = document.getElementById("Compte");
   compte.addEventListener("click", () => {
@@ -22,6 +24,7 @@ function AddListeners() {
 
 }
 
+// Récupération de l'utilisateur connecté
 function GetConnected() {
   if (sessionStorage.getItem("Proprio") != null) {
     let user = JSON.parse(sessionStorage.getItem('Proprio'));
@@ -30,6 +33,7 @@ function GetConnected() {
   }
 }
 
+// Affichage de la photo de profil dans le header 
 function SetModalAndProfilePicture() { 
     let compte = document.getElementById("Compte");
     if (currentUser === undefined || currentUser === null) {
@@ -39,6 +43,7 @@ function SetModalAndProfilePicture() {
     }
 }
 
+// affichage de la modale de connexion avec les boutons de connexion et d'inscription
 function ShowModalConnexion() {
   let modal = document.getElementById("Bulle");
   let profile = document.getElementById("Profil");
@@ -60,6 +65,8 @@ function ShowModalConnexion() {
   modal.classList.remove("d-none");
 }
 
+
+// affichage de la modale de profil
 function ShowModalProfile() {
   let modal = document.getElementById("Bulle");
   let profile = document.getElementById("Profil");

@@ -18,6 +18,9 @@ class AbonnementICalController {
         $this->icalService = new ICalService();
     }
 
+    /**
+     * Créer un nouvel abonnement
+     */
     public function newAction($id) {
         $titre = $_POST['titreAbo'];
         $dateDebut = $_POST['dateDebut'];
@@ -35,6 +38,9 @@ class AbonnementICalController {
         echo json_encode($abonnement->newAbonnement($id));
     }
 
+    /**
+     * Editer un abonnement
+     */
     public function editAction($id) {
         $titre = $_POST['titreAbo'];
         $dateDebut = $_POST['dateDebut'];
@@ -47,11 +53,17 @@ class AbonnementICalController {
         echo json_encode($abonnement->editAbonnement($id));
     }
 
+    /**
+     * Supprimer un abonnement
+     */
     public function deleteAction($id) {
         header('Content-Type: application/json');
         echo json_encode($this->abonnementICal->deleteAbonnement($id));
     }
 
+    /**
+     * Récupérer les données d'un abonnement
+     */
     public function getDataICal($id) {
         $abonnement = $this->abonnementICal->getAbonnementById($id);
 
@@ -59,6 +71,9 @@ class AbonnementICalController {
         echo json_encode($abonnement);
     }
 
+    /**
+     * Récupérer les abonnements d'un propriétaire
+     */
     public function getAbonnementsICalByProprietaire($id) {
         $abonnementFormat = $this->icalService->formatAbonnementTab($id);
         
@@ -66,6 +81,9 @@ class AbonnementICalController {
         echo json_encode($abonnementFormat);
     }
 
+    /**
+     * Exporter un abonnement en fichier iCal
+     */
     public function exportIcal($token) {
         $this->icalService->generateFileWithToken($token);
         $url = $this->icalService->urlFromToken($token);

@@ -65,6 +65,7 @@ function storeOriginalProfileData() {
     });
 }
 
+// Fonction pour activer/désactiver la modification du mot de passe
 function togglePasswordModification(){
     const passwordZone = document.getElementById('zonemodif');
     const modifyButton = document.querySelector('.mdp');
@@ -93,6 +94,7 @@ function togglePasswordModification(){
         formData.append('confPwd', confPwd);
         formData.append('id', JSON.parse(sessionStorage.getItem('User')).id_compte);
 
+        // Vérifier si les mots de passe correspondent
         if(newPwd === confPwd){
             fetch('/api/updateCliPassword', {
                 method: 'POST',
@@ -123,12 +125,14 @@ function togglePasswordModification(){
     }
 }
 
+// Fonction pour annuler la modification du mot de passe
 function cancelPasswordModification(){
     document.getElementById('zonemodif').classList.add('d-none');
     document.querySelector('.mdp').innerHTML = 'Modifier Mot de passe';
     document.querySelector('.annul').classList.add('d-none');
 }
 
+// Fonction pour activer la modification du profil 
 function enableProfileModification(){
     const fields = document.querySelectorAll('.infoPer input, .infoCo input, .infoPer select');
     fields.forEach(field => {
@@ -140,6 +144,7 @@ function enableProfileModification(){
     document.getElementById('annulmodif').classList.remove('d-none');
 }
 
+// Fonction pour annuler la modification du profil
 function cancelProfileModification(){
     const fields = document.querySelectorAll('.infoPer input, .infoCo input, .infoPer select');
     fields.forEach(field => {
@@ -152,6 +157,7 @@ function cancelProfileModification(){
     document.getElementById('annulmodif').classList.add('d-none');
 }
 
+// Fonction pour sauvegarder les modifications du profil
 function saveProfileChanges(){
     const pseudo = document.querySelector('.pseudo').value;
     const email = document.querySelector('.email').value;
@@ -179,6 +185,7 @@ function saveProfileChanges(){
         return utils.ThrowAlertPopup('Veuillez remplir tous les champs', 'error');
     }
 
+    // Vérifier si l'email est valide
     fetch('/api/updateCliProfile', {
         method: 'POST',
         body: formData

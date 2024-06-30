@@ -16,6 +16,9 @@ class LogementController {
         $this->logement = new Logement();
     }
         
+    /**
+     * Récupérer tous les logements
+     */
     public function getAllLogements() {            
         $logements = $this->logement->getAllLogements();
             
@@ -24,6 +27,9 @@ class LogementController {
         echo json_encode($logements);
     }
 
+    /**
+     * Récupérer les logements d'un propriétaire
+     */
     public function getLogementsByProprietaireId($id) {
         $logements = $this->logement->getLogementsByProprietaireId($id);
 
@@ -32,6 +38,10 @@ class LogementController {
         echo json_encode($logements);
     }
         
+
+    /**
+     * Récupérer un logement par son ID
+     */
     public function getLogementById($id) {
             
         $logement = $this->logement->getLogementById($id);
@@ -41,6 +51,9 @@ class LogementController {
         echo json_encode($logement);
     }  
     
+    /**
+     * Mettre à jour le statut d'un logement
+     */
     public function updateStatus($id, $status){
         $logement = $this->logement->updateStatutLogement($id, $status);
 
@@ -48,6 +61,10 @@ class LogementController {
             
         echo json_encode($logement);
     }
+
+    /**
+     * Récupérer les données des logements pour les cartes sur la page d'accueil
+     */
     public function getLogementsDataForCards() {
         $dataLogements = $this->logement->getLogementsDataForCards();
 
@@ -56,6 +73,9 @@ class LogementController {
         echo json_encode($dataLogements);
     }
 
+    /**
+     * Récupérer les données d'un logement par son ID
+     */
     public function getLogementDataById($id) {
         $logement = $this->logement->getLogementCompleteByID($id);
 
@@ -64,6 +84,9 @@ class LogementController {
         echo json_encode($logement);
     }
 
+    /**
+     * Récupérer les aménagements d'un logement par son ID
+     */
     public function getAmenagementsOfLogementById($id) {
         $amenagements = $this->logement->getAmenagementsOfLogementById($id);
 
@@ -72,6 +95,9 @@ class LogementController {
         echo json_encode($amenagements);
     }
 
+    /**
+     * Récupérer le type d'un logement par son ID
+     */
     public function getTypeOfLogementById($id) {
         $logements = $this->logement->getTypeOfLogementById($id);
 
@@ -80,9 +106,13 @@ class LogementController {
         echo json_encode($logements);
     }
 
+    /**
+     * Récupérer les logements disponibles pour une période donnée
+     */
     public function getLogementsDispo($startDate = null, $endDate = null) {
         header('Content-Type: application/json');
         
+        // si les dates de début et de fin ne sont pas fournies, on renvoie une erreur
         if ($startDate === null || $endDate === null) {
             echo json_encode(['error' => 'Dates de début et de fin non fournies.']);
             return;
@@ -94,9 +124,13 @@ class LogementController {
         echo json_encode($logements);
     }
 
+    /**
+     * Vérifier si un logement est disponible pour une période donnée
+     */
     public function isDisponible($id, $startDate = null, $endDate = null) {
         header('Content-Type: application/json');
         
+        // si les dates de début et de fin ne sont pas fournies, on renvoie une erreur
         if ($startDate === null || $endDate === null) {
             echo json_encode(['error' => 'Dates de début et de fin non fournies.']);
             return;
@@ -107,6 +141,9 @@ class LogementController {
         echo json_encode($dispo);
     }
 
+    /**
+     * Récupérer la catégorie d'un logement par son ID
+     */
     public function getCategorieOfLogementById($id) {
         $logements = $this->logement->getCategorieOfLogementById($id);
 
@@ -115,10 +152,13 @@ class LogementController {
         echo json_encode($logements);
     }
 
-
+    /**
+     * Récupérer les logements d'une ville
+     */
     public function processFormNewLogement() { 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+            // on récupère le numéro de rue et le nom de la rue séparément
             $tabNomRue = explode(' ', htmlentities($_POST['nom_rue']));
             if(is_numeric($tabNomRue[0])) {
                 $numeroRue = $tabNomRue[0];
@@ -133,6 +173,7 @@ class LogementController {
 
             $photo = null;
 
+            // on initialise l'objet FormNewLogement avec les données du formulaire
             $formLogement = new FormNewLogement(
                 htmlentities($_POST['titre']),
                 htmlentities($_POST['tarif']),
@@ -152,6 +193,7 @@ class LogementController {
                 htmlentities($_POST['etat'])
             );
 
+            // on définit les champs facultatifs
             $formLogement->setNotRequiredFields(
                 $numeroRue,
                 (isset($_POST['complement_adresse']) ? htmlentities($_POST['complement_adresse']) : ''),
@@ -164,6 +206,7 @@ class LogementController {
             
             header('Content-Type: application/json');
 
+            // on insère le logement dans la base de données avec la méhotde insert du service FormNewLogement
             try {
                 $formLogement->insert();
                 echo json_encode('true');
@@ -231,6 +274,7 @@ class LogementController {
             $etat
         );
 
+        // Définition des champs facultatifs
         $formLogement->setNotRequiredFields(
             $numeroRue,
             $complementAdresse,
@@ -243,6 +287,7 @@ class LogementController {
 
         header('Content-Type: application/json');
 
+        // Mise à jour du logement dans la base de données avec la méthode update de la classe Logement
         try {
             $this->logement->updateLogementFromForm($formLogement, $idLogement);
             echo json_encode(['success' => true]);

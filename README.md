@@ -1,88 +1,40 @@
 # APOC-AlHaIZ-Breizh
-Projet de SAE 3 &amp; 4 IUT de Lannion
+Projet de SAE 3 et 4 IUT de Lannion
 
--------------------------------------------------------------------------
+## Architecture du projet
+Le projet est organisée sous le principe de Model-View-Controller (MVC) voici l'architecture du projet expliquée : 
 
-Commentaires
+html
+|_ assets
+    |_ imgs : images / icones utilisés dans le projet
+    |_ JS : 
+        |_ Front : Fichiers Javascript du Front-Office du projet 
+        |_ Back : Fichiers Javascript du Back-Office du projet 
+        |_ *.js : fichiers js communs et utilisés dans les codes / pages js du Front et du Back office 
+    |_ SCSS : 
+        |_ Front : Fichiers .scss et .css du Front-Office du projet 
+        |_ Back : Fichiers .scss et .css du Back-Office du projet 
+        |_ *.scss : fichiers scss communs et utilisés dans les codes / pages scss du Front et du Back office 
+|_ Controllers:  Fonctions appelées par le routeur qui doient utiliser les Services / Models pour traiter / récupérer des données,puis rediriger vers d'autres pages
+|_ icalfiles :Dossier où se trouvent les fichiers ics générés par l'application par l'outil Icalator
+|_ Models
+    |_ les fichiers de models contiennent les fonctions qui permettent de faire des requetes sur la BDD
+|_ Service
+    |_ Fichiers où sont stockés des fonctions / objets qui peuvent potentiellement être utiles à différents endroits de l'application
+|_ Views
+    |_ Front : Fichiers de vue (code html dans fichiers .php) de l'application
+    |_ Back : Fichiers de vue (code html dans fichiers .php) de l'application
+    |_ *.php : fichier de vue qui sont communs au Front et au Back office
+|_ index.php : Routeur
 
-> [!NOTE]
-> Tous les commentaires seront écrits en français.
+### Routeur
+Le site utilise un routeur (code qui est présent dans le index.php). 
+Toutes les url qui appelent le site sont redirigées vers le index.php, si l'url n'est pas connue par ce fichier, une erreur 404 est renvoyée.  
 
--------------------------------------------------------------------------
+### Liaison automatique du css/js
+Le composant php 'header.php', sert en partie (pour le back et le front) à lier le fichier .php de vue à des fichiers css et js du moment qu'ils portent le même nom que lui, ainsi si un fichier de vue s'appelle 'maVue.php', si des fichiers css et js appelés 'maVue.css' et 'maVue.js' existent, ils seront liés au fichier php, si celui-ci inclue le head.php
 
-Commandes GIT
-
-Setup :
-- Pour récupérer les fichiers du repository, se positionner dans son dossier de travail puis faire : 
-  ```
-  git clone https://github.com/EvanSaleck/APOC-AlHaIZ-Breizh.git
-  ```
-
-- Installer les extension suivantes sous VSC :
-  ```
-  Live Server (Five Server)
-  Live Sass Compiler
-  Sass (.sass only)
-  ```
-
-- Pour créer une branche :
-  ```
-  git checkout -b <nom_branche>
-  ```
-
-- Pour se déplacer :
-  ```
-  git checkout <nom_branche_destination>
-  ```
-  
--------------------------------------------------------------------------
-
-Procédure de pull / push :
-- Avant toute action, faire la commande suivante pour récupérer les fichiers à jour :
-  ```
-  git pull
-  ```
-
-> [!CAUTION]
-> En case de conflit de fichier (proposition de merge), en discuter avec les autres membres puis merge
-
-
-- Pour commit :
-  - Pour ajouter les fichier :
-    ```
-    git add .
-    ```
-
-  - Pour commit les fichiers à ajouter :
-    ```
-    git commit -m "Message qui explique le but du commit"
-    ```
-
-> [!CAUTION]
-> Règles pour nommer un commit :
-> ```
-> Ajout :       "ADD <nom_fichier>"
-> Mise à jour : "UPD <nom_fichier>"
-> Suppression : "DEL <nom_fichier>"
-> ```
-
-- Pour pusher, il est nécessaire de le faire avec plusieurs commits différent, en fonction de ce qui à été fait :
-- Exemple : On veut push un commit qui contient une suppression dans un dossier et un ajout dans un autre
-- On sépare le commit en deux :
-  - Pour le premier : "DEL <nom_fichier>" puis push
-  - Pour le second :  "ADD <nom_fichier>" puis push
-  ```
-  git push <nom_branche>
-  ```
-
-> [!CAUTION]
-> Il ne faut JAMAIS push su la branche main, sauf si tout le monde s'est concerté
-
--------------------------------------------------------------------------
-
-Modifications BDD
-
-S'il y a des modifs à la BDD, il faut ajouter le fichier modifié dans [Migrations](APOC-AlHaIZ-Breizh/Migrations) en le renommant :
-```
-"jour-mois-année_<nom_fichier>"
-```
+### Données affichés en JS
+Le site utilise beaucoup le JS avec des appels ajax pour afficher les données qui doient être récupérées en BDD. 
+Les fichiers de vue servent principalement à afficher les données statiques de la page. L'affichage des données calculées ou requétées est géré en js. 
+Les requetes ajax utilisent elles aussi le routeur, ce dernier contient tout un bloc concernant les 'routes api' qui servent à faire des requetes en BDD et à renvoyer des données au format json. 

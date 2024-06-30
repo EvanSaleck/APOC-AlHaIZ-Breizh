@@ -6,6 +6,7 @@ let tabtoken;
 let btnGenerer = document.getElementById("generateToken");
 btnGenerer.addEventListener("click", () => GenerateToken());
 
+// Récupération des tokens
 fetch("/api/getAllTokenById")
   .then((response) => response.json())
   .then((data) => {
@@ -13,6 +14,7 @@ fetch("/api/getAllTokenById")
     tabtoken = data;
     zonetoken.innerHTML = ""; 
     data.forEach((token, i) => {
+      // on ajoute un token à la liste
       zonetoken.innerHTML += `
       <div class="token-container">
           <div class="mask" data-id="${i}" id="token-${i}"><p>${token.cle}</p></div>
@@ -25,6 +27,7 @@ fetch("/api/getAllTokenById")
     });
   });
 
+// on floute les tokens sauf quand on passe la souris dessus 
 zonetoken.addEventListener("mouseover", (e) => {
   if (e.target.closest(".mask")) {
     e.target.closest(".mask").classList.remove("mask");
@@ -44,6 +47,7 @@ zonetoken.addEventListener("click", (e) => {
   }
 });
 
+// Suppression d'un token
 function deleteToken(id) {
   let formData = new FormData();
   formData.append("id_cle", id);
@@ -69,6 +73,7 @@ function deleteToken(id) {
   });
 }
 
+// Génération d'un token
 function GenerateToken(){
     let form = new FormData();
     let email = JSON.parse(sessionStorage.getItem("Proprio")).e_mail;    

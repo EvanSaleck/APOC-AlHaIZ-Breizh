@@ -63,12 +63,6 @@ switch($requestUrl) {
         include_once './Views/Back/reservation/exportICal.php';
         break;
     
-    // Export d'un abonnement iCal
-    case '/service/exportICal':
-    case '/service/exportICal/':
-        $reservationController->exportIcal();
-        break;
-
     // Création d'un abonement iCal
     case '/api/reservations/abonnements/iCal/new':
     case '/api/reservations/abonnement/iCal/new/':
@@ -110,7 +104,6 @@ switch($requestUrl) {
         break;
 
     
-
     //////////////////////////////
     //                          //
     // ROUTES VUES FRONT OFFICE //////////////////////////////////////////////////////////////////////////////////////
@@ -378,13 +371,6 @@ switch($requestUrl) {
         $data = $_POST;
         $logementController->getTypeOfLogementById($data);
         break;
-    /*
-    case 'api/getCategorieOfLogementById/':
-    case 'api/getCategorieOfLogementById/':
-        $data = $_POST;
-        $logementController->getCategorieOfLogementById($data);
-        break;
-    */
 
     case '/api/updateLogementStatus':
     case '/api/updateLogementStatus/':
@@ -498,15 +484,6 @@ switch($requestUrl) {
         $idcpt = $client->id_compte;
         $reservationController->saveReservation($data, $idcpt);
         break;
-
-    /*
-    case preg_match('/^\/api\/getDataReservationById\/\d+$/', $requestUrl) ? true : false:
-        $url_parts = explode('/', $requestUrl);
-        $idResa = end($url_parts);
-        echo $reservationController->getDataReservationById($idResa);
-        break;
-    */
-
 
 
     // FONCTIONS D'API POUR INFOS COMPTES /////////////////////////////////////////////////////////////////////////

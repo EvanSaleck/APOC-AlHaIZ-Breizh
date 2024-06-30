@@ -3,12 +3,14 @@ import * as utils from '../utils.js';
 document.addEventListener('DOMContentLoaded', function() {
     var compteContainer = document.querySelector('.compte');
     
+    // Ajout des event listeners
     document.querySelector('.mdp').addEventListener('click', togglePasswordModification);
     document.querySelector('.annul').addEventListener('click', cancelPasswordModification);
     document.querySelector('.update').addEventListener('click', enableProfileModification);
     document.querySelector('.save').addEventListener('click', saveProfileChanges);
     document.getElementById('annulmodif').addEventListener('click', cancelProfileModification);
 
+    // Récupération des données du compte
     fetch('/api/getCompteProprioDetails')
         .then(response => response.json())
         .then(data => {
@@ -25,13 +27,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.querySelector('.imgProfil').src = img.src;
                 };
 
+                // On charge l'image de profil
                 setImageSource(compte.photo_profil);
-
+                
                 img.onerror = () => {
+                    // Si l'image n'est pas trouvée, on charge l'image par défaut
                     console.log('Image non trouvée, chargement de l\'image par défaut...');
                     setImageSource('/assets/imgs/person-fill.svg');
                 };
 
+
+                // Remplissage des champs
                 document.querySelector('.nom').value = compte.nom;
                 document.querySelector('.prenom').value = compte.prenom;
                 document.querySelector('.civilite').value = compte.civilite;
@@ -56,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let originalProfileData = {};
 
+// Fonction pour stocker les données originales du profil
 function storeOriginalProfileData() {
     const fields = document.querySelectorAll('.infoPer input, .infoCo input, .infoPer select');
     fields.forEach(field => {
@@ -63,6 +70,7 @@ function storeOriginalProfileData() {
     });
 }
 
+// Fonction pour afficher ou masquer la zone de modification du mot de passe
 function togglePasswordModification(){
     const passwordZone = document.getElementById('zonemodif');
     const modifyButton = document.querySelector('.mdp');
@@ -79,18 +87,23 @@ function togglePasswordModification(){
         const newPwd = document.querySelector('.newPwd').value;
         const confPwd = document.querySelector('.confPwd').value;
 
+        // Vérifier si les champs sont vides
         if (oldPwd === '' || newPwd === '' || confPwd === '') return utils.ThrowAlertPopup('Veuillez remplir tous les champs', 'error');
 
+        // Vérifier si le nouveau mot de passe contient au moins 8 caractères
         if (newPwd.length < 8) return utils.ThrowAlertPopup('Le mot de passe doit contenir au moins 8 caractères', 'error');
 
+        // Vérifier si le nouveau mot de passe est différent de l'ancien
         if (newPwd === oldPwd) return utils.ThrowAlertPopup('Le nouveau mot de passe doit être différent de l\'ancien', 'error');
 
+        // Création du formulaire
         let formData = new FormData(); 
         formData.append('oldPwd', oldPwd);
         formData.append('newPwd', newPwd);
         formData.append('confPwd', confPwd);
         formData.append('id', JSON.parse(sessionStorage.getItem('Proprio')).id_compte);
 
+        // Vérifier si les mots de passe correspondent
         if(newPwd === confPwd){
             fetch('/api/updatePassword', {
                 method: 'POST',
@@ -121,12 +134,14 @@ function togglePasswordModification(){
     }
 }
 
+// Fonction pour annuler la modification du mot de passe
 function cancelPasswordModification(){
     document.getElementById('zonemodif').classList.add('d-none');
     document.querySelector('.mdp').innerHTML = 'Modifier Mot de passe';
     document.querySelector('.annul').classList.add('d-none');
 }
 
+// Fonction pour activer la modification du profil
 function enableProfileModification(){
     const fields = document.querySelectorAll('.infoPer input, .infoCo input, .infoPer select');
     fields.forEach(field => {
@@ -140,6 +155,7 @@ function enableProfileModification(){
     document.getElementById('annulmodif').classList.remove('d-none');
 }
 
+// Fonction pour annuler la modification du profil
 function cancelProfileModification(){
     const fields = document.querySelectorAll('.infoPer input, .infoCo input, .infoPer select');
     fields.forEach(field => {
@@ -152,6 +168,7 @@ function cancelProfileModification(){
     document.getElementById('annulmodif').classList.add('d-none');
 }
 
+// Fonction pour sauvegarder les modifications du profil
 function saveProfileChanges(){
     const pseudo = document.querySelector('.pseudo').value;
     const email = document.querySelector('.email').value;
@@ -164,6 +181,7 @@ function saveProfileChanges(){
     const ville = document.querySelector('.ville').value;
     const pays = document.querySelector('.pays').value;
 
+    // Création du formulaire 
     let formData = new FormData();
     formData.append('pseudo', pseudo);
     formData.append('email', email);
@@ -177,6 +195,7 @@ function saveProfileChanges(){
     formData.append('pays', pays);
     formData.append('id', JSON.parse(sessionStorage.getItem('Proprio')).id_compte);
 
+    // Vérifier si les champs sont vides
     if(pseudo === '' || email === '' || nom === '' || prenom === '' || civilite === '' || ddn === '' || rue === '' || codePostal === '' || ville === '' || pays === ''){
         return utils.ThrowAlertPopup('Veuillez remplir tous les champs', 'error');
     }
@@ -185,6 +204,7 @@ function saveProfileChanges(){
     //     return utils.ThrowAlertPopup('Aucune modification détectée', 'error');
     // }
 
+    // Envoi de la requête
     fetch('/api/updateProfile', {
         method: 'POST',
         body: formData

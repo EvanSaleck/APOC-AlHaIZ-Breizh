@@ -1,4 +1,7 @@
+// TODO : supprimer la répétition de code (faire fonctions pour les filtres)
+
 document.addEventListener('DOMContentLoaded', function() {
+    // toogle de l'affichage des filtres sur mobile
     document.getElementById('buttonfiltresMobile').addEventListener('click', function() {
         var filters = document.getElementById('filtres');
 
@@ -14,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var communes = [];
     var proprietaires = [];
 
+    // on initialise les filtres dans le session storage
     if(sessionStorage.getItem('filters') == null){
         sessionStorage.setItem('filters', JSON.stringify({
             depts: [],
@@ -47,13 +51,16 @@ document.addEventListener('DOMContentLoaded', function() {
     sessionStorage.setItem('filters', JSON.stringify(filters));
 
     
-
     function fetchLogementsData() {
+        // on récupère les dates dans le session storage
         var filters = JSON.parse(sessionStorage.getItem('filters'));
 
+        // on initialise le date picker
         flatpickr("#rangePicker", {
+            // permet de choisir une range de date
             mode: "range",
             dateFormat: "Y-m-d",
+            // permet de mettre le date picker en français
             locale: {
                 firstDayOfWeek: 1,
                 weekdays: {
@@ -65,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     longhand: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
                 },
             },
+            // permet la mise à jour des filtres
             onChange: function(selectedDates) {
                 if (selectedDates.length === 2) {
 
@@ -120,11 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }    
 
+    // affichage des cards de logements sur la page
     function displayLogements(data) {
         cardsContainer.innerHTML = '';     
         if(data.length == 0){
             noResultMessage();
         } else {
+            // on trie les logements par prix
             data.sort((a, b) => isAscending ? parseFloat(a.prix_nuit_ttc) - parseFloat(b.prix_nuit_ttc) : parseFloat(b.prix_nuit_ttc) - parseFloat(a.prix_nuit_ttc));
             data.forEach(logement => {
                 let cardContent = cardTemplate.content;
@@ -178,6 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // meme chose pour les proprietaires
                     let nomPrenom = logement.nom.toUpperCase() + ' ' + logement.prenom;
 
+                    // on push que si le tuple id et nomPrenom n'existe pas
                     if (!proprietaires.some(prop => prop.id === logement.id_compte && prop.nomPrenom === nomPrenom)) {
                         proprietaires.push({
                             id: logement.id_compte,
@@ -193,6 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // initialisation des filtres
     function initFilters() {
         var optionsList = document.getElementById('options-list');
 
@@ -234,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.range-input input.range-max').value = prixMax;
     }
 
-
+    // on met à jour les departements selectionnés dans l'input
     function updateSelectedItems() {
         let selectedItems = document.getElementById('selected-items');
         let optionsList = document.getElementById('options-list');
@@ -262,6 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // on supprime de l'input le departement selectionné
     function removeSelection(value) {
         let optionsList = document.getElementById('options-list');
 
@@ -281,6 +294,7 @@ document.addEventListener('DOMContentLoaded', function() {
         applyFilters();
     }
 
+    // application des filtres 
     function applyFilters() {
         // on supprime le message d'erreur s'il y en a
         var noResultElement = cardsContainer.querySelector('.no-result');
@@ -304,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var cardTarif = parseFloat(card.getAttribute('data-tarif'));
             var cardProprietaire = card.getAttribute('data-proprietaire');
 
-
+            // on vérifie si la carte correspond aux filtres et on l'affiche ou non
             if(
                 (filters.depts.length === 0 || filters.depts.includes(cardDept)) &&
                 (filters.prix.min === null || cardTarif >= filters.prix.min) &&
@@ -348,6 +362,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // affichage du message d'erreur si aucun logement n'est trouvé
     function noResultMessage() {
         // on vérifie d'abord si le message n'est pas déjà affiché
         if (cardsContainer.querySelector('.no-result')) {
@@ -364,6 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
         cardsContainer.appendChild(noResult);
     }
     
+    // vérifier si tous les cards sont cachés après filtrage
     function checkForNoResults(cards) {
         var noResult = true;
         for (var i = 0; i < cards.length; i++) {
@@ -378,6 +394,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // affichage du nombre de cards visibles
     function logVisibleCards(cards) {
         var visibleCards = 0;
         for (var i = 0; i < cards.length; i++) {
@@ -388,7 +405,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Nombre de cards visibles : ' + visibleCards);
     }
     
-
+    // initialisation des filtres
     function setupFilters() {
         // filtre de departement
         var selectBox = document.getElementById('select-box');
@@ -431,6 +448,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // on affiche ou cache le dropdown
         function toggleDropdown() {
             var dropdown = document.getElementById('dropdown');
             
@@ -444,7 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-
+        // on filtre les departements en fonction de la recherche
         function filterOptions() {
             var filter = searchInput.value.toUpperCase();
             var li = optionsList.getElementsByTagName('li');
@@ -455,6 +473,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        // on selectionne / deselectionne un departement
         function toggleSelection(target) {
             var value = target.getAttribute('data-value');
 
@@ -488,6 +507,7 @@ document.addEventListener('DOMContentLoaded', function() {
             wrapper.style.display = (wrapper.style.display === 'none' || wrapper.style.display === '') ? 'block' : 'none';
         });
         
+        // Écouteurs pour les inputs de prix
         priceInput.forEach(input =>{
             input.addEventListener("input", e =>{
                 
@@ -517,7 +537,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Écouteurs pour les inputs de range
+        // Écouteurs pour les inputs de range (le slider)
         rangeInput.forEach(input => {
             input.addEventListener("input", e => {
                 let minVal = parseFloat(rangeInput[0].value);
@@ -544,6 +564,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
 
+                // Mettre à jour le texte du bouton
                 priceInput[0].value = minVal;
                 priceInput[1].value = maxVal;
 
@@ -553,14 +574,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 filters.prix.max = maxVal;
                 sessionStorage.setItem('filters', JSON.stringify(filters));
 
-        
+                // Mettre à jour la position du slider
                 let leftPercent = ((rangeInput[0].value - rangeInput[0].min) / (rangeInput[0].max - rangeInput[0].min)) * 100;
                 let rightPercent = 100 - ((rangeInput[1].value - rangeInput[1].min) / (rangeInput[1].max - rangeInput[1].min)) * 100;
 
+                // Assurer que leftPercent et rightPercent sont toujours entre 0 et 100
                 if (rightPercent < 0) {
                     rightPercent = 0;
                 }
         
+                // Mettre à jour la position du slider
                 range.style.left = leftPercent + "%";
                 range.style.right = rightPercent + "%";
 
@@ -601,16 +624,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateSelectedItemsCommune();
 
-
+        // on ajoute les écouteurs
         selectBoxCommune.addEventListener('click', function(event) {
             toggleDropdownCommune();
             event.stopPropagation();  
         });
 
+        // on filtre les communes en fonction de la recherche
         searchInputCommune.addEventListener('keyup', function() {
             filterOptionsCommune();
         });
 
+        // on selectionne / deselectionne une commune
         optionsListCommune.addEventListener('click', function(event) {
             var target = event.target;
             if (target.tagName === 'LI') {
@@ -618,12 +643,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // on cache le dropdown si on clique en dehors
         document.addEventListener('click', function(event) {
             if (!selectBoxCommune.contains(event.target) && !dropdownCommune.contains(event.target)) {
                 dropdownCommune.style.display = 'none';
             }
         });
 
+        // on permet de scroller horizontalement les communes selectionnées
         selectedItemsCommune.addEventListener('wheel', function(event) {
             if (event.deltaY !== 0) {
                 event.preventDefault();
@@ -631,10 +658,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // on affiche ou cache le dropdown
         function toggleDropdownCommune() {
             dropdownCommune.style.display = (dropdownCommune.style.display === 'none' || dropdownCommune.style.display === '') ? 'block' : 'none';
         }
 
+        // on filtre les communes en fonction de la recherche
         function filterOptionsCommune() {
             var filter = searchInputCommune.value.toUpperCase();
             var li = optionsListCommune.getElementsByTagName('li');
@@ -645,6 +674,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        // on selectionne / deselectionne une commune de la liste
         function toggleSelectionCommune(target) {
             var value = target.getAttribute('data-value');
 
@@ -665,6 +695,7 @@ document.addEventListener('DOMContentLoaded', function() {
             applyFilters();
         }
 
+        // on met à jour les communes selectionnées dans l'input
         function updateSelectedItemsCommune() {
             let selectedItemsCommune = document.getElementById('selected-items-commune');
             let optionsListCommune = document.getElementById('options-list-commune');
@@ -692,6 +723,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        // on enleve une commune parmis celles selectionnées
         function removeSelectionCommune(value) {
             let optionsListCommune = document.getElementById('options-list-commune');
 
@@ -761,6 +793,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // on permet de scroller horizontalement les proprietaires selectionnés
         selectedItemsProp.addEventListener('wheel', function(event) {
             if (event.deltaY !== 0) {
                 event.preventDefault();
@@ -768,11 +801,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // on affiche ou cache le dropdown
         function toggleDropdownProp() {
             dropdownProp.style.display = (dropdownProp.style.display === 'none' || dropdownProp.style.display === '') ? 'block' : 'none';
         }
 
-        function filterOptionsProp() {
+        // on filtre les proprietaires en foncion de la recherche
+        function filterOptionsProp() { 
             var filter = searchInputProp.value.toUpperCase();
             var li = optionsListProp.getElementsByTagName('li');
 
@@ -782,6 +817,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        // on selectionne / deselectionne un proprietaire
         function toggleSelectionProp(target) {
             var value = target.getAttribute('data-value');
 
@@ -802,6 +838,7 @@ document.addEventListener('DOMContentLoaded', function() {
             applyFilters();
         }
 
+        // on met à jour les proprietaires selectionnés
         function updateSelectedItemsProp() {
             let selectedItemsProp = document.getElementById('selected-items-prop');
             let optionsListProp = document.getElementById('options-list-prop');
@@ -829,6 +866,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        // on enleve un propriétaire parmis ceux selecitonnés
         function removeSelectionProp(value) {
             let optionsListProp = document.getElementById('options-list-prop');
 
@@ -865,6 +903,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('sortToggle').textContent = isAscending ? 'Trier par prix décroissant' : 'Trier par prix croissant';
     }
 
+    // Trie les logements par prix
     function sortLogements() {
         let sortedLogements = Array.from(cardsContainer.children);
         sortedLogements.sort((a, b) => {
@@ -880,6 +919,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // on ajuste le margin top du container des cards, cela permet de s'adapter à la taille 
+    // de la fenetre meme quand elle change de taille après le chargement du css 
     function adjustMarginTop() {
         var header = document.querySelector('#headerAccueilMobile');
         var cardsContainer = document.querySelector('#cardsContainer');

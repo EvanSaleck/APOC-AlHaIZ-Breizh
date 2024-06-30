@@ -1,15 +1,15 @@
 import { ThrowAlertPopup } from "../utils.js";
 
 document.addEventListener('DOMContentLoaded', function() {
+    // si une pop up est stockée en local storage, on l'affiche
     const storedPopup = localStorage.getItem('alertPopup');
     if (storedPopup) {
         const { message, type } = JSON.parse(storedPopup);
         ThrowAlertPopup(message, type);
         localStorage.removeItem('alertPopup');
     }
-
-    console.log(sessionStorage);
     
+    // Récupération des abonnements iCal
     fetch('/api/getAbonnementsICalByProprietaire/', {
         method: 'GET',  
         headers: {
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }).then(response => response.json())
     .then(data => {
-        console.log(data);
+        // si le tableau est vide, on ajoute une ligne pour le signaler
         if(data.length == 0) {
             let tbody = document.getElementById('tbodyListeLogements');
             let tr = document.createElement('tr');
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             tr.appendChild(td);
             tbody.appendChild(tr);
         } else {
+            // on remplit le tableau 
             let tbody = document.getElementById('tbodyListeLogements');
             data.forEach(element => {
                 let tr = document.createElement('tr');
@@ -63,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 copyBtn.id = 'copyIconButton';
                 copyBtn.innerHTML = "<img src='/assets/imgs/basicIcons/copy.svg' alt='Copier l'url'>";
 
+                // on ajoute un écouteur d'événement pour copier l'url
                 copyBtn.addEventListener('click', function() {
                     let text = element.url;
                     navigator.clipboard.writeText(text).then(function() {
@@ -74,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 td.appendChild(copyBtn);
                 tr.appendChild(td);
 
+                // on ajoute un bouton permettant de modifier l'abonnement
                 let update = document.createElement('td');
                 let updateBtn = document.createElement('button');
                 updateBtn.id = 'penIconButton';
@@ -84,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 update.appendChild(updateBtn);
                 tr.appendChild(update);
 
+                // on ajoute un bouton permettant de supprimer l'abonnement
                 let del = document.createElement('td');
                 let delBtn = document.createElement('button');
                 delBtn.id = 'trashIconButton';
