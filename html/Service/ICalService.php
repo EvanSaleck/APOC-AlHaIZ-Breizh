@@ -75,6 +75,8 @@ class ICalService {
             $ical .= "DESCRIPTION:Nom du client: " . $reservation['pseudo'] . "\\nEmail: " . $reservation['e_mail'] . "\\nTarif total: " . $reservation['tarif_total'] . "\n";
             $ical .= "LOCATION:" . $reservation['numero_rue'] . ", " . $reservation['nom_rue'] . ", " . $reservation['nom_ville'] . $reservation['code_postal'] . " " . $reservation['nom_ville'] . "\n";
             $ical .= "STATUS:CONFIRMED\n";
+            $ical .= "DTSTAMP:" . date('Ymd\THis\Z') . "\n";
+            $ical .= "UID:" . $reservation['id_reservation'] . "\n";
             $ical .= "END:VEVENT\n";
         }
 
